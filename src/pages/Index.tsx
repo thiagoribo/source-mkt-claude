@@ -8,10 +8,10 @@ import thiago1 from "@/assets/thiago-1.png";
 /* ─── Hero ─── */
 function HeroSection() {
   return (
-    <section className="section-spacing bg-background">
+    <section className="py-24 md:py-36 lg:py-[120px] bg-background">
       <div className="container-sm">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-8">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          <div className="space-y-10">
             <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.15] font-bold tracking-tight">
               Sua empresa é sólida.{" "}
               <span className="text-primary">Sua marca ainda não comunica isso.</span>
@@ -70,12 +70,12 @@ function AuthoritySection() {
     <section className="section-spacing bg-secondary">
       <div className="container-sm">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 max-w-3xl mx-auto leading-tight">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-20 max-w-3xl mx-auto leading-tight">
             Por Que Empresas de Alto Crescimento{" "}
             <span className="text-primary">Confiam na SM Agency</span>
           </h2>
         </RevealSection>
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-3 gap-14">
           {items.map((item, i) => (
             <RevealSection key={item.title} delay={i * 150}>
               <div className="space-y-5">
@@ -99,14 +99,14 @@ function LeadershipSection() {
     <section className="section-spacing bg-background">
       <div className="container-sm">
         <RevealSection>
-          <div className="text-center mb-16 max-w-3xl mx-auto space-y-5">
+          <div className="text-center mb-20 max-w-3xl mx-auto space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold leading-tight">Liderança Estratégica</h2>
             <p className="text-foreground/70 leading-relaxed">
               Projetos de consultoria estratégica são conduzidos sob supervisão direta dos fundadores Ana Santos e Thiago Bianchi, garantindo a profundidade analítica e rigor metodológico que caracterizam o trabalho da SM Agency.
             </p>
           </div>
         </RevealSection>
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-2 gap-16 lg:gap-20">
           <RevealSection delay={0}>
             <div className="text-center space-y-5">
               <img src={ana1} alt="Ana Santos" className="w-64 h-64 rounded-2xl object-cover mx-auto shadow-lg" />
@@ -133,7 +133,7 @@ function LeadershipSection() {
           </RevealSection>
         </div>
         <RevealSection>
-          <div className="text-center mt-12 space-y-4">
+          <div className="text-center mt-16 space-y-5">
             <p className="text-foreground/60 text-sm italic max-w-2xl mx-auto">
               "Nossa equipe de estrategistas foi treinada diretamente por Ana e Thiago na metodologia SM, garantindo consistência de qualidade em todos os projetos."
             </p>
@@ -178,11 +178,11 @@ function MainServicesSection() {
     <section className="section-spacing bg-secondary">
       <div className="container-sm">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-20">
             Soluções Estratégicas para Crescimento
           </h2>
         </RevealSection>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           {services.map((s, i) => (
             <RevealSection key={s.title} delay={i * 150}>
               <div
@@ -219,10 +219,10 @@ function SpecializedServicesSection() {
   ];
 
   return (
-    <section className="pb-24 md:pb-32 bg-secondary">
+    <section className="pb-20 md:pb-28 lg:pb-[100px] bg-secondary">
       <div className="container-sm">
         <RevealSection>
-          <div className="text-center mb-12 space-y-3">
+          <div className="text-center mb-16 space-y-4">
             <h3 className="text-xl md:text-2xl font-bold font-serif text-foreground/80">
               Serviços Especializados de Implementação
             </h3>
@@ -265,11 +265,11 @@ function CasesSection() {
     <section id="cases" className="section-spacing bg-background">
       <div className="container-sm">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-20">
             Empresas que Transformamos
           </h2>
         </RevealSection>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           {cases.map((c, i) => (
             <RevealSection key={c.name} delay={i * 150}>
               <div className="rounded-xl overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-300 group">
@@ -286,7 +286,7 @@ function CasesSection() {
             </RevealSection>
           ))}
         </div>
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <Button asChild variant="outline" className="rounded-md border-primary text-primary hover:bg-primary hover:text-primary-foreground">
             <Link to="/quem-somos#portfolio">Ver Todos os Cases</Link>
           </Button>
@@ -308,11 +308,11 @@ function TestimonialsSection() {
     <section className="section-spacing bg-secondary">
       <div className="container-sm">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-20">
             O Que Nossos Clientes Dizem
           </h2>
         </RevealSection>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           {testimonials.map((t, i) => (
             <RevealSection key={t.name} delay={i * 150}>
               <div className="bg-background rounded-xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)] h-full flex flex-col">
@@ -339,8 +339,8 @@ function TestimonialsSection() {
 /* ─── CTA Final ─── */
 function CTASection() {
   return (
-    <section id="diagnostico" className="py-24 md:py-32 bg-primary text-primary-foreground">
-      <div className="container-sm text-center space-y-8 max-w-3xl">
+    <section id="diagnostico" className="py-24 md:py-36 lg:py-[120px] bg-primary text-primary-foreground">
+      <div className="container-sm text-center space-y-10 max-w-3xl">
         <RevealSection>
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">
             Vamos Construir a Estratégia que sua Empresa Merece?
