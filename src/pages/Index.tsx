@@ -152,7 +152,7 @@ function MainServicesSection() {
       icon: Compass,
       title: "Consultoria Estratégica",
       text: "Diagnóstico completo, reposicionamento estratégico, arquitetura de funil e implementação acompanhada. Para empresas que precisam de transformação, não apenas ajustes.",
-      price: "A partir de R$48.000",
+      price: "R$48.000",
       href: "/consultoria-estrategica",
       featured: true,
     },
@@ -160,14 +160,14 @@ function MainServicesSection() {
       icon: Star,
       title: "Branding Empresarial",
       text: "Construção completa de plataforma de marca: propósito, posicionamento, arquitetura estratégica e identidade visual integrada.",
-      price: "A partir de R$25.000",
+      price: "R$25.000",
       href: "/branding-empresarial",
     },
     {
       icon: User,
       title: "Branding Pessoal",
       text: "Para empreendedores e especialistas que querem construir autoridade e se tornarem referência no seu segmento.",
-      price: "A partir de R$18.000",
+      price: "R$18.000",
       href: "/branding-pessoal",
     },
   ];
@@ -194,7 +194,8 @@ function MainServicesSection() {
                 <h3 className="text-xl font-bold font-serif mb-4">{s.title}</h3>
                 <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-1">{s.text}</p>
                 <div className="mt-auto">
-                  <p className="text-primary font-bold text-lg font-serif mb-8">{s.price}</p>
+                  <p className="text-muted-foreground text-sm mb-1">A partir de</p>
+                  <p className="text-primary font-semibold text-2xl font-serif mb-8">{s.price}</p>
                   <Button asChild variant={s.featured ? "default" : "outline"} className="w-full rounded-md">
                     <Link to={s.href}>Saber Mais</Link>
                   </Button>
