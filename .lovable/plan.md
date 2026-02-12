@@ -1,14 +1,47 @@
 
 
-# Trocar Fotos de Ana e Thiago
+## Plano de Implementacao
 
-## Resumo
-Substituir os arquivos `ana-1.png` e `thiago-1.png` em `src/assets/` pelas fotos corretas enviadas pelo usuario.
+### 1. Botoes Secundarios (Outline) - Estilo Global
 
-## Alteracoes
+Atualizar a variante `outline` no componente `Button` (`src/components/ui/button.tsx`) para aplicar o novo estilo em todo o site:
 
-1. Copiar `user-uploads://2025-04-08-17_03_49-Layout-Quem-Somos-SM-Agency-Site-Opera-3.png` (foto da Ana) para `src/assets/ana-1.png`
-2. Copiar `user-uploads://2025-04-08-17_03_58-Layout-Quem-Somos-SM-Agency-Site-Opera-3.png` (foto do Thiago) para `src/assets/thiago-1.png`
+- Border: 2px solida em azul petroleo (cor primary)
+- Texto: azul petroleo (cor primary)  
+- Padding: 16px horizontal, 12px vertical
+- Border-radius: 6px
+- Hover: background azul petroleo, texto branco
+- Transicao: 0.3s ease
 
-Nenhuma alteracao de codigo e necessaria — as paginas ja importam esses arquivos pelo mesmo caminho, entao as fotos serao atualizadas automaticamente em todas as paginas (Homepage, Consultoria Estrategica, Quem Somos).
+### 2. Header - Fundo Escuro com Contraste
+
+Transformar o header (`src/components/layout/Header.tsx`) para usar fundo escuro (azul petroleo ou preto) com textos em branco, criando contraste com a logo:
+
+- Background: azul petroleo `#0A4D68` (cor primary)
+- Textos de navegacao: branco
+- Hover dos links: branco com opacidade ou accent
+- Logo: altura 40px desktop, 32px mobile (ja e link para homepage)
+- Botao CTA do header: branco com texto azul petroleo (invertido)
+- Dropdowns: manter fundo escuro consistente com textos claros
+
+### Detalhes Tecnicos
+
+**Arquivo `src/components/ui/button.tsx`:**
+- Variante `outline`: alterar para `border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300`
+- Tamanho default: ajustar padding para `px-4 py-3`
+- Border-radius: `rounded-[6px]`
+
+**Arquivo `src/components/layout/Header.tsx`:**
+- Classe do `<header>`: trocar `bg-background/95` por `bg-primary` (azul petroleo)
+- Border inferior: remover ou tornar sutil (`border-primary/20`)
+- Links de navegacao: `text-white/80 hover:text-white`
+- Link bold (Consultoria): `text-white font-semibold`
+- Botao chevron dos dropdowns: `text-white/80`
+- Logo: `h-10 md:h-10` no desktop (40px), adicionar classe responsiva `h-8` no mobile (32px). Adicionar `brightness-0 invert` para garantir que a logo fique branca sobre fundo escuro
+- Botao CTA: `bg-white text-primary hover:bg-white/90`
+- Dropdown menus: `bg-primary border-white/20` com links `text-white/80 hover:text-white`
+- Menu mobile: fundo `bg-primary` com textos brancos
+
+**Arquivo `src/pages/Index.tsx`:**
+- Verificar se os botoes outline existentes na hero ja usam classes inline que precisam ser ajustadas para herdar o novo estilo global
 
