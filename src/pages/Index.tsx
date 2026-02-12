@@ -271,9 +271,9 @@ function CasesSection() {
         <div className="grid md:grid-cols-3 gap-10">
           {cases.map((c, i) => (
             <RevealSection key={c.name} delay={i * 150}>
-              <div className="rounded-xl overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-300 group">
-                <div className="aspect-[16/10] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                  <span className="text-primary/30 font-serif text-5xl font-bold">{c.name.charAt(0)}</span>
+              <div className="rounded-lg overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-300 group">
+                <div className="aspect-video bg-[#F5F5F5] rounded-lg flex items-center justify-center">
+                  <span className="text-foreground/30 text-sm font-medium">Imagem do projeto</span>
                 </div>
                 <div className="p-6 space-y-3">
                   <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">{c.category}</span>
