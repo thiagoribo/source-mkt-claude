@@ -33,7 +33,7 @@ export default function Header() {
       <div className="container-sm flex items-center justify-between h-20">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
-          <img src={logoHeader} alt="SM Agency" className="h-8 md:h-10 w-auto" />
+          <img src={logoHeader} alt="SM Agency" className="h-10 md:h-14 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
