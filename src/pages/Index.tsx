@@ -338,19 +338,19 @@ function TestimonialsSection() {
 /* ─── CTA Final ─── */
 function CTASection() {
   return (
-    <section id="diagnostico" className="py-24 md:py-36 lg:py-[120px] bg-primary text-primary-foreground">
+    <section id="diagnostico" className="py-[100px] bg-primary text-primary-foreground">
       <div className="container-sm text-center space-y-10 max-w-3xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+          <h2 className="text-[42px] font-bold leading-tight font-serif">
             Vamos Construir a Estratégia que sua Empresa Merece?
           </h2>
-          <p className="text-primary-foreground/80 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">
+          <p className="text-white/90 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">
             Agende uma conversa de diagnóstico de 30 minutos. Sem compromisso. Vamos entender seu contexto e validar se faz sentido trabalharmos juntos.
           </p>
           <div className="mt-8">
             <Button
               size="lg"
-              className="bg-background text-primary hover:bg-background/90 rounded-md text-base px-10 h-13 font-semibold"
+              className="bg-background text-primary hover:bg-background/95 rounded-md text-base px-10 h-13 font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
               asChild
             >
               <a href="https://wa.me/5511937292921" target="_blank" rel="noopener noreferrer">
