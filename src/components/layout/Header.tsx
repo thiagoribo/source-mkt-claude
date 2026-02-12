@@ -29,11 +29,11 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-primary backdrop-blur-sm border-b border-white/10">
       <div className="container-sm flex items-center justify-between h-20">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
-          <img src={logoSm} alt="SM Agency" className="h-10 w-auto" />
+          <img src={logoSm} alt="SM Agency" className="h-8 md:h-10 w-auto brightness-0 invert" />
         </Link>
 
         {/* Desktop Nav */}
@@ -46,18 +46,18 @@ export default function Header() {
                 onMouseEnter={() => setOpenDropdown(item.label)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
-                <button className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+                <button className="flex items-center gap-1 text-sm font-medium text-white/80 hover:text-white transition-colors">
                   {item.label}
                   <ChevronDown className="h-3.5 w-3.5" />
                 </button>
                 {openDropdown === item.label && (
-                  <div className="absolute top-full left-0 pt-2">
-                    <div className="bg-background rounded-lg border shadow-lg py-2 min-w-[200px]">
+                  <div className="absolute top-full left-0 pt-2 z-50">
+                    <div className="bg-primary rounded-lg border border-white/20 shadow-lg py-2 min-w-[200px]">
                       {item.children.map((child) => (
                         <Link
                           key={child.href}
                           to={child.href}
-                          className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-primary hover:bg-secondary transition-colors"
+                          className="block px-4 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors"
                         >
                           {child.label}
                         </Link>
@@ -70,8 +70,8 @@ export default function Header() {
               <Link
                 key={item.href}
                 to={item.href!}
-                className={`text-sm transition-colors hover:text-primary ${
-                  item.bold ? "font-semibold text-foreground" : "font-medium text-foreground/80"
+                className={`text-sm transition-colors hover:text-white ${
+                  item.bold ? "font-semibold text-white" : "font-medium text-white/80"
                 }`}
               >
                 {item.label}
@@ -82,11 +82,11 @@ export default function Header() {
 
         {/* CTA + Mobile Toggle */}
         <div className="flex items-center gap-4">
-          <Button asChild className="hidden md:inline-flex rounded-md text-sm">
+          <Button asChild className="hidden md:inline-flex rounded-[6px] text-sm bg-white text-primary hover:bg-white/90">
             <a href="#diagnostico">Agendar Diagnóstico</a>
           </Button>
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 text-white"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Menu"
           >
@@ -97,18 +97,18 @@ export default function Header() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="lg:hidden bg-background border-t border-border/50 py-6 px-6">
+        <div className="lg:hidden bg-primary border-t border-white/10 py-6 px-6">
           <nav className="flex flex-col gap-4">
             {navItems.map((item) =>
               item.children ? (
                 <div key={item.label} className="flex flex-col gap-2">
-                  <span className="text-sm font-semibold text-foreground">{item.label}</span>
+                  <span className="text-sm font-semibold text-white">{item.label}</span>
                   {item.children.map((child) => (
                     <Link
                       key={child.href}
                       to={child.href}
                       onClick={() => setMobileOpen(false)}
-                      className="text-sm text-foreground/70 pl-4 hover:text-primary transition-colors"
+                      className="text-sm text-white/70 pl-4 hover:text-white transition-colors"
                     >
                       {child.label}
                     </Link>
@@ -119,13 +119,13 @@ export default function Header() {
                   key={item.href}
                   to={item.href!}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  className="text-sm font-medium text-white hover:text-white/80 transition-colors"
                 >
                   {item.label}
                 </Link>
               )
             )}
-            <Button asChild className="mt-4 w-full rounded-md">
+            <Button asChild className="mt-4 w-full rounded-[6px] bg-white text-primary hover:bg-white/90">
               <a href="#diagnostico" onClick={() => setMobileOpen(false)}>
                 Agendar Diagnóstico
               </a>
