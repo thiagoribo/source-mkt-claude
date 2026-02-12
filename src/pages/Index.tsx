@@ -26,7 +26,7 @@ function HeroSection() {
               <Button asChild size="lg" className="rounded-md text-base px-8 h-12">
                 <a href="#diagnostico">Agendar Diagnóstico Gratuito</a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-md text-base px-8 h-12 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Button asChild variant="outline" size="lg" className="text-base px-8 h-12">
                 <a href="#cases">Ver Cases de Transformação</a>
               </Button>
             </div>
