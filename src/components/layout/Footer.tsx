@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Facebook, Phone } from "lucide-react";
-import logoSm from "@/assets/logo-sm.png";
+import logoFooter from "@/assets/logo-footer.svg";
 
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Col 1 */}
           <div className="space-y-5">
-            <img src={logoSm} alt="SM Agency" className="h-8 brightness-0 invert" />
+            <img src={logoFooter} alt="SM Agency" className="h-10 w-auto" />
             <p className="text-sm text-background/70 leading-relaxed max-w-xs">
               Consultoria estratégica e branding para empresas estabelecidas.
             </p>
