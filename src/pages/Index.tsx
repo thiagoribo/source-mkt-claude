@@ -184,15 +184,17 @@ function MainServicesSection() {
           {services.map((s, i) => (
             <RevealSection key={s.title} delay={i * 150}>
               <div
-                className={`bg-background rounded-xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1 flex flex-col h-full ${
-                  s.featured ? "ring-2 ring-primary" : ""
+                className={`bg-background rounded-xl p-12 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full ${
+                  s.featured
+                    ? "border-2 border-primary shadow-none"
+                    : "shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
                 }`}
               >
                 <s.icon className="h-12 w-12 text-primary mb-6" strokeWidth={1.25} />
-                <h3 className="text-xl font-bold font-serif mb-3">{s.title}</h3>
+                <h3 className="text-xl font-bold font-serif mb-4">{s.title}</h3>
                 <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-1">{s.text}</p>
-                <div className="mt-auto space-y-4">
-                  <p className="text-primary font-bold text-lg font-serif">{s.price}</p>
+                <div className="mt-auto">
+                  <p className="text-primary font-bold text-lg font-serif mb-8">{s.price}</p>
                   <Button asChild variant={s.featured ? "default" : "outline"} className="w-full rounded-md">
                     <Link to={s.href}>Saber Mais</Link>
                   </Button>
