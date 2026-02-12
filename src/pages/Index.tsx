@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Target, Cog, TrendingUp, Compass, Star, User, Palette, Share2, PenTool, Quote } from "lucide-react";
+import { Compass, Cog, TrendingUp, Target, Star, User, Palette, Share2, PenTool, Quote } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ana1 from "@/assets/ana-1.png";
 import thiago1 from "@/assets/thiago-1.png";
@@ -50,7 +50,7 @@ function HeroSection() {
 function AuthoritySection() {
   const items = [
     {
-      icon: Target,
+      icon: Compass,
       title: "Estratégia 360°",
       text: "Não fazemos apenas branding ou apenas marketing. Desenvolvemos a arquitetura completa que conecta posicionamento, performance e crescimento sustentável.",
     },
@@ -79,9 +79,7 @@ function AuthoritySection() {
           {items.map((item, i) => (
             <RevealSection key={item.title} delay={i * 150}>
               <div className="space-y-5">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <item.icon className="h-6 w-6 text-primary" />
-                </div>
+                <item.icon className="h-12 w-12 text-primary" strokeWidth={1.25} />
                 <h3 className="text-xl font-bold font-serif">{item.title}</h3>
                 <p className="text-foreground/70 leading-relaxed">{item.text}</p>
               </div>
@@ -190,9 +188,7 @@ function MainServicesSection() {
                   s.featured ? "ring-2 ring-primary" : ""
                 }`}
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-                  <s.icon className="h-5 w-5 text-primary" />
-                </div>
+                <s.icon className="h-12 w-12 text-primary mb-6" strokeWidth={1.25} />
                 <h3 className="text-xl font-bold font-serif mb-3">{s.title}</h3>
                 <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-1">{s.text}</p>
                 <div className="mt-auto space-y-4">
@@ -238,7 +234,7 @@ function SpecializedServicesSection() {
                 to={item.href}
                 className="flex items-start gap-4 p-6 bg-background rounded-lg border border-border/50 hover:border-primary/30 hover:shadow-sm transition-all group"
               >
-                <item.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <item.icon className="h-10 w-10 text-primary mt-0.5 flex-shrink-0" strokeWidth={1.25} />
                 <div>
                   <h4 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">{item.title}</h4>
                   <p className="text-foreground/60 text-xs leading-relaxed">{item.text}</p>
