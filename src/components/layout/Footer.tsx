@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Col 1 */}
           <div className="space-y-5">
-            <img src={logoFooter} alt="SM Agency" className="h-16 w-auto" />
+            <img src={logoFooter} alt="SM Agency" className="h-24 w-auto" />
             <p className="text-sm text-background/70 leading-relaxed max-w-xs">
               Consultoria estratégica e branding para empresas estabelecidas.
             </p>
