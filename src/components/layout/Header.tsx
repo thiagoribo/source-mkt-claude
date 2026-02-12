@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoSm from "@/assets/logo-sm.png";
+import logoHeader from "@/assets/logo-header.svg";
 
 const navItems = [
   { label: "Consultoria Estratégica", href: "/consultoria-estrategica", bold: true },
@@ -33,7 +33,7 @@ export default function Header() {
       <div className="container-sm flex items-center justify-between h-20">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
-          <img src={logoSm} alt="SM Agency" className="h-8 md:h-10 w-auto brightness-0 invert" />
+          <img src={logoHeader} alt="SM Agency" className="h-8 md:h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
