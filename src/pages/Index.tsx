@@ -5,8 +5,8 @@ import RevealSection from "@/components/shared/RevealSection";
 import ResponsiveImage from "@/components/shared/ResponsiveImage";
 import TestimonialV2 from "@/components/ui/testimonial-v2";
 import { useCases } from "@/hooks/queries/useCases";
-import anaHero from "../../fotos-socios/Anaheader.svg";
-import ana1 from "../../fotos-socios/anasocia.svg";
+import anaHero from "@/assets/ana-hero.png";
+import ana1 from "@/assets/ana-1.png";
 import thiago1 from "@/assets/thiago-1.png";
 
 // Fallback data for cases
