@@ -41,8 +41,9 @@ export function useSubmitLead(formSource: FormSource): UseSubmitLeadReturn {
     }
 
     try {
-      const leadData: Partial<Lead> = {
+      const leadData: Partial<Lead> & { workspace_id: string } = {
         ...formData,
+        workspace_id: 'f1d7cfc8-88a0-4b8a-8812-381f42b1e3aa',
         source: 'Site SM Agency',
         service_interest: SERVICE_LABELS[formSource],
         form_source: formSource,
