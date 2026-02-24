@@ -1,31 +1,88 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Layers, Eye, BarChart3, Quote } from "lucide-react";
+import { Layers, Eye, BarChart3 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
+import AnimatedNumber from "@/components/shared/AnimatedNumber";
+import { useTeamMembers } from "@/hooks/queries/useTeamMembers";
+import { useCases } from "@/hooks/queries/useCases";
 import ana1 from "@/assets/ana-1.png";
 import ana2 from "@/assets/ana-2.png";
 import thiago1 from "@/assets/thiago-1.png";
 import thiago2 from "@/assets/thiago-2.png";
 import team1 from "@/assets/team-1.png";
 
+// Equipe (fallback images)
+import anaCastro from "@/assets/equipe/ana-castro.jpeg";
+import caioCastro from "@/assets/equipe/caio-castro.jpg";
+import gabrielaMontezi from "@/assets/equipe/gabriela-montezi.png";
+import grazielliSantos from "@/assets/equipe/grazielli-santos.jpg";
+import lohanaVitoria from "@/assets/equipe/lohana-vitoria.png";
+
+// Fallback data for team members (used when Supabase is unavailable)
+const fallbackTeamMembers = [
+  { name: "Ana Castro", role: "Designer Sênior", image: anaCastro },
+  { name: "Caio Castro", role: "Designer Sênior", image: caioCastro },
+  { name: "Gabriela Montezi", role: "Estrategista de Redes Sociais", image: gabrielaMontezi },
+  { name: "Grazielli Santos", role: "Adm & Financeiro", image: grazielliSantos },
+  { name: "Lohana Vitória", role: "Designer Sênior", image: lohanaVitoria },
+];
+
+// Map team member names to their local images
+const teamImageMap: Record<string, string> = {
+  "Ana Castro": anaCastro,
+  "Caio Castro": caioCastro,
+  "Gabriela Montezi": gabrielaMontezi,
+  "Grazielli Santos": grazielliSantos,
+  "Lohana Vitória": lohanaVitoria,
+};
+
+// Fallback data for cases/portfolio
+const fallbackProjects = [
+  { name: "Tech Solutions", category: "Consultoria Estratégica", result: "3× ticket médio" },
+  { name: "Consultoria Premium", category: "Branding Empresarial", result: "Segmento premium" },
+  { name: "E-commerce Moda", category: "Consultoria Estratégica", result: "+180% margem" },
+  { name: "Thatiane Oliveira", category: "Branding Pessoal", result: "Autoridade construída" },
+  { name: "Grupo RA", category: "Branding Empresarial", result: "Reposicionamento completo" },
+  { name: "StartupX", category: "Consultoria Estratégica", result: "Entrada no mercado premium" },
+];
+
 /* ─── Hero ─── */
 function Hero() {
   return (
-    <section className="section-spacing bg-background">
-      <div className="container-sm max-w-4xl">
+    <section className="section-spacing bg-background overflow-hidden relative">
+      <div className="container-sm max-w-6xl">
         <RevealSection>
-          <div className="space-y-8">
-            <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-bold leading-[1.15] tracking-tight">
-              Transformamos Negócios em{" "}
-              <span className="text-primary">Marcas de Referência</span>
-            </h1>
-            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-3xl">
-              Acreditamos que marcas bem construídas não apenas vendem mais, mas criam conexões reais, geram autoridade e deixam um legado.
-            </p>
-            <p className="text-foreground/70 leading-relaxed max-w-2xl">
-              Fundada por Ana Santos e Thiago Bianchi, a SM Agency nasceu da convicção de que toda empresa estabelecida tem potencial para se tornar referência no seu mercado — mas a maioria compete por preço porque falta clareza estratégica.
-            </p>
+          <div className="relative">
+            <span
+              aria-hidden
+              className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden lg:block"
+              style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
+            >
+              SM
+            </span>
+
+            <div className="relative max-w-3xl space-y-8">
+              <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
+                Quem Somos
+              </div>
+
+              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
+                Transformamos negócios{" "}
+                <em className="not-italic text-foreground/40 font-normal">em</em>
+                <br />
+                <span className="text-primary">marcas de referência.</span>
+              </h1>
+
+              <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
+                Acreditamos que marcas bem construídas não apenas vendem mais — criam conexões reais, geram autoridade e deixam um legado.
+              </p>
+
+              <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
+                Fundada por Ana Santos e Thiago Bianchi, a SM Agency nasceu da convicção de que toda empresa estabelecida tem potencial para se tornar referência no seu mercado.
+              </p>
+            </div>
           </div>
         </RevealSection>
       </div>
@@ -37,24 +94,26 @@ function Hero() {
 function Historia() {
   return (
     <section className="section-spacing bg-secondary">
-      <div className="container-sm max-w-3xl">
+      <div className="container-sm max-w-5xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-10">Como Começou</h2>
-        </RevealSection>
-        <RevealSection delay={100}>
-          <div className="space-y-5 text-foreground/80 leading-relaxed">
-            <p>
-              A SM Agency nasceu quando Ana e Thiago, cada um com mais de uma década de experiência em suas áreas, perceberam um padrão frustrante no mercado: empresas excelentes sendo tratadas como commodities porque suas marcas não comunicavam o valor real que entregavam.
-            </p>
-            <p>
-              Ana, com background profundo em branding e design estratégico, via constantemente negócios sólidos com identidades visuais que não refletiam sua essência. Thiago, vindo do mundo de performance e crescimento, frustrava-se ao ver empresas competindo por preço quando poderiam justificar premium com posicionamento correto.
-            </p>
-            <p>
-              Juntos, desenvolveram uma abordagem que integra o melhor de ambos os mundos: a profundidade conceitual do branding estratégico com o rigor analítico de performance e crescimento. Não fazemos marca bonita sem substância, nem estratégia sem execução visual.
-            </p>
-            <p>
-              Hoje, após trabalhar com mais de 100 empresas, desenvolvemos uma metodologia proprietária que provou sua eficácia em diversos setores — de manufatura a tecnologia, de serviços profissionais a e-commerce.
-            </p>
+          <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-16 items-start">
+            <div className="space-y-4">
+              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">Nossa história</p>
+              <h2 className="text-2xl md:text-3xl font-bold leading-snug">Como Começou</h2>
+              <div className="h-px w-12 bg-accent mt-6" />
+            </div>
+
+            <div className="space-y-5 text-foreground/70 leading-relaxed text-sm md:text-base">
+              <p>
+                A SM Agency nasceu quando Ana e Thiago, cada um com mais de uma década de experiência em suas áreas, perceberam um padrão frustrante no mercado: empresas excelentes sendo tratadas como commodities porque suas marcas não comunicavam o valor real que entregavam.
+              </p>
+              <p>
+                Ana, com background profundo em branding e design estratégico, via constantemente negócios sólidos com identidades que não refletiam sua essência. Thiago, vindo do mundo de performance e crescimento, frustrava-se ao ver empresas competindo por preço quando poderiam justificar premium com posicionamento correto.
+              </p>
+              <p className="pl-4 border-l-2 border-border text-foreground/50 text-sm">
+                Juntos, desenvolveram uma abordagem que integra o melhor de ambos: profundidade conceitual do branding estratégico com o rigor analítico de performance. Hoje, após mais de 100 empresas, nossa metodologia provou sua eficácia em diversos setores.
+              </p>
+            </div>
           </div>
         </RevealSection>
       </div>
@@ -73,7 +132,7 @@ function Valores() {
     {
       icon: Eye,
       title: "Transparência Radical",
-      text: "Não prometemos milagres. Somos honestos sobre o que é possível, quanto vai custar, e quanto tempo vai levar. Se não somos o fit certo, dizemos isso logo na primeira conversa.",
+      text: "Não prometemos milagres. Somos honestos sobre o que é possível, quanto vai custar e quanto tempo vai levar. Se não somos o fit certo, dizemos isso logo na primeira conversa.",
     },
     {
       icon: BarChart3,
@@ -86,17 +145,16 @@ function Valores() {
     <section className="section-spacing bg-background">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">O Que Nos Move</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-16">O Que Nos Move</h2>
         </RevealSection>
-        <div className="grid md:grid-cols-3 gap-10">
+
+        <div className="grid md:grid-cols-3 gap-0 border border-border divide-y md:divide-y-0 md:divide-x divide-border">
           {values.map((v, i) => (
             <RevealSection key={v.title} delay={i * 150}>
-              <div className="space-y-5">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <v.icon className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold font-serif">{v.title}</h3>
-                <p className="text-foreground/70 leading-relaxed text-sm">{v.text}</p>
+              <div className="p-8 space-y-5">
+                <v.icon className="h-8 w-8 text-accent" strokeWidth={1.25} />
+                <h3 className="text-lg font-bold">{v.title}</h3>
+                <p className="text-foreground/60 leading-relaxed text-sm">{v.text}</p>
               </div>
             </RevealSection>
           ))}
@@ -112,7 +170,7 @@ function Fundadores() {
     <section className="section-spacing bg-secondary">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Liderança</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-16">Liderança</h2>
         </RevealSection>
 
         {/* Ana */}
@@ -120,27 +178,32 @@ function Fundadores() {
           <div className="mb-20">
             <div className="grid md:grid-cols-[320px_1fr] gap-10 items-start">
               <div className="space-y-4">
-                <img src={ana1} alt="Ana Santos" className="w-full rounded-2xl shadow-lg aspect-square object-cover" />
+                <img src={ana1} alt="Ana Santos" className="w-full shadow-lg aspect-square object-cover" />
                 <div className="grid grid-cols-2 gap-3">
-                  <img src={ana2} alt="Ana Santos em workshop" className="rounded-xl aspect-square object-cover w-full" />
-                  <img src={team1} alt="Ana Santos apresentando" className="rounded-xl aspect-square object-cover w-full" />
+                  <img src={ana2} alt="Ana Santos em workshop" className="aspect-square object-cover w-full" />
+                  <img src={team1} alt="Ana Santos apresentando" className="aspect-square object-cover w-full" />
                 </div>
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold font-serif">Ana Santos</h3>
-                <p className="text-primary font-medium text-sm">Co-fundadora e Diretora de Branding</p>
-                <div className="text-foreground/70 text-sm leading-relaxed space-y-3">
+                <div>
+                  <div className="h-px w-10 bg-primary mb-4" />
+                  <h3 className="text-2xl font-bold font-serif">Ana Santos</h3>
+                  <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-1.5">
+                    Co-fundadora e Diretora de Branding
+                  </p>
+                </div>
+                <div className="text-foreground/65 text-sm leading-relaxed space-y-3">
                   <p>
                     Ana Santos é co-fundadora e Diretora de Branding da SM Agency, onde lidera todos os projetos de posicionamento estratégico e construção de marca.
                   </p>
                   <p>
-                    Com mais de 15 anos de experiência em branding para empresas de diversos setores, Ana desenvolveu uma abordagem única que combina rigor analítico com sensibilidade para traduzir essência de negócio em territórios de comunicação memoráveis. Sua expertise está em identificar o que realmente diferencia uma empresa no mercado — não o que ela quer ser, mas o que ela genuinamente é — e construir posicionamento em cima dessa verdade.
+                    Com mais de 15 anos de experiência em branding para empresas de diversos setores, Ana desenvolveu uma abordagem única que combina rigor analítico com sensibilidade para traduzir essência de negócio em territórios de comunicação memoráveis.
                   </p>
                   <p>
-                    Ana é conhecida por sua abordagem sem frescura: ela não acredita em branding como exercício criativo desconectado de negócio. Cada decisão de marca precisa ter justificativa estratégica e potencial de gerar valor mensurável. Essa mentalidade a tornou procurada por CEOs e líderes que querem transformação real, não apenas uma cara nova.
+                    Sua expertise está em identificar o que realmente diferencia uma empresa no mercado — não o que ela quer ser, mas o que ela genuinamente é — e construir posicionamento em cima dessa verdade.
                   </p>
-                  <p>
-                    Nos últimos anos, Ana liderou pessoalmente o reposicionamento de mais de 50 empresas, muitas das quais conseguiram aumentar significativamente seus preços e atrair clientes de maior valor após o trabalho estratégico. Ela participa diretamente de todos os projetos de consultoria e branding da SM, garantindo consistência metodológica e profundidade analítica.
+                  <p className="text-foreground/40 text-xs">
+                    Nos últimos anos, Ana liderou pessoalmente o reposicionamento de mais de 50 empresas, muitas das quais conseguiram aumentar significativamente seus preços e atrair clientes de maior valor após o trabalho estratégico.
                   </p>
                 </div>
               </div>
@@ -153,27 +216,32 @@ function Fundadores() {
           <div>
             <div className="grid md:grid-cols-[320px_1fr] gap-10 items-start">
               <div className="space-y-4">
-                <img src={thiago1} alt="Thiago Bianchi" className="w-full rounded-2xl shadow-lg aspect-square object-cover" />
+                <img src={thiago1} alt="Thiago Bianchi" className="w-full shadow-lg aspect-square object-cover" />
                 <div className="grid grid-cols-2 gap-3">
-                  <img src={thiago2} alt="Thiago Bianchi analisando dados" className="rounded-xl aspect-square object-cover w-full" />
-                  <img src={team1} alt="Thiago Bianchi em apresentação" className="rounded-xl aspect-square object-cover w-full" />
+                  <img src={thiago2} alt="Thiago Bianchi analisando dados" className="aspect-square object-cover w-full" />
+                  <img src={team1} alt="Thiago Bianchi em apresentação" className="aspect-square object-cover w-full" />
                 </div>
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold font-serif">Thiago Bianchi</h3>
-                <p className="text-primary font-medium text-sm">Co-fundador e Diretor de Performance</p>
-                <div className="text-foreground/70 text-sm leading-relaxed space-y-3">
+                <div>
+                  <div className="h-px w-10 bg-primary mb-4" />
+                  <h3 className="text-2xl font-bold font-serif">Thiago Bianchi</h3>
+                  <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-1.5">
+                    Co-fundador e Diretor de Performance
+                  </p>
+                </div>
+                <div className="text-foreground/65 text-sm leading-relaxed space-y-3">
                   <p>
-                    Thiago Bianchi é co-fundador e Diretor de Performance da SM Agency, onde lidera a dimensão de crescimento, conversão e resultados mensuráveis em todos os projetos de consultoria.
+                    Thiago Bianchi é co-fundador e Diretor de Performance da SM Agency, onde lidera a dimensão de crescimento, conversão e resultados mensuráveis.
                   </p>
                   <p>
-                    Com background em estratégias de crescimento e marketing de performance, Thiago desenvolveu expertise em conectar estratégia de marca com resultados tangíveis de negócio. Ele não acredita em branding que não se traduz em crescimento de receita, nem em performance sem clareza estratégica — para ele, os dois precisam andar juntos.
+                    Com background em estratégias de crescimento e marketing de performance, Thiago desenvolveu expertise em conectar estratégia de marca com resultados tangíveis de negócio. Ele não acredita em branding que não se traduz em crescimento de receita, nem em performance sem clareza estratégica.
                   </p>
                   <p>
-                    Thiago é conhecido por sua abordagem direta e orientada a dados. Ele não tem paciência para estratégias que não podem ser medidas ou implementadas. Em cada projeto, ele garante que há KPIs claros, roadmap viável, e mecanismos de acompanhamento de ROI. Essa mentalidade pragmática o tornou procurado por empresas que já tentaram "branding" no passado mas não viram impacto real no negócio.
+                    O que diferencia a abordagem de Thiago é a capacidade de traduzir posicionamento de marca em ações concretas de crescimento — garantindo que há plano claro de como executar e medir resultados.
                   </p>
-                  <p>
-                    O que diferencia a abordagem de Thiago é a capacidade de traduzir posicionamento de marca em ações concretas de crescimento. Ele não deixa o projeto terminar no "strategic document" — ele garante que há plano claro de como executar e medir resultados.
+                  <p className="text-foreground/40 text-xs">
+                    Em cada projeto, ele garante que há KPIs claros, roadmap viável e mecanismos de acompanhamento de ROI. Essa mentalidade pragmática o tornou procurado por empresas que já tentaram branding no passado mas não viram impacto real.
                   </p>
                 </div>
               </div>
@@ -187,24 +255,65 @@ function Fundadores() {
 
 /* ─── Equipe ─── */
 function Equipe() {
+  const { data: supabaseMembers, isLoading } = useTeamMembers();
+
+  // Filter non-founders from Supabase data, or use fallback
+  const teamMembers = supabaseMembers && supabaseMembers.length > 0
+    ? supabaseMembers
+        .filter(m => !m.is_founder)
+        .map(m => ({
+          name: m.name,
+          role: m.role,
+          image: m.image_url || teamImageMap[m.name] || anaCastro,
+        }))
+    : fallbackTeamMembers;
+
   return (
     <section className="section-spacing bg-background">
-      <div className="container-sm max-w-4xl">
+      <div className="container-sm max-w-5xl">
+        {/* Header */}
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            Equipe de Estrategistas
-          </h2>
-          <p className="text-foreground/70 text-center leading-relaxed max-w-2xl mx-auto mb-12">
-            Conforme a SM cresceu, desenvolvemos um processo rigoroso de seleção e treinamento. Cada membro é treinado diretamente por Ana e Thiago na metodologia SM, passando por meses de imersão em projetos reais antes de liderar componentes de consultoria.
-          </p>
+          <div className="mb-16 space-y-4 max-w-2xl">
+            <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">
+              Nossa Equipe
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Equipe de Estrategistas
+            </h2>
+            <p className="text-foreground/60 text-sm leading-relaxed">
+              Desenvolvemos um processo rigoroso de seleção e treinamento. Cada membro
+              é treinado diretamente por Ana e Thiago na metodologia SM, passando por
+              meses de imersão em projetos reais antes de liderar componentes de consultoria.
+            </p>
+            <div className="h-px w-12 bg-accent mt-6" />
+          </div>
         </RevealSection>
-        <RevealSection delay={100}>
-          <img
-            src={team1}
-            alt="Equipe SM Agency"
-            className="w-full rounded-2xl shadow-lg aspect-[16/9] object-cover"
-          />
-        </RevealSection>
+
+        {/* Grid de Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {teamMembers.map((member, index) => (
+            <RevealSection key={member.name} delay={index * 100}>
+              <div className="group border border-border/50 hover:border-primary/40 transition-colors duration-300 overflow-hidden">
+                {/* Foto */}
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                  />
+                </div>
+
+                {/* Info */}
+                <div className="p-6 space-y-2 border-t border-border/30">
+                  <h3 className="text-lg font-bold font-serif">{member.name}</h3>
+                  <p className="text-primary font-mono text-xs tracking-widest uppercase">
+                    {member.role}
+                  </p>
+                </div>
+              </div>
+            </RevealSection>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -215,21 +324,24 @@ function Numeros() {
   const stats = [
     { value: "10+", label: "Anos de expertise combinada" },
     { value: "100+", label: "Marcas transformadas" },
-    { value: "6", label: "Projetos por trimestre (capacidade atual)" },
+    { value: "6", label: "Projetos por trimestre" },
   ];
 
   return (
     <section className="section-spacing bg-secondary">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Impacto em Números</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-16">Impacto em Números</h2>
         </RevealSection>
-        <div className="grid md:grid-cols-3 gap-8">
+
+        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border border border-border">
           {stats.map((s, i) => (
             <RevealSection key={s.label} delay={i * 150}>
-              <div className="text-center space-y-3">
-                <p className="text-5xl md:text-6xl font-bold font-serif text-primary">{s.value}</p>
-                <p className="text-foreground/70 text-sm">{s.label}</p>
+              <div className="p-10 space-y-3 text-center">
+                <p className="text-5xl md:text-6xl font-bold font-serif text-primary">
+                  <AnimatedNumber value={s.value} />
+                </p>
+                <p className="text-foreground/55 text-sm">{s.label}</p>
               </div>
             </RevealSection>
           ))}
@@ -242,15 +354,17 @@ function Numeros() {
 /* ─── Portfolio ─── */
 function Portfolio() {
   const [filter, setFilter] = useState("Todos");
+  const { data: supabaseCases } = useCases();
   const categories = ["Todos", "Consultoria Estratégica", "Branding Empresarial", "Branding Pessoal"];
-  const projects = [
-    { name: "Tech Solutions", category: "Consultoria Estratégica", result: "3x ticket médio" },
-    { name: "Consultoria Premium", category: "Branding Empresarial", result: "Segmento premium" },
-    { name: "E-commerce Moda", category: "Consultoria Estratégica", result: "+180% margem" },
-    { name: "Thatiane Oliveira", category: "Branding Pessoal", result: "Autoridade construída" },
-    { name: "Grupo RA", category: "Branding Empresarial", result: "Reposicionamento completo" },
-    { name: "StartupX", category: "Consultoria Estratégica", result: "Entrada no mercado premium" },
-  ];
+
+  // Use Supabase data or fallback
+  const projects = supabaseCases && supabaseCases.length > 0
+    ? supabaseCases.map(c => ({
+        name: c.name,
+        category: c.category || "Consultoria Estratégica",
+        result: c.result || "",
+      }))
+    : fallbackProjects;
 
   const filtered = filter === "Todos" ? projects : projects.filter((p) => p.category === filter);
 
@@ -258,20 +372,19 @@ function Portfolio() {
     <section id="portfolio" className="section-spacing bg-background">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-            Trabalhos que Nos Orgulham
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-10">Trabalhos que Nos Orgulham</h2>
         </RevealSection>
+
         <RevealSection delay={100}>
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap gap-2 mb-12">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`text-sm px-4 py-2 rounded-full transition-colors ${
+                className={`text-xs font-mono uppercase tracking-widest px-4 py-2 border transition-colors ${
                   filter === cat
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-foreground/70 hover:text-primary"
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "border-border text-foreground/50 hover:border-primary/40 hover:text-foreground"
                 }`}
               >
                 {cat}
@@ -279,17 +392,18 @@ function Portfolio() {
             ))}
           </div>
         </RevealSection>
+
         <div className="grid md:grid-cols-3 gap-6">
           {filtered.map((p, i) => (
             <RevealSection key={p.name + p.category} delay={i * 100}>
-              <div className="rounded-xl overflow-hidden border border-border/50 hover:shadow-lg transition-all group">
-                <div className="aspect-[16/10] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                  <span className="text-primary/30 font-serif text-5xl font-bold">{p.name.charAt(0)}</span>
+              <div className="border border-border hover:border-primary/40 transition-colors group overflow-hidden">
+                <div className="aspect-[16/10] bg-primary/5 flex items-center justify-center">
+                  <span className="text-primary/20 font-serif text-6xl font-bold">{p.name.charAt(0)}</span>
                 </div>
                 <div className="p-5 space-y-2">
-                  <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">{p.category}</span>
-                  <h3 className="font-bold font-serif">{p.name}</h3>
-                  <p className="text-foreground/60 text-sm">{p.result}</p>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-primary">{p.category}</span>
+                  <h3 className="font-bold">{p.name}</h3>
+                  <p className="text-foreground/50 text-sm">{p.result}</p>
                 </div>
               </div>
             </RevealSection>
@@ -303,19 +417,28 @@ function Portfolio() {
 /* ─── CTA Final ─── */
 function CTAFinal() {
   return (
-    <section className="py-24 md:py-32 bg-primary text-primary-foreground">
-      <div className="container-sm text-center space-y-8 max-w-3xl">
+    <section className="py-24 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+      <span
+        aria-hidden
+        className="absolute right-8 top-1/2 -translate-y-1/2 font-bold font-serif leading-none select-none pointer-events-none hidden lg:block"
+        style={{ opacity: 0.05, fontSize: "200px" }}
+      >
+        →
+      </span>
+
+      <div className="container-sm max-w-3xl relative">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-            Vamos Construir Algo Extraordinário Juntos?
-          </h2>
-          <p className="text-primary-foreground/80 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">
-            Se você sente que sua empresa ou marca pessoal tem potencial não realizado, vamos conversar. Agende um diagnóstico gratuito de 30 minutos e vamos explorar como podemos ajudar.
-          </p>
-          <div className="mt-8">
+          <div className="space-y-8">
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+              Vamos Construir Algo Extraordinário Juntos?
+            </h2>
+            <p className="text-primary-foreground/70 text-lg leading-relaxed max-w-2xl">
+              Se você sente que sua empresa ou marca pessoal tem potencial não realizado, vamos conversar. Agende um diagnóstico gratuito de 30 minutos.
+            </p>
             <Button
               size="lg"
-              className="bg-background text-primary hover:bg-background/90 rounded-md text-base px-10 h-13 font-semibold"
+              variant="outline"
+              className="rounded-none text-base px-10 h-12 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors"
               asChild
             >
               <a href="https://wa.me/5511937292921" target="_blank" rel="noopener noreferrer">

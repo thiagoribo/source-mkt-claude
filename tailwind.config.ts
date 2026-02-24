@@ -14,8 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
+        display: ["Playfair Display", "Georgia", "serif"],
         serif: ["Playfair Display", "Georgia", "serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["DM Sans", "system-ui", "sans-serif"],
+        mono: ["DM Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -61,11 +63,22 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        brand: {
+          black: "#000000",
+          navy: "#212E3F",
+          offwhite: "#F0ECE3",
+        },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "0px",
+        md: "0px",
+        sm: "0px",
+      },
+      letterSpacing: {
+        tightest: "-0.04em",
+        tighter: "-0.02em",
+        widest: "0.2em",
+        wider: "0.1em",
       },
       keyframes: {
         "accordion-down": {
@@ -77,16 +90,34 @@ export default {
           to: { height: "0" },
         },
         "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "0%": { opacity: "0", transform: "translateY(40px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "slide-in-right": {
+          "0%": { opacity: "0", transform: "translateX(30px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        "line-grow": {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in-up": "fade-in-up 0.7s ease-out forwards",
+        "fade-in-up": "fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fade-in": "fade-in 0.6s ease-out forwards",
+        "slide-in-right": "slide-in-right 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "line-grow": "line-grow 1.2s ease-out forwards",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/container-queries"),
+  ],
 } satisfies Config;

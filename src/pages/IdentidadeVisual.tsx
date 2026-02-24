@@ -17,36 +17,119 @@ import {
   Shapes,
   Image,
   FileText,
-  AlertTriangle,
+  ArrowRight,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
+import ServiceMockupCard from "@/components/shared/ServiceMockupCard";
+import ComparisonTable from "@/components/shared/ComparisonTable";
+import { identidadeVisualMockups } from "@/data/serviceMockups";
+import { TestimonialSlider } from "@/components/ui/testimonial-slider";
+import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
+
+// Fotos dos clientes - Identidade Visual (fallback images)
+import beatrizGarcia from "@/assets/clientes/beatriz-garcia.jpeg";
+import guilhermeMoeller from "@/assets/clientes/guilherme-moeller.png";
+import jessicaFrasson from "@/assets/clientes/jessica-frasson.jpg";
+import milenaPandolfi from "@/assets/clientes/milena-pandolfi.jpg";
+
+// Map client names to their local images
+const clientImageMap: Record<string, string> = {
+  "Beatriz Garcia": beatrizGarcia,
+  "Guilherme Moeller": guilhermeMoeller,
+  "Jéssica Frasson": jessicaFrasson,
+  "Dra. Milena Pandolfi": milenaPandolfi,
+};
+
+// Fallback testimonials for when Supabase is unavailable
+const fallbackTestimonials = [
+  {
+    id: 1,
+    name: "Beatriz Garcia",
+    role: "Advogada",
+    quote: "O resultado superou todas as expectativas e combinou perfeitamente com minha identidade. Agora sinto que posso dominar o mundo!",
+    result: "Marca do escritório alavancada",
+    imageSrc: beatrizGarcia,
+    thumbnailSrc: beatrizGarcia,
+  },
+  {
+    id: 2,
+    name: "Guilherme Moeller",
+    role: "Treinador e Palestrante — Furu",
+    quote: "Atendimento com muita atenção e soluções que atenderam perfeitamente os sócios.",
+    result: "Soluções adequadas para todos",
+    imageSrc: guilhermeMoeller,
+    thumbnailSrc: guilhermeMoeller,
+  },
+  {
+    id: 3,
+    name: "Jéssica Frasson",
+    role: "Fisioterapeuta",
+    quote: "Agenda sempre lotada e aumento significativo no ticket dos meus serviços.",
+    result: "Espaço próprio inaugurado",
+    imageSrc: jessicaFrasson,
+    thumbnailSrc: jessicaFrasson,
+  },
+  {
+    id: 4,
+    name: "Dra. Milena Pandolfi",
+    role: "Médica Alergista e Imunologista",
+    quote: "Uma palavra resume o trabalho: clareza e direcionamento.",
+    result: "Agenda de pacientes preenchida",
+    imageSrc: milenaPandolfi,
+    thumbnailSrc: milenaPandolfi,
+  },
+];
 
 /* ─── Hero ─── */
 function Hero() {
   return (
-    <section className="section-spacing bg-background">
-      <div className="container-sm max-w-4xl">
+    <section className="section-spacing bg-background overflow-hidden relative">
+      <div className="container-sm max-w-6xl">
         <RevealSection>
-          <div className="space-y-8">
-            <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-bold leading-[1.15] tracking-tight">
-              Identidade Visual para{" "}
-              <span className="text-primary">Estratégias Já Definidas</span>
-            </h1>
-            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-3xl">
-              Transformamos plataformas de marca em sistemas visuais memoráveis, coerentes e aplicáveis em todos os pontos de contato.
-            </p>
-            <div className="bg-accent/10 border border-accent/30 rounded-xl p-6 flex items-start gap-4">
-              <AlertTriangle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-foreground/80 leading-relaxed">
-                <strong>Importante:</strong> Este serviço é para empresas que já possuem estratégia de marca definida (propósito, posicionamento, valores). Se você ainda não tem clareza estratégica, recomendamos começar pelo Branding Empresarial.
-                <Link to="/branding-empresarial" className="text-primary font-medium hover:underline ml-1 inline-block">
-                  Precisa de estratégia primeiro? →
-                </Link>
+          <div className="relative">
+            {/* Ghosted decorative monogram */}
+            <span
+              aria-hidden
+              className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden lg:block"
+              style={{ opacity: 0.035, letterSpacing: "-0.04em", color: "currentColor" }}
+            >
+              IV
+            </span>
+
+            <div className="relative max-w-3xl space-y-8">
+              {/* Service label */}
+              <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
+                Identidade Visual
               </div>
+
+              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
+                Sistemas visuais{" "}
+                <em className="not-italic text-foreground/40 font-normal">
+                  que comunicam
+                </em>
+                <br />
+                <span className="text-primary">estratégia.</span>
+              </h1>
+
+              <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
+                Transformamos plataformas de marca em identidades memoráveis, coerentes e aplicáveis em todos os pontos de contato.
+              </p>
+
+              <p className="text-sm text-foreground/50">
+                Serviço para empresas com estratégia de marca já definida.{" "}
+                <Link
+                  to="/branding-empresarial"
+                  className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+                >
+                  Ainda não tem? Comece pelo Branding →
+                </Link>
+              </p>
+
+              <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
+                <a href="#formulario">Solicitar Orçamento</a>
+              </Button>
             </div>
-            <Button size="lg" className="rounded-md text-base px-8 h-12" asChild>
-              <a href="#formulario">Solicitar Orçamento</a>
-            </Button>
           </div>
         </RevealSection>
       </div>
@@ -54,144 +137,60 @@ function Hero() {
   );
 }
 
-/* ─── O Que É ─── */
-function OQueE() {
-  return (
-    <section className="section-spacing bg-secondary">
-      <div className="container-sm max-w-3xl">
-        <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Sistema de Identidade Visual Completo
-          </h2>
-        </RevealSection>
-        <RevealSection delay={100}>
-          <p className="text-foreground/80 leading-relaxed">
-            Identidade visual é o conjunto de elementos gráficos que expressam visualmente quem sua marca é: logotipo, paleta de cores, tipografia, padrões, aplicações e diretrizes de uso. Mas na SM, ela vai além da estética — criamos sistemas visuais que comunicam estratégia, geram reconhecimento e constroem valor percebido.
-          </p>
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
+/* ─── Antes e Depois — tabela comparativa ─── */
+const identidadeVisualRows = [
+  { sem: "Logo solto sem aplicação coerente", com: "Identidade consistente em todos os pontos de contato" },
+  { sem: "Marca visualmente genérica", com: "Visual marcante, diferenciado e memorável" },
+  { sem: "Comunicação desalinhada com a estratégia", com: "Expressão visual clara do posicionamento" },
+  { sem: "Dificuldade em se destacar da concorrência", com: "Reconhecimento e valorização da marca" },
+  { sem: "Sem manual de diretrizes de uso", com: "Manual completo e fácil de aplicar" },
+  { sem: "Dúvidas constantes na hora de aplicar", com: "Clareza, coesão e profissionalismo em tudo" },
+];
 
-/* ─── Antes e Depois ─── */
 function AntesDepois() {
-  const sem = [
-    "Logo solto sem aplicação coerente",
-    "Marca visualmente genérica",
-    "Comunicação desalinhada",
-    "Dificuldade em se destacar",
-    "Sem manual de diretrizes",
-    "Dúvidas constantes na aplicação",
-  ];
-  const com = [
-    "Identidade consistente em todos os pontos",
-    "Visual marcante e memorável",
-    "Expressão clara do posicionamento",
-    "Reconhecimento e valorização",
-    "Manual completo e fácil de usar",
-    "Clareza, coesão e profissionalismo",
-  ];
-
   return (
-    <section className="section-spacing bg-background">
-      <div className="container-sm max-w-5xl">
-        <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Antes e Depois
-          </h2>
-        </RevealSection>
-        <div className="grid md:grid-cols-2 gap-8">
-          <RevealSection>
-            <div className="rounded-xl border border-destructive/20 bg-destructive/5 p-8 h-full">
-              <h3 className="font-bold font-serif text-lg mb-6 text-destructive">Sem Identidade Visual Profissional</h3>
-              <ul className="space-y-4">
-                {sem.map((s) => (
-                  <li key={s} className="flex items-start gap-3 text-sm text-foreground/70">
-                    <X className="h-4 w-4 text-destructive flex-shrink-0 mt-0.5" />
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </RevealSection>
-          <RevealSection delay={200}>
-            <div className="rounded-xl border border-primary/20 bg-primary/5 p-8 h-full">
-              <h3 className="font-bold font-serif text-lg mb-6 text-primary">Com Sistema de Identidade SM</h3>
-              <ul className="space-y-4">
-                {com.map((c) => (
-                  <li key={c} className="flex items-start gap-3 text-sm text-foreground/70">
-                    <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </RevealSection>
-        </div>
-      </div>
-    </section>
+    <ComparisonTable
+      title="Antes e Depois"
+      rows={identidadeVisualRows}
+      beforeLabel="Sem Sistema Profissional"
+      afterLabel="Com Sistema SM"
+      className="bg-secondary"
+    />
   );
 }
 
-/* ─── Processo ─── */
+/* ─── Processo — lista numerada editorial ─── */
 function Processo() {
   const steps = [
-    { icon: Search, title: "Imersão na Marca", text: "Entendemos estratégia, propósito, diferenciais e público" },
-    { icon: Layers, title: "Estratégia Visual", text: "Traduzimos a marca em conceitos visuais e referências" },
-    { icon: PenTool, title: "Criação do Logotipo", text: "Desenvolvemos símbolo, cores, tipografia e variações" },
-    { icon: Grid3X3, title: "Sistema de Identidade", text: "Criamos aplicações e elementos complementares" },
-    { icon: BookOpen, title: "Manual Visual", text: "Guia completo para aplicação consistente" },
-  ];
-
-  return (
-    <section className="section-spacing bg-secondary">
-      <div className="container-sm max-w-5xl">
-        <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Como Funciona</h2>
-        </RevealSection>
-        <div className="grid md:grid-cols-5 gap-6">
-          {steps.map((s, i) => (
-            <RevealSection key={s.title} delay={i * 100}>
-              <div className="text-center space-y-4">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto">
-                  <s.icon className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block">Etapa {i + 1}</div>
-                <h3 className="font-bold font-serif text-sm leading-snug">{s.title}</h3>
-                <p className="text-foreground/60 text-xs leading-relaxed">{s.text}</p>
-              </div>
-            </RevealSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Entregáveis ─── */
-function Entregaveis() {
-  const items = [
-    { icon: PenTool, title: "Logotipo principal + variações" },
-    { icon: Palette, title: "Paleta de cores completa" },
-    { icon: Type, title: "Tipografia (primária e secundária)" },
-    { icon: Shapes, title: "Padrões e elementos gráficos" },
-    { icon: Image, title: "Aplicações mockups" },
-    { icon: FileText, title: "Manual de identidade visual (PDF)" },
+    { num: "01", icon: Search, title: "Imersão na Marca", text: "Entendemos estratégia, propósito, diferenciais e público-alvo antes de criar qualquer elemento visual." },
+    { num: "02", icon: Layers, title: "Estratégia Visual", text: "Traduzimos a estratégia de marca em conceitos visuais, moodboards e referências estéticas." },
+    { num: "03", icon: PenTool, title: "Criação do Logotipo", text: "Desenvolvemos símbolo, wordmark, paleta de cores, tipografia e variações do logo." },
+    { num: "04", icon: Grid3X3, title: "Sistema de Identidade", text: "Criamos aplicações, texturas, ícones e elementos gráficos complementares do sistema." },
+    { num: "05", icon: BookOpen, title: "Manual de Identidade", text: "Entregamos guia completo com regras de uso para aplicação consistente da marca." },
   ];
 
   return (
     <section className="section-spacing bg-background">
       <div className="container-sm max-w-4xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">O Que Está Incluído</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-16">Como Funciona</h2>
         </RevealSection>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {items.map((item, i) => (
-            <RevealSection key={item.title} delay={i * 80}>
-              <div className="bg-secondary rounded-xl p-6 text-center space-y-3 h-full">
-                <item.icon className="h-6 w-6 text-primary mx-auto" />
-                <p className="font-semibold text-sm">{item.title}</p>
+
+        <div className="divide-y divide-border">
+          {steps.map((s, i) => (
+            <RevealSection key={s.title} delay={i * 80}>
+              <div className="group flex gap-6 py-8 items-start cursor-default hover:bg-secondary/50 transition-colors -mx-6 px-6">
+                <span
+                  className="font-mono text-4xl font-bold leading-none flex-shrink-0 w-14 text-right pt-1 transition-colors"
+                  style={{ color: "hsl(var(--foreground) / 0.08)" }}
+                >
+                  {s.num}
+                </span>
+                <div className="flex-1 space-y-2">
+                  <h3 className="font-bold text-lg leading-snug">{s.title}</h3>
+                  <p className="text-foreground/55 text-sm leading-relaxed">{s.text}</p>
+                </div>
+                <s.icon className="h-5 w-5 text-foreground/15 group-hover:text-accent/60 transition-colors flex-shrink-0 mt-1.5" />
               </div>
             </RevealSection>
           ))}
@@ -201,19 +200,112 @@ function Entregaveis() {
   );
 }
 
-/* ─── Investimento ─── */
-function Investimento() {
+/* ─── Entregáveis — lista com tracejados ─── */
+function Entregaveis() {
+  const items = [
+    { icon: PenTool, title: "Logotipo principal + variações" },
+    { icon: Palette, title: "Paleta de cores completa" },
+    { icon: Type, title: "Tipografia primária e secundária" },
+    { icon: Shapes, title: "Padrões e elementos gráficos" },
+    { icon: Image, title: "Aplicações em mockups realistas" },
+    { icon: FileText, title: "Manual de identidade visual (PDF)" },
+  ];
+
   return (
     <section className="section-spacing bg-secondary">
-      <div className="container-sm max-w-3xl">
+      <div className="container-sm max-w-4xl">
         <RevealSection>
-          <div className="bg-background rounded-xl p-8 md:p-12 shadow-sm border border-border/50 text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">Investimento</h2>
-            <p className="text-4xl font-bold font-serif text-primary">A partir de R$8.000</p>
-            <p className="text-sm text-muted-foreground">Prazo: 4-6 semanas</p>
-            <Button size="lg" className="rounded-md text-base px-8 h-12" asChild>
-              <a href="#formulario">Solicitar Proposta</a>
-            </Button>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">O Que Está Incluído</h2>
+        </RevealSection>
+
+        <div className="divide-y divide-border">
+          {items.map((item, i) => (
+            <RevealSection key={item.title} delay={i * 60}>
+              <div className="flex items-center gap-4 py-5">
+                <item.icon className="h-4 w-4 text-accent flex-shrink-0" />
+                <span className="font-semibold text-base">{item.title}</span>
+                <div className="flex-1 border-t border-dashed border-border/50 mx-2" />
+                <Check className="h-4 w-4 text-primary flex-shrink-0" />
+              </div>
+            </RevealSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Galeria Mockups ─── */
+function GaleriaMockups() {
+  return (
+    <section className="section-spacing bg-background">
+      <div className="container-sm max-w-5xl">
+        <RevealSection>
+          <div className="mb-12 space-y-3">
+            <h2 className="text-3xl md:text-4xl font-bold">Sistema Visual Aplicado</h2>
+            <p className="text-foreground/55 max-w-xl text-sm">
+              Simulações com a mesma linguagem gráfica em interface digital, materiais institucionais e social media.
+            </p>
+          </div>
+        </RevealSection>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {identidadeVisualMockups.map((mockup, i) => (
+            <RevealSection key={mockup.title} delay={i * 100}>
+              <ServiceMockupCard
+                title={mockup.title}
+                subtitle={mockup.subtitle}
+                tag={mockup.tag}
+                evidence={mockup.evidence}
+                imageSrc={mockup.imageSrc}
+                ratio={mockup.ratio}
+                theme={mockup.theme}
+              />
+            </RevealSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Investimento — secão escura de contraste ─── */
+function Investimento() {
+  return (
+    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+      {/* Decorative large text */}
+      <span
+        aria-hidden
+        className="absolute right-8 top-1/2 -translate-y-1/2 text-[160px] font-bold font-serif leading-none select-none pointer-events-none hidden lg:block"
+        style={{ opacity: 0.05 }}
+      >
+        R$
+      </span>
+
+      <div className="container-sm max-w-5xl relative">
+        <RevealSection>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
+            <div className="space-y-4">
+              <p className="text-xs font-mono tracking-widest uppercase opacity-50">Investimento</p>
+              <p className="text-6xl md:text-7xl font-bold font-serif leading-none">
+                R$8.000
+              </p>
+              <p className="text-primary-foreground/50 text-sm">
+                A partir de — Prazo: 4 a 6 semanas
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 md:items-end">
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-none text-base px-8 h-12 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors"
+                asChild
+              >
+                <a href="#formulario" className="flex items-center gap-2">
+                  Solicitar Proposta <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
           </div>
         </RevealSection>
       </div>
@@ -229,11 +321,11 @@ function Formulario() {
     return (
       <section id="formulario" className="section-spacing bg-background">
         <div className="container-sm max-w-2xl text-center space-y-6">
-          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 bg-primary/10 flex items-center justify-center mx-auto">
             <Check className="h-8 w-8 text-primary" />
           </div>
-          <h2 className="text-3xl font-bold font-serif">Solicitação Enviada!</h2>
-          <p className="text-foreground/70">Entraremos em contato em até 48h úteis.</p>
+          <h2 className="text-3xl font-bold">Solicitação Enviada!</h2>
+          <p className="text-foreground/60">Entraremos em contato em até 48h úteis.</p>
         </div>
       </section>
     );
@@ -243,48 +335,67 @@ function Formulario() {
     <section id="formulario" className="section-spacing bg-background">
       <div className="container-sm max-w-2xl">
         <RevealSection>
-          <div className="text-center mb-12 space-y-4">
+          <div className="mb-12 space-y-3">
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Orçamento</p>
             <h2 className="text-3xl md:text-4xl font-bold">Solicitar Orçamento</h2>
           </div>
         </RevealSection>
+
         <RevealSection delay={100}>
-          <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-6 bg-secondary rounded-xl p-8 border border-border/50">
+          <form
+            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            className="space-y-6 border border-border p-8"
+          >
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome *</Label>
-                <Input id="name" required placeholder="Seu nome" />
+                <Input id="name" required placeholder="Seu nome" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email *</Label>
-                <Input id="email" type="email" required placeholder="seu@empresa.com" />
+                <Input id="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
               </div>
             </div>
+
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" required placeholder="(11) 99999-9999" />
+                <Input id="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="company">Empresa *</Label>
-                <Input id="company" required placeholder="Sua empresa" />
+                <Input id="company" required placeholder="Sua empresa" className="rounded-none" />
               </div>
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="has-strategy">Você já tem estratégia de marca definida? *</Label>
-              <select id="has-strategy" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <select
+                id="has-strategy"
+                required
+                className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
                 <option value="">Selecione</option>
                 <option value="sim">Sim, já tenho</option>
                 <option value="parcial">Parcialmente</option>
                 <option value="nao">Não, preciso construir</option>
               </select>
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="details">Detalhes do projeto</Label>
-              <Textarea id="details" placeholder="Descreva brevemente o que precisa..." rows={3} />
+              <Textarea
+                id="details"
+                placeholder="Descreva brevemente o que precisa..."
+                rows={3}
+                className="rounded-none"
+              />
             </div>
-            <Button type="submit" size="lg" className="w-full rounded-md text-base h-12">
+
+            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12">
               Solicitar Orçamento
             </Button>
+
             <p className="text-xs text-muted-foreground text-center">
               Ao enviar, você concorda com nossa Política de Privacidade.
             </p>
@@ -296,15 +407,42 @@ function Formulario() {
 }
 
 /* ─── Page ─── */
+/* ─── Depoimentos ─── */
+function Depoimentos() {
+  const { data: supabaseTestimonials } = useTestimonialsByService('identidade-visual');
+
+  // Transform Supabase data to match TestimonialSlider format, or use fallback
+  const testimonials = supabaseTestimonials && supabaseTestimonials.length > 0
+    ? supabaseTestimonials.map((t, i) => ({
+        id: i + 1,
+        name: t.name,
+        role: t.role || '',
+        quote: t.quote,
+        result: t.result || '',
+        imageSrc: t.image_url || clientImageMap[t.name] || beatrizGarcia,
+        thumbnailSrc: t.image_url || clientImageMap[t.name] || beatrizGarcia,
+      }))
+    : fallbackTestimonials;
+
+  return (
+    <TestimonialSlider
+      reviews={testimonials}
+      title="Identidades que Marcam"
+      subtitle="Clientes que transformaram a percepção de suas marcas com design estratégico"
+    />
+  );
+}
+
 export default function IdentidadeVisual() {
   return (
     <>
       <Hero />
-      <OQueE />
       <AntesDepois />
       <Processo />
       <Entregaveis />
+      <GaleriaMockups />
       <Investimento />
+      <Depoimentos />
       <Formulario />
     </>
   );
