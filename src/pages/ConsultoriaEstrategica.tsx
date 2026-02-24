@@ -22,7 +22,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ana1 from "@/assets/ana-1.png";
+import ana1 from "@/assets/ana-foto.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 
 /* ─── Hero ─── */

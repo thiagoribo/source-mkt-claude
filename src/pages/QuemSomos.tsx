@@ -6,7 +6,7 @@ import RevealSection from "@/components/shared/RevealSection";
 import AnimatedNumber from "@/components/shared/AnimatedNumber";
 import { useTeamMembers } from "@/hooks/queries/useTeamMembers";
 import { useCases } from "@/hooks/queries/useCases";
-import ana1 from "@/assets/ana-1.png";
+import ana1 from "@/assets/ana-foto.jpeg";
 import ana2 from "@/assets/ana-2.png";
 import thiago1 from "@/assets/thiago-1.png";
 import thiago2 from "@/assets/thiago-2.png";

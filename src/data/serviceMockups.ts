@@ -1,5 +1,5 @@
 import type { MockupRatio, MockupTheme } from "@/components/shared/ServiceMockupCard";
-import ana1 from "@/assets/ana-1.jpeg";
+import ana1 from "@/assets/ana-foto.jpeg";
 import ana2 from "@/assets/ana-2.jpeg";
 import team1 from "@/assets/team-1.png";
 import team2 from "@/assets/team-2.png";

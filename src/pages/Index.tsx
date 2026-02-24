@@ -6,7 +6,7 @@ import ResponsiveImage from "@/components/shared/ResponsiveImage";
 import TestimonialV2 from "@/components/ui/testimonial-v2";
 import { useCases } from "@/hooks/queries/useCases";
 import anaHero from "@/assets/ana-header.svg";
-import ana1 from "@/assets/ana-socia.svg";
+import ana1 from "@/assets/ana-foto.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 
 // Fallback data for cases
