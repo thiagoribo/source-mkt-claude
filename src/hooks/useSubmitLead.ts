@@ -47,8 +47,8 @@ export function useSubmitLead(formSource: FormSource): UseSubmitLeadReturn {
         source: 'Site SM Agency',
         service_interest: SERVICE_LABELS[formSource],
         form_source: formSource,
-        pipeline: 'novo-site',
-        stage: 'novo lead',
+        pipeline: 'Novos Leads',
+        stage: 'New Lead',
       };
 
       const { error: insertError } = await supabaseCRM
