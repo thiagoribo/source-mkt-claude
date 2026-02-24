@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useSubmitLead } from "@/hooks/useSubmitLead";
 import {
   Check,
   X,
@@ -410,6 +411,30 @@ function Comparacao() {
 /* ─── Formulário ─── */
 function FormularioBranding() {
   const [submitted, setSubmitted] = useState(false);
+  const { submitLead, isLoading } = useSubmitLead('branding-empresarial');
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    const formData = new FormData(formRef.current);
+
+    const result = await submitLead({
+      full_name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      whatsapp: formData.get('phone') as string,
+      company: formData.get('company') as string,
+      website: formData.get('website') as string,
+      notes: formData.get('challenge') as string,
+      has_identity_visual: formData.get('has-vi') as string,
+      budget: formData.get('budget') as string,
+    });
+
+    if (result.success) {
+      setSubmitted(true);
+    }
+  };
 
   if (submitted) {
     return (
@@ -437,39 +462,40 @@ function FormularioBranding() {
 
         <RevealSection delay={100}>
           <form
-            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            ref={formRef}
+            onSubmit={handleSubmit}
             className="space-y-6 bg-background border border-border p-8"
           >
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome *</Label>
-                <Input id="name" required placeholder="Seu nome" className="rounded-none" />
+                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email *</Label>
-                <Input id="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
+                <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
+                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="company">Empresa *</Label>
-                <Input id="company" required placeholder="Sua empresa" className="rounded-none" />
+                <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="website">Site da empresa</Label>
-              <Input id="website" placeholder="www.suaempresa.com" className="rounded-none" />
+              <Input id="website" name="website" placeholder="www.suaempresa.com" className="rounded-none" />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="challenge">Seu maior desafio com a marca atual *</Label>
-              <Textarea id="challenge" required placeholder="Descreva brevemente..." rows={3} className="rounded-none" />
+              <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente..." rows={3} className="rounded-none" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
@@ -477,30 +503,32 @@ function FormularioBranding() {
                 <Label htmlFor="has-vi">Você já tem identidade visual?</Label>
                 <select
                   id="has-vi"
+                  name="has-vi"
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="sim">Sim</option>
-                  <option value="nao">Não</option>
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
                 </select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="budget">Faixa de investimento</Label>
                 <select
                   id="budget"
+                  name="budget"
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="25k-35k">R$25.000 - R$35.000</option>
-                  <option value="35k-50k">R$35.000 - R$50.000</option>
-                  <option value="50k+">Acima de R$50.000</option>
-                  <option value="flexivel">Flexível</option>
+                  <option value="R$25.000 - R$35.000">R$25.000 - R$35.000</option>
+                  <option value="R$35.000 - R$50.000">R$35.000 - R$50.000</option>
+                  <option value="Acima de R$50.000">Acima de R$50.000</option>
+                  <option value="Flexível">Flexível</option>
                 </select>
               </div>
             </div>
 
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12">
-              Solicitar Proposta
+            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
+              {isLoading ? 'Enviando...' : 'Solicitar Proposta'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">

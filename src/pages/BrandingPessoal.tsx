@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useSubmitLead } from "@/hooks/useSubmitLead";
 import {
   Check,
   X,
@@ -407,6 +408,29 @@ function Depoimento() {
 /* ─── Formulário ─── */
 function FormularioPessoal() {
   const [submitted, setSubmitted] = useState(false);
+  const { submitLead, isLoading } = useSubmitLead('branding-pessoal');
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    const formData = new FormData(formRef.current);
+
+    const result = await submitLead({
+      full_name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      whatsapp: formData.get('phone') as string,
+      area: formData.get('area') as string,
+      notes: formData.get('challenge') as string,
+      digital_presence: formData.get('presence') as string,
+      budget: formData.get('budget') as string,
+    });
+
+    if (result.success) {
+      setSubmitted(true);
+    }
+  };
 
   if (submitted) {
     return (
@@ -434,34 +458,35 @@ function FormularioPessoal() {
 
         <RevealSection delay={100}>
           <form
-            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            ref={formRef}
+            onSubmit={handleSubmit}
             className="space-y-6 bg-background border border-border p-8"
           >
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome completo *</Label>
-                <Input id="name" required placeholder="Seu nome" className="rounded-none" />
+                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email *</Label>
-                <Input id="email" type="email" required placeholder="seu@email.com" className="rounded-none" />
+                <Input id="email" name="email" type="email" required placeholder="seu@email.com" className="rounded-none" />
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
+                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="area">Área de atuação *</Label>
-                <Input id="area" required placeholder="Consultoria, Medicina, Tecnologia..." className="rounded-none" />
+                <Input id="area" name="area" required placeholder="Consultoria, Medicina, Tecnologia..." className="rounded-none" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="challenge">Seu maior desafio com marca pessoal *</Label>
-              <Textarea id="challenge" required placeholder="Descreva brevemente..." rows={3} className="rounded-none" />
+              <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente..." rows={3} className="rounded-none" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
@@ -469,32 +494,34 @@ function FormularioPessoal() {
                 <Label htmlFor="presence">Presença digital atual</Label>
                 <select
                   id="presence"
+                  name="presence"
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="nenhuma">Não tenho presença digital</option>
-                  <option value="basica">Básica (perfis sem estratégia)</option>
-                  <option value="ativa">Ativa mas inconsistente</option>
-                  <option value="forte">Forte, quero profissionalizar</option>
+                  <option value="Não tenho presença digital">Não tenho presença digital</option>
+                  <option value="Básica (perfis sem estratégia)">Básica (perfis sem estratégia)</option>
+                  <option value="Ativa mas inconsistente">Ativa mas inconsistente</option>
+                  <option value="Forte, quero profissionalizar">Forte, quero profissionalizar</option>
                 </select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="budget">Faixa de investimento</Label>
                 <select
                   id="budget"
+                  name="budget"
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="18k-25k">R$18.000 - R$25.000</option>
-                  <option value="25k-35k">R$25.000 - R$35.000</option>
-                  <option value="35k+">Acima de R$35.000</option>
-                  <option value="flexivel">Flexível</option>
+                  <option value="R$18.000 - R$25.000">R$18.000 - R$25.000</option>
+                  <option value="R$25.000 - R$35.000">R$25.000 - R$35.000</option>
+                  <option value="Acima de R$35.000">Acima de R$35.000</option>
+                  <option value="Flexível">Flexível</option>
                 </select>
               </div>
             </div>
 
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12">
-              Solicitar Proposta
+            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
+              {isLoading ? 'Enviando...' : 'Solicitar Proposta'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">

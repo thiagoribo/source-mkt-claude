@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useSubmitLead } from "@/hooks/useSubmitLead";
 import {
   Check,
   X,
@@ -316,6 +317,28 @@ function Investimento() {
 /* ─── Formulário ─── */
 function Formulario() {
   const [submitted, setSubmitted] = useState(false);
+  const { submitLead, isLoading } = useSubmitLead('identidade-visual');
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    const formData = new FormData(formRef.current);
+
+    const result = await submitLead({
+      full_name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      whatsapp: formData.get('phone') as string,
+      company: formData.get('company') as string,
+      has_strategy: formData.get('has-strategy') as string,
+      notes: formData.get('details') as string,
+    });
+
+    if (result.success) {
+      setSubmitted(true);
+    }
+  };
 
   if (submitted) {
     return (
@@ -343,28 +366,29 @@ function Formulario() {
 
         <RevealSection delay={100}>
           <form
-            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            ref={formRef}
+            onSubmit={handleSubmit}
             className="space-y-6 border border-border p-8"
           >
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome *</Label>
-                <Input id="name" required placeholder="Seu nome" className="rounded-none" />
+                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email *</Label>
-                <Input id="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
+                <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
+                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="company">Empresa *</Label>
-                <Input id="company" required placeholder="Sua empresa" className="rounded-none" />
+                <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" />
               </div>
             </div>
 
@@ -372,13 +396,14 @@ function Formulario() {
               <Label htmlFor="has-strategy">Você já tem estratégia de marca definida? *</Label>
               <select
                 id="has-strategy"
+                name="has-strategy"
                 required
                 className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <option value="">Selecione</option>
-                <option value="sim">Sim, já tenho</option>
-                <option value="parcial">Parcialmente</option>
-                <option value="nao">Não, preciso construir</option>
+                <option value="Sim, já tenho">Sim, já tenho</option>
+                <option value="Parcialmente">Parcialmente</option>
+                <option value="Não, preciso construir">Não, preciso construir</option>
               </select>
             </div>
 
@@ -386,14 +411,15 @@ function Formulario() {
               <Label htmlFor="details">Detalhes do projeto</Label>
               <Textarea
                 id="details"
+                name="details"
                 placeholder="Descreva brevemente o que precisa..."
                 rows={3}
                 className="rounded-none"
               />
             </div>
 
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12">
-              Solicitar Orçamento
+            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
+              {isLoading ? 'Enviando...' : 'Solicitar Orçamento'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">

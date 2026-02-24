@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +6,7 @@ import AnimatedNumber from "@/components/shared/AnimatedNumber";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useSubmitLead } from "@/hooks/useSubmitLead";
 import {
   Accordion,
   AccordionContent,
@@ -601,6 +602,35 @@ function FAQ() {
 /* ─── Formulário ─── */
 function FormularioQualificacao() {
   const [submitted, setSubmitted] = useState(false);
+  const { submitLead, isLoading } = useSubmitLead('consultoria-estrategica');
+  const formRef = useRef<HTMLFormElement>(null);
+  const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    const formData = new FormData(formRef.current);
+
+    const result = await submitLead({
+      full_name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      whatsapp: formData.get('phone') as string,
+      company: formData.get('company') as string,
+      website: formData.get('website') as string,
+      role: formData.get('role') as string,
+      notes: formData.get('challenge') as string,
+      revenue: formData.get('revenue') as string,
+      budget: formData.get('budget') as string,
+      scope: selectedScopes,
+      modality: formData.get('modality') as string,
+      timeline: formData.get('timeline') as string,
+    });
+
+    if (result.success) {
+      setSubmitted(true);
+    }
+  };
 
   if (submitted) {
     return (
@@ -631,45 +661,46 @@ function FormularioQualificacao() {
 
         <RevealSection delay={100}>
           <form
-            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            ref={formRef}
+            onSubmit={handleSubmit}
             className="space-y-6 border border-border p-8"
           >
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome completo *</Label>
-                <Input id="name" required placeholder="Seu nome" className="rounded-none" />
+                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email corporativo *</Label>
-                <Input id="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
+                <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
+                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="company">Nome da empresa *</Label>
-                <Input id="company" required placeholder="Sua empresa" className="rounded-none" />
+                <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" />
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="website">Site da empresa *</Label>
-                <Input id="website" required placeholder="www.suaempresa.com" className="rounded-none" />
+                <Input id="website" name="website" required placeholder="www.suaempresa.com" className="rounded-none" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="role">Seu cargo *</Label>
-                <Input id="role" required placeholder="CEO, Diretor, etc." className="rounded-none" />
+                <Input id="role" name="role" required placeholder="CEO, Diretor, etc." className="rounded-none" />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="challenge">Qual o principal desafio estratégico? *</Label>
-              <Textarea id="challenge" required placeholder="Descreva brevemente o desafio que sua empresa enfrenta..." rows={3} className="rounded-none" />
+              <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente o desafio que sua empresa enfrenta..." rows={3} className="rounded-none" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
@@ -677,31 +708,33 @@ function FormularioQualificacao() {
                 <Label htmlFor="revenue">Faturamento anual aproximado *</Label>
                 <select
                   id="revenue"
+                  name="revenue"
                   required
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="ate500k">Até R$500k/ano</option>
-                  <option value="500k-2m">R$500k – R$2M/ano</option>
-                  <option value="2m-10m">R$2M – R$10M/ano</option>
-                  <option value="10m+">R$10M+/ano</option>
-                  <option value="funding">Empresa com funding</option>
+                  <option value="Até R$500k/ano">Até R$500k/ano</option>
+                  <option value="R$500k – R$2M/ano">R$500k – R$2M/ano</option>
+                  <option value="R$2M – R$10M/ano">R$2M – R$10M/ano</option>
+                  <option value="R$10M+/ano">R$10M+/ano</option>
+                  <option value="Empresa com funding">Empresa com funding</option>
                 </select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="budget">Faixa de investimento disponível *</Label>
                 <select
                   id="budget"
+                  name="budget"
                   required
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="ate35k">Até R$35.000</option>
-                  <option value="35k-55k">R$35.000 – R$55.000</option>
-                  <option value="55k-85k">R$55.000 – R$85.000</option>
-                  <option value="85k-140k">R$85.000 – R$140.000</option>
-                  <option value="140k+">Acima de R$140.000</option>
-                  <option value="flexivel">Budget flexível</option>
+                  <option value="Até R$35.000">Até R$35.000</option>
+                  <option value="R$35.000 – R$55.000">R$35.000 – R$55.000</option>
+                  <option value="R$55.000 – R$85.000">R$55.000 – R$85.000</option>
+                  <option value="R$85.000 – R$140.000">R$85.000 – R$140.000</option>
+                  <option value="Acima de R$140.000">Acima de R$140.000</option>
+                  <option value="Budget flexível">Budget flexível</option>
                 </select>
               </div>
             </div>
@@ -717,7 +750,17 @@ function FormularioQualificacao() {
                   "Ainda não sei, preciso de ajuda para mapear",
                 ].map((scope) => (
                   <div key={scope} className="flex items-center gap-2">
-                    <Checkbox id={`scope-${scope}`} />
+                    <Checkbox
+                      id={`scope-${scope}`}
+                      checked={selectedScopes.includes(scope)}
+                      onCheckedChange={(checked) => {
+                        if (checked) {
+                          setSelectedScopes([...selectedScopes, scope]);
+                        } else {
+                          setSelectedScopes(selectedScopes.filter((s) => s !== scope));
+                        }
+                      }}
+                    />
                     <Label htmlFor={`scope-${scope}`} className="text-sm font-normal text-foreground/75 cursor-pointer">
                       {scope}
                     </Label>
@@ -731,37 +774,39 @@ function FormularioQualificacao() {
                 <Label htmlFor="modality">Modalidade preferencial</Label>
                 <select
                   id="modality"
+                  name="modality"
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="remota">100% Remota</option>
-                  <option value="hibrida">Híbrida</option>
-                  <option value="presencial">Imersão Presencial</option>
-                  <option value="flexivel">Flexível</option>
+                  <option value="100% Remota">100% Remota</option>
+                  <option value="Híbrida">Híbrida</option>
+                  <option value="Imersão Presencial">Imersão Presencial</option>
+                  <option value="Flexível">Flexível</option>
                 </select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="timeline">Timeline desejado</Label>
                 <select
                   id="timeline"
+                  name="timeline"
                   className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Selecione</option>
-                  <option value="urgente">Urgente (menos de 30 dias)</option>
-                  <option value="30-90">30–90 dias</option>
-                  <option value="90+">90+ dias</option>
-                  <option value="flexivel">Flexível</option>
+                  <option value="Urgente (menos de 30 dias)">Urgente (menos de 30 dias)</option>
+                  <option value="30–90 dias">30–90 dias</option>
+                  <option value="90+ dias">90+ dias</option>
+                  <option value="Flexível">Flexível</option>
                 </select>
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="source">Como conheceu a SM Agency?</Label>
-              <Input id="source" placeholder="Google, indicação, redes sociais..." className="rounded-none" />
+              <Input id="source" name="source" placeholder="Google, indicação, redes sociais..." className="rounded-none" />
             </div>
 
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12">
-              Solicitar Conversa de Qualificação
+            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
+              {isLoading ? 'Enviando...' : 'Solicitar Conversa de Qualificação'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">
