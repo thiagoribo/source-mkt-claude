@@ -47,7 +47,7 @@ export function useSubmitLead(formSource: FormSource): UseSubmitLeadReturn {
         source: 'Site SM Agency',
         service_interest: SERVICE_LABELS[formSource],
         form_source: formSource,
-        pipeline: 'Novos Leads',
+        pipeline: 'new_lead',
         stage: 'New Lead',
       };
 
