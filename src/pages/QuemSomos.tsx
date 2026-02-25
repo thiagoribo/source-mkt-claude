@@ -21,8 +21,8 @@ import lohanaVitoria from "@/assets/equipe/lohana-vitoria.png";
 
 // Fallback data for team members (used when Supabase is unavailable)
 const fallbackTeamMembers = [
-  { name: "Ana Castro", role: "Designer Sênior", image: anaCastro },
   { name: "Caio Castro", role: "Designer Sênior", image: caioCastro },
+  { name: "Ana Castro", role: "Designer Sênior", image: anaCastro },
   { name: "Gabriela Montezi", role: "Estrategista de Redes Sociais", image: gabrielaMontezi },
   { name: "Grazielli Santos", role: "Adm & Financeiro", image: grazielliSantos },
   { name: "Lohana Vitória", role: "Designer Sênior", image: lohanaVitoria },
@@ -269,7 +269,6 @@ function Equipe() {
   // Filter non-founders from Supabase data, or use fallback
   const teamMembers = supabaseMembers && supabaseMembers.length > 0
     ? supabaseMembers
-        .filter(m => !m.is_founder)
         .map(m => ({
           name: m.name,
           role: m.role,
