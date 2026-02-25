@@ -7,10 +7,7 @@ import AnimatedNumber from "@/components/shared/AnimatedNumber";
 import { useTeamMembers } from "@/hooks/queries/useTeamMembers";
 import { useCases } from "@/hooks/queries/useCases";
 import ana1 from "@/assets/ana-foto.jpeg";
-import ana2 from "@/assets/ana-2.png";
 import thiago1 from "@/assets/thiago-1.png";
-import thiago2 from "@/assets/thiago-2.png";
-import team1 from "@/assets/team-1.png";
 
 // Equipe (fallback images)
 import anaCastro from "@/assets/equipe/ana-castro.jpeg";
@@ -179,81 +176,123 @@ function Fundadores() {
     <section className="section-spacing bg-secondary">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-16">Liderança</h2>
+          <div className="mb-16">
+            <p className="text-xs font-mono uppercase tracking-widest text-foreground/40 mb-3">Liderança</p>
+            <h2 className="text-3xl md:text-4xl font-bold">As Pessoas por Trás da Metodologia</h2>
+          </div>
         </RevealSection>
 
         {/* Ana */}
         <RevealSection>
-          <div className="mb-20">
-            <div className="grid md:grid-cols-[320px_1fr] gap-10 items-start">
-              <div className="space-y-4">
-                <img src={ana1} alt="Ana Santos" className="w-full shadow-lg aspect-square object-cover" />
-                <div className="grid grid-cols-2 gap-3">
-                  <img src={ana2} alt="Ana Santos em workshop" className="aspect-square object-cover w-full" />
-                  <img src={team1} alt="Ana Santos apresentando" className="aspect-square object-cover w-full" />
+          <div className="mb-24">
+            <div className="grid md:grid-cols-[400px_1fr] gap-14 items-start">
+              {/* Foto */}
+              <div className="relative">
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img
+                    src={ana1}
+                    alt="Ana Santos"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                {/* Stat bar */}
+                <div className="bg-primary text-primary-foreground px-6 py-4 flex gap-8">
+                  <div>
+                    <p className="text-2xl font-bold font-serif">15+</p>
+                    <p className="text-xs font-mono tracking-widest uppercase opacity-70">Anos de experiência</p>
+                  </div>
+                  <div className="w-px bg-primary-foreground/20" />
+                  <div>
+                    <p className="text-2xl font-bold font-serif">50+</p>
+                    <p className="text-xs font-mono tracking-widest uppercase opacity-70">Marcas reposicionadas</p>
+                  </div>
                 </div>
               </div>
-              <div className="space-y-4">
+
+              {/* Conteúdo */}
+              <div className="space-y-6 md:pt-6">
                 <div>
-                  <div className="h-px w-10 bg-primary mb-4" />
-                  <h3 className="text-2xl font-bold font-serif">Ana Santos</h3>
-                  <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-1.5">
-                    Co-fundadora e Diretora de Branding
+                  <div className="h-px w-10 bg-primary mb-5" />
+                  <h3 className="text-3xl font-bold font-serif leading-tight">Ana Santos</h3>
+                  <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-2">
+                    Co-fundadora · Diretora de Branding
                   </p>
                 </div>
-                <div className="text-foreground/65 text-sm leading-relaxed space-y-3">
+
+                <div className="text-foreground/65 text-sm leading-relaxed space-y-4">
                   <p>
                     Ana Santos é co-fundadora e Diretora de Branding da SM Agency, onde lidera todos os projetos de posicionamento estratégico e construção de marca.
                   </p>
                   <p>
-                    Com mais de 15 anos de experiência em branding para empresas de diversos setores, Ana desenvolveu uma abordagem única que combina rigor analítico com sensibilidade para traduzir essência de negócio em territórios de comunicação memoráveis.
+                    Com mais de 15 anos de experiência em branding para empresas de diversos setores, desenvolveu uma abordagem única que combina rigor analítico com sensibilidade para traduzir a essência de um negócio em territórios de comunicação memoráveis.
                   </p>
                   <p>
                     Sua expertise está em identificar o que realmente diferencia uma empresa no mercado — não o que ela quer ser, mas o que ela genuinamente é — e construir posicionamento em cima dessa verdade.
                   </p>
-                  <p className="text-foreground/40 text-xs">
-                    Nos últimos anos, Ana liderou pessoalmente o reposicionamento de mais de 50 empresas, muitas das quais conseguiram aumentar significativamente seus preços e atrair clientes de maior valor após o trabalho estratégico.
-                  </p>
                 </div>
+
+                <blockquote className="border-l-2 border-primary pl-5 text-foreground/50 text-sm italic leading-relaxed">
+                  "Marca não é estética. É a clareza sobre quem você é e para quem você existe."
+                </blockquote>
               </div>
             </div>
           </div>
         </RevealSection>
 
+        {/* Divider */}
+        <div className="h-px bg-border mb-24" />
+
         {/* Thiago */}
         <RevealSection>
-          <div>
-            <div className="grid md:grid-cols-[320px_1fr] gap-10 items-start">
-              <div className="space-y-4">
-                <img src={thiago1} alt="Thiago Bianchi" className="w-full shadow-lg aspect-square object-cover" />
-                <div className="grid grid-cols-2 gap-3">
-                  <img src={thiago2} alt="Thiago Bianchi analisando dados" className="aspect-square object-cover w-full" />
-                  <img src={team1} alt="Thiago Bianchi em apresentação" className="aspect-square object-cover w-full" />
-                </div>
+          <div className="grid md:grid-cols-[400px_1fr] gap-14 items-start">
+            {/* Foto */}
+            <div className="relative">
+              <div className="aspect-[3/4] overflow-hidden">
+                <img
+                  src={thiago1}
+                  alt="Thiago Bianchi"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
-              <div className="space-y-4">
+              {/* Stat bar */}
+              <div className="bg-primary text-primary-foreground px-6 py-4 flex gap-8">
                 <div>
-                  <div className="h-px w-10 bg-primary mb-4" />
-                  <h3 className="text-2xl font-bold font-serif">Thiago Bianchi</h3>
-                  <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-1.5">
-                    Co-fundador e Diretor de Performance
-                  </p>
+                  <p className="text-2xl font-bold font-serif">10+</p>
+                  <p className="text-xs font-mono tracking-widest uppercase opacity-70">Anos em performance</p>
                 </div>
-                <div className="text-foreground/65 text-sm leading-relaxed space-y-3">
-                  <p>
-                    Thiago Bianchi é co-fundador e Diretor de Performance da SM Agency, onde lidera a dimensão de crescimento, conversão e resultados mensuráveis.
-                  </p>
-                  <p>
-                    Com background em estratégias de crescimento e marketing de performance, Thiago desenvolveu expertise em conectar estratégia de marca com resultados tangíveis de negócio. Ele não acredita em branding que não se traduz em crescimento de receita, nem em performance sem clareza estratégica.
-                  </p>
-                  <p>
-                    O que diferencia a abordagem de Thiago é a capacidade de traduzir posicionamento de marca em ações concretas de crescimento — garantindo que há plano claro de como executar e medir resultados.
-                  </p>
-                  <p className="text-foreground/40 text-xs">
-                    Em cada projeto, ele garante que há KPIs claros, roadmap viável e mecanismos de acompanhamento de ROI. Essa mentalidade pragmática o tornou procurado por empresas que já tentaram branding no passado mas não viram impacto real.
-                  </p>
+                <div className="w-px bg-primary-foreground/20" />
+                <div>
+                  <p className="text-2xl font-bold font-serif">100+</p>
+                  <p className="text-xs font-mono tracking-widest uppercase opacity-70">Estratégias executadas</p>
                 </div>
               </div>
+            </div>
+
+            {/* Conteúdo */}
+            <div className="space-y-6 md:pt-6">
+              <div>
+                <div className="h-px w-10 bg-primary mb-5" />
+                <h3 className="text-3xl font-bold font-serif leading-tight">Thiago Bianchi</h3>
+                <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-2">
+                  Co-fundador · Diretor de Performance
+                </p>
+              </div>
+
+              <div className="text-foreground/65 text-sm leading-relaxed space-y-4">
+                <p>
+                  Thiago Bianchi é co-fundador e Diretor de Performance da SM Agency, onde lidera a dimensão de crescimento, conversão e resultados mensuráveis.
+                </p>
+                <p>
+                  Com background em estratégias de crescimento e marketing de performance, desenvolveu expertise em conectar estratégia de marca com resultados tangíveis de negócio. Ele não acredita em branding que não se traduz em crescimento de receita, nem em performance sem clareza estratégica.
+                </p>
+                <p>
+                  O que diferencia a abordagem de Thiago é a capacidade de traduzir posicionamento em ações concretas de crescimento — garantindo que há um plano claro de como executar e medir resultados.
+                </p>
+              </div>
+
+              <blockquote className="border-l-2 border-primary pl-5 text-foreground/50 text-sm italic leading-relaxed">
+                "Posicionamento sem resultado não é estratégia — é apenas uma boa intenção."
+              </blockquote>
             </div>
           </div>
         </RevealSection>
