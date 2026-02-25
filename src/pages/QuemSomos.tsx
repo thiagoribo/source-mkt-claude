@@ -35,7 +35,16 @@ const teamImageMap: Record<string, string> = {
   "Gabriela Montezi": gabrielaMontezi,
   "Grazielli Santos": grazielliSantos,
   "Lohana Vitória": lohanaVitoria,
+  "Lohana Vitoria": lohanaVitoria,
 };
+
+function getTeamImage(name: string): string | undefined {
+  if (teamImageMap[name]) return teamImageMap[name];
+  const normalize = (s: string) =>
+    s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  const norm = normalize(name);
+  return Object.entries(teamImageMap).find(([k]) => normalize(k) === norm)?.[1];
+}
 
 // Fallback data for cases/portfolio
 const fallbackProjects = [
@@ -264,7 +273,7 @@ function Equipe() {
         .map(m => ({
           name: m.name,
           role: m.role,
-          image: m.image_url || teamImageMap[m.name] || anaCastro,
+          image: m.image_url || getTeamImage(m.name) || anaCastro,
         }))
     : fallbackTeamMembers;
 
@@ -300,6 +309,13 @@ function Equipe() {
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      const fallback = teamImageMap[member.name];
+                      if (fallback && target.src !== fallback) {
+                        target.src = fallback;
+                      }
+                    }}
                   />
                 </div>
 
