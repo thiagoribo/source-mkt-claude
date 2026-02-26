@@ -21,8 +21,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ServiceMockupCard from "@/components/shared/ServiceMockupCard";
 import ComparisonTable from "@/components/shared/ComparisonTable";
+import CasesCarousel from "@/components/shared/CasesCarousel";
 import { brandingEmpresarialMockups } from "@/data/serviceMockups";
 import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
@@ -305,21 +305,7 @@ function ShowcaseVisual() {
           </div>
         </RevealSection>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {brandingEmpresarialMockups.map((item, i) => (
-            <RevealSection key={item.title} delay={i * 100}>
-              <ServiceMockupCard
-                title={item.title}
-                subtitle={item.subtitle}
-                tag={item.tag}
-                evidence={item.evidence}
-                imageSrc={item.imageSrc}
-                ratio={item.ratio}
-                theme={item.theme}
-              />
-            </RevealSection>
-          ))}
-        </div>
+        <CasesCarousel items={brandingEmpresarialMockups} />
       </div>
     </section>
   );

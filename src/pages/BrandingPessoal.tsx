@@ -1,4 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,12 +14,12 @@ import {
   Palette,
   MessageSquare,
   FileText,
+  ArrowLeft,
   ArrowRight,
   Layers,
   BarChart3,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ServiceMockupCard from "@/components/shared/ServiceMockupCard";
 import ComparisonTable from "@/components/shared/ComparisonTable";
 import { brandingPessoalResults } from "@/data/serviceMockups";
 import { TestimonialSlider } from "@/components/ui/testimonial-slider";
@@ -311,8 +313,34 @@ function ParaQuemE() {
   );
 }
 
-/* ─── Resultados Simulados ─── */
+/* ─── Cases Reais — Slideshow ─── */
 function ResultadosSimulados() {
+  const items = brandingPessoalResults;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+
+  const handleNext = useCallback(() => {
+    setDirection("right");
+    setCurrentIndex((prev) => (prev + 1) % items.length);
+  }, [items.length]);
+
+  const handlePrev = useCallback(() => {
+    setDirection("left");
+    setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+  }, [items.length]);
+
+  const slideVariants = {
+    enter: (dir: "left" | "right") => ({
+      x: dir === "right" ? "100%" : "-100%",
+      opacity: 0,
+    }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: "left" | "right") => ({
+      x: dir === "right" ? "-100%" : "100%",
+      opacity: 0,
+    }),
+  };
+
   return (
     <section className="section-spacing bg-secondary">
       <div className="container-sm max-w-5xl">
@@ -325,20 +353,65 @@ function ResultadosSimulados() {
           </div>
         </RevealSection>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {brandingPessoalResults.map((item, i) => (
-            <RevealSection key={item.title} delay={i * 100}>
-              <ServiceMockupCard
-                title={item.title}
-                subtitle={item.subtitle}
-                tag={item.tag}
-                evidence={item.evidence}
-                imageSrc={item.imageSrc}
-                ratio={item.ratio}
-                theme={item.theme}
+        {/* Full-image slideshow */}
+        <div className="relative overflow-hidden rounded-sm bg-background/40">
+          <div className="aspect-[4/3] relative overflow-hidden">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.img
+                key={currentIndex}
+                src={items[currentIndex].imageSrc}
+                alt={`Case de Branding Pessoal ${currentIndex + 1}`}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 w-full h-full object-contain"
               />
-            </RevealSection>
-          ))}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex items-center justify-between mt-6">
+          <div className="flex items-center gap-2">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  setDirection(i > currentIndex ? "right" : "left");
+                  setCurrentIndex(i);
+                }}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  i === currentIndex ? "bg-primary w-6" : "bg-border/70 w-1.5"
+                )}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="text-xs font-mono text-foreground/40">
+              {String(currentIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={handlePrev}
+                className="w-10 h-10 border border-border hover:border-primary/40 flex items-center justify-center transition-colors"
+                aria-label="Slide anterior"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="w-10 h-10 bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center transition-colors"
+                aria-label="Próximo slide"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

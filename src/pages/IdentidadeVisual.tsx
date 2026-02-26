@@ -21,8 +21,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ServiceMockupCard from "@/components/shared/ServiceMockupCard";
 import ComparisonTable from "@/components/shared/ComparisonTable";
+import CasesCarousel from "@/components/shared/CasesCarousel";
 import { identidadeVisualMockups } from "@/data/serviceMockups";
 import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
@@ -251,21 +251,7 @@ function GaleriaMockups() {
           </div>
         </RevealSection>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {identidadeVisualMockups.map((mockup, i) => (
-            <RevealSection key={mockup.title} delay={i * 100}>
-              <ServiceMockupCard
-                title={mockup.title}
-                subtitle={mockup.subtitle}
-                tag={mockup.tag}
-                evidence={mockup.evidence}
-                imageSrc={mockup.imageSrc}
-                ratio={mockup.ratio}
-                theme={mockup.theme}
-              />
-            </RevealSection>
-          ))}
-        </div>
+        <CasesCarousel items={identidadeVisualMockups} />
       </div>
     </section>
   );
