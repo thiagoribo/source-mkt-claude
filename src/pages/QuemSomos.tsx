@@ -6,7 +6,7 @@ import RevealSection from "@/components/shared/RevealSection";
 import AnimatedNumber from "@/components/shared/AnimatedNumber";
 import { useTeamMembers } from "@/hooks/queries/useTeamMembers";
 import { useCases } from "@/hooks/queries/useCases";
-import ana1 from "@/assets/ana-foto.jpeg";
+import ana1 from "@/assets/ana-nova.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 
 // Equipe (fallback images)
@@ -86,7 +86,7 @@ function Hero() {
               </p>
 
               <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Fundada por Ana Santos e Thiago Bianchi, a SM Agency nasceu da convicção de que toda empresa estabelecida tem potencial para se tornar referência no seu mercado.
+                Fundada por Ana Santos e Thiago Castro, a SM Agency nasceu da convicção de que toda empresa estabelecida tem potencial para se tornar referência no seu mercado.
               </p>
             </div>
           </div>
@@ -111,10 +111,10 @@ function Historia() {
 
             <div className="space-y-5 text-foreground/70 leading-relaxed text-sm md:text-base">
               <p>
-                A SM Agency nasceu quando Ana e Thiago, cada um com mais de uma década de experiência em suas áreas, perceberam um padrão frustrante no mercado: empresas excelentes sendo tratadas como commodities porque suas marcas não comunicavam o valor real que entregavam.
+                Ana, com background profundo em branding e posicionamento de marca, via constantemente negócios sólidos com uma comunicação que não refletiam de fato a entrega e essência do negócio.
               </p>
               <p>
-                Ana, com background profundo em branding e design estratégico, via constantemente negócios sólidos com identidades que não refletiam sua essência. Thiago, vindo do mundo de performance e crescimento, frustrava-se ao ver empresas competindo por preço quando poderiam justificar premium com posicionamento correto.
+                Thiago, vindo do mundo de performance e crescimento, frustrava-se ao ver empresas competindo por preço e travadas em faturamentos insustentáveis enquanto poderiam estruturar seu ecossistema, jornada e experiência do cliente para escalar de forma segura e lucrativa.
               </p>
               <p className="pl-4 border-l-2 border-border text-foreground/50 text-sm">
                 Juntos, desenvolveram uma abordagem que integra o melhor de ambos: profundidade conceitual do branding estratégico com o rigor analítico de performance. Hoje, após mais de 100 empresas, nossa metodologia provou sua eficácia em diversos setores.
@@ -198,13 +198,13 @@ function Fundadores() {
                 {/* Stat bar */}
                 <div className="bg-primary text-primary-foreground px-6 py-4 flex gap-8">
                   <div>
-                    <p className="text-2xl font-bold font-serif">15+</p>
+                    <p className="text-2xl font-bold font-serif">10+</p>
                     <p className="text-xs font-mono tracking-widest uppercase opacity-70">Anos de experiência</p>
                   </div>
                   <div className="w-px bg-primary-foreground/20" />
                   <div>
-                    <p className="text-2xl font-bold font-serif">50+</p>
-                    <p className="text-xs font-mono tracking-widest uppercase opacity-70">Marcas reposicionadas</p>
+                    <p className="text-2xl font-bold font-serif">100+</p>
+                    <p className="text-xs font-mono tracking-widest uppercase opacity-70">Marcas lideradas</p>
                   </div>
                 </div>
               </div>
@@ -215,16 +215,16 @@ function Fundadores() {
                   <div className="h-px w-10 bg-primary mb-5" />
                   <h3 className="text-3xl font-bold font-serif leading-tight">Ana Santos</h3>
                   <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-2">
-                    Co-fundadora · Diretora de Branding
+                    Co-fundadora · Estrategista de Posicionamento de Marca & Negócios
                   </p>
                 </div>
 
                 <div className="text-foreground/65 text-sm leading-relaxed space-y-4">
                   <p>
-                    Ana Santos é co-fundadora e Diretora de Branding da SM Agency, onde lidera todos os projetos de posicionamento estratégico e construção de marca.
+                    Ana Santos é co-fundadora da SM Agency, onde lidera todos os projetos de posicionamento estratégico e construção de marca.
                   </p>
                   <p>
-                    Com mais de 15 anos de experiência em branding para empresas de diversos setores, desenvolveu uma abordagem única que combina rigor analítico com sensibilidade para traduzir a essência de um negócio em territórios de comunicação memoráveis.
+                    Com mais de 10 anos de experiência em branding para empresas de diversos setores, desenvolveu uma abordagem única que combina rigor analítico com sensibilidade para traduzir a essência de um negócio em territórios de comunicação memoráveis.
                   </p>
                   <p>
                     Sua expertise está em identificar o que realmente diferencia uma empresa no mercado — não o que ela quer ser, mas o que ela genuinamente é — e construir posicionamento em cima dessa verdade.
@@ -250,20 +250,20 @@ function Fundadores() {
               <div className="aspect-[3/4] overflow-hidden">
                 <img
                   src={thiago1}
-                  alt="Thiago Bianchi"
+                  alt="Thiago Castro"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
               {/* Stat bar */}
               <div className="bg-primary text-primary-foreground px-6 py-4 flex gap-8">
                 <div>
-                  <p className="text-2xl font-bold font-serif">10+</p>
-                  <p className="text-xs font-mono tracking-widest uppercase opacity-70">Anos em performance</p>
+                  <p className="text-2xl font-bold font-serif">15+</p>
+                  <p className="text-xs font-mono tracking-widest uppercase opacity-70">Anos de mercado</p>
                 </div>
                 <div className="w-px bg-primary-foreground/20" />
                 <div>
-                  <p className="text-2xl font-bold font-serif">100+</p>
-                  <p className="text-xs font-mono tracking-widest uppercase opacity-70">Estratégias executadas</p>
+                  <p className="text-2xl font-bold font-serif">6+</p>
+                  <p className="text-xs font-mono tracking-widest uppercase opacity-70">Países de atuação</p>
                 </div>
               </div>
             </div>
@@ -272,21 +272,21 @@ function Fundadores() {
             <div className="space-y-6 md:pt-6">
               <div>
                 <div className="h-px w-10 bg-primary mb-5" />
-                <h3 className="text-3xl font-bold font-serif leading-tight">Thiago Bianchi</h3>
+                <h3 className="text-3xl font-bold font-serif leading-tight">Thiago Castro</h3>
                 <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-2">
-                  Co-fundador · Diretor de Performance
+                  Co-fundador · Performance e Crescimento
                 </p>
               </div>
 
               <div className="text-foreground/65 text-sm leading-relaxed space-y-4">
                 <p>
-                  Thiago Bianchi é co-fundador e Diretor de Performance da SM Agency, onde lidera a dimensão de crescimento, conversão e resultados mensuráveis.
+                  Thiago Castro é co-fundador da SM Agency, onde lidera a dimensão de performance, estruturação comercial e crescimento de negócios.
                 </p>
                 <p>
-                  Com background em estratégias de crescimento e marketing de performance, desenvolveu expertise em conectar estratégia de marca com resultados tangíveis de negócio. Ele não acredita em branding que não se traduz em crescimento de receita, nem em performance sem clareza estratégica.
+                  Com mais de 15 anos de atuação em mercados nacionais e internacionais — incluindo EUA, China, Austrália, Portugal, Itália e Espanha — desenvolveu expertise em estruturar ecossistemas de negócios, jornadas do cliente e arquiteturas de funil que geram crescimento escalável e lucrativo.
                 </p>
                 <p>
-                  O que diferencia a abordagem de Thiago é a capacidade de traduzir posicionamento em ações concretas de crescimento — garantindo que há um plano claro de como executar e medir resultados.
+                  O que diferencia a abordagem de Thiago é a capacidade de enxergar o negócio de forma sistêmica: estruturando processos, canais e estratégias comerciais que transformam faturamento inconsistente em crescimento previsível.
                 </p>
               </div>
 
@@ -305,9 +305,12 @@ function Fundadores() {
 function Equipe() {
   const { data: supabaseMembers, isLoading } = useTeamMembers();
 
-  // Filter non-founders from Supabase data, or use fallback
+  const FOUNDER_NAMES = ["Ana Santos", "Thiago Castro"];
+
+  // Filter out founders from Supabase data, or use fallback
   const teamMembers = supabaseMembers && supabaseMembers.length > 0
     ? supabaseMembers
+        .filter(m => !FOUNDER_NAMES.includes(m.name))
         .map(m => ({
           name: m.name,
           role: m.role,
@@ -325,7 +328,7 @@ function Equipe() {
               Nossa Equipe
             </p>
             <h2 className="text-3xl md:text-4xl font-bold">
-              Equipe de Estrategistas
+              Equipe SM. Agency
             </h2>
             <p className="text-foreground/60 text-sm leading-relaxed">
               Desenvolvemos um processo rigoroso de seleção e treinamento. Cada membro
@@ -376,9 +379,9 @@ function Equipe() {
 /* ─── Números ─── */
 function Numeros() {
   const stats = [
-    { value: "10+", label: "Anos de expertise combinada" },
-    { value: "100+", label: "Marcas transformadas" },
-    { value: "6", label: "Projetos por trimestre" },
+    { value: "20+", label: "Anos de expertise combinados" },
+    { value: "100+", label: "Negócios transformados" },
+    { value: "10+", label: "Projetos por trimestre" },
   ];
 
   return (

@@ -210,6 +210,7 @@ function Entregaveis() {
     { icon: Shapes, title: "Padrões e elementos gráficos" },
     { icon: Image, title: "Aplicações em mockups realistas" },
     { icon: FileText, title: "Manual de identidade visual (PDF)" },
+    { icon: Layers, title: "Projeção de 20 conteúdos personalizados para o seu perfil e nicho, e pontos de contato" },
   ];
 
   return (

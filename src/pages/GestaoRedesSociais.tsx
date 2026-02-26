@@ -412,11 +412,11 @@ function Investimento() {
             <div className="space-y-4">
               <p className="text-xs font-mono tracking-widest uppercase opacity-50">Investimento</p>
               <p className="text-6xl md:text-7xl font-bold font-serif leading-none">
-                R$3.500
+                R$1.597
                 <span className="text-3xl font-normal opacity-60">/mês</span>
               </p>
               <p className="text-primary-foreground/50 text-sm">
-                A partir de — Contrato mínimo: 3 meses
+                A partir de — Contrato mínimo: 6 meses
               </p>
             </div>
             <Button

@@ -13,6 +13,8 @@ import {
   MessageSquare,
   FileText,
   ArrowRight,
+  Layers,
+  BarChart3,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ServiceMockupCard from "@/components/shared/ServiceMockupCard";
@@ -226,9 +228,12 @@ function Processo() {
   const steps = [
     { num: "01", icon: User, title: "Imersão na História e Essência", text: "Entendemos trajetória, valores, diferenciais e impacto desejado", duration: "1 semana" },
     { num: "02", icon: Search, title: "Mapeamento de Posicionamento", text: "Definimos como sua marca deve se comunicar e posicionar no mercado", duration: "2 semanas" },
-    { num: "03", icon: Palette, title: "Identidade Visual Pessoal", text: "Desenvolvemos elementos visuais que expressam sua essência e estilo", duration: "3 semanas" },
+    { num: "03", icon: Palette, title: "Comunicação Estética de Marca Completa", text: "Desenvolvemos sua identidade visual estratégica, trazemos todos os elementos que representam a sua marca e universo de marca, e projetamos para todos os seus pontos de contato", duration: "3 semanas" },
     { num: "04", icon: MessageSquare, title: "Narrativa e Direcionamento", text: "Criamos pilares, frases e abordagens para canais digitais", duration: "1 semana" },
-    { num: "05", icon: FileText, title: "Guia de Marca Pessoal", text: "Material completo com identidade e direção estratégica aplicável", duration: "Entrega final" },
+    { num: "05", icon: FileText, title: "Manual de Marca Completo", text: "Material completo com identidade e direção estratégica aplicável", duration: "Entrega final" },
+    { num: "06", icon: ArrowRight, title: "Definição de Jornada do Cliente Estratégica", text: "Estruturamos a jornada do cliente de forma estratégica, mapeando cada ponto de contato e oportunidade de conversão", duration: "1 semana" },
+    { num: "07", icon: Layers, title: "Estruturação do Ecossistema de Serviços e Comunicação", text: "Organizamos sua oferta de serviços e canais de comunicação de forma coesa e estratégica", duration: "1 semana" },
+    { num: "08", icon: BarChart3, title: "Análise de Posicionamento Completo da Concorrência e Referências", text: "Mapeamento e análise profunda da concorrência e referências de mercado para definir seu diferencial competitivo", duration: "1 semana" },
   ];
 
   return (
@@ -313,9 +318,9 @@ function ResultadosSimulados() {
       <div className="container-sm max-w-5xl">
         <RevealSection>
           <div className="mb-12 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-bold">Resultados Simulados</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Cases Reais</h2>
             <p className="text-foreground/55 text-sm max-w-xl">
-              Cases fictícios para visualizar o tipo de impacto esperado em branding pessoal.
+              Resultados reais de clientes que investiram em branding pessoal com a SM Agency.
             </p>
           </div>
         </RevealSection>

@@ -6,7 +6,7 @@ import ResponsiveImage from "@/components/shared/ResponsiveImage";
 import TestimonialV2 from "@/components/ui/testimonial-v2";
 import { useCases } from "@/hooks/queries/useCases";
 import anaHero from "@/assets/ana-header.svg";
-import ana1 from "@/assets/ana-foto.jpeg";
+import ana1 from "@/assets/ana-nova.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 
 // Fallback data for cases
@@ -145,25 +145,25 @@ function LeadershipSection() {
                   <div className="h-px w-10 bg-primary mb-4" />
                   <h3 className="text-2xl font-bold font-serif">Ana Santos</h3>
                   <p className="text-primary font-medium text-xs tracking-widest uppercase mt-1.5">
-                    Co-fundadora · Estratégia de Branding
+                    Co-fundadora · Estrategista de Posicionamento de Marca & Negócios
                   </p>
                 </div>
                 <div className="grid grid-cols-3 gap-4 py-5 border-y border-border/30">
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary">15+</p>
+                    <p className="text-2xl font-bold font-serif text-primary">10+</p>
                     <p className="text-xs text-foreground/50 mt-0.5 leading-tight">Anos de mercado</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary">50+</p>
+                    <p className="text-2xl font-bold font-serif text-primary">100+</p>
                     <p className="text-xs text-foreground/50 mt-0.5 leading-tight">Marcas lideradas</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary">6+</p>
+                    <p className="text-2xl font-bold font-serif text-primary">15+</p>
                     <p className="text-xs text-foreground/50 mt-0.5 leading-tight">Segmentos</p>
                   </div>
                 </div>
                 <p className="text-foreground/70 leading-relaxed text-sm">
-                  Ana lidera o posicionamento e a construção de marca em cada projeto. Sua metodologia, desenvolvida ao longo de 15 anos, transforma empresas estabelecidas em referências de mercado — com profundidade conceitual que vai além do visual.
+                  Ana lidera o posicionamento e a construção de marca em cada projeto. Sua metodologia, desenvolvida ao longo de 10 anos, transforma empresas estabelecidas em referências de mercado — com profundidade conceitual que vai além do visual.
                 </p>
               </div>
             </div>
@@ -173,29 +173,29 @@ function LeadershipSection() {
             <div className="flex flex-col space-y-8">
               <img
                 src={thiago1}
-                alt="Thiago Bianchi"
+                alt="Thiago Castro"
                 className="w-full object-cover object-top aspect-[3/4] shadow-lg"
               />
               <div className="space-y-5">
                 <div>
                   <div className="h-px w-10 bg-primary mb-4" />
-                  <h3 className="text-2xl font-bold font-serif">Thiago Bianchi</h3>
+                  <h3 className="text-2xl font-bold font-serif">Thiago Castro</h3>
                   <p className="text-primary font-medium text-xs tracking-widest uppercase mt-1.5">
                     Co-fundador · Performance e Crescimento
                   </p>
                 </div>
                 <div className="grid grid-cols-3 gap-4 py-5 border-y border-border/30">
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary">10+</p>
+                    <p className="text-2xl font-bold font-serif text-primary">15+</p>
                     <p className="text-xs text-foreground/50 mt-0.5 leading-tight">Anos de mercado</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary">3+</p>
+                    <p className="text-2xl font-bold font-serif text-primary">6+</p>
                     <p className="text-xs text-foreground/50 mt-0.5 leading-tight">Países de atuação</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary">95%</p>
-                    <p className="text-xs text-foreground/50 mt-0.5 leading-tight">Satisfação</p>
+                    <p className="text-2xl font-bold font-serif text-primary">99+</p>
+                    <p className="text-xs text-foreground/50 mt-0.5 leading-tight">Projetos Aprovados</p>
                   </div>
                 </div>
                 <p className="text-foreground/70 leading-relaxed text-sm">

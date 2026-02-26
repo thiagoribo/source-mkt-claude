@@ -261,6 +261,10 @@ function Entregaveis() {
     { icon: Layers, title: "Posicionamento e Proposta de Valor" },
     { icon: Volume2, title: "Tom de Voz e Territórios de Comunicação" },
     { icon: FileText, title: "Manual de Marca (60-80 páginas)" },
+    { icon: Search, title: "Auditoria Completa de Gestão, Marketing, Posicionamento & Performance" },
+    { icon: ArrowRight, title: "Estratégias Comerciais e de Performance" },
+    { icon: MessageSquare, title: "Estruturação de Funil de Vendas e Jornada do Cliente" },
+    { icon: BookOpen, title: "Arquitetura de Site (página de vendas) & UX Experience" },
   ];
 
   return (

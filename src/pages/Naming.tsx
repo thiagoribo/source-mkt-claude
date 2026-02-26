@@ -18,9 +18,11 @@ import {
   ArrowRight,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ServiceMockupCard from "@/components/shared/ServiceMockupCard";
 import ComparisonTable from "@/components/shared/ComparisonTable";
-import { namingCases, namingScorecard } from "@/data/serviceMockups";
+import { namingScorecard } from "@/data/serviceMockups";
+import likeBrand from "@/assets/cases/naming/like-brand.png";
+import clinicaPetra from "@/assets/cases/naming/clinica-petra.png";
+import passeiPonto from "@/assets/cases/naming/passei-ponto.png";
 
 /* ─── Hero ─── */
 function Hero() {
@@ -254,32 +256,80 @@ function ScorecardNaming() {
   );
 }
 
-/* ─── Cases Simulados ─── */
-function CasosSimuladosNaming() {
+/* ─── Cases Reais ─── */
+const namingRealCases = [
+  {
+    num: "01",
+    img: clinicaPetra,
+    sector: "Saúde & Estética",
+    name: "Clínica Petra",
+    description: "Nome estratégico que posiciona sofisticação e cuidado — com verificação INPI e disponibilidade digital.",
+  },
+  {
+    num: "02",
+    img: likeBrand,
+    sector: "Moda & Lifestyle",
+    name: "LIKE. BRAND",
+    description: "Naming contemporâneo e memorável construído para se destacar em mercados de moda e identidade de estilo.",
+  },
+  {
+    num: "03",
+    img: passeiPonto,
+    sector: "Educação & Mobilidade",
+    name: "Passei e Ponto",
+    description: "Nome com fonética assertiva e posicionamento de resultado — direto, memorável e diferenciado no segmento.",
+  },
+];
+
+function CasosReaisNaming() {
   return (
     <section className="section-spacing bg-secondary">
       <div className="container-sm max-w-5xl">
         <RevealSection>
           <div className="mb-12 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-bold">Antes e Depois (Simulados)</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Cases Reais</h2>
             <p className="text-foreground/55 text-sm max-w-xl">
-              Exemplos ficticios de renaming e naming para diferentes segmentos e objetivos.
+              Nomes criados pela SM Agency — estratégicos, verificados e construídos para durar.
             </p>
           </div>
         </RevealSection>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {namingCases.map((caso, i) => (
-            <RevealSection key={caso.title} delay={i * 100}>
-              <ServiceMockupCard
-                title={caso.title}
-                subtitle={caso.subtitle}
-                tag={caso.tag}
-                evidence={caso.evidence}
-                imageSrc={caso.imageSrc}
-                ratio={caso.ratio}
-                theme={caso.theme}
-              />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {namingRealCases.map((caso, i) => (
+            <RevealSection key={caso.name} delay={i * 100}>
+              <div className="group border border-border hover:border-primary/40 transition-colors duration-150 bg-background overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+                  <img
+                    src={caso.img}
+                    alt={caso.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute bottom-2 right-3 font-mono font-bold text-[64px] leading-none select-none pointer-events-none text-white/10"
+                  >
+                    {caso.num}
+                  </span>
+                </div>
+                <div className="p-5 space-y-3">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-foreground/40">
+                    {caso.sector}
+                  </p>
+                  <h3 className="text-xl font-bold font-serif leading-tight">
+                    {caso.name}
+                  </h3>
+                  <p className="text-sm text-foreground/60 leading-relaxed">
+                    {caso.description}
+                  </p>
+                  <div className="pt-2 flex items-center gap-2">
+                    <div className="h-px w-6 bg-primary" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-primary/70">
+                      Naming Estratégico
+                    </span>
+                  </div>
+                </div>
+              </div>
             </RevealSection>
           ))}
         </div>
@@ -452,7 +502,7 @@ export default function Naming() {
       <Processo />
       <Entregaveis />
       <ScorecardNaming />
-      <CasosSimuladosNaming />
+      <CasosReaisNaming />
       <Investimento />
       <Formulario />
     </>

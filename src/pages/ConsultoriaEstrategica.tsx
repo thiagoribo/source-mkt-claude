@@ -23,7 +23,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ana1 from "@/assets/ana-foto.jpeg";
+import ana1 from "@/assets/ana-nova.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 
 /* ─── Hero ─── */
@@ -38,11 +38,11 @@ function Hero() {
               className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden lg:block"
               style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
             >
-              CE
+              SM
             </span>
 
             <div className="relative max-w-3xl space-y-8">
-              <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
+              <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
                 Consultoria Estratégica
               </div>
@@ -57,7 +57,7 @@ function Hero() {
               </h1>
 
               <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Se sua empresa já fatura consistentemente mas está presa numa categoria competitiva, desenvolvemos a estratégia que justifica preços premium e atrai o cliente que você realmente quer.
+                Se sua empresa já fatura consistentemente mas está presa numa categoria competitiva, desenvolvemos a estratégia que conecta posicionamento, performance e crescimento para atrair o cliente que você realmente quer.
               </p>
 
               <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
@@ -457,20 +457,20 @@ function Lideranca() {
                 </div>
                 <div className="grid grid-cols-3 gap-4 py-5 border-y border-border/30">
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="15+" /></p>
+                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="10+" /></p>
                     <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Anos de mercado</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="50+" /></p>
+                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="100+" /></p>
                     <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Marcas lideradas</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="6+" /></p>
+                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="15+" /></p>
                     <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Segmentos</p>
                   </div>
                 </div>
                 <p className="text-foreground/65 text-sm leading-relaxed">
-                  Ana lidera a dimensão de posicionamento e construção de marca, trazendo 15 anos de experiência em transformar empresas em referências de mercado.
+                  Ana lidera a dimensão de posicionamento e construção de marca, trazendo 10 anos de experiência em transformar empresas em referências de mercado.
                 </p>
               </div>
             </div>
@@ -478,31 +478,31 @@ function Lideranca() {
 
           <RevealSection delay={200}>
             <div className="flex flex-col space-y-7">
-              <img src={thiago1} alt="Thiago Bianchi" className="w-full object-cover object-top aspect-[3/4] shadow-lg" />
+              <img src={thiago1} alt="Thiago Castro" className="w-full object-cover object-top aspect-[3/4] shadow-lg" />
               <div className="space-y-4">
                 <div>
                   <div className="h-px w-10 bg-primary mb-4" />
-                  <h3 className="text-2xl font-bold font-serif">Thiago Bianchi</h3>
+                  <h3 className="text-2xl font-bold font-serif">Thiago Castro</h3>
                   <p className="text-primary font-medium text-xs tracking-widest uppercase mt-1.5 font-mono">
                     Co-fundador · Performance e Crescimento
                   </p>
                 </div>
                 <div className="grid grid-cols-3 gap-4 py-5 border-y border-border/30">
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="100+" /></p>
-                    <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Projetos</p>
+                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="15+" /></p>
+                    <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Anos de mercado</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="3×" /></p>
-                    <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Ticket médio</p>
+                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="6+" /></p>
+                    <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Países de atuação</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="95%" /></p>
-                    <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Satisfação</p>
+                    <p className="text-2xl font-bold font-serif text-primary"><AnimatedNumber value="99+" /></p>
+                    <p className="text-xs text-foreground/45 mt-0.5 leading-tight">Projetos Aprovados</p>
                   </div>
                 </div>
                 <p className="text-foreground/65 text-sm leading-relaxed">
-                  Thiago lidera a dimensão de performance, conversão e funil, com foco em conectar posicionamento de marca com resultados mensuráveis.
+                  Thiago lidera a dimensão de performance, estruturação comercial e crescimento, com mais de 15 anos de atuação em 6 países e 99+ projetos aprovados.
                 </p>
               </div>
             </div>
@@ -512,6 +512,7 @@ function Lideranca() {
         <RevealSection delay={300}>
           <p className="text-foreground/50 text-sm mt-12 max-w-2xl leading-relaxed pl-4 border-l-2 border-border">
             Cada projeto é supervisionado diretamente por Ana e Thiago, com execução por nossa equipe de estrategistas treinados na metodologia SM. Você terá um estrategista dedicado, com os fundadores presentes nos momentos críticos.
+
           </p>
         </RevealSection>
       </div>
