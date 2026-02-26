@@ -289,9 +289,9 @@ function CasesSimulados() {
       <div className="container-sm max-w-5xl">
         <RevealSection>
           <div className="mb-12 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-bold">Cases Simulados de Conteúdo</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Cases Reais</h2>
             <p className="text-foreground/55 text-sm max-w-xl">
-              Exemplos fictícios de como trabalhamos a produção e entrega de conteúdo para diferentes perfis de marca.
+              Cases reais de clientes que transformaram sua presença digital com a SM Agency.
             </p>
           </div>
         </RevealSection>

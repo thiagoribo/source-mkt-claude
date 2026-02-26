@@ -25,6 +25,8 @@ import {
 import RevealSection from "@/components/shared/RevealSection";
 import ana1 from "@/assets/ana-nova.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
+import stdiCase from "@/assets/cases/consultoria/stdi.png";
+import startCase from "@/assets/cases/consultoria/start.png";
 
 /* ─── Hero ─── */
 function Hero() {
@@ -523,9 +525,20 @@ function Lideranca() {
 /* ─── Cases ─── */
 function CasesConsultoria() {
   const cases = [
-    { name: "Empresa de Tecnologia", challenge: "Competia por preço em mercado saturado", actions: ["Diagnóstico completo de posicionamento", "Redefinição de proposta de valor", "Arquitetura de funil premium"], result: "3× no ticket médio em 6 meses" },
-    { name: "Consultoria Financeira", challenge: "Dificuldade em atrair clientes de maior valor", actions: ["Reposicionamento de marca", "Estratégia de conteúdo de autoridade", "Novo funil de qualificação"], result: "Entrada bem-sucedida no segmento premium" },
-    { name: "E-commerce de Moda", challenge: "Margens apertadas e dependência de promoções", actions: ["Auditoria estratégica completa", "Nova arquitetura de marca", "Estratégia de precificação premium"], result: "+180% em margem líquida" },
+    {
+      img: stdiCase,
+      name: "STDI",
+      challenge: "Empresa com posicionamento genérico e dificuldade de diferenciação no mercado B2B",
+      actions: ["Diagnóstico estratégico completo", "Reposicionamento de marca B2B", "Arquitetura comercial e funil de vendas"],
+      result: "Posicionamento consolidado e marca reposicionada",
+    },
+    {
+      img: startCase,
+      name: "Start Imobiliário",
+      challenge: "Mercado imobiliário saturado com baixa diferenciação de marca",
+      actions: ["Diagnóstico de posicionamento", "Estratégia de marca para mercado imobiliário", "Funil de captação de leads qualificados"],
+      result: "Entrada no segmento premium com autoridade de marca",
+    },
   ];
 
   return (
@@ -535,24 +548,34 @@ function CasesConsultoria() {
           <h2 className="text-3xl md:text-4xl font-bold mb-16">Empresas que Transformamos</h2>
         </RevealSection>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {cases.map((c, i) => (
             <RevealSection key={c.name} delay={i * 150}>
-              <div className="border border-border p-6 md:p-8 h-full flex flex-col hover:border-primary/40 transition-colors">
-                <span className="text-xs font-mono uppercase tracking-widest text-primary mb-4 inline-block">
-                  Consultoria Estratégica
-                </span>
-                <h3 className="font-bold text-lg mb-2">{c.name}</h3>
-                <p className="text-foreground/50 text-sm mb-4">{c.challenge}</p>
-                <ul className="space-y-1.5 mb-4 flex-1">
-                  {c.actions.map((a) => (
-                    <li key={a} className="text-foreground/65 text-xs flex items-start gap-2">
-                      <Check className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />
-                      {a}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-primary font-semibold text-sm mt-auto pt-4 border-t border-border">{c.result}</p>
+              <div className="group border border-border overflow-hidden h-full flex flex-col hover:border-primary/40 transition-colors">
+                <div className="aspect-[16/9] overflow-hidden bg-secondary">
+                  <img
+                    src={c.img}
+                    alt={c.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 md:p-8 flex flex-col flex-1">
+                  <span className="text-xs font-mono uppercase tracking-widest text-primary mb-4 inline-block">
+                    Consultoria Estratégica
+                  </span>
+                  <h3 className="font-bold text-lg mb-2">{c.name}</h3>
+                  <p className="text-foreground/50 text-sm mb-4">{c.challenge}</p>
+                  <ul className="space-y-1.5 mb-4 flex-1">
+                    {c.actions.map((a) => (
+                      <li key={a} className="text-foreground/65 text-xs flex items-start gap-2">
+                        <Check className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />
+                        {a}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-primary font-semibold text-sm mt-auto pt-4 border-t border-border">{c.result}</p>
+                </div>
               </div>
             </RevealSection>
           ))}
