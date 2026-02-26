@@ -10,6 +10,7 @@ import clinicaPetraImg from "@/assets/cases/naming/clinica-petra.png";
 import bpCase2 from "@/assets/cases/branding-pessoal/case-2.png";
 import bpCase3 from "@/assets/cases/branding-pessoal/case-3.png";
 import bpCase4 from "@/assets/cases/branding-pessoal/case-4.png";
+import bpCase5 from "@/assets/cases/branding-pessoal/case-5.png";
 import ivDrAnaPaula from "@/assets/cases/identidade-visual/dr-ana-paula.png";
 import ivPasseiPonto from "@/assets/cases/identidade-visual/passei-ponto.png";
 import ivPaesAdao from "@/assets/cases/identidade-visual/paes-adao.png";
@@ -210,6 +211,15 @@ export const brandingPessoalResults: ServiceMockupItem[] = [
     tag: "Marca Pessoal",
     evidence: "",
     imageSrc: bpCase4,
+    ratio: "3/4",
+    theme: "personal",
+  },
+  {
+    title: "Case de Branding Pessoal",
+    subtitle: "Construção de autoridade e presença digital estratégica.",
+    tag: "Marca Pessoal",
+    evidence: "",
+    imageSrc: bpCase5,
     ratio: "3/4",
     theme: "personal",
   },

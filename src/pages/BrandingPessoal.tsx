@@ -354,23 +354,21 @@ function ResultadosSimulados() {
         </RevealSection>
 
         {/* Full-image slideshow */}
-        <div className="relative overflow-hidden rounded-sm bg-background/40">
-          <div className="aspect-[4/3] relative overflow-hidden">
-            <AnimatePresence initial={false} custom={direction} mode="wait">
-              <motion.img
-                key={currentIndex}
-                src={items[currentIndex].imageSrc}
-                alt={`Case de Branding Pessoal ${currentIndex + 1}`}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-0 w-full h-full object-contain"
-              />
-            </AnimatePresence>
-          </div>
+        <div className="overflow-hidden rounded-sm">
+          <AnimatePresence initial={false} custom={direction} mode="wait">
+            <motion.img
+              key={currentIndex}
+              src={items[currentIndex].imageSrc}
+              alt={`Case de Branding Pessoal ${currentIndex + 1}`}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-auto"
+            />
+          </AnimatePresence>
         </div>
 
         {/* Navigation */}
