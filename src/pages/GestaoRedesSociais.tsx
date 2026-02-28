@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,12 +19,23 @@ import {
   Zap,
   ArrowRight,
 } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
-import CasesCarousel from "@/components/shared/CasesCarousel";
-import { gestaoSocialCases, socialDashboardKpis, socialEditorialCycle } from "@/data/serviceMockups";
+import { socialDashboardKpis, socialEditorialCycle } from "@/data/serviceMockups";
 import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
+
+// Imagens de depoimentos (o que falam de nós)
+import dep1 from "@/assets/cases/gestao-redes/depoimentos/dep-1.png";
+import dep2 from "@/assets/cases/gestao-redes/depoimentos/dep-2.png";
+import dep3 from "@/assets/cases/gestao-redes/depoimentos/dep-3.png";
+import dep4 from "@/assets/cases/gestao-redes/depoimentos/dep-4.png";
+import dep5 from "@/assets/cases/gestao-redes/depoimentos/dep-5.png";
+import dep6 from "@/assets/cases/gestao-redes/depoimentos/dep-6.png";
+import dep7 from "@/assets/cases/gestao-redes/depoimentos/dep-7.png";
+import dep8 from "@/assets/cases/gestao-redes/depoimentos/dep-8.png";
+import dep9 from "@/assets/cases/gestao-redes/depoimentos/dep-9.png";
 
 // Fotos dos clientes - Gestão de Redes Sociais (fallback images)
 import monalisaOliveira from "@/assets/clientes/monalisa-oliveira.png";
@@ -282,21 +293,88 @@ function Entregaveis() {
   );
 }
 
-/* ─── Cases Simulados ─── */
-function CasesSimulados() {
+/* ─── O Que Falam de Nós — carrossel de depoimentos ─── */
+const depoimentoImagens = [dep1, dep2, dep3, dep4, dep5, dep6, dep7, dep8, dep9];
+
+function OQueFalamDeNos() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => { emblaApi.off("select", onSelect); };
+  }, [emblaApi, onSelect]);
+
   return (
     <section className="section-spacing bg-background">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <div className="mb-12 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-bold">Cases Reais</h2>
+          <div className="mb-10 space-y-3">
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Depoimentos</p>
+            <h2 className="text-3xl md:text-4xl font-bold">O Que Falam de Nós</h2>
             <p className="text-foreground/55 text-sm max-w-xl">
-              Cases reais de clientes que transformaram sua presença digital com a SM Agency.
+              Mensagens reais de clientes que vivenciaram a nossa gestão de redes sociais.
             </p>
           </div>
         </RevealSection>
 
-        <CasesCarousel items={gestaoSocialCases} />
+        <div className="relative">
+          <div ref={emblaRef} className="overflow-hidden">
+            <div className="flex -ml-3 md:-ml-5">
+              {depoimentoImagens.map((src, i) => (
+                <div
+                  key={i}
+                  className="pl-3 md:pl-5 min-w-0 shrink-0 grow-0 basis-4/5 sm:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="border border-border bg-secondary/30 overflow-hidden">
+                    <img
+                      src={src}
+                      alt={`Depoimento ${i + 1}`}
+                      className="w-full max-h-[520px] object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between mt-5 md:mt-6">
+            <span className="text-xs font-mono text-foreground/40">
+              {String(selectedIndex + 1).padStart(2, "0")} / {String(depoimentoImagens.length).padStart(2, "0")}
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => emblaApi?.scrollPrev()}
+                disabled={!canScrollPrev}
+                className="w-10 h-10 border border-border hover:border-primary/40 flex items-center justify-center disabled:opacity-25 transition-colors"
+                aria-label="Depoimento anterior"
+              >
+                <ArrowRight className="w-4 h-4 rotate-180" />
+              </button>
+              <button
+                onClick={() => emblaApi?.scrollNext()}
+                disabled={!canScrollNext}
+                className="w-10 h-10 bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center disabled:opacity-25 transition-colors"
+                aria-label="Próximo depoimento"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -570,7 +648,7 @@ export default function GestaoRedesSociais() {
       <AntesDepois />
       <Processo />
       <Entregaveis />
-      <CasesSimulados />
+      <OQueFalamDeNos />
       <PreviewOperacao />
       <Investimento />
       <Depoimentos />

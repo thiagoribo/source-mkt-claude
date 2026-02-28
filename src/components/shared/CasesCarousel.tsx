@@ -53,6 +53,7 @@ export default function CasesCarousel({ items, className }: CasesCarouselProps) 
                 imageSrc={item.imageSrc}
                 ratio={item.ratio}
                 theme={item.theme}
+                fit={item.fit}
               />
             </div>
           ))}

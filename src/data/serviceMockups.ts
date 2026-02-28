@@ -1,4 +1,4 @@
-import type { MockupRatio, MockupTheme } from "@/components/shared/ServiceMockupCard";
+import type { MockupRatio, MockupTheme, MockupFit } from "@/components/shared/ServiceMockupCard";
 import ana1 from "@/assets/ana-foto.jpeg";
 import team2 from "@/assets/team-2.png";
 import thiago1 from "@/assets/thiago-1.png";
@@ -26,6 +26,7 @@ export interface ServiceMockupItem {
   imageSrc: string;
   ratio: MockupRatio;
   theme: MockupTheme;
+  fit?: MockupFit;
 }
 
 export interface SocialCycleItem {
@@ -115,6 +116,7 @@ export const gestaoSocialCases: ServiceMockupItem[] = [
     imageSrc: gestaoLike,
     ratio: "16/10",
     theme: "social",
+    fit: "contain",
   },
   {
     title: "Jaqueline Vieira",
@@ -124,6 +126,7 @@ export const gestaoSocialCases: ServiceMockupItem[] = [
     imageSrc: gestaoJaqueline,
     ratio: "16/10",
     theme: "social",
+    fit: "contain",
   },
   {
     title: "Lísia Heinen",
@@ -133,6 +136,7 @@ export const gestaoSocialCases: ServiceMockupItem[] = [
     imageSrc: gestaoLisia,
     ratio: "16/10",
     theme: "social",
+    fit: "contain",
   },
 ];
 

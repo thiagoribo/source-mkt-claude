@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 
 export type MockupRatio = "4/3" | "16/10" | "3/4";
 export type MockupTheme = "branding" | "social" | "naming" | "visual" | "personal";
+export type MockupFit = "cover" | "contain";
 
 interface ServiceMockupCardProps {
   title: string;
@@ -11,6 +12,7 @@ interface ServiceMockupCardProps {
   imageSrc?: string;
   ratio?: MockupRatio;
   theme?: MockupTheme;
+  fit?: MockupFit;
   className?: string;
 }
 
@@ -61,6 +63,7 @@ export default function ServiceMockupCard({
   imageSrc,
   ratio = "4/3",
   theme = "branding",
+  fit = "cover",
   className,
 }: ServiceMockupCardProps) {
   const styles = themeStyles[theme];
@@ -73,7 +76,10 @@ export default function ServiceMockupCard({
             <img
               src={imageSrc}
               alt={title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className={cn(
+                "w-full h-full transition-transform duration-500 group-hover:scale-[1.04]",
+                fit === "contain" ? "object-contain" : "object-cover"
+              )}
               loading="lazy"
             />
           </div>
