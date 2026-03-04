@@ -5,7 +5,7 @@ import { Layers, Eye, BarChart3 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import AnimatedNumber from "@/components/shared/AnimatedNumber";
 import { useTeamMembers } from "@/hooks/queries/useTeamMembers";
-import { useCases } from "@/hooks/queries/useCases";
+import { casesData } from "@/data/casesData";
 import ana1 from "@/assets/ana-nova.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 
@@ -16,7 +16,7 @@ import gabrielaMontezi from "@/assets/equipe/gabriela-montezi.png";
 import grazielliSantos from "@/assets/equipe/grazielli-santos.jpg";
 import lohanaVitoria from "@/assets/equipe/lohana-vitoria.png";
 
-// Fallback data for team members (used when Supabase is unavailable)
+// Team members (used when Supabase is unavailable)
 const fallbackTeamMembers = [
   { name: "Caio Castro", role: "Designer Sênior", image: caioCastro },
   { name: "Ana Castro", role: "Designer Sênior", image: anaCastro },
@@ -43,15 +43,6 @@ function getTeamImage(name: string): string | undefined {
   return Object.entries(teamImageMap).find(([k]) => normalize(k) === norm)?.[1];
 }
 
-// Fallback data for cases/portfolio
-const fallbackProjects = [
-  { name: "Tech Solutions", category: "Consultoria Estratégica", result: "3× ticket médio" },
-  { name: "Consultoria Premium", category: "Branding Empresarial", result: "Segmento premium" },
-  { name: "E-commerce Moda", category: "Consultoria Estratégica", result: "+180% margem" },
-  { name: "Thatiane Oliveira", category: "Branding Pessoal", result: "Autoridade construída" },
-  { name: "Grupo RA", category: "Branding Empresarial", result: "Reposicionamento completo" },
-  { name: "StartupX", category: "Consultoria Estratégica", result: "Entrada no mercado premium" },
-];
 
 /* ─── Hero ─── */
 function Hero() {
@@ -411,19 +402,12 @@ function Numeros() {
 /* ─── Portfolio ─── */
 function Portfolio() {
   const [filter, setFilter] = useState("Todos");
-  const { data: supabaseCases } = useCases();
-  const categories = ["Todos", "Consultoria Estratégica", "Branding Empresarial", "Branding Pessoal"];
+  const categories = ["Todos", "Consultoria 360°", "Branding Empresarial"];
 
-  // Use Supabase data or fallback
-  const projects = supabaseCases && supabaseCases.length > 0
-    ? supabaseCases.map(c => ({
-        name: c.name,
-        category: c.category || "Consultoria Estratégica",
-        result: c.result || "",
-      }))
-    : fallbackProjects;
-
-  const filtered = filter === "Todos" ? projects : projects.filter((p) => p.category === filter);
+  const filtered =
+    filter === "Todos"
+      ? casesData
+      : casesData.filter((c) => c.category === filter);
 
   return (
     <section id="portfolio" className="section-spacing bg-background">
@@ -450,19 +434,44 @@ function Portfolio() {
           </div>
         </RevealSection>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {filtered.map((p, i) => (
-            <RevealSection key={p.name + p.category} delay={i * 100}>
-              <div className="border border-border hover:border-primary/40 transition-colors group overflow-hidden">
-                <div className="aspect-[16/10] bg-primary/5 flex items-center justify-center">
-                  <span className="text-primary/20 font-serif text-6xl font-bold">{p.name.charAt(0)}</span>
+        <div className="grid md:grid-cols-2 gap-8">
+          {filtered.map((c, i) => (
+            <RevealSection key={c.id} delay={i * 100}>
+              <Link
+                to={`/cases/${c.id}`}
+                className="group block border border-border hover:border-primary/40 transition-colors overflow-hidden"
+              >
+                {/* Metrics highlight */}
+                <div className="bg-primary/5 p-8 grid grid-cols-3 gap-4 border-b border-border/30">
+                  {c.results.map((r, ri) => (
+                    <div key={ri} className="text-center">
+                      <p className="text-2xl md:text-3xl font-serif font-bold text-primary leading-none mb-1">
+                        {r.metric}
+                      </p>
+                      <p className="text-[10px] text-foreground/50 leading-tight">{r.label}</p>
+                    </div>
+                  ))}
                 </div>
-                <div className="p-5 space-y-2">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-primary">{p.category}</span>
-                  <h3 className="font-bold">{p.name}</h3>
-                  <p className="text-foreground/50 text-sm">{p.result}</p>
+
+                {/* Card body */}
+                <div className="p-6 space-y-3">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-primary">
+                    {c.category}
+                  </span>
+                  <h3 className="font-bold text-foreground">{c.client}</h3>
+                  <p className="text-foreground/50 text-sm leading-relaxed">{c.tagline}</p>
+
+                  {c.quote && (
+                    <p className="text-foreground/40 text-xs italic pt-2 border-t border-border/20 leading-relaxed line-clamp-2">
+                      "{c.quote.text}"
+                    </p>
+                  )}
+
+                  <p className="text-primary text-sm font-medium group-hover:underline pt-1">
+                    Ver case completo →
+                  </p>
                 </div>
-              </div>
+              </Link>
             </RevealSection>
           ))}
         </div>
