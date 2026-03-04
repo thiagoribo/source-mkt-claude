@@ -4,17 +4,11 @@ import { Layers, Zap, BarChart3, Map, Building2, Sparkles, Paintbrush2, Megaphon
 import RevealSection from "@/components/shared/RevealSection";
 import ResponsiveImage from "@/components/shared/ResponsiveImage";
 import TestimonialV2 from "@/components/ui/testimonial-v2";
-import { useCases } from "@/hooks/queries/useCases";
+import { casesData } from "@/data/casesData";
 import anaHero from "@/assets/ana-header.svg";
 import ana1 from "@/assets/ana-nova.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 
-// Fallback data for cases
-const fallbackCases = [
-  { name: "Empresa de Tecnologia", category: "Consultoria Estratégica", result: "Crescimento de 3x no ticket médio em 6 meses" },
-  { name: "Consultoria Financeira", category: "Branding Completo", result: "Entrada bem-sucedida no segmento premium" },
-  { name: "E-commerce de Moda", category: "Consultoria Estratégica", result: "Aumento de 180% em margem líquida" },
-];
 
 /* ─── Hero ─── */
 function HeroSection() {
@@ -478,17 +472,6 @@ function ServicesSection() {
 
 /* ─── Cases ─── */
 function CasesSection() {
-  const { data: supabaseCases } = useCases();
-
-  // Use Supabase data or fallback (show only first 3)
-  const cases = supabaseCases && supabaseCases.length > 0
-    ? supabaseCases.slice(0, 3).map(c => ({
-        name: c.name,
-        category: c.category || "Consultoria Estratégica",
-        result: c.result || "",
-      }))
-    : fallbackCases;
-
   return (
     <section id="cases" className="section-spacing bg-background">
       <div className="container-sm">
@@ -497,26 +480,30 @@ function CasesSection() {
             Empresas que Transformamos
           </h2>
         </RevealSection>
-        <div className="grid md:grid-cols-3 gap-10">
-          {cases.map((c, i) => (
-            <RevealSection key={c.name} delay={i * 150}>
-              <div className="border border-border/50 group hover:border-primary/40 transition-colors duration-300">
-                <div className="h-48 bg-primary/5 flex flex-col justify-between p-8">
-                  <span className="text-primary text-xs font-semibold tracking-widest uppercase">{c.category}</span>
-                  <p className="text-xl md:text-2xl font-serif font-semibold text-foreground leading-tight">{c.result}</p>
+        <div className="grid md:grid-cols-2 gap-8">
+          {casesData.map((c, i) => (
+            <RevealSection key={c.id} delay={i * 120}>
+              <Link
+                to={`/cases/${c.id}`}
+                className="group block border border-border/50 hover:border-primary/40 transition-colors duration-300"
+              >
+                <div className="h-52 bg-primary/5 flex flex-col justify-between p-8">
+                  <span className="text-primary text-xs font-mono font-semibold tracking-widest uppercase">
+                    {c.category}
+                  </span>
+                  <p className="text-xl font-serif font-semibold text-foreground leading-tight">
+                    {c.tagline}
+                  </p>
                 </div>
                 <div className="p-8 flex items-center justify-between border-t border-border/30">
-                  <h3 className="font-semibold text-sm text-foreground/70">{c.name}</h3>
-                  <span className="text-primary text-sm font-medium group-hover:underline">Ver Case →</span>
+                  <h3 className="font-semibold text-sm text-foreground/70">{c.client}</h3>
+                  <span className="text-primary text-sm font-medium group-hover:underline">
+                    Ver case completo →
+                  </span>
                 </div>
-              </div>
+              </Link>
             </RevealSection>
           ))}
-        </div>
-        <div className="text-center mt-16">
-          <Button asChild variant="outline" className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            <Link to="/quem-somos#portfolio">Ver Todos os Cases</Link>
-          </Button>
         </div>
       </div>
     </section>

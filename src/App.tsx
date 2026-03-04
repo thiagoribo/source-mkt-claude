@@ -18,6 +18,7 @@ import QuemSomos from "./pages/QuemSomos";
 import IdentidadeVisual from "./pages/IdentidadeVisual";
 import GestaoRedesSociais from "./pages/GestaoRedesSociais";
 import Naming from "./pages/Naming";
+import CaseDetail from "./pages/CaseDetail";
 import NotFound from "./pages/NotFound";
 
 // Blog Pages
@@ -102,6 +103,7 @@ const App = () => (
                       <Route path="/identidade-visual" element={<IdentidadeVisual />} />
                       <Route path="/gestao-redes-sociais" element={<GestaoRedesSociais />} />
                       <Route path="/naming" element={<Naming />} />
+                      <Route path="/cases/:slug" element={<CaseDetail />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Layout>
