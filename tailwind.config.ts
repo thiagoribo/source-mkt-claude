@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Playfair Display", "Georgia", "serif"],
-        serif: ["Playfair Display", "Georgia", "serif"],
+        display: ["Montserrat", "system-ui", "sans-serif"],
+        serif: ["Montserrat", "system-ui", "sans-serif"],
         sans: ["DM Sans", "system-ui", "sans-serif"],
         mono: ["DM Mono", "monospace"],
       },
