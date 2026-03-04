@@ -30,12 +30,8 @@ export function useSubmitLead(formSource: FormSource): UseSubmitLeadReturn {
     setIsLoading(true);
     setError(null);
 
-    console.log('[Lead] Iniciando envio...', { formSource, formData });
-    console.log('[Lead] CRM configurado?', isCRMConfigured());
-
     // Se CRM não está configurado, simular sucesso (ambiente de dev)
     if (!isCRMConfigured()) {
-      console.warn('[Lead] CRM não configurado. Dados do lead:', formData);
       setIsLoading(false);
       return { success: true };
     }

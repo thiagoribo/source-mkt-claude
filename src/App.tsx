@@ -19,6 +19,7 @@ import IdentidadeVisual from "./pages/IdentidadeVisual";
 import GestaoRedesSociais from "./pages/GestaoRedesSociais";
 import Naming from "./pages/Naming";
 import CaseDetail from "./pages/CaseDetail";
+import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
 import NotFound from "./pages/NotFound";
 
 // Blog Pages
@@ -104,6 +105,7 @@ const App = () => (
                       <Route path="/gestao-redes-sociais" element={<GestaoRedesSociais />} />
                       <Route path="/naming" element={<Naming />} />
                       <Route path="/cases/:slug" element={<CaseDetail />} />
+                      <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </Layout>

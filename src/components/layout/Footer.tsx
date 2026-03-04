@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Facebook } from "lucide-react";
+import { Instagram, Linkedin } from "lucide-react";
 import logoFooter from "@/assets/logo-footer.svg";
 
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-5 items-center">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/sourcemkt"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -26,22 +26,13 @@ export default function Footer() {
                 <Instagram className="h-4 w-4" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/company/sourcemkt"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="text-brand-offwhite/40 hover:text-brand-offwhite transition-colors duration-200"
               >
                 <Linkedin className="h-4 w-4" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="text-brand-offwhite/40 hover:text-brand-offwhite transition-colors duration-200"
-              >
-                <Facebook className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -109,15 +100,15 @@ export default function Footer() {
         {/* Bottom */}
         <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <span className="text-[11px] text-brand-offwhite/25 font-light tracking-wide">
-            © 2025 SM Agency — CNPJ: 49.800.040/0001-07
+            © 2026 SM Agency — CNPJ: 49.800.040/0001-07
           </span>
           <div className="flex gap-6">
             <Link to="/quem-somos" className="text-[11px] text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
               Quem Somos
             </Link>
-            <a href="#" className="text-[11px] text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
+            <Link to="/politica-de-privacidade" className="text-[11px] text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
               Política de Privacidade
-            </a>
+            </Link>
           </div>
         </div>
       </div>
