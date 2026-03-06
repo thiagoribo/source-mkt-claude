@@ -27,10 +27,6 @@ function HeroSection() {
               <p className="text-fluid-lg text-foreground/75 leading-[1.6] max-w-xl font-light">
                 Consultoria estratégica e branding para empresas estabelecidas que querem parar de competir por preço e começar a vender pelo valor que entregam.
               </p>
-              <div className="flex items-center gap-3 text-fluid-sm text-muted-foreground font-mono">
-                <div className="h-px w-12 bg-accent"></div>
-                <p>Faturamento mínimo: R$500k/ano</p>
-              </div>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button asChild size="lg" className="rounded-none text-base px-8 bg-primary hover:shadow-lg transition-shadow">
                   <a href="#diagnostico">Diagnóstico Estratégico</a>
@@ -342,10 +338,6 @@ function ServicesSection() {
 
                   {/* Footer */}
                   <div className="flex items-end justify-between pt-8 border-t border-primary-foreground/10">
-                    <div>
-                      <p className="text-xs opacity-50 mb-1">A partir de</p>
-                      <p className="text-3xl md:text-4xl font-bold font-serif">{featured.price}</p>
-                    </div>
                     <div className="flex items-center gap-2 text-sm font-medium group-hover:gap-4 transition-all duration-300">
                       <span>Ver detalhes</span>
                       <span className="w-8 h-px bg-current group-hover:w-12 transition-all duration-300" />
@@ -396,11 +388,7 @@ function ServicesSection() {
                     </div>
 
                     {/* Footer */}
-                    <div className="flex items-end justify-between pt-6 border-t border-border/50">
-                      <div>
-                        <p className="text-xs text-foreground/40 mb-0.5">A partir de</p>
-                        <p className="text-2xl font-bold font-serif text-primary">{service.price}</p>
-                      </div>
+                    <div className="flex items-end justify-end pt-6 border-t border-border/50">
                       <span className="text-primary text-sm font-medium flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
                         Saber mais
                         <span className="w-5 h-px bg-primary group-hover:w-8 transition-all duration-300" />

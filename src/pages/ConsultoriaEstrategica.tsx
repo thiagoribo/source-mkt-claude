@@ -851,7 +851,7 @@ export default function ConsultoriaEstrategica() {
       <ParaQuemE />
       <Metodologia />
       <Modalidades />
-      <Investimento />
+      {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-consultoria-estrategica.tsx */}
       <Lideranca />
       <CasesConsultoria />
       <FAQ />

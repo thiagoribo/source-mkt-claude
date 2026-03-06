@@ -650,7 +650,7 @@ export default function GestaoRedesSociais() {
       <Entregaveis />
       <OQueFalamDeNos />
       <PreviewOperacao />
-      <Investimento />
+      {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-gestao-redes-sociais.tsx */}
       <Depoimentos />
       <Formulario />
     </>

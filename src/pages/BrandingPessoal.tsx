@@ -620,7 +620,7 @@ export default function BrandingPessoal() {
       <Processo />
       <ParaQuemE />
       <ResultadosSimulados />
-      <InvestimentoPessoal />
+      {/* <InvestimentoPessoal /> — preço oculto, backup em src/_pricing-backup/investimento-branding-pessoal.tsx */}
       <Depoimento />
       <FormularioPessoal />
     </>

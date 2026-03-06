@@ -567,7 +567,7 @@ export default function BrandingEmpresarial() {
       <Processo />
       <Entregaveis />
       <ShowcaseVisual />
-      <InvestimentoBranding />
+      {/* <InvestimentoBranding /> — preço oculto, backup em src/_pricing-backup/investimento-branding-empresarial.tsx */}
       <Comparacao />
       <Depoimentos />
       <FormularioBranding />

@@ -503,7 +503,7 @@ export default function Naming() {
       <Entregaveis />
       <ScorecardNaming />
       <CasosReaisNaming />
-      <Investimento />
+      {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-naming.tsx */}
       <Formulario />
     </>
   );

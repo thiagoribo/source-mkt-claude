@@ -454,7 +454,7 @@ export default function IdentidadeVisual() {
       <Processo />
       <Entregaveis />
       <GaleriaMockups />
-      <Investimento />
+      {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-identidade-visual.tsx */}
       <Depoimentos />
       <Formulario />
     </>
