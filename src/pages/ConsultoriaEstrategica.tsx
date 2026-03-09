@@ -547,7 +547,7 @@ function CasesConsultoria() {
       result: "Entrada no segmento premium com autoridade de marca",
       links: {
         instagram: "https://www.instagram.com/startimobiliario/",
-        site: "https://www.startimobiliario.com.br",
+        site: "https://www.startimobiliario.com",
       },
     },
   ];

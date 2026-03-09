@@ -130,7 +130,7 @@ export const casesData: CaseData[] = [
     ],
     links: {
       instagram: "https://www.instagram.com/startimobiliario/",
-      site: "https://www.startimobiliario.com.br",
+      site: "https://www.startimobiliario.com",
     },
   },
 ];
