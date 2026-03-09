@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-5 items-center">
               <a
-                href="https://instagram.com/sourcemkt"
+                href="https://www.instagram.com/sm.agencybr/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -26,7 +26,7 @@ export default function Footer() {
                 <Instagram className="h-4 w-4" />
               </a>
               <a
-                href="https://linkedin.com/company/sourcemkt"
+                href="https://www.linkedin.com/company/source-marketingag/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"

@@ -12,6 +12,8 @@ export interface CaseQuote {
 export interface CaseLinks {
   instagram?: string;
   linkedin?: string;
+  site?: string;
+  drive?: string;
 }
 
 export interface CaseData {
@@ -54,6 +56,7 @@ export const casesData: CaseData[] = [
     },
     links: {
       instagram: "https://www.instagram.com/likebrand.oficial/",
+      drive: "https://drive.google.com/drive/folders/1td6Z5UQf8y_jjKFRFt62RfTO6-H2LONj?usp=sharing",
     },
   },
   {
@@ -75,8 +78,8 @@ export const casesData: CaseData[] = [
       { metric: "100%", label: "dos leads com acompanhamento estruturado" },
     ],
     links: {
-      linkedin:
-        "https://www.linkedin.com/company/stdi-investiga%C3%A7%C3%A3o-intelig%C3%AAncia/posts/?feedView=all",
+      linkedin: "https://www.linkedin.com/company/stdi-investiga%C3%A7%C3%A3o-intelig%C3%AAncia/posts/?feedView=all",
+      site: "https://www.stdiinteligencia.com.br/",
     },
   },
   {
@@ -105,6 +108,7 @@ export const casesData: CaseData[] = [
     },
     links: {
       instagram: "https://www.instagram.com/clinica.petra/",
+      drive: "https://drive.google.com/drive/folders/1yksBFNAm9W-iLKPWSL10DlEKSy_i0dNf?usp=sharing",
     },
   },
   {
@@ -125,7 +129,8 @@ export const casesData: CaseData[] = [
       { metric: "Clareza", label: "de rota para escala e performance" },
     ],
     links: {
-      instagram: "https://www.instagram.com/startimobiliario",
+      instagram: "https://www.instagram.com/startimobiliario/",
+      site: "https://www.startimobiliario.com.br",
     },
   },
 ];

@@ -126,7 +126,7 @@ function Hero() {
               className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden lg:block"
               style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
             >
-              BP
+              SM
             </span>
 
             <div className="relative max-w-3xl space-y-8">

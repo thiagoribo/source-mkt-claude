@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Instagram, Linkedin } from "lucide-react";
+import { ArrowLeft, Instagram, Linkedin, Globe, FolderOpen } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import RevealSection from "@/components/shared/RevealSection";
@@ -150,6 +150,28 @@ export default function CaseDetail() {
                   >
                     <Linkedin className="w-4 h-4" />
                     LinkedIn
+                  </a>
+                )}
+                {caseData.links.site && (
+                  <a
+                    href={caseData.links.site}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-foreground/60 hover:text-primary transition-colors"
+                  >
+                    <Globe className="w-4 h-4" />
+                    Site
+                  </a>
+                )}
+                {caseData.links.drive && (
+                  <a
+                    href={caseData.links.drive}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-foreground/60 hover:text-primary transition-colors"
+                  >
+                    <FolderOpen className="w-4 h-4" />
+                    Identidade Visual
                   </a>
                 )}
               </div>

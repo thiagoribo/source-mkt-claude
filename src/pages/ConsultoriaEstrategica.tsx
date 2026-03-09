@@ -21,6 +21,9 @@ import {
   Route,
   Eye,
   ArrowRight,
+  Instagram,
+  Linkedin,
+  Globe,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ana1 from "@/assets/ana-nova.jpeg";
@@ -531,6 +534,10 @@ function CasesConsultoria() {
       challenge: "Empresa com posicionamento genérico e dificuldade de diferenciação no mercado B2B",
       actions: ["Diagnóstico estratégico completo", "Reposicionamento de marca B2B", "Arquitetura comercial e funil de vendas"],
       result: "Posicionamento consolidado e marca reposicionada",
+      links: {
+        linkedin: "https://www.linkedin.com/company/stdi-investiga%C3%A7%C3%A3o-intelig%C3%AAncia/posts/?feedView=all",
+        site: "https://www.stdiinteligencia.com.br/",
+      },
     },
     {
       img: startCase,
@@ -538,6 +545,10 @@ function CasesConsultoria() {
       challenge: "Mercado imobiliário saturado com baixa diferenciação de marca",
       actions: ["Diagnóstico de posicionamento", "Estratégia de marca para mercado imobiliário", "Funil de captação de leads qualificados"],
       result: "Entrada no segmento premium com autoridade de marca",
+      links: {
+        instagram: "https://www.instagram.com/startimobiliario/",
+        site: "https://www.startimobiliario.com.br",
+      },
     },
   ];
 
@@ -574,7 +585,29 @@ function CasesConsultoria() {
                       </li>
                     ))}
                   </ul>
-                  <p className="text-primary font-semibold text-sm mt-auto pt-4 border-t border-border">{c.result}</p>
+                  <div className="mt-auto pt-4 border-t border-border flex items-center justify-between gap-4 flex-wrap">
+                    <p className="text-primary font-semibold text-sm">{c.result}</p>
+                    <div className="flex items-center gap-3">
+                      {c.links.instagram && (
+                        <a href={c.links.instagram} target="_blank" rel="noopener noreferrer"
+                          className="text-foreground/40 hover:text-primary transition-colors" aria-label="Instagram">
+                          <Instagram className="w-4 h-4" />
+                        </a>
+                      )}
+                      {c.links.linkedin && (
+                        <a href={c.links.linkedin} target="_blank" rel="noopener noreferrer"
+                          className="text-foreground/40 hover:text-primary transition-colors" aria-label="LinkedIn">
+                          <Linkedin className="w-4 h-4" />
+                        </a>
+                      )}
+                      {c.links.site && (
+                        <a href={c.links.site} target="_blank" rel="noopener noreferrer"
+                          className="text-foreground/40 hover:text-primary transition-colors" aria-label="Site">
+                          <Globe className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </RevealSection>

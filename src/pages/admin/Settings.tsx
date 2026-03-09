@@ -24,8 +24,8 @@ const defaultSettings: SiteSettings = {
   contact_phone: '(11) 93729-2921',
   contact_whatsapp: '5511937292921',
   address: 'São Paulo, SP',
-  social_instagram: 'https://instagram.com/sourcemkt',
-  social_linkedin: 'https://linkedin.com/company/sourcemkt',
+  social_instagram: 'https://www.instagram.com/sm.agencybr/',
+  social_linkedin: 'https://www.linkedin.com/company/source-marketingag/',
   social_facebook: '',
   footer_text: '© 2024 SM Agency. Todos os direitos reservados.',
 };
