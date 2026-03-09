@@ -68,24 +68,24 @@ export const TestimonialSlider = ({
   // Animation variants
   const imageVariants = {
     enter: (direction: "left" | "right") => ({
-      y: direction === "right" ? "100%" : "-100%",
+      x: direction === "right" ? "100%" : "-100%",
       opacity: 0,
     }),
-    center: { y: 0, opacity: 1 },
+    center: { x: 0, opacity: 1 },
     exit: (direction: "left" | "right") => ({
-      y: direction === "right" ? "-100%" : "100%",
+      x: direction === "right" ? "-100%" : "100%",
       opacity: 0,
     }),
   };
 
   const textVariants = {
     enter: (direction: "left" | "right") => ({
-      x: direction === "right" ? 50 : -50,
+      x: direction === "right" ? 40 : -40,
       opacity: 0,
     }),
     center: { x: 0, opacity: 1 },
     exit: (direction: "left" | "right") => ({
-      x: direction === "right" ? -50 : 50,
+      x: direction === "right" ? -40 : 40,
       opacity: 0,
     }),
   };
@@ -151,8 +151,8 @@ export const TestimonialSlider = ({
           </div>
 
           {/* Center Column: Main Image */}
-          <div className="lg:col-span-4 relative min-h-[350px] md:min-h-[450px] order-1 lg:order-2">
-            <AnimatePresence initial={false} custom={direction}>
+          <div className="lg:col-span-4 relative min-h-[350px] md:min-h-[450px] overflow-hidden order-1 lg:order-2">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.img
                 key={currentIndex}
                 src={activeReview.imageSrc}
@@ -162,7 +162,7 @@ export const TestimonialSlider = ({
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                 className="absolute inset-0 w-full h-full object-cover object-top shadow-lg"
               />
             </AnimatePresence>
@@ -171,8 +171,8 @@ export const TestimonialSlider = ({
           {/* Right Column: Text and Navigation */}
           <div className="lg:col-span-5 flex flex-col justify-between lg:pl-4 order-3">
             {/* Text Content */}
-            <div className="relative overflow-hidden pt-4 lg:pt-8 min-h-[220px]">
-              <AnimatePresence initial={false} custom={direction} mode="wait">
+            <div className="relative overflow-hidden min-h-[280px] md:min-h-[320px]">
+              <AnimatePresence initial={false} custom={direction}>
                 <motion.div
                   key={currentIndex}
                   custom={direction}
@@ -180,7 +180,8 @@ export const TestimonialSlider = ({
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  className="absolute inset-0 pt-4 lg:pt-8"
                 >
                   <p className="text-primary font-mono text-xs tracking-widest uppercase">
                     {activeReview.role}
