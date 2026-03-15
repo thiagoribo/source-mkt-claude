@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoHeader from "@/assets/logo-header.svg";
@@ -28,16 +28,35 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY.current;
+
+      setScrolled(currentY > 20);
+
+      if (currentY < 80) {
+        setVisible(true);
+      } else if (diff > 4) {
+        setVisible(false);
+      } else if (diff < -4) {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentY;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      } ${
         scrolled
           ? "bg-brand-navy/98 backdrop-blur-sm shadow-[0_1px_0_rgba(240,236,227,0.08)]"
           : "bg-brand-navy"
