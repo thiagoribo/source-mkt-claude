@@ -19,11 +19,13 @@ import {
   Volume2,
   FileText,
   ArrowRight,
+  Instagram,
+  Globe,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
-import CasesCarousel from "@/components/shared/CasesCarousel";
-import { brandingEmpresarialMockups } from "@/data/serviceMockups";
+import likeBrandCase from "@/assets/cases/branding/like-brand-p18.png";
+import petraCase from "@/assets/cases/naming/clinica-petra.png";
 import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
 
@@ -291,21 +293,95 @@ function Entregaveis() {
   );
 }
 
-/* ─── Showcase Visual ─── */
-function ShowcaseVisual() {
+/* ─── Cases Branding ─── */
+function CasesBranding() {
+  const cases = [
+    {
+      img: likeBrandCase,
+      name: "LIKE. Brand",
+      challenge: "Marca comunicando infantilidade, operando no atacado e sem posicionamento premium definido",
+      actions: [
+        "Reestruturação de nome e posicionamento de marca",
+        "Elevação para mercado premium B2C",
+        "Criação de identidade e narrativa consistente",
+      ],
+      result: "420% de crescimento em faturamento em 6 meses",
+      links: {
+        instagram: "https://www.instagram.com/likebrand.oficial/",
+        site: "https://www.likeadoll.com.br/",
+      },
+    },
+    {
+      img: petraCase,
+      name: "Clínica Petra",
+      challenge: "Clínica integrada nascente sem nome, identidade visual ou posicionamento definido",
+      actions: [
+        "Criação de naming e identidade visual completa",
+        "Posicionamento e narrativa de marca premium",
+        "Estruturação de marketing e scripts comerciais",
+      ],
+      result: "Clínica nasceu pronta para ser referência no segmento integrado",
+      links: {
+        instagram: "https://www.instagram.com/clinica.petra/",
+      },
+    },
+  ];
+
   return (
-    <section className="section-spacing bg-secondary">
+    <section className="section-spacing bg-background">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <div className="mb-12 space-y-3">
-            <h2 className="text-3xl md:text-4xl font-bold">Preview Visual do Projeto</h2>
-            <p className="text-foreground/55 text-sm max-w-xl">
-              Como o branding estratégico aparece em website, social e materiais comerciais.
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-16">Empresas que Transformamos</h2>
         </RevealSection>
 
-        <CasesCarousel items={brandingEmpresarialMockups} />
+        <div className="grid md:grid-cols-2 gap-6">
+          {cases.map((c, i) => (
+            <RevealSection key={c.name} delay={i * 150}>
+              <div className="group border border-border overflow-hidden h-full flex flex-col hover:border-primary/40 transition-colors">
+                <div className="aspect-[16/9] overflow-hidden bg-secondary">
+                  <img
+                    src={c.img}
+                    alt={c.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 md:p-8 flex flex-col flex-1">
+                  <span className="text-xs font-mono uppercase tracking-widest text-primary mb-4 inline-block">
+                    Branding Empresarial
+                  </span>
+                  <h3 className="font-bold text-lg mb-2">{c.name}</h3>
+                  <p className="text-foreground/50 text-sm mb-4">{c.challenge}</p>
+                  <ul className="space-y-1.5 mb-4 flex-1">
+                    {c.actions.map((a) => (
+                      <li key={a} className="text-foreground/65 text-xs flex items-start gap-2">
+                        <Check className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />
+                        {a}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto pt-4 border-t border-border flex items-center justify-between gap-4 flex-wrap">
+                    <p className="text-primary font-semibold text-sm">{c.result}</p>
+                    <div className="flex items-center gap-3">
+                      {c.links.instagram && (
+                        <a href={c.links.instagram} target="_blank" rel="noopener noreferrer"
+                          className="text-foreground/40 hover:text-primary transition-colors" aria-label="Instagram">
+                          <Instagram className="w-4 h-4" />
+                        </a>
+                      )}
+                      {c.links.site && (
+                        <a href={c.links.site} target="_blank" rel="noopener noreferrer"
+                          className="text-foreground/40 hover:text-primary transition-colors" aria-label="Site">
+                          <Globe className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </RevealSection>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -566,7 +642,7 @@ export default function BrandingEmpresarial() {
       <AntesDepois />
       <Processo />
       <Entregaveis />
-      <ShowcaseVisual />
+      <CasesBranding />
       {/* <InvestimentoBranding /> — preço oculto, backup em src/_pricing-backup/investimento-branding-empresarial.tsx */}
       <Comparacao />
       <Depoimentos />

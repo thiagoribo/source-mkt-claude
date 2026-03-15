@@ -30,6 +30,7 @@ import ana1 from "@/assets/ana-nova.jpeg";
 import thiago1 from "@/assets/thiago-1.png";
 import stdiCase from "@/assets/cases/consultoria/stdi.png";
 import startCase from "@/assets/cases/consultoria/start.png";
+import likeBrandP20 from "@/assets/cases/branding/like-brand-p20.png";
 
 /* ─── Hero ─── */
 function Hero() {
@@ -550,6 +551,21 @@ function CasesConsultoria() {
         site: "https://www.startimobiliario.com",
       },
     },
+    {
+      img: likeBrandP20,
+      name: "LIKE. Brand",
+      challenge: "Marca sem posicionamento estratégico, operando no atacado e sem direção clara de crescimento",
+      actions: [
+        "Diagnóstico estratégico e reposicionamento completo",
+        "Encerramento do atacado e elevação para premium",
+        "Estruturação de processos, liderança e abertura de loja física",
+      ],
+      result: "420% de crescimento em faturamento e abertura da primeira loja B2C",
+      links: {
+        instagram: "https://www.instagram.com/likebrand.oficial/",
+        site: "https://www.likeadoll.com.br/",
+      },
+    },
   ];
 
   return (
@@ -559,7 +575,7 @@ function CasesConsultoria() {
           <h2 className="text-3xl md:text-4xl font-bold mb-16">Empresas que Transformamos</h2>
         </RevealSection>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cases.map((c, i) => (
             <RevealSection key={c.name} delay={i * 150}>
               <div className="group border border-border overflow-hidden h-full flex flex-col hover:border-primary/40 transition-colors">
