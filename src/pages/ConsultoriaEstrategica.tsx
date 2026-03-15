@@ -24,6 +24,12 @@ import {
   Instagram,
   Linkedin,
   Globe,
+  Users,
+  MessageSquare,
+  TrendingUp,
+  Layers,
+  Target,
+  X,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ana1 from "@/assets/ana-nova.jpeg";
@@ -54,20 +60,20 @@ function Hero() {
               </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
-                Para empresas que{" "}
+                Você está investindo{" "}
                 <em className="not-italic text-foreground/40 font-normal">
-                  já provaram.
+                  em marketing.
                 </em>
                 <br />
-                <span className="text-primary">Agora precisam liderar.</span>
+                <span className="text-primary">Quanto está convertendo?</span>
               </h1>
 
               <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Se sua empresa já fatura consistentemente mas está presa numa categoria competitiva, desenvolvemos a estratégia que conecta posicionamento, performance e crescimento para atrair o cliente que você realmente quer.
+                Diagnóstico completo de marketing 360°: analisamos suas campanhas de tráfego pago, seu funil de conversão, a gestão dos seus leads e o alinhamento entre marca, comunicação e vendas — para identificar onde está o vazamento e construir a estratégia que fecha o gap.
               </p>
 
               <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Desenhada para empresas estabelecidas com produto validado que precisam de reposicionamento estratégico para crescer em margens mais rentáveis.
+                Para empresas que já investem em marketing mas precisam entender o que está funcionando, o que está vazando e o que precisa mudar.
               </p>
 
               <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
@@ -81,13 +87,145 @@ function Hero() {
   );
 }
 
+/* ─── Sintomas ─── */
+function Sintomas() {
+  const symptoms = [
+    "Você investe em Meta Ads ou Google Ads mas não sabe com precisão qual campanha gera resultado de verdade",
+    "Leads chegam, mas grande parte não converte — e a equipe de vendas culpa a qualidade do lead",
+    "Seu funil tem etapas, mas você não consegue identificar onde os contatos estão travando",
+    "Sua marca tem um posicionamento, mas comunicação, marketing e time comercial falam coisas diferentes",
+    "O custo por aquisição subiu e você não sabe se é problema de campanha, de oferta ou de processo",
+    "Você sente que o marketing está rodando, mas o impacto no caixa não é proporcional ao investimento",
+  ];
+
+  return (
+    <section className="section-spacing bg-secondary">
+      <div className="container-sm max-w-4xl">
+        <RevealSection>
+          <div className="mb-12 space-y-3">
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Diagnóstico</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Algum desses cenários soa familiar?</h2>
+          </div>
+        </RevealSection>
+
+        <RevealSection delay={100}>
+          <div className="grid md:grid-cols-2 gap-4">
+            {symptoms.map((s, i) => (
+              <div key={i} className="flex items-start gap-4 bg-background border border-border p-5">
+                <X className="h-4 w-4 text-foreground/25 flex-shrink-0 mt-0.5" />
+                <span className="text-foreground/70 text-sm leading-relaxed">{s}</span>
+              </div>
+            ))}
+          </div>
+        </RevealSection>
+
+        <RevealSection delay={200}>
+          <div className="mt-8 pl-5 border-l-2 border-accent">
+            <p className="text-sm text-foreground/60 leading-relaxed">
+              Se você se identificou com ao menos dois desses pontos, sua empresa é candidata à nossa consultoria.{" "}
+              <strong className="text-foreground">O problema raramente está onde parece.</strong>{" "}
+              Nosso trabalho começa por descobrir onde ele realmente está.
+            </p>
+          </div>
+        </RevealSection>
+      </div>
+    </section>
+  );
+}
+
+/* ─── O que Analisamos ─── */
+function OQueAnalisamos() {
+  const pillars = [
+    {
+      icon: BarChart3,
+      title: "Meta Ads & Google Ads",
+      desc: "Estrutura de campanhas, segmentações, criativos, otimizações e ROI real por canal",
+    },
+    {
+      icon: Route,
+      title: "Funil de conversão",
+      desc: "Da atração ao fechamento: onde estão os vazamentos, os gargalos e as oportunidades",
+    },
+    {
+      icon: Users,
+      title: "Gestão de leads",
+      desc: "Como os contatos são recebidos, qualificados, nutridos e abordados pelo time comercial",
+    },
+    {
+      icon: Target,
+      title: "Posicionamento de marca",
+      desc: "Se o que você comunica está alinhado com o que o mercado percebe e o que o cliente compra",
+    },
+    {
+      icon: MessageSquare,
+      title: "Comunicação cross-channel",
+      desc: "Consistência entre redes sociais, anúncios, e-mail, site e discurso do time de vendas",
+    },
+    {
+      icon: TrendingUp,
+      title: "Alinhamento marketing + vendas",
+      desc: "Se as duas áreas falam a mesma língua, trabalham com o mesmo ICP e têm os mesmos objetivos",
+    },
+    {
+      icon: Layers,
+      title: "Estratégia de canais",
+      desc: "Qual canal merece mais investimento dado o seu produto, perfil de cliente e momento de crescimento",
+    },
+  ];
+
+  return (
+    <section className="section-spacing bg-background">
+      <div className="container-sm max-w-5xl">
+        <RevealSection>
+          <div className="mb-12 space-y-3">
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Escopo 360°</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Nossa visão é 360° — e isso não é slogan</h2>
+            <p className="text-foreground/55 text-sm max-w-xl leading-relaxed">
+              Antes de qualquer recomendação, mapeamos sua operação completa de marketing e vendas. Sete pilares analisados de forma integrada.
+            </p>
+          </div>
+        </RevealSection>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {pillars.map((p, i) => {
+            const Icon = p.icon;
+            return (
+              <RevealSection key={p.title} delay={i * 70}>
+                <div className="border border-border p-6 bg-background h-full">
+                  <Icon className="h-5 w-5 text-primary mb-4" />
+                  <h3 className="font-bold text-sm mb-2">{p.title}</h3>
+                  <p className="text-foreground/55 text-xs leading-relaxed">{p.desc}</p>
+                </div>
+              </RevealSection>
+            );
+          })}
+
+          {/* Card de fechamento */}
+          <RevealSection delay={pillars.length * 70}>
+            <div className="border border-primary bg-primary text-primary-foreground p-6 h-full flex flex-col justify-between">
+              <p className="text-primary-foreground/70 text-xs leading-relaxed">
+                Tudo isso integrado em um único diagnóstico executivo — não sete análises isoladas, mas uma visão do sistema como um todo.
+              </p>
+              <a href="#formulario" className="mt-6 text-xs font-mono uppercase tracking-widest text-primary-foreground/60 hover:text-primary-foreground transition-colors flex items-center gap-2">
+                Solicitar diagnóstico <ArrowRight className="h-3 w-3" />
+              </a>
+            </div>
+          </RevealSection>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Para Quem É — lista editorial ─── */
 function ParaQuemE() {
   const criteria = [
     "Sua empresa fatura acima de R$500k/ano ou possui funding confirmado",
     "Você tem produto ou serviço já validado no mercado",
-    "Sua empresa compete mais por preço do que gostaria",
-    "Você quer reposicionar para atrair clientes de maior valor",
+    "Você investe em tráfego pago (Meta Ads, Google Ads) mas o retorno não está claro ou não é consistente",
+    "Você sente que entrega mais do que cobra, mas ainda assim perde para concorrentes mais baratos",
+    "Seu time de vendas e marketing não têm clareza sobre qual é o ICP e como o funil deve funcionar",
+    "Você quer reposicionar para atrair clientes de maior valor com processos mais previsíveis",
     "Você tem equipe interna ou budget para implementar estratégia",
     "Você está disposto a investir 90-120 dias num processo estruturado",
   ];
@@ -139,10 +277,10 @@ function Metodologia() {
       title: "Auditoria Estratégica",
       duration: "Semanas 1–3",
       items: [
-        "Análise profunda de posicionamento competitivo",
-        "Mapeamento de percepção de marca (pesquisa qualitativa)",
-        "Auditoria de comunicação cross-channel",
-        "Identificação de gaps estratégicos e oportunidades",
+        "Auditoria de campanhas Meta Ads e Google Ads: estrutura, performance histórica e gaps de otimização",
+        "Mapeamento do fluxo de leads: da captação ao fechamento, identificando perdas por etapa",
+        "Análise de alinhamento entre posicionamento de marca, comunicação e processo comercial",
+        "Mapeamento de percepção externa e identidade interna (pesquisa qualitativa com stakeholders)",
       ],
       deliverable: "Diagnóstico Executivo (40-60 páginas)",
     },
@@ -532,9 +670,9 @@ function CasesConsultoria() {
     {
       img: stdiCase,
       name: "STDI",
-      challenge: "Empresa com posicionamento genérico e dificuldade de diferenciação no mercado B2B",
+      challenge: "Empresa B2B investindo em marketing sem processo estruturado de geração e acompanhamento de leads — posicionamento genérico e pipeline sem previsibilidade",
       actions: ["Diagnóstico estratégico completo", "Reposicionamento de marca B2B", "Arquitetura comercial e funil de vendas"],
-      result: "Posicionamento consolidado e marca reposicionada",
+      result: "100% dos leads com acompanhamento estruturado e posicionamento consolidado",
       links: {
         linkedin: "https://www.linkedin.com/company/stdi-investiga%C3%A7%C3%A3o-intelig%C3%AAncia/posts/?feedView=all",
         site: "https://www.stdiinteligencia.com.br/",
@@ -543,7 +681,7 @@ function CasesConsultoria() {
     {
       img: startCase,
       name: "Start Imobiliário",
-      challenge: "Mercado imobiliário saturado com baixa diferenciação de marca",
+      challenge: "Investimento em mídia e captação sem funil estruturado — leads chegavam mas sem processo claro de qualificação para o segmento premium",
       actions: ["Diagnóstico de posicionamento", "Estratégia de marca para mercado imobiliário", "Funil de captação de leads qualificados"],
       result: "Entrada no segmento premium com autoridade de marca",
       links: {
@@ -554,7 +692,7 @@ function CasesConsultoria() {
     {
       img: likeBrandP20,
       name: "LIKE. Brand",
-      challenge: "Marca sem posicionamento estratégico, operando no atacado e sem direção clara de crescimento",
+      challenge: "Marca operando no atacado sem posicionamento, sem estratégia de canal e sem alinhamento entre identidade, comunicação e processo de vendas",
       actions: [
         "Diagnóstico estratégico e reposicionamento completo",
         "Encerramento do atacado e elevação para premium",
@@ -644,6 +782,8 @@ function FAQ() {
     { q: "Como é o processo de kickoff?", a: "Após assinatura, realizamos uma sessão de kickoff com os stakeholders-chave para alinhar expectativas, definir cronograma e iniciar a fase de diagnóstico." },
     { q: "Precisamos ter equipe interna?", a: "Depende da modalidade. Na Essencial e Completa, ter equipe interna para implementar é recomendado. Na Hands-On, nossa equipe executa a implementação." },
     { q: "Qual a diferença entre consultoria e branding empresarial?", a: "Branding Empresarial foca na construção da plataforma de marca. A Consultoria Estratégica é mais abrangente: inclui branding, mas adiciona performance, funil e acompanhamento." },
+    { q: "A consultoria inclui análise das nossas campanhas de tráfego pago?", a: "Sim. A auditoria de Meta Ads e Google Ads é parte central do diagnóstico. Analisamos estrutura de campanhas, segmentações, histórico de performance e alocação de orçamento — identificando o que está gerando ROI e o que está desperdiçando investimento." },
+    { q: "Vocês trabalham o alinhamento entre marketing e vendas?", a: "É um dos pontos mais críticos que avaliamos. Grande parte das empresas tem um gap real entre o que o marketing comunica e o que vendas precisa fechar. Mapeamos esse gap e estruturamos os processos para que as duas áreas operem com os mesmos objetivos e o mesmo ICP." },
   ];
 
   return (
@@ -897,6 +1037,8 @@ export default function ConsultoriaEstrategica() {
   return (
     <>
       <Hero />
+      <Sintomas />
+      <OQueAnalisamos />
       <ParaQuemE />
       <Metodologia />
       <Modalidades />
