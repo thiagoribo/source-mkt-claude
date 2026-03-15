@@ -30,10 +30,7 @@ import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
 import dep1 from "@/assets/cases/gestao-redes/depoimentos/dep-1.png";
 import dep2 from "@/assets/cases/gestao-redes/depoimentos/dep-2.png";
 import dep3 from "@/assets/cases/gestao-redes/depoimentos/dep-3.png";
-import dep4 from "@/assets/cases/gestao-redes/depoimentos/dep-4.png";
 import dep5 from "@/assets/cases/gestao-redes/depoimentos/dep-5.png";
-import dep6 from "@/assets/cases/gestao-redes/depoimentos/dep-6.png";
-import dep7 from "@/assets/cases/gestao-redes/depoimentos/dep-7.png";
 import dep8 from "@/assets/cases/gestao-redes/depoimentos/dep-8.png";
 import dep9 from "@/assets/cases/gestao-redes/depoimentos/dep-9.png";
 
@@ -294,7 +291,7 @@ function Entregaveis() {
 }
 
 /* ─── O Que Falam de Nós — carrossel de depoimentos ─── */
-const depoimentoImagens = [dep1, dep2, dep3, dep4, dep5, dep6, dep7, dep8, dep9];
+const depoimentoImagens = [dep1, dep2, dep3, dep5, dep8, dep9];
 
 function OQueFalamDeNos() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
