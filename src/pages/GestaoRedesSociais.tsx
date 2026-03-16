@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -641,6 +642,14 @@ function Depoimentos() {
 export default function GestaoRedesSociais() {
   return (
     <>
+      <Helmet>
+        <title>Gestão de Redes Sociais Estratégica | SM Agency</title>
+        <meta name="description" content="Gestão profissional de redes sociais com calendário editorial, criação de conteúdo, gestão de comunidade e relatórios de performance mensais." />
+        <link rel="canonical" href="https://sourcemkt.com.br/gestao-redes-sociais" />
+        <meta property="og:title" content="Gestão de Redes Sociais Estratégica | SM Agency" />
+        <meta property="og:description" content="Gestão profissional de redes sociais com calendário editorial, criação de conteúdo e relatórios de performance mensais." />
+        <meta property="og:url" content="https://sourcemkt.com.br/gestao-redes-sociais" />
+      </Helmet>
       <Hero />
       <AntesDepois />
       <Processo />

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -522,6 +523,14 @@ function CTAFinal() {
 export default function QuemSomos() {
   return (
     <>
+      <Helmet>
+        <title>Quem Somos | SM Agency — Agência de Branding e Marketing</title>
+        <meta name="description" content="Conheça a SM Agency: nossa história, valores e os profissionais por trás de marcas que se tornaram referência de mercado. Branding e consultoria estratégica." />
+        <link rel="canonical" href="https://sourcemkt.com.br/quem-somos" />
+        <meta property="og:title" content="Quem Somos | SM Agency — Agência de Branding e Marketing" />
+        <meta property="og:description" content="Conheça a SM Agency: nossa história, valores e os profissionais por trás de marcas que se tornaram referência de mercado." />
+        <meta property="og:url" content="https://sourcemkt.com.br/quem-somos" />
+      </Helmet>
       <Hero />
       <Historia />
       <Valores />

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -449,6 +450,14 @@ function Depoimentos() {
 export default function IdentidadeVisual() {
   return (
     <>
+      <Helmet>
+        <title>Identidade Visual Profissional para Empresas | SM Agency</title>
+        <meta name="description" content="Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico alinhado ao posicionamento do seu negócio." />
+        <link rel="canonical" href="https://sourcemkt.com.br/identidade-visual" />
+        <meta property="og:title" content="Identidade Visual Profissional para Empresas | SM Agency" />
+        <meta property="og:description" content="Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico." />
+        <meta property="og:url" content="https://sourcemkt.com.br/identidade-visual" />
+      </Helmet>
       <Hero />
       <AntesDepois />
       <Processo />

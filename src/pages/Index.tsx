@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Layers, Zap, BarChart3, Map, Building2, Sparkles, Paintbrush2, Megaphone, Type } from "lucide-react";
@@ -532,6 +533,14 @@ function CTASection() {
 export default function Index() {
   return (
     <>
+      <Helmet>
+        <title>Agência de Branding e Consultoria de Marketing | SM Agency</title>
+        <meta name="description" content="Consultoria estratégica e branding para empresas que querem parar de competir por preço. Branding empresarial, identidade visual, gestão de redes sociais e naming." />
+        <link rel="canonical" href="https://sourcemkt.com.br/" />
+        <meta property="og:title" content="Agência de Branding e Consultoria de Marketing | SM Agency" />
+        <meta property="og:description" content="Consultoria estratégica e branding para empresas que querem parar de competir por preço. Branding empresarial, identidade visual, gestão de redes sociais e naming." />
+        <meta property="og:url" content="https://sourcemkt.com.br/" />
+      </Helmet>
       <HeroSection />
       <AuthoritySection />
       <LeadershipSection />

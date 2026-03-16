@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -614,6 +615,14 @@ function FormularioPessoal() {
 export default function BrandingPessoal() {
   return (
     <>
+      <Helmet>
+        <title>Branding Pessoal para Líderes e Especialistas | SM Agency</title>
+        <meta name="description" content="Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes que querem ser reconhecidos pelo que representam." />
+        <link rel="canonical" href="https://sourcemkt.com.br/branding-pessoal" />
+        <meta property="og:title" content="Branding Pessoal para Líderes e Especialistas | SM Agency" />
+        <meta property="og:description" content="Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes." />
+        <meta property="og:url" content="https://sourcemkt.com.br/branding-pessoal" />
+      </Helmet>
       <Hero />
       <OQueE />
       <AntesDepois />

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -1036,6 +1037,14 @@ function FormularioQualificacao() {
 export default function ConsultoriaEstrategica() {
   return (
     <>
+      <Helmet>
+        <title>Consultoria de Marketing Estratégico | SM Agency</title>
+        <meta name="description" content="Diagnóstico 360° de marketing: Meta Ads, Google Ads, funil de conversão, posicionamento de marca e alinhamento marketing+vendas. Identifique os gargalos que impedem seu crescimento." />
+        <link rel="canonical" href="https://sourcemkt.com.br/consultoria-estrategica" />
+        <meta property="og:title" content="Consultoria de Marketing Estratégico | SM Agency" />
+        <meta property="og:description" content="Diagnóstico 360° de marketing: Meta Ads, Google Ads, funil de conversão, posicionamento de marca e alinhamento marketing+vendas." />
+        <meta property="og:url" content="https://sourcemkt.com.br/consultoria-estrategica" />
+      </Helmet>
       <Hero />
       <Sintomas />
       <OQueAnalisamos />

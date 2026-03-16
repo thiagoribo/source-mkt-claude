@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -533,6 +534,14 @@ function FormularioBranding() {
 export default function BrandingEmpresarial() {
   return (
     <>
+      <Helmet>
+        <title>Branding Empresarial Estratégico | SM Agency</title>
+        <meta name="description" content="Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo para negócios que querem vender pelo valor que entregam." />
+        <link rel="canonical" href="https://sourcemkt.com.br/branding-empresarial" />
+        <meta property="og:title" content="Branding Empresarial Estratégico | SM Agency" />
+        <meta property="og:description" content="Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo." />
+        <meta property="og:url" content="https://sourcemkt.com.br/branding-empresarial" />
+      </Helmet>
       <Hero />
       <OQueE />
       <AntesDepois />

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -497,6 +498,14 @@ function Formulario() {
 export default function Naming() {
   return (
     <>
+      <Helmet>
+        <title>Naming Estratégico para Marcas e Produtos | SM Agency</title>
+        <meta name="description" content="Criação de nomes estratégicos para marcas e produtos. Análise fonética, semântica, verificação de domínios disponíveis e pesquisa no INPI. Nomes construídos para durar." />
+        <link rel="canonical" href="https://sourcemkt.com.br/naming" />
+        <meta property="og:title" content="Naming Estratégico para Marcas e Produtos | SM Agency" />
+        <meta property="og:description" content="Criação de nomes estratégicos para marcas e produtos com verificação de domínios e pesquisa no INPI." />
+        <meta property="og:url" content="https://sourcemkt.com.br/naming" />
+      </Helmet>
       <Hero />
       <AntesDepois />
       <Processo />
