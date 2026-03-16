@@ -540,6 +540,21 @@ export default function Index() {
         <meta property="og:title" content="Agência de Branding e Consultoria de Marketing | SM Agency" />
         <meta property="og:description" content="Consultoria estratégica e branding para empresas que querem parar de competir por preço. Branding empresarial, identidade visual, gestão de redes sociais e naming." />
         <meta property="og:url" content="https://sourcemkt.com.br/" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "SM Agency",
+          "url": "https://sourcemkt.com.br",
+          "logo": "https://sourcemkt.com.br/og-image.png",
+          "description": "Consultoria estratégica e branding para empresas que querem parar de competir por preço. Branding empresarial, identidade visual, gestão de redes sociais e naming.",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55-11-93729-2921",
+            "contactType": "customer service",
+            "availableLanguage": "Portuguese"
+          },
+          "sameAs": ["https://www.instagram.com/sourcemarketing"]
+        })}</script>
       </Helmet>
       <HeroSection />
       <AuthoritySection />

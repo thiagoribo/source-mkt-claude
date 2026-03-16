@@ -622,6 +622,16 @@ export default function BrandingPessoal() {
         <meta property="og:title" content="Branding Pessoal para Líderes e Especialistas | SM Agency" />
         <meta property="og:description" content="Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes." />
         <meta property="og:url" content="https://sourcemkt.com.br/branding-pessoal" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Branding Pessoal para Líderes e Especialistas",
+          "description": "Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes que querem ser reconhecidos pelo que representam.",
+          "url": "https://sourcemkt.com.br/branding-pessoal",
+          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "areaServed": { "@type": "Country", "name": "Brazil" },
+          "serviceType": "Branding Pessoal"
+        })}</script>
       </Helmet>
       <Hero />
       <OQueE />

@@ -505,6 +505,16 @@ export default function Naming() {
         <meta property="og:title" content="Naming Estratégico para Marcas e Produtos | SM Agency" />
         <meta property="og:description" content="Criação de nomes estratégicos para marcas e produtos com verificação de domínios e pesquisa no INPI." />
         <meta property="og:url" content="https://sourcemkt.com.br/naming" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Naming Estratégico para Marcas e Produtos",
+          "description": "Criação de nomes estratégicos para marcas e produtos. Análise fonética, semântica, verificação de domínios disponíveis e pesquisa no INPI. Nomes construídos para durar.",
+          "url": "https://sourcemkt.com.br/naming",
+          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "areaServed": { "@type": "Country", "name": "Brazil" },
+          "serviceType": "Naming"
+        })}</script>
       </Helmet>
       <Hero />
       <AntesDepois />

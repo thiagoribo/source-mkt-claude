@@ -457,6 +457,16 @@ export default function IdentidadeVisual() {
         <meta property="og:title" content="Identidade Visual Profissional para Empresas | SM Agency" />
         <meta property="og:description" content="Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico." />
         <meta property="og:url" content="https://sourcemkt.com.br/identidade-visual" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Identidade Visual Profissional para Empresas",
+          "description": "Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico alinhado ao posicionamento do seu negócio.",
+          "url": "https://sourcemkt.com.br/identidade-visual",
+          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "areaServed": { "@type": "Country", "name": "Brazil" },
+          "serviceType": "Identidade Visual"
+        })}</script>
       </Helmet>
       <Hero />
       <AntesDepois />

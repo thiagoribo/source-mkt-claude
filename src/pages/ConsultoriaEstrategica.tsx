@@ -1044,6 +1044,16 @@ export default function ConsultoriaEstrategica() {
         <meta property="og:title" content="Consultoria de Marketing Estratégico | SM Agency" />
         <meta property="og:description" content="Diagnóstico 360° de marketing: Meta Ads, Google Ads, funil de conversão, posicionamento de marca e alinhamento marketing+vendas." />
         <meta property="og:url" content="https://sourcemkt.com.br/consultoria-estrategica" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Consultoria de Marketing Estratégico",
+          "description": "Diagnóstico 360° de marketing: Meta Ads, Google Ads, funil de conversão, posicionamento de marca e alinhamento marketing+vendas. Identifique os gargalos que impedem seu crescimento.",
+          "url": "https://sourcemkt.com.br/consultoria-estrategica",
+          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "areaServed": { "@type": "Country", "name": "Brazil" },
+          "serviceType": "Consultoria de Marketing"
+        })}</script>
       </Helmet>
       <Hero />
       <Sintomas />

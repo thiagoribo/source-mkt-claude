@@ -541,6 +541,16 @@ export default function BrandingEmpresarial() {
         <meta property="og:title" content="Branding Empresarial Estratégico | SM Agency" />
         <meta property="og:description" content="Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo." />
         <meta property="og:url" content="https://sourcemkt.com.br/branding-empresarial" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Branding Empresarial Estratégico",
+          "description": "Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo para negócios que querem vender pelo valor que entregam.",
+          "url": "https://sourcemkt.com.br/branding-empresarial",
+          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "areaServed": { "@type": "Country", "name": "Brazil" },
+          "serviceType": "Branding Empresarial"
+        })}</script>
       </Helmet>
       <Hero />
       <OQueE />

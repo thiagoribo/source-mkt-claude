@@ -649,6 +649,16 @@ export default function GestaoRedesSociais() {
         <meta property="og:title" content="Gestão de Redes Sociais Estratégica | SM Agency" />
         <meta property="og:description" content="Gestão profissional de redes sociais com calendário editorial, criação de conteúdo e relatórios de performance mensais." />
         <meta property="og:url" content="https://sourcemkt.com.br/gestao-redes-sociais" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Gestão de Redes Sociais Estratégica",
+          "description": "Gestão profissional de redes sociais com calendário editorial, criação de conteúdo, gestão de comunidade e relatórios de performance mensais.",
+          "url": "https://sourcemkt.com.br/gestao-redes-sociais",
+          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "areaServed": { "@type": "Country", "name": "Brazil" },
+          "serviceType": "Gestão de Redes Sociais"
+        })}</script>
       </Helmet>
       <Hero />
       <AntesDepois />
