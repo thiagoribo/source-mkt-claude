@@ -108,7 +108,6 @@ export const casesData: CaseData[] = [
     },
     links: {
       instagram: "https://www.instagram.com/clinica.petra/",
-      drive: "https://drive.google.com/drive/folders/1yksBFNAm9W-iLKPWSL10DlEKSy_i0dNf?usp=sharing",
     },
   },
   {

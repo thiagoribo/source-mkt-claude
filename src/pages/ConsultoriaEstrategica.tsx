@@ -33,11 +33,11 @@ import {
   X,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ana1 from "@/assets/ana-nova.jpeg";
-import thiago1 from "@/assets/thiago-1.png";
-import stdiCase from "@/assets/cases/consultoria/stdi.png";
-import startCase from "@/assets/cases/consultoria/start.png";
-import likeBrandP20 from "@/assets/cases/branding/like-brand-p20.png";
+import ana1 from "@/assets/ana-nova.webp";
+import thiago1 from "@/assets/thiago-1.webp";
+import stdiCase from "@/assets/cases/consultoria/stdi.webp";
+import startCase from "@/assets/cases/consultoria/start.webp";
+import likeBrandP20 from "@/assets/cases/branding/like-brand-p20.webp";
 
 /* ─── Hero ─── */
 function Hero() {

@@ -2,15 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 
 // --- Imports de fotos de clientes ---
-import sabrinaKeller from "@/assets/clientes/sabrina-keller.jpeg";
-import giuliaCloss from "@/assets/clientes/giulia-closs.jpeg";
-import renataImaoka from "@/assets/clientes/renata-imaoka.jpeg";
-import andressaFraga from "@/assets/clientes/andressa-fraga.png";
-import anaPriscia from "@/assets/clientes/ana-priscia.jpeg";
-import jaquelineVieira from "@/assets/clientes/jaqueline-vieira.jpg";
-import indyZimmer from "@/assets/clientes/indy-zimmer.jpg";
-import beatrizGarcia from "@/assets/clientes/beatriz-garcia.jpeg";
-import thatianeOliveira from "@/assets/clientes/thatiane-oliveira.jpg";
+import sabrinaKeller from "@/assets/clientes/sabrina-keller.webp";
+import giuliaCloss from "@/assets/clientes/giulia-closs.webp";
+import renataImaoka from "@/assets/clientes/renata-imaoka.webp";
+import andressaFraga from "@/assets/clientes/andressa-fraga.webp";
+import anaPriscia from "@/assets/clientes/ana-priscia.webp";
+import jaquelineVieira from "@/assets/clientes/jaqueline-vieira.webp";
+import indyZimmer from "@/assets/clientes/indy-zimmer.webp";
+import beatrizGarcia from "@/assets/clientes/beatriz-garcia.webp";
+import thatianeOliveira from "@/assets/clientes/thatiane-oliveira.webp";
 
 // --- Types ---
 interface Testimonial {

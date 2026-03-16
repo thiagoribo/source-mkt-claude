@@ -7,15 +7,15 @@ import RevealSection from "@/components/shared/RevealSection";
 import AnimatedNumber from "@/components/shared/AnimatedNumber";
 import { useTeamMembers } from "@/hooks/queries/useTeamMembers";
 import { casesData } from "@/data/casesData";
-import ana1 from "@/assets/ana-nova.jpeg";
-import thiago1 from "@/assets/thiago-1.png";
+import ana1 from "@/assets/ana-nova.webp";
+import thiago1 from "@/assets/thiago-1.webp";
 
 // Equipe (fallback images)
-import anaCastro from "@/assets/equipe/ana-castro.jpeg";
-import caioCastro from "@/assets/equipe/caio-castro.jpg";
-import gabrielaMontezi from "@/assets/equipe/gabriela-montezi.png";
-import grazielliSantos from "@/assets/equipe/grazielli-santos.jpg";
-import lohanaVitoria from "@/assets/equipe/lohana-vitoria.png";
+import anaCastro from "@/assets/equipe/ana-castro.webp";
+import caioCastro from "@/assets/equipe/caio-castro.webp";
+import gabrielaMontezi from "@/assets/equipe/gabriela-montezi.webp";
+import grazielliSantos from "@/assets/equipe/grazielli-santos.webp";
+import lohanaVitoria from "@/assets/equipe/lohana-vitoria.webp";
 
 // Team members (used when Supabase is unavailable)
 const fallbackTeamMembers = [

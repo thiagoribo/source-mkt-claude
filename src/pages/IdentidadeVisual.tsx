@@ -29,10 +29,10 @@ import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
 
 // Fotos dos clientes - Identidade Visual (fallback images)
-import beatrizGarcia from "@/assets/clientes/beatriz-garcia.jpeg";
-import guilhermeMoeller from "@/assets/clientes/guilherme-moeller.png";
-import jessicaFrasson from "@/assets/clientes/jessica-frasson.jpg";
-import milenaPandolfi from "@/assets/clientes/milena-pandolfi.jpg";
+import beatrizGarcia from "@/assets/clientes/beatriz-garcia.webp";
+import guilhermeMoeller from "@/assets/clientes/guilherme-moeller.webp";
+import jessicaFrasson from "@/assets/clientes/jessica-frasson.webp";
+import milenaPandolfi from "@/assets/clientes/milena-pandolfi.webp";
 
 // Map client names to their local images
 const clientImageMap: Record<string, string> = {

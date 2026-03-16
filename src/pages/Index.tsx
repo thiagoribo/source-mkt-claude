@@ -7,8 +7,8 @@ import ResponsiveImage from "@/components/shared/ResponsiveImage";
 import TestimonialV2 from "@/components/ui/testimonial-v2";
 import { casesData } from "@/data/casesData";
 import anaHero from "@/assets/ana-header.svg";
-import ana1 from "@/assets/ana-nova.jpeg";
-import thiago1 from "@/assets/thiago-1.png";
+import ana1 from "@/assets/ana-nova.webp";
+import thiago1 from "@/assets/thiago-1.webp";
 
 
 /* ─── Hero ─── */

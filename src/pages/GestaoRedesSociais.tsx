@@ -28,18 +28,18 @@ import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
 
 // Imagens de depoimentos (o que falam de nós)
-import dep1 from "@/assets/cases/gestao-redes/depoimentos/dep-1.png";
-import dep2 from "@/assets/cases/gestao-redes/depoimentos/dep-2.png";
-import dep3 from "@/assets/cases/gestao-redes/depoimentos/dep-3.png";
-import dep5 from "@/assets/cases/gestao-redes/depoimentos/dep-5.png";
-import dep8 from "@/assets/cases/gestao-redes/depoimentos/dep-8.png";
-import dep9 from "@/assets/cases/gestao-redes/depoimentos/dep-9.png";
+import dep1 from "@/assets/cases/gestao-redes/depoimentos/dep-1.webp";
+import dep2 from "@/assets/cases/gestao-redes/depoimentos/dep-2.webp";
+import dep3 from "@/assets/cases/gestao-redes/depoimentos/dep-3.webp";
+import dep5 from "@/assets/cases/gestao-redes/depoimentos/dep-5.webp";
+import dep8 from "@/assets/cases/gestao-redes/depoimentos/dep-8.webp";
+import dep9 from "@/assets/cases/gestao-redes/depoimentos/dep-9.webp";
 
 // Fotos dos clientes - Gestão de Redes Sociais (fallback images)
-import monalisaOliveira from "@/assets/clientes/monalisa-oliveira.png";
-import rebeccaSantos from "@/assets/clientes/rebecca-santos.png";
-import glayceKerolin from "@/assets/clientes/glayce-kerolin.jpg";
-import sabrinaKeller from "@/assets/clientes/sabrina-keller.jpeg";
+import monalisaOliveira from "@/assets/clientes/monalisa-oliveira.webp";
+import rebeccaSantos from "@/assets/clientes/rebecca-santos.webp";
+import glayceKerolin from "@/assets/clientes/glayce-kerolin.webp";
+import sabrinaKeller from "@/assets/clientes/sabrina-keller.webp";
 
 // Map client names to their local images
 const clientImageMap: Record<string, string> = {

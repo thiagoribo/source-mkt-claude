@@ -27,13 +27,13 @@ import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
 
 // Fotos dos clientes - Branding Pessoal (fallback images)
-import sabrinaKeller from "@/assets/clientes/sabrina-keller.jpeg";
-import giuliaCloss from "@/assets/clientes/giulia-closs.jpeg";
-import andressaFraga from "@/assets/clientes/andressa-fraga.png";
-import anaPriscia from "@/assets/clientes/ana-priscia.jpeg";
-import indyZimmer from "@/assets/clientes/indy-zimmer.jpg";
-import thatianeOliveira from "@/assets/clientes/thatiane-oliveira.jpg";
-import stephanytizziani from "@/assets/clientes/stephany-tizziani.jpg";
+import sabrinaKeller from "@/assets/clientes/sabrina-keller.webp";
+import giuliaCloss from "@/assets/clientes/giulia-closs.webp";
+import andressaFraga from "@/assets/clientes/andressa-fraga.webp";
+import anaPriscia from "@/assets/clientes/ana-priscia.webp";
+import indyZimmer from "@/assets/clientes/indy-zimmer.webp";
+import thatianeOliveira from "@/assets/clientes/thatiane-oliveira.webp";
+import stephanytizziani from "@/assets/clientes/stephany-tizziani.webp";
 
 // Map client names to their local images
 const clientImageMap: Record<string, string> = {

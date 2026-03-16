@@ -25,8 +25,8 @@ import {
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
-import likeBrandCase from "@/assets/cases/branding/like-brand-p18.png";
-import petraCase from "@/assets/cases/naming/clinica-petra.png";
+import likeBrandCase from "@/assets/cases/branding/like-brand-p18.webp";
+import petraCase from "@/assets/cases/naming/clinica-petra.webp";
 
 /* ─── Hero ─── */
 function Hero() {

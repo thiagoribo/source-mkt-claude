@@ -1,22 +1,22 @@
 import type { MockupRatio, MockupTheme, MockupFit } from "@/components/shared/ServiceMockupCard";
-import ana1 from "@/assets/ana-foto.jpeg";
-import team2 from "@/assets/team-2.png";
-import thiago1 from "@/assets/thiago-1.png";
+import ana1 from "@/assets/ana-foto.webp";
+import team2 from "@/assets/team-2.webp";
+import thiago1 from "@/assets/thiago-1.webp";
 
 // Real case images
-import likeBrandP18 from "@/assets/cases/branding/like-brand-p18.png";
-import likeBrandP20 from "@/assets/cases/branding/like-brand-p20.png";
-import clinicaPetraImg from "@/assets/cases/naming/clinica-petra.png";
-import bpCase2 from "@/assets/cases/branding-pessoal/case-2.png";
-import bpCase3 from "@/assets/cases/branding-pessoal/case-3.png";
-import bpCase4 from "@/assets/cases/branding-pessoal/case-4.png";
-import bpCase5 from "@/assets/cases/branding-pessoal/case-5.png";
-import ivDrAnaPaula from "@/assets/cases/identidade-visual/dr-ana-paula.png";
-import ivPasseiPonto from "@/assets/cases/identidade-visual/passei-ponto.png";
-import ivPaesAdao from "@/assets/cases/identidade-visual/paes-adao.png";
-import gestaoLike from "@/assets/cases/gestao-redes/like.png";
-import gestaoJaqueline from "@/assets/cases/gestao-redes/jaqueline-vieira.png";
-import gestaoLisia from "@/assets/cases/gestao-redes/lisia-heinen.png";
+import likeBrandP18 from "@/assets/cases/branding/like-brand-p18.webp";
+import likeBrandP20 from "@/assets/cases/branding/like-brand-p20.webp";
+import clinicaPetraImg from "@/assets/cases/naming/clinica-petra.webp";
+import bpCase2 from "@/assets/cases/branding-pessoal/case-2.webp";
+import bpCase3 from "@/assets/cases/branding-pessoal/case-3.webp";
+import bpCase4 from "@/assets/cases/branding-pessoal/case-4.webp";
+import bpCase5 from "@/assets/cases/branding-pessoal/case-5.webp";
+import ivDrAnaPaula from "@/assets/cases/identidade-visual/dr-ana-paula.webp";
+import ivPasseiPonto from "@/assets/cases/identidade-visual/passei-ponto.webp";
+import ivPaesAdao from "@/assets/cases/identidade-visual/paes-adao.webp";
+import gestaoLike from "@/assets/cases/gestao-redes/like.webp";
+import gestaoJaqueline from "@/assets/cases/gestao-redes/jaqueline-vieira.webp";
+import gestaoLisia from "@/assets/cases/gestao-redes/lisia-heinen.webp";
 
 export interface ServiceMockupItem {
   title: string;

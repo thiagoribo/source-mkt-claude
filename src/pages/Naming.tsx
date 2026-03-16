@@ -21,9 +21,9 @@ import {
 import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
 import { namingScorecard } from "@/data/serviceMockups";
-import likeBrand from "@/assets/cases/naming/like-brand.png";
-import clinicaPetra from "@/assets/cases/naming/clinica-petra.png";
-import passeiPonto from "@/assets/cases/naming/passei-ponto.png";
+import likeBrand from "@/assets/cases/naming/like-brand.webp";
+import clinicaPetra from "@/assets/cases/naming/clinica-petra.webp";
+import passeiPonto from "@/assets/cases/naming/passei-ponto.webp";
 
 /* ─── Hero ─── */
 function Hero() {
