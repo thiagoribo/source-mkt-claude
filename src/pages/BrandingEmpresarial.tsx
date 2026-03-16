@@ -26,84 +26,6 @@ import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
 import likeBrandCase from "@/assets/cases/branding/like-brand-p18.png";
 import petraCase from "@/assets/cases/naming/clinica-petra.png";
-import { TestimonialSlider } from "@/components/ui/testimonial-slider";
-import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
-
-// Fotos dos clientes - Branding Empresarial (fallback images)
-import beatrizGarcia from "@/assets/clientes/beatriz-garcia.jpeg";
-import daianeFurlanetto from "@/assets/clientes/daiane-furlanetto.jpeg";
-import jaquelineVieira from "@/assets/clientes/jaqueline-vieira.jpg";
-import renataImaoka from "@/assets/clientes/renata-imaoka.jpeg";
-import marinaRosso from "@/assets/clientes/marina-rosso.png";
-import lumaSchmitti from "@/assets/clientes/luma-schmitti.png";
-
-// Map client names to their local images
-const clientImageMap: Record<string, string> = {
-  "Beatriz Garcia": beatrizGarcia,
-  "Daiane Furlanetto": daianeFurlanetto,
-  "Jaqueline Vieira": jaquelineVieira,
-  "Renata Imaoka": renataImaoka,
-  "Marina Rosso": marinaRosso,
-  "Luma Schmitti": lumaSchmitti,
-};
-
-// Fallback testimonials for when Supabase is unavailable
-const fallbackTestimonials = [
-  {
-    id: 1,
-    name: "Beatriz Garcia",
-    role: "Advogada",
-    quote: "O resultado superou todas as expectativas e combinou perfeitamente com minha identidade. Agora sinto que posso dominar o mundo!",
-    result: "Time cresceu 200%",
-    imageSrc: beatrizGarcia,
-    thumbnailSrc: beatrizGarcia,
-  },
-  {
-    id: 2,
-    name: "Daiane Furlanetto",
-    role: "Advogada e Sócia de Escritório",
-    quote: "Extremamente competente. Recebi um tratamento único que acertou desde o tom de voz até a identidade visual. Recomendo com total confiança.",
-    result: "Posicionamento estratégico consistente",
-    imageSrc: daianeFurlanetto,
-    thumbnailSrc: daianeFurlanetto,
-  },
-  {
-    id: 3,
-    name: "Jaqueline Vieira",
-    role: "Proprietária de Franquia",
-    quote: "A SM. Agency acerta em cheio onde grandes players do mercado erram. Pontualidade e cumprimento do calendário são diferenciais reais.",
-    result: "Marca pessoal insubstituível",
-    imageSrc: jaquelineVieira,
-    thumbnailSrc: jaquelineVieira,
-  },
-  {
-    id: 4,
-    name: "Renata Imaoka",
-    role: "CEO da HM Tour & ELO8 Assessoria",
-    quote: "Cliente há 4 anos. Me emocionei com a leitura perfeita da minha identidade transformada em marca. Ana enxerga além da superfície.",
-    result: "Negócio expandido",
-    imageSrc: renataImaoka,
-    thumbnailSrc: renataImaoka,
-  },
-  {
-    id: 5,
-    name: "Marina Rosso",
-    role: "Loja Like. Brand",
-    quote: "O reposicionamento da empresa hoje colhe resultados positivos e consistentes.",
-    result: "Reposicionamento bem-sucedido",
-    imageSrc: marinaRosso,
-    thumbnailSrc: marinaRosso,
-  },
-  {
-    id: 6,
-    name: "Luma Schmitti",
-    role: "Professora e Mestre em Língua Portuguesa",
-    quote: "Fiquei impressionada com o detalhamento do projeto. Aprendi que construir uma marca exige base, não apenas logo e posts.",
-    result: "Projeto 'Passei e Ponto' criado",
-    imageSrc: lumaSchmitti,
-    thumbnailSrc: lumaSchmitti,
-  },
-];
 
 /* ─── Hero ─── */
 function Hero() {
@@ -607,32 +529,6 @@ function FormularioBranding() {
   );
 }
 
-/* ─── Depoimentos ─── */
-function Depoimentos() {
-  const { data: supabaseTestimonials } = useTestimonialsByService('branding-empresarial');
-
-  // Transform Supabase data to match TestimonialSlider format, or use fallback
-  const testimonials = supabaseTestimonials && supabaseTestimonials.length > 0
-    ? supabaseTestimonials.map((t, i) => ({
-        id: i + 1,
-        name: t.name,
-        role: t.role || '',
-        quote: t.quote,
-        result: t.result || '',
-        imageSrc: t.image_url || clientImageMap[t.name] || beatrizGarcia,
-        thumbnailSrc: t.image_url || clientImageMap[t.name] || beatrizGarcia,
-      }))
-    : fallbackTestimonials;
-
-  return (
-    <TestimonialSlider
-      reviews={testimonials}
-      title="Empresas que Transformaram suas Marcas"
-      subtitle="Negócios que investiram em branding estratégico e alcançaram novos patamares"
-    />
-  );
-}
-
 /* ─── Page ─── */
 export default function BrandingEmpresarial() {
   return (
@@ -645,7 +541,6 @@ export default function BrandingEmpresarial() {
       <CasesBranding />
       {/* <InvestimentoBranding /> — preço oculto, backup em src/_pricing-backup/investimento-branding-empresarial.tsx */}
       <Comparacao />
-      <Depoimentos />
       <FormularioBranding />
     </>
   );

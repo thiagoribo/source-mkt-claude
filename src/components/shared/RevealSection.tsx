@@ -31,6 +31,10 @@ const visibleClasses: Record<Variant, string> = {
   scale: "opacity-100 scale-100",
 };
 
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export default function RevealSection({
   children,
   className,
@@ -40,6 +44,10 @@ export default function RevealSection({
   threshold = 0.1,
 }: Props) {
   const { ref, isVisible } = useScrollReveal(threshold);
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <div

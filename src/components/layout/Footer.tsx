@@ -39,7 +39,7 @@ export default function Footer() {
 
           {/* Nav cols */}
           <div className="md:col-span-3 space-y-5">
-            <h4 className="text-[10px] font-semibold tracking-widest uppercase text-brand-offwhite/30">
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-brand-offwhite/30">
               Serviços
             </h4>
             <nav className="flex flex-col gap-3">
@@ -63,7 +63,7 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-4 space-y-5">
-            <h4 className="text-[10px] font-semibold tracking-widest uppercase text-brand-offwhite/30">
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-brand-offwhite/30">
               Contato
             </h4>
             <div className="flex flex-col gap-3 text-sm text-brand-offwhite/50 font-light">
@@ -89,7 +89,7 @@ export default function Footer() {
                 href="https://wa.me/5511937292921"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center h-10 px-6 text-[10px] font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-black hover:bg-white transition-colors duration-200"
+                className="inline-flex items-center h-10 px-6 text-xs font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-black hover:bg-white transition-colors duration-200"
               >
                 Agendar Diagnóstico
               </a>
@@ -99,14 +99,14 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <span className="text-[11px] text-brand-offwhite/25 font-light tracking-wide">
+          <span className="text-xs text-brand-offwhite/25 font-light tracking-wide">
             © 2026 SM Agency — CNPJ: 49.800.040/0001-07
           </span>
           <div className="flex gap-6">
-            <Link to="/quem-somos" className="text-[11px] text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
+            <Link to="/quem-somos" className="text-xs text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
               Quem Somos
             </Link>
-            <Link to="/politica-de-privacidade" className="text-[11px] text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
+            <Link to="/politica-de-privacidade" className="text-xs text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
               Política de Privacidade
             </Link>
           </div>

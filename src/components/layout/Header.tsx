@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoHeader from "@/assets/logo-header.svg";
 
@@ -25,11 +25,16 @@ const navItems = [
 ];
 
 export default function Header() {
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
+
+  const isActive = (href: string) => location.pathname === href;
+  const isDropdownActive = (children: { href: string }[]) =>
+    children.some((c) => location.pathname === c.href);
 
   useEffect(() => {
     const onScroll = () => {
@@ -58,7 +63,7 @@ export default function Header() {
         visible ? "translate-y-0" : "-translate-y-full"
       } ${
         scrolled
-          ? "bg-brand-navy/98 backdrop-blur-sm shadow-[0_1px_0_rgba(240,236,227,0.08)]"
+          ? "bg-brand-navy shadow-[0_1px_0_rgba(240,236,227,0.08)]"
           : "bg-brand-navy"
       }`}
     >
@@ -82,7 +87,22 @@ export default function Header() {
                 onMouseEnter={() => setOpenDropdown(item.label)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
-                <button className="flex items-center gap-1 text-xs font-semibold tracking-widest uppercase text-brand-offwhite/60 hover:text-brand-offwhite transition-colors duration-200 py-3 min-h-[44px]">
+                <button
+                  aria-expanded={openDropdown === item.label}
+                  aria-haspopup="true"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setOpenDropdown(openDropdown === item.label ? null : item.label);
+                    }
+                    if (e.key === "Escape") setOpenDropdown(null);
+                  }}
+                  className={`flex items-center gap-1 text-xs font-semibold tracking-widest uppercase transition-colors duration-200 py-3 min-h-[44px] ${
+                    isDropdownActive(item.children)
+                      ? "text-brand-offwhite"
+                      : "text-brand-offwhite/60 hover:text-brand-offwhite"
+                  }`}
+                >
                   {item.label}
                   <ChevronDown
                     className={`h-3 w-3 transition-transform duration-200 ${
@@ -102,7 +122,12 @@ export default function Header() {
                       <Link
                         key={child.href}
                         to={child.href}
-                        className="block px-5 py-3 min-h-[44px] flex items-center text-xs font-medium tracking-wider uppercase text-brand-offwhite/60 hover:text-brand-offwhite hover:bg-brand-offwhite/5 transition-colors duration-150"
+                        onClick={() => setOpenDropdown(null)}
+                        className={`block px-5 py-3 min-h-[44px] flex items-center text-xs font-medium tracking-wider uppercase hover:bg-brand-offwhite/5 transition-colors duration-150 ${
+                          isActive(child.href)
+                            ? "text-brand-offwhite border-l-2 border-brand-gold pl-[18px]"
+                            : "text-brand-offwhite/60 hover:text-brand-offwhite"
+                        }`}
                       >
                         {child.label}
                       </Link>
@@ -114,9 +139,11 @@ export default function Header() {
               <Link
                 key={item.href}
                 to={item.href!}
-                className={`text-xs font-semibold tracking-widest uppercase transition-colors duration-200 nav-link ${
-                  item.bold
-                    ? "text-brand-offwhite"
+                className={`text-xs font-semibold tracking-widest uppercase transition-colors duration-200 relative ${
+                  isActive(item.href!)
+                    ? "text-brand-offwhite after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-brand-gold"
+                    : item.bold
+                    ? "text-brand-offwhite hover:text-brand-offwhite/80"
                     : "text-brand-offwhite/60 hover:text-brand-offwhite"
                 }`}
               >
@@ -164,7 +191,11 @@ export default function Header() {
                     key={child.href}
                     to={child.href}
                     onClick={() => setMobileOpen(false)}
-                    className="text-sm font-medium text-brand-offwhite/70 hover:text-brand-offwhite py-2.5 pl-4 border-l border-brand-offwhite/10 hover:border-brand-offwhite/40 transition-all"
+                    className={`text-sm font-medium py-2.5 pl-4 transition-all ${
+                      isActive(child.href)
+                        ? "text-brand-offwhite border-l-2 border-brand-gold pl-[14px]"
+                        : "text-brand-offwhite/70 hover:text-brand-offwhite border-l border-brand-offwhite/10 hover:border-brand-offwhite/40"
+                    }`}
                   >
                     {child.label}
                   </Link>
@@ -175,7 +206,11 @@ export default function Header() {
                 key={item.href}
                 to={item.href!}
                 onClick={() => setMobileOpen(false)}
-                className="text-sm font-semibold tracking-wider uppercase text-brand-offwhite/80 hover:text-brand-offwhite py-3 transition-colors"
+                className={`text-sm font-semibold tracking-wider uppercase py-3 transition-colors ${
+                  isActive(item.href!)
+                    ? "text-brand-offwhite border-l-2 border-brand-gold pl-3"
+                    : "text-brand-offwhite/80 hover:text-brand-offwhite"
+                }`}
               >
                 {item.label}
               </Link>
