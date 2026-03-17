@@ -50,9 +50,11 @@ export default function BlogPostEditorPage() {
   });
 
   const [keywordsText, setKeywordsText] = useState('');
+  const [initialized, setInitialized] = useState(false);
 
+  // Inicializa formData apenas na primeira carga do post (ignora refetches para não sobrescrever edits do usuário)
   useEffect(() => {
-    if (post) {
+    if (post && !initialized) {
       setFormData({
         title: post.title,
         slug: post.slug,
@@ -67,8 +69,9 @@ export default function BlogPostEditorPage() {
         status: post.status,
       });
       setKeywordsText(post.keywords?.join(', ') || '');
+      setInitialized(true);
     }
-  }, [post]);
+  }, [post, initialized]);
 
   const handleTitleChange = (title: string) => {
     setFormData((prev) => ({
@@ -220,7 +223,7 @@ export default function BlogPostEditorPage() {
               <Label>Conteúdo *</Label>
               <RichTextEditor
                 value={formData.content}
-                onChange={(content) => setFormData({ ...formData, content })}
+                onChange={(content) => setFormData(prev => ({ ...prev, content }))}
                 placeholder="Escreva o conteúdo do post..."
               />
             </div>
@@ -234,7 +237,7 @@ export default function BlogPostEditorPage() {
             <Label>Imagem Destacada</Label>
             <ImageUploader
               value={formData.featured_image_url || ''}
-              onChange={(url) => setFormData({ ...formData, featured_image_url: url })}
+              onChange={(url) => setFormData(prev => ({ ...prev, featured_image_url: url }))}
               category="blog"
             />
           </div>
