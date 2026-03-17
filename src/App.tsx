@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -10,34 +11,34 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import Layout from "@/components/layout/Layout";
 import ScrollToTop from "@/components/ScrollToTop";
 
-// Public Pages
-import Index from "./pages/Index";
-import ConsultoriaEstrategica from "./pages/ConsultoriaEstrategica";
-import BrandingEmpresarial from "./pages/BrandingEmpresarial";
-import BrandingPessoal from "./pages/BrandingPessoal";
-import QuemSomos from "./pages/QuemSomos";
-import IdentidadeVisual from "./pages/IdentidadeVisual";
-import GestaoRedesSociais from "./pages/GestaoRedesSociais";
-import Naming from "./pages/Naming";
-import CaseDetail from "./pages/CaseDetail";
-import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
-import NotFound from "./pages/NotFound";
+// Public Pages — lazy loaded (chunk separado por rota)
+const Index = lazy(() => import("./pages/Index"));
+const ConsultoriaEstrategica = lazy(() => import("./pages/ConsultoriaEstrategica"));
+const BrandingEmpresarial = lazy(() => import("./pages/BrandingEmpresarial"));
+const BrandingPessoal = lazy(() => import("./pages/BrandingPessoal"));
+const QuemSomos = lazy(() => import("./pages/QuemSomos"));
+const IdentidadeVisual = lazy(() => import("./pages/IdentidadeVisual"));
+const GestaoRedesSociais = lazy(() => import("./pages/GestaoRedesSociais"));
+const Naming = lazy(() => import("./pages/Naming"));
+const CaseDetail = lazy(() => import("./pages/CaseDetail"));
+const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Blog Pages
-import BlogIndex from "./pages/blog/BlogIndex";
-import BlogPost from "./pages/blog/BlogPost";
+const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
+const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 
 // Admin Pages
-import AdminLogin from "./pages/admin/Login";
-import AdminDashboard from "./pages/admin/Dashboard";
-import AdminTeamMembers from "./pages/admin/TeamMembers";
-import AdminTestimonials from "./pages/admin/Testimonials";
-import AdminCases from "./pages/admin/Cases";
-import AdminMedia from "./pages/admin/Media";
-import AdminSettings from "./pages/admin/Settings";
-import AdminBlogPosts from "./pages/admin/BlogPosts";
-import AdminBlogPostEditor from "./pages/admin/BlogPostEditor";
-import AdminBlogCategories from "./pages/admin/BlogCategories";
+const AdminLogin = lazy(() => import("./pages/admin/Login"));
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
+const AdminTeamMembers = lazy(() => import("./pages/admin/TeamMembers"));
+const AdminTestimonials = lazy(() => import("./pages/admin/Testimonials"));
+const AdminCases = lazy(() => import("./pages/admin/Cases"));
+const AdminMedia = lazy(() => import("./pages/admin/Media"));
+const AdminSettings = lazy(() => import("./pages/admin/Settings"));
+const AdminBlogPosts = lazy(() => import("./pages/admin/BlogPosts"));
+const AdminBlogPostEditor = lazy(() => import("./pages/admin/BlogPostEditor"));
+const AdminBlogCategories = lazy(() => import("./pages/admin/BlogCategories"));
 
 // Admin Components
 import AdminLayout from "./components/admin/AdminLayout";
@@ -63,6 +64,7 @@ const App = () => (
           <Analytics />
           <BrowserRouter>
             <ScrollToTop />
+            <Suspense fallback={null}>
             <Routes>
               {/* Admin Routes */}
               <Route path="/admin" element={<AdminLogin />} />
@@ -114,6 +116,7 @@ const App = () => (
                 }
               />
             </Routes>
+            </Suspense>
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>
