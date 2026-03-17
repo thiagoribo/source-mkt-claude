@@ -194,7 +194,7 @@ export default function BlogPost() {
             <article className="lg:col-span-3">
               <RevealSection>
                 <div
-                  className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-bold prose-a:text-primary prose-img:border-2 prose-img:border-border"
+                  className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-bold prose-a:text-primary prose-img:border-2 prose-img:border-border [&_p:empty]:min-h-[1.5em] [&_p:has(>br:only-child)]:min-h-[1.5em]"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </RevealSection>
