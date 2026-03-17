@@ -162,7 +162,7 @@ export default function BlogPostEditorPage() {
             className="gap-2"
           >
             <Save className="w-4 h-4" />
-            Salvar Rascunho
+            {formData.status === 'published' ? 'Salvar Alterações' : 'Salvar Rascunho'}
           </Button>
           {formData.status !== 'published' && (
             <Button
