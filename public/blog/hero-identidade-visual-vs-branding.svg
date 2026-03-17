@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=DM+Mono:wght@300;400&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#212E3F"/>
+
+  <!-- Left half — identity visual side (gold geometric symbol) -->
+  <rect x="0" y="0" width="598" height="630" fill="#212E3F"/>
+  <!-- Vertical divider -->
+  <rect x="596" y="0" width="4" height="630" fill="#DCB464"/>
+  <!-- Right half — branding side (lighter navy) -->
+  <rect x="600" y="0" width="600" height="630" fill="#1A2535"/>
+
+  <!-- LEFT: Abstract geometric logo symbol -->
+  <!-- Outer circle -->
+  <circle cx="299" cy="315" r="130" fill="none" stroke="#DCB464" stroke-width="2.5"/>
+  <!-- Inner geometric shapes -->
+  <polygon points="299,195 399,360 199,360" fill="none" stroke="#DCB464" stroke-width="2"/>
+  <!-- Inner square rotated 45° -->
+  <rect x="225" y="241" width="148" height="148" fill="none" stroke="#DCB464" stroke-width="1.5" transform="rotate(45 299 315)"/>
+  <!-- Center dot -->
+  <circle cx="299" cy="315" r="8" fill="#DCB464"/>
+  <!-- Decorative lines -->
+  <line x1="299" y1="185" x2="299" y2="165" stroke="#DCB464" stroke-width="2"/>
+  <line x1="299" y1="445" x2="299" y2="465" stroke="#DCB464" stroke-width="2"/>
+  <line x1="169" y1="315" x2="149" y2="315" stroke="#DCB464" stroke-width="2"/>
+  <line x1="429" y1="315" x2="449" y2="315" stroke="#DCB464" stroke-width="2"/>
+
+  <!-- LEFT label -->
+  <text x="299" y="528" font-family="'DM Mono', monospace" font-size="11" font-weight="400" fill="#DCB464" text-anchor="middle" letter-spacing="4" opacity="0.8">IDENTIDADE VISUAL</text>
+  <text x="299" y="548" font-family="'DM Mono', monospace" font-size="10" font-weight="300" fill="#F2F0EB" text-anchor="middle" letter-spacing="3" opacity="0.5">forma · cor · símbolo</text>
+
+  <!-- RIGHT: Strategic brand architecture grid -->
+  <!-- Grid of small rectangles representing brand system -->
+  <rect x="660" y="190" width="80" height="52" fill="#DCB464" opacity="0.9" rx="0"/>
+  <rect x="752" y="190" width="52" height="52" fill="none" stroke="#DCB464" stroke-width="1.5" opacity="0.7"/>
+  <rect x="816" y="190" width="80" height="52" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.4"/>
+  <rect x="908" y="190" width="52" height="52" fill="#DCB464" opacity="0.3" rx="0"/>
+  <!-- Row 2 -->
+  <rect x="660" y="254" width="52" height="52" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.4"/>
+  <rect x="724" y="254" width="80" height="52" fill="none" stroke="#DCB464" stroke-width="1.5" opacity="0.6"/>
+  <rect x="816" y="254" width="52" height="52" fill="#DCB464" opacity="0.15" rx="0"/>
+  <rect x="880" y="254" width="80" height="52" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+  <!-- Row 3 — brand pillars -->
+  <rect x="660" y="318" width="300" height="3" fill="#DCB464" opacity="0.3"/>
+  <!-- Pillar labels -->
+  <text x="660" y="346" font-family="'DM Mono', monospace" font-size="9" fill="#F2F0EB" opacity="0.4" letter-spacing="2">PROPÓSITO</text>
+  <text x="740" y="346" font-family="'DM Mono', monospace" font-size="9" fill="#F2F0EB" opacity="0.4" letter-spacing="2">POSIÇÃO</text>
+  <text x="818" y="346" font-family="'DM Mono', monospace" font-size="9" fill="#F2F0EB" opacity="0.4" letter-spacing="2">PROMESSA</text>
+  <!-- Row 4 -->
+  <rect x="660" y="360" width="130" height="52" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.25"/>
+  <rect x="802" y="360" width="80" height="52" fill="none" stroke="#DCB464" stroke-width="1.5" opacity="0.5"/>
+  <rect x="894" y="360" width="66" height="52" fill="#DCB464" opacity="0.12"/>
+  <!-- Connecting lines -->
+  <line x1="700" y1="242" x2="700" y2="254" stroke="#DCB464" stroke-width="1" opacity="0.5"/>
+  <line x1="842" y1="242" x2="842" y2="254" stroke="#DCB464" stroke-width="1" opacity="0.5"/>
+
+  <!-- RIGHT label -->
+  <text x="800" y="528" font-family="'DM Mono', monospace" font-size="11" font-weight="400" fill="#DCB464" text-anchor="middle" letter-spacing="4" opacity="0.8">BRANDING</text>
+  <text x="800" y="548" font-family="'DM Mono', monospace" font-size="10" font-weight="300" fill="#F2F0EB" text-anchor="middle" letter-spacing="3" opacity="0.5">estratégia · posição · essência</text>
+
+  <!-- CENTER × symbol -->
+  <text x="600" y="328" font-family="'Montserrat', sans-serif" font-size="22" font-weight="700" fill="#DCB464" text-anchor="middle">×</text>
+
+  <!-- TOP: Category label -->
+  <rect x="0" y="0" width="1200" height="1" fill="#DCB464"/>
+  <text x="60" y="58" font-family="'DM Mono', monospace" font-size="10" fill="#DCB464" letter-spacing="5" opacity="0.7">SOURCE BLOG · BRANDING</text>
+
+  <!-- MAIN TITLE block — bottom area -->
+  <rect x="0" y="580" width="1200" height="1" fill="#DCB464" opacity="0.3"/>
+
+  <!-- Title text — positioned in lower third -->
+  <text x="60" y="108" font-family="'Montserrat', sans-serif" font-size="42" font-weight="900" fill="#F2F0EB" letter-spacing="-1">IDENTIDADE VISUAL</text>
+  <text x="60" y="152" font-family="'Montserrat', sans-serif" font-size="42" font-weight="900" fill="#DCB464" letter-spacing="-1">VS BRANDING</text>
+  <rect x="60" y="162" width="280" height="3" fill="#DCB464"/>
+  <text x="60" y="186" font-family="'DM Mono', monospace" font-size="12" fill="#F2F0EB" opacity="0.55" letter-spacing="1">Por que sua empresa precisa de ambos</text>
+
+  <!-- Bottom author -->
+  <circle cx="72" cy="598" r="14" fill="#DCB464" opacity="0.2"/>
+  <text x="96" y="602" font-family="'DM Mono', monospace" font-size="11" fill="#F2F0EB" opacity="0.6" letter-spacing="1">Ana Santos · Estrategista de Marca</text>
+
+  <!-- Bottom line -->
+  <rect x="0" y="629" width="1200" height="1" fill="#DCB464" opacity="0.4"/>
+</svg>

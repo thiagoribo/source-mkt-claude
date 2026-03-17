@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#212E3F"/>
+
+  <!-- Subtle background pattern: radial lines from center -->
+  <g opacity="0.06" stroke="#DCB464" stroke-width="1">
+    <line x1="780" y1="315" x2="780" y2="100"/>
+    <line x1="780" y1="315" x2="780" y2="530"/>
+    <line x1="780" y1="315" x2="565" y2="315"/>
+    <line x1="780" y1="315" x2="995" y2="315"/>
+    <line x1="780" y1="315" x2="628" y2="163"/>
+    <line x1="780" y1="315" x2="932" y2="467"/>
+    <line x1="780" y1="315" x2="932" y2="163"/>
+    <line x1="780" y1="315" x2="628" y2="467"/>
+  </g>
+
+  <!-- Radar/spider chart — 7 pillars -->
+  <!-- Outer circle -->
+  <circle cx="780" cy="315" r="190" fill="none" stroke="#DCB464" stroke-width="1.5" opacity="0.25"/>
+  <!-- Middle circle -->
+  <circle cx="780" cy="315" r="130" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.2"/>
+  <!-- Inner circle -->
+  <circle cx="780" cy="315" r="70" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.15"/>
+
+  <!-- 7 axis lines (every 51.4°) -->
+  <line x1="780" y1="315" x2="780" y2="125" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+  <line x1="780" y1="315" x2="941" y2="179" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+  <line x1="780" y1="315" x2="960" y2="380" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+  <line x1="780" y1="315" x2="848" y2="491" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+  <line x1="780" y1="315" x2="666" y2="491" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+  <line x1="780" y1="315" x2="600" y2="380" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+  <line x1="780" y1="315" x2="619" y2="179" stroke="#DCB464" stroke-width="1" opacity="0.35"/>
+
+  <!-- Filled radar shape (irregular polygon representing diagnosis values) -->
+  <polygon points="780,145 920,198 940,355 840,468 680,468 614,370 640,195"
+    fill="#DCB464" fill-opacity="0.08" stroke="#DCB464" stroke-width="2" stroke-opacity="0.6"/>
+
+  <!-- Axis endpoint dots -->
+  <circle cx="780" cy="125" r="5" fill="#DCB464" opacity="0.9"/>
+  <circle cx="941" cy="179" r="5" fill="#DCB464" opacity="0.9"/>
+  <circle cx="960" cy="380" r="5" fill="#DCB464" opacity="0.7"/>
+  <circle cx="848" cy="491" r="5" fill="#DCB464" opacity="0.9"/>
+  <circle cx="666" cy="491" r="5" fill="#DCB464" opacity="0.9"/>
+  <circle cx="600" cy="380" r="5" fill="#DCB464" opacity="0.7"/>
+  <circle cx="619" cy="179" r="5" fill="#DCB464" opacity="0.9"/>
+
+  <!-- Axis labels (7 pillars) -->
+  <text x="780" y="108" font-family="monospace" font-size="9" fill="#DCB464" text-anchor="middle" letter-spacing="2" opacity="0.8">BRANDING</text>
+  <text x="962" y="165" font-family="monospace" font-size="9" fill="#F2F0EB" text-anchor="start" letter-spacing="2" opacity="0.7">META ADS</text>
+  <text x="975" y="388" font-family="monospace" font-size="9" fill="#F2F0EB" text-anchor="start" letter-spacing="2" opacity="0.7">GOOGLE</text>
+  <text x="858" y="512" font-family="monospace" font-size="9" fill="#F2F0EB" text-anchor="middle" letter-spacing="2" opacity="0.7">FUNIL</text>
+  <text x="666" y="512" font-family="monospace" font-size="9" fill="#F2F0EB" text-anchor="middle" letter-spacing="2" opacity="0.7">LEADS</text>
+  <text x="500" y="388" font-family="monospace" font-size="9" fill="#F2F0EB" text-anchor="end" letter-spacing="2" opacity="0.7">VENDAS</text>
+  <text x="500" y="168" font-family="monospace" font-size="9" fill="#F2F0EB" text-anchor="end" letter-spacing="2" opacity="0.7">CANAIS</text>
+
+  <!-- Center: Large 360° text -->
+  <text x="780" y="329" font-family="'Montserrat', sans-serif" font-size="64" font-weight="900" fill="#DCB464" text-anchor="middle" opacity="0.95">360°</text>
+  <rect x="720" y="338" width="120" height="2" fill="#DCB464" opacity="0.5"/>
+
+  <!-- LEFT SIDE: Main title block -->
+  <!-- Top line -->
+  <rect x="0" y="0" width="1" height="630" fill="#DCB464" opacity="0.4"/>
+  <rect x="0" y="0" width="1200" height="1" fill="#DCB464"/>
+  <!-- Category label -->
+  <text x="60" y="58" font-family="monospace" font-size="10" fill="#DCB464" letter-spacing="5" opacity="0.7">SOURCE BLOG · ESTRATÉGIA</text>
+
+  <!-- Title -->
+  <text x="60" y="130" font-family="'Montserrat', sans-serif" font-size="38" font-weight="900" fill="#F2F0EB" letter-spacing="-1">DIAGNÓSTICO</text>
+  <text x="60" y="175" font-family="'Montserrat', sans-serif" font-size="38" font-weight="900" fill="#DCB464" letter-spacing="-1">DE MARKETING</text>
+  <text x="60" y="218" font-family="'Montserrat', sans-serif" font-size="38" font-weight="900" fill="#F2F0EB" letter-spacing="-1">360°</text>
+  <rect x="60" y="228" width="320" height="3" fill="#DCB464"/>
+
+  <!-- Subtitle -->
+  <text x="60" y="256" font-family="monospace" font-size="11" fill="#F2F0EB" opacity="0.5" letter-spacing="1">Por que sua estratégia isolada</text>
+  <text x="60" y="272" font-family="monospace" font-size="11" fill="#F2F0EB" opacity="0.5" letter-spacing="1">não funciona</text>
+
+  <!-- 7 pillars small list -->
+  <rect x="60" y="310" width="300" height="1" fill="#DCB464" opacity="0.2"/>
+  <text x="60" y="332" font-family="monospace" font-size="9" fill="#F2F0EB" opacity="0.4" letter-spacing="2">01 Branding  02 Meta Ads  03 Google</text>
+  <text x="60" y="350" font-family="monospace" font-size="9" fill="#F2F0EB" opacity="0.4" letter-spacing="2">04 Funil  05 Leads  06 Vendas  07 Canais</text>
+
+  <!-- Divider line between left and radar -->
+  <rect x="500" y="80" width="1" height="470" fill="#DCB464" opacity="0.1"/>
+
+  <!-- Bottom author -->
+  <rect x="0" y="580" width="1200" height="1" fill="#DCB464" opacity="0.3"/>
+  <circle cx="72" cy="598" r="14" fill="#DCB464" opacity="0.2"/>
+  <text x="96" y="602" font-family="monospace" font-size="11" fill="#F2F0EB" opacity="0.6" letter-spacing="1">Thiago Castro · Performance &amp; Crescimento</text>
+
+  <rect x="0" y="629" width="1200" height="1" fill="#DCB464" opacity="0.4"/>
+</svg>
