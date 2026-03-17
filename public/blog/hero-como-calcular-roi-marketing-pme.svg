@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=DM+Mono:wght@300;400&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#212E3F"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="1200" height="1" fill="#DCB464"/>
+  <text x="60" y="58" font-family="'DM Mono', monospace" font-size="10" fill="#DCB464" letter-spacing="5" opacity="0.7">SOURCE BLOG · ESTRATÉGIA</text>
+
+  <!-- ROI formula — centered right side -->
+  <!-- Large ROI% ghost -->
+  <text x="870" y="420" font-family="'Montserrat', sans-serif" font-size="220" font-weight="900" fill="#DCB464" opacity="0.06" text-anchor="middle">ROI</text>
+
+  <!-- Bar chart — visual representation of return -->
+  <!-- Bars going up from baseline -->
+  <rect x="620" y="370" width="44" height="80" fill="#DCB464" opacity="0.2"/>
+  <rect x="676" y="310" width="44" height="140" fill="#DCB464" opacity="0.35"/>
+  <rect x="732" y="250" width="44" height="200" fill="#DCB464" opacity="0.55"/>
+  <rect x="788" y="180" width="44" height="270" fill="#DCB464" opacity="0.75"/>
+  <rect x="844" y="130" width="44" height="320" fill="#DCB464" opacity="0.95"/>
+
+  <!-- Baseline -->
+  <line x1="600" y1="450" x2="920" y2="450" stroke="#DCB464" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Arrow going up on last bar -->
+  <line x1="866" y1="120" x2="866" y2="100" stroke="#DCB464" stroke-width="2" opacity="0.8"/>
+  <polygon points="860,108 872,108 866,95" fill="#DCB464" opacity="0.8"/>
+
+  <!-- Y axis -->
+  <line x1="600" y1="120" x2="600" y2="455" stroke="#DCB464" stroke-width="1" opacity="0.3"/>
+
+  <!-- Axis labels -->
+  <text x="642" y="472" font-family="'DM Mono', monospace" font-size="9" fill="#F2F0EB" text-anchor="middle" opacity="0.35" letter-spacing="1">M1</text>
+  <text x="698" y="472" font-family="'DM Mono', monospace" font-size="9" fill="#F2F0EB" text-anchor="middle" opacity="0.35" letter-spacing="1">M2</text>
+  <text x="754" y="472" font-family="'DM Mono', monospace" font-size="9" fill="#F2F0EB" text-anchor="middle" opacity="0.35" letter-spacing="1">M3</text>
+  <text x="810" y="472" font-family="'DM Mono', monospace" font-size="9" fill="#F2F0EB" text-anchor="middle" opacity="0.35" letter-spacing="1">M4</text>
+  <text x="866" y="472" font-family="'DM Mono', monospace" font-size="9" fill="#DCB464" text-anchor="middle" opacity="0.8" letter-spacing="1">M5</text>
+
+  <!-- ROI percentage callout -->
+  <rect x="840" y="80" width="100" height="36" fill="#DCB464" opacity="0.15"/>
+  <rect x="840" y="80" width="100" height="36" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.6"/>
+  <text x="890" y="103" font-family="'DM Mono', monospace" font-size="14" fill="#DCB464" text-anchor="middle" letter-spacing="1" font-weight="400">+300%</text>
+
+  <!-- Title text -->
+  <text x="60" y="108" font-family="'Montserrat', sans-serif" font-size="38" font-weight="900" fill="#F2F0EB" letter-spacing="-1">COMO CALCULAR</text>
+  <text x="60" y="152" font-family="'Montserrat', sans-serif" font-size="38" font-weight="900" fill="#DCB464" letter-spacing="-1">O ROI DE MARKETING</text>
+  <rect x="60" y="162" width="340" height="3" fill="#DCB464"/>
+  <text x="60" y="186" font-family="'DM Mono', monospace" font-size="12" fill="#F2F0EB" opacity="0.55" letter-spacing="1">Fórmulas, KPIs e por que a maioria erra</text>
+
+  <!-- Formula block -->
+  <rect x="60" y="360" width="460" height="72" fill="#DCB464" opacity="0.06"/>
+  <rect x="60" y="360" width="4" height="72" fill="#DCB464" opacity="0.6"/>
+  <text x="80" y="390" font-family="'DM Mono', monospace" font-size="13" fill="#DCB464" letter-spacing="1" opacity="0.9">ROI = (Retorno — Investimento)</text>
+  <text x="80" y="412" font-family="'DM Mono', monospace" font-size="13" fill="#DCB464" letter-spacing="1" opacity="0.9">         ÷ Investimento × 100</text>
+
+  <!-- KPI chips -->
+  <rect x="60" y="450" width="58" height="20" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.4"/>
+  <text x="89" y="464" font-family="'DM Mono', monospace" font-size="8" fill="#DCB464" text-anchor="middle" letter-spacing="2" opacity="0.7">CAC</text>
+
+  <rect x="128" y="450" width="58" height="20" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.4"/>
+  <text x="157" y="464" font-family="'DM Mono', monospace" font-size="8" fill="#DCB464" text-anchor="middle" letter-spacing="2" opacity="0.7">LTV</text>
+
+  <rect x="196" y="450" width="58" height="20" fill="none" stroke="#DCB464" stroke-width="1" opacity="0.4"/>
+  <text x="225" y="464" font-family="'DM Mono', monospace" font-size="8" fill="#DCB464" text-anchor="middle" letter-spacing="2" opacity="0.7">ROAS</text>
+
+  <rect x="264" y="450" width="58" height="20" fill="#DCB464" opacity="0.15"/>
+  <text x="293" y="464" font-family="'DM Mono', monospace" font-size="8" fill="#DCB464" text-anchor="middle" letter-spacing="2" opacity="0.9">CPL</text>
+
+  <!-- Bottom author -->
+  <circle cx="72" cy="598" r="14" fill="#DCB464" opacity="0.2"/>
+  <text x="96" y="602" font-family="'DM Mono', monospace" font-size="11" fill="#F2F0EB" opacity="0.6" letter-spacing="1">Thiago Castro · Performance &amp; Crescimento</text>
+
+  <!-- Bottom line -->
+  <rect x="0" y="629" width="1200" height="1" fill="#DCB464" opacity="0.4"/>
+</svg>
