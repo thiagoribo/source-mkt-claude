@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -33,6 +34,12 @@ export default function RichTextEditor({
       onChange(editor.getHTML());
     },
   });
+
+  // Sincroniza quando o post é carregado de forma assíncrona (ex: ao editar post existente)
+  useEffect(() => {
+    if (!editor || !value || editor.getHTML() === value) return;
+    editor.commands.setContent(value);
+  }, [value, editor]);
 
   if (!editor) {
     return null;
