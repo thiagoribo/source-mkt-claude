@@ -604,3 +604,66 @@ Link: https://wa.me/5511937292921?text=...
 3. **CasesCarousel vs carrossel inline**: O `CasesCarousel` usa dados do `serviceMockups.ts`. Para carrosseis com imagens próprias (como `OQueFalamDeNos`), implementar diretamente na página.
 4. **TypeScript relaxado**: `noImplicitAny: false` e `strictNullChecks: false` — o projeto aceita tipos menos rígidos para facilitar desenvolvimento rápido.
 5. **Supabase opcional**: Todas as queries têm fallback para dados mockados quando o Supabase não está configurado.
+
+---
+
+## Blog — Regras de Conteúdo HTML
+
+### Espaçamento obrigatório entre blocos
+
+**Todo post de blog criado ou editado por IA deve ter `<p></p>` entre cada bloco de conteúdo.** Isso garante legibilidade visual consistente no site.
+
+Padrão obrigatório para todos os arquivos em `content/blog/`:
+
+```html
+<!-- CORRETO — com separadores -->
+<p>Parágrafo introdutório.</p>
+
+<p></p>
+
+<h2>Título da Seção</h2>
+
+<p></p>
+
+<p>Primeiro parágrafo da seção.</p>
+
+<p></p>
+
+<p>Segundo parágrafo.</p>
+
+<p></p>
+
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+<p></p>
+
+<h2>Próxima Seção</h2>
+
+<!-- ERRADO — sem separadores -->
+<p>Parágrafo introdutório.</p>
+<h2>Título da Seção</h2>
+<p>Primeiro parágrafo da seção.</p>
+```
+
+**Razão técnica:** TipTap serializa linhas em branco como `<p></p>`. O CSS `prose` do Tailwind sofre de margin collapse em parágrafos vazios. O fix já está aplicado em `BlogPost.tsx` com `[&_p:empty]:min-h-[1.5em]`. Sem o `<p></p>` no HTML, não há espaço visual entre os blocos.
+
+### Script de espaçamento automático
+
+Para posts já existentes sem espaçamento:
+```bash
+node scripts/add-blog-spacing.mjs  # aplica aos posts 01-03
+```
+
+### Atualizar conteúdo de post existente via script
+
+Usar PATCH com filtro por slug (não POST/upsert — o upsert tenta inserir com campos nulos):
+```js
+fetch(`${SUPABASE_URL}/rest/v1/blog_posts?slug=eq.{slug}`, {
+  method: 'PATCH',
+  headers: HEADERS,
+  body: JSON.stringify({ content: novoHTML, updated_at: new Date().toISOString() })
+})
+```
