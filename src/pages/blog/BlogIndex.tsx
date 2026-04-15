@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useBlogPosts } from '@/hooks/queries/useBlogPosts';
 import { useBlogCategories } from '@/hooks/queries/useBlogCategories';
 import Layout from '@/components/layout/Layout';
-import RevealSection from '@/components/shared/RevealSection';
 import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { BlogPostWithRelations } from '@/types/database';
@@ -22,19 +21,17 @@ export default function BlogIndex() {
       {/* Hero */}
       <section className="bg-primary text-primary-foreground py-20 md:py-28">
         <div className="container-sm">
-          <RevealSection>
-            <p className="text-xs font-mono tracking-[0.3em] uppercase opacity-60 mb-4">
-              Blog
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif leading-[1.1] mb-6">
-              Insights de{' '}
-              <span className="italic">Branding</span>
-              <br />& Estratégia
-            </h1>
-            <p className="text-lg text-primary-foreground/70 max-w-xl">
-              Artigos, estudos de caso e reflexões sobre posicionamento, marca e crescimento de negócios.
-            </p>
-          </RevealSection>
+          <p className="text-xs font-mono tracking-[0.3em] uppercase opacity-60 mb-4">
+            Blog
+          </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif leading-[1.1] mb-6">
+            Insights de{' '}
+            <span className="italic">Branding</span>
+            <br />& Estratégia
+          </h1>
+          <p className="text-lg text-primary-foreground/70 max-w-xl">
+            Artigos, estudos de caso e reflexões sobre posicionamento, marca e crescimento de negócios.
+          </p>
         </div>
       </section>
 
@@ -44,41 +41,39 @@ export default function BlogIndex() {
           <div className="grid lg:grid-cols-4 gap-12">
             {/* Sidebar */}
             <aside className="lg:col-span-1">
-              <RevealSection>
-                <div className="sticky top-8">
-                  <h3 className="font-bold font-serif text-lg mb-4">Categorias</h3>
-                  <ul className="space-y-2">
-                    <li>
+              <div className="sticky top-8">
+                <h3 className="font-bold font-serif text-lg mb-4">Categorias</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <button
+                      onClick={() => setSelectedCategory(null)}
+                      className={cn(
+                        'text-sm transition-colors',
+                        !selectedCategory
+                          ? 'text-primary font-medium'
+                          : 'text-foreground/60 hover:text-primary'
+                      )}
+                    >
+                      Todos os posts
+                    </button>
+                  </li>
+                  {categories.map((cat) => (
+                    <li key={cat.id}>
                       <button
-                        onClick={() => setSelectedCategory(null)}
+                        onClick={() => setSelectedCategory(cat.id)}
                         className={cn(
                           'text-sm transition-colors',
-                          !selectedCategory
+                          selectedCategory === cat.id
                             ? 'text-primary font-medium'
                             : 'text-foreground/60 hover:text-primary'
                         )}
                       >
-                        Todos os posts
+                        {cat.name}
                       </button>
                     </li>
-                    {categories.map((cat) => (
-                      <li key={cat.id}>
-                        <button
-                          onClick={() => setSelectedCategory(cat.id)}
-                          className={cn(
-                            'text-sm transition-colors',
-                            selectedCategory === cat.id
-                              ? 'text-primary font-medium'
-                              : 'text-foreground/60 hover:text-primary'
-                          )}
-                        >
-                          {cat.name}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </RevealSection>
+                  ))}
+                </ul>
+              </div>
             </aside>
 
             {/* Posts Grid */}
@@ -93,10 +88,8 @@ export default function BlogIndex() {
                 </div>
               ) : (
                 <div className="grid md:grid-cols-2 gap-8">
-                  {filteredPosts.map((post, i) => (
-                    <RevealSection key={post.id} delay={i * 100}>
-                      <PostCard post={post} />
-                    </RevealSection>
+                  {filteredPosts.map((post) => (
+                    <PostCard key={post.id} post={post} />
                   ))}
                 </div>
               )}

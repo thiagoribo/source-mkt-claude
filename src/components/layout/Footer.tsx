@@ -91,7 +91,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center h-10 px-6 text-xs font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-black hover:bg-white transition-colors duration-200"
               >
-                Agendar Diagnóstico
+                Agendar Conversa
               </a>
             </div>
           </div>

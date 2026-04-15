@@ -357,7 +357,7 @@ function InvestimentoBranding() {
               asChild
             >
               <a href="#formulario" className="flex items-center gap-2">
-                Solicitar Proposta <ArrowRight className="h-4 w-4" />
+                Agendar Conversa <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
           </div>
@@ -417,7 +417,7 @@ function FormularioBranding() {
       website: formData.get('website') as string,
       notes: formData.get('challenge') as string,
       has_identity_visual: formData.get('has-vi') as string,
-      budget: formData.get('budget') as string,
+      budget: '',
     });
 
     if (result.success) {
@@ -487,37 +487,21 @@ function FormularioBranding() {
               <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente..." rows={3} className="rounded-none" />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="has-vi">Você já tem identidade visual?</Label>
-                <select
-                  id="has-vi"
-                  name="has-vi"
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="Sim">Sim</option>
-                  <option value="Não">Não</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="budget">Faixa de investimento</Label>
-                <select
-                  id="budget"
-                  name="budget"
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="R$25.000 - R$35.000">R$25.000 - R$35.000</option>
-                  <option value="R$35.000 - R$50.000">R$35.000 - R$50.000</option>
-                  <option value="Acima de R$50.000">Acima de R$50.000</option>
-                  <option value="Flexível">Flexível</option>
-                </select>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="has-vi">Você já tem identidade visual?</Label>
+              <select
+                id="has-vi"
+                name="has-vi"
+                className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <option value="">Selecione</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+              </select>
             </div>
 
             <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Solicitar Proposta'}
+              {isLoading ? 'Enviando...' : 'Quero Construir Minha Marca'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">

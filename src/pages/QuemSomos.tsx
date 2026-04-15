@@ -500,7 +500,7 @@ function CTAFinal() {
               Vamos Construir Algo Extraordinário Juntos?
             </h2>
             <p className="text-primary-foreground/70 text-lg leading-relaxed max-w-2xl">
-              Se você sente que sua empresa ou marca pessoal tem potencial não realizado, vamos conversar. Agende um diagnóstico gratuito de 30 minutos.
+              Se você sente que sua empresa ou marca pessoal tem potencial não realizado, vamos conversar. Apresentamos uma proposta personalizada para o seu momento.
             </p>
             <Button
               size="lg"

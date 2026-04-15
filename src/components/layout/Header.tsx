@@ -161,7 +161,7 @@ export default function Header() {
             rel="noopener noreferrer"
             className="hidden lg:inline-flex items-center h-9 px-6 text-xs font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-navy transition-all duration-300 hover:bg-white"
           >
-            Diagnóstico Gratuito
+            Agendar Conversa
           </a>
           <button
             className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-brand-offwhite/80 hover:text-brand-offwhite transition-colors"
@@ -223,7 +223,7 @@ export default function Header() {
             onClick={() => setMobileOpen(false)}
             className="mt-6 flex items-center justify-center h-11 text-xs font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-navy"
           >
-            Diagnóstico Gratuito
+            Agendar Conversa
           </a>
         </nav>
       </div>

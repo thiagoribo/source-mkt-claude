@@ -76,7 +76,7 @@ function Hero() {
               </p>
 
               <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
-                <a href="#formulario">Solicitar Orçamento</a>
+                <a href="#formulario">Quero Meu Nome Estratégico</a>
               </Button>
             </div>
           </div>
@@ -370,7 +370,7 @@ function Investimento() {
               asChild
             >
               <a href="#formulario" className="flex items-center gap-2">
-                Solicitar Proposta <ArrowRight className="h-4 w-4" />
+                Quero Meu Nome Estratégico <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
           </div>
@@ -481,7 +481,7 @@ function Formulario() {
             </div>
 
             <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Solicitar Orçamento'}
+              {isLoading ? 'Enviando...' : 'Quero Meu Nome Estratégico'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">

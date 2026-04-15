@@ -61,24 +61,24 @@ function Hero() {
               </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
-                Você está investindo{" "}
+                Você não tem{" "}
                 <em className="not-italic text-foreground/40 font-normal">
-                  em marketing.
+                  problema de produto.
                 </em>
                 <br />
-                <span className="text-primary">Quanto está convertendo?</span>
+                <span className="text-primary">Tem problema de máquina de crescimento.</span>
               </h1>
 
               <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Diagnóstico completo de marketing 360°: analisamos suas campanhas de tráfego pago, seu funil de conversão, a gestão dos seus leads e o alinhamento entre marca, comunicação e vendas — para identificar onde está o vazamento e construir a estratégia que fecha o gap.
+                Diagnóstico 360° para empresas que investem em marketing mas não conseguem escalar: analisamos tráfego pago, funil de conversão, gestão de leads, posicionamento e alinhamento marketing+vendas — e entregamos o mapa do que está travando sua máquina de vendas.
               </p>
 
               <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Para empresas que já investem em marketing mas precisam entender o que está funcionando, o que está vazando e o que precisa mudar.
+                Para empresas que já cresceram, mas chegaram em platô e precisam de clareza estratégica para disparar de vez.
               </p>
 
               <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
-                <a href="#formulario">Solicitar Conversa de Qualificação</a>
+                <a href="#formulario">Quero uma Conversa Estratégica</a>
               </Button>
             </div>
           </div>
@@ -208,7 +208,7 @@ function OQueAnalisamos() {
                 Tudo isso integrado em um único diagnóstico executivo — não sete análises isoladas, mas uma visão do sistema como um todo.
               </p>
               <a href="#formulario" className="mt-6 text-xs font-mono uppercase tracking-widest text-primary-foreground/60 hover:text-primary-foreground transition-colors flex items-center gap-2">
-                Solicitar diagnóstico <ArrowRight className="h-3 w-3" />
+                Solicitar Conversa <ArrowRight className="h-3 w-3" />
               </a>
             </div>
           </RevealSection>
@@ -528,7 +528,7 @@ function Investimento() {
                     }`}
                     variant={p.featured ? "default" : "outline"}
                   >
-                    <a href="#formulario">Solicitar Proposta</a>
+                    <a href="#formulario">Quero uma Conversa</a>
                   </Button>
                 </div>
               </div>
@@ -1020,7 +1020,7 @@ function FormularioQualificacao() {
             </div>
 
             <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Solicitar Conversa de Qualificação'}
+              {isLoading ? 'Enviando...' : 'Quero uma Conversa Estratégica'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">

@@ -488,7 +488,7 @@ function Investimento() {
               asChild
             >
               <a href="#formulario" className="flex items-center gap-2">
-                Solicitar Proposta <ArrowRight className="h-4 w-4" />
+                Quero Gerenciar Minhas Redes <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
           </div>
@@ -599,7 +599,7 @@ function Formulario() {
             </div>
 
             <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Solicitar Proposta'}
+              {isLoading ? 'Enviando...' : 'Quero Gerenciar Minhas Redes'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">

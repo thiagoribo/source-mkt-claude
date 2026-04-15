@@ -26,11 +26,11 @@ function HeroSection() {
                 </h1>
               </div>
               <p className="text-fluid-lg text-foreground/75 leading-[1.6] max-w-xl font-light">
-                Consultoria estratégica e branding para empresas estabelecidas que querem parar de competir por preço e começar a vender pelo valor que entregam.
+                Para empreendedores, especialistas e empresas que entregam mais do que o mercado percebe — e precisam de posicionamento e branding que justifiquem o preço que deveriam estar cobrando.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button asChild size="lg" className="rounded-none text-base px-8 bg-primary hover:shadow-lg transition-shadow">
-                  <a href="#diagnostico">Diagnóstico Estratégico</a>
+                  <a href="#diagnostico">Conversa Estratégica</a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-none text-base px-8 border-2 border-primary hover:bg-primary/5">
                   <a href="#cases">Ver Transformações</a>
@@ -510,7 +510,7 @@ function CTASection() {
             Vamos Construir a Estratégia que sua Empresa Merece?
           </h2>
           <p className="text-white/90 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">
-            Agende uma conversa de diagnóstico de 30 minutos. Sem compromisso. Vamos entender seu contexto e validar se faz sentido trabalharmos juntos.
+            Vamos entender seu contexto e apresentar uma proposta que faça sentido para o momento da sua empresa. Sem compromisso.
           </p>
           <div className="mt-8">
             <Button
@@ -519,7 +519,7 @@ function CTASection() {
               asChild
             >
               <a href="https://wa.me/5511937292921" target="_blank" rel="noopener noreferrer">
-                Agendar Diagnóstico Gratuito
+                Agendar uma Conversa
               </a>
             </Button>
           </div>

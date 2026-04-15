@@ -13,4 +13,15 @@ Allow: /
 User-agent: *
 Allow: /
 
+# URLs legadas (WordPress) — páginas inexistentes, não indexar
+Disallow: /branding/
+Disallow: /servicos-gestao-redes-sociais/
+Disallow: /servicos-consultoria-de-marketing/
+Disallow: /servicos-branding-institucional/
+Disallow: /servicos-identidade-visual/
+Disallow: /servicos-branding-pessoal/
+Disallow: /servicos-naming/
+Disallow: /author/
+Disallow: /home/
+
 Sitemap: https://sourcemkt.com.br/sitemap.xml

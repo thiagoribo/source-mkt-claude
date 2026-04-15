@@ -9,17 +9,19 @@ import { Label } from "@/components/ui/label";
 import { useSubmitLead } from "@/hooks/useSubmitLead";
 import {
   Check,
-  X,
   User,
   Search,
   Palette,
-  MessageSquare,
-  FileText,
+  Compass,
   ArrowLeft,
   ArrowRight,
-  Layers,
-  BarChart3,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
 import { brandingPessoalResults } from "@/data/serviceMockups";
@@ -113,6 +115,22 @@ const fallbackTestimonials = [
   },
 ];
 
+/* ─── CTA mid-page reutilizável ─── */
+function MidPageCta({ label, cta }: { label: string; cta: string }) {
+  return (
+    <RevealSection>
+      <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <p className="text-sm text-foreground/50 max-w-sm leading-relaxed">{label}</p>
+        <Button variant="outline" className="rounded-none flex-shrink-0" asChild>
+          <a href="#formulario" className="flex items-center gap-2">
+            {cta} <ArrowRight className="h-4 w-4" />
+          </a>
+        </Button>
+      </div>
+    </RevealSection>
+  );
+}
+
 /* ─── Hero ─── */
 function Hero() {
   const profiles = ["Empreendedores", "Executivos", "Consultores", "Especialistas"];
@@ -149,24 +167,24 @@ function Hero() {
               </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
-                Você já tem o conteúdo.{" "}
+                Especialistas cobram menos{" "}
                 <em className="not-italic text-foreground/40 font-normal">
-                  Falta a marca
+                  do que valem.
                 </em>
                 <br />
-                <span className="text-primary">que o comunica.</span>
+                <span className="text-primary">O problema raramente é a competência.</span>
               </h1>
 
               <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Construa autoridade autêntica e torne-se referência no seu segmento com posicionamento estratégico e identidade visual consistente.
+                Construímos o posicionamento estratégico e a identidade visual que fazem líderes, consultores e especialistas serem percebidos pelo que realmente valem.
               </p>
 
               <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Sua marca pessoal é um ativo de negócio, não apenas presença digital. Tratamos ela com a mesma profundidade estratégica que uma marca corporativa.
+                Não é presença digital. É autoridade de mercado construída com método — do posicionamento à identidade visual aplicada em todos os seus pontos de contato.
               </p>
 
               <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
-                <a href="#formulario">Quero Construir Minha Autoridade</a>
+                <a href="#formulario">Quero Ser Percebido pelo Meu Valor</a>
               </Button>
             </div>
           </div>
@@ -229,14 +247,34 @@ function AntesDepois() {
 /* ─── Processo — numerado com duração ─── */
 function Processo() {
   const steps = [
-    { num: "01", icon: User, title: "Imersão na História e Essência", text: "Entendemos trajetória, valores, diferenciais e impacto desejado", duration: "1 semana" },
-    { num: "02", icon: Search, title: "Mapeamento de Posicionamento", text: "Definimos como sua marca deve se comunicar e posicionar no mercado", duration: "2 semanas" },
-    { num: "03", icon: Palette, title: "Comunicação Estética de Marca Completa", text: "Desenvolvemos sua identidade visual estratégica, trazemos todos os elementos que representam a sua marca e universo de marca, e projetamos para todos os seus pontos de contato", duration: "3 semanas" },
-    { num: "04", icon: MessageSquare, title: "Narrativa e Direcionamento", text: "Criamos pilares, frases e abordagens para canais digitais", duration: "1 semana" },
-    { num: "05", icon: FileText, title: "Manual de Marca Completo", text: "Material completo com identidade e direção estratégica aplicável", duration: "Entrega final" },
-    { num: "06", icon: ArrowRight, title: "Definição de Jornada do Cliente Estratégica", text: "Estruturamos a jornada do cliente de forma estratégica, mapeando cada ponto de contato e oportunidade de conversão", duration: "1 semana" },
-    { num: "07", icon: Layers, title: "Estruturação do Ecossistema de Serviços e Comunicação", text: "Organizamos sua oferta de serviços e canais de comunicação de forma coesa e estratégica", duration: "1 semana" },
-    { num: "08", icon: BarChart3, title: "Análise de Posicionamento Completo da Concorrência e Referências", text: "Mapeamento e análise profunda da concorrência e referências de mercado para definir seu diferencial competitivo", duration: "1 semana" },
+    {
+      num: "01",
+      icon: User,
+      title: "Imersão e Diagnóstico",
+      text: "Entendemos quem você é, onde quer chegar e como o mercado te percebe hoje — trajetória, valores, diferenciais e análise de concorrência.",
+      duration: "1–2 semanas",
+    },
+    {
+      num: "02",
+      icon: Search,
+      title: "Posicionamento e Narrativa",
+      text: "Definimos como sua marca deve se comunicar, qual história construir e os pilares estratégicos que vão diferenciar você no mercado.",
+      duration: "2 semanas",
+    },
+    {
+      num: "03",
+      icon: Palette,
+      title: "Identidade Visual Completa",
+      text: "Desenvolvemos o sistema visual que representa quem você é — logotipo, paleta, tipografia, elementos gráficos e manual de marca aplicado em todos os pontos de contato.",
+      duration: "3 semanas",
+    },
+    {
+      num: "04",
+      icon: Compass,
+      title: "Ativação e Direcionamento",
+      text: "Entregamos manual completo, jornada do cliente estruturada, ecossistema de serviços organizado e direcionamento estratégico para os seus canais digitais.",
+      duration: "Entrega final",
+    },
   ];
 
   return (
@@ -270,6 +308,11 @@ function Processo() {
             </RevealSection>
           ))}
         </div>
+
+        <MidPageCta
+          label="Todo o processo leva menos de 2 meses. Pronto para começar?"
+          cta="Quero Iniciar Meu Processo"
+        />
       </div>
     </section>
   );
@@ -309,6 +352,11 @@ function ParaQuemE() {
             ))}
           </div>
         </RevealSection>
+
+        <MidPageCta
+          label="Se você se identificou com 3 ou mais pontos acima, esse serviço é para você."
+          cta="Agendar Conversa"
+        />
       </div>
     </section>
   );
@@ -412,6 +460,11 @@ function ResultadosSimulados() {
             </div>
           </div>
         </div>
+
+        <MidPageCta
+          label="Quer um resultado como esse para sua marca pessoal?"
+          cta="Quero Ser o Próximo Case"
+        />
       </div>
     </section>
   );
@@ -482,6 +535,60 @@ function Depoimento() {
   );
 }
 
+/* ─── FAQ ─── */
+function FAQ() {
+  const faqs = [
+    {
+      q: "Qual a diferença entre branding pessoal e fazer posts no Instagram?",
+      a: "Branding pessoal é a estratégia por trás de tudo. Define quem você é, para quem fala, como se posiciona e o que comunica — antes de qualquer post. Sem isso, você produz conteúdo no escuro: muito esforço, pouco resultado. O Instagram é apenas um canal de distribuição.",
+    },
+    {
+      q: "Preciso ter muitos seguidores para esse serviço fazer sentido?",
+      a: "Não. Branding pessoal não é sobre quantidade de seguidores — é sobre qualidade de percepção. Clientes com 2.000 seguidores fecham contratos maiores do que perfis com 50.000 quando têm posicionamento claro. O objetivo é atrair as pessoas certas, não qualquer pessoa.",
+    },
+    {
+      q: "Em quanto tempo começo a perceber resultados?",
+      a: "Os primeiros resultados aparecem já durante o processo — clareza, segurança na comunicação, identidade visual consistente. Contratos e oportunidades concretas geralmente surgem nos primeiros 60 a 90 dias após a implementação.",
+    },
+    {
+      q: "Por que R$18.000? O que justifica esse investimento?",
+      a: "Você recebe: posicionamento estratégico completo, identidade visual profissional (que sozinha custa de R$6.000 a R$15.000 no mercado), narrativa de marca, jornada do cliente estruturada e manual completo. Mas mais do que o entregável, o retorno sobre a percepção de valor — que permite cobrar mais pelos mesmos serviços — costuma pagar o investimento no primeiro ou segundo contrato fechado.",
+    },
+    {
+      q: "E se eu não gostar do resultado?",
+      a: "Trabalhamos com imersão profunda e co-criação em cada etapa — você aprova antes de avançarmos. Revisões fazem parte do processo. Nosso histórico com mais de 100 projetos mostra que quando o processo é seguido corretamente, o resultado supera as expectativas do cliente.",
+    },
+  ];
+
+  return (
+    <section className="section-spacing bg-background">
+      <div className="container-sm max-w-3xl">
+        <RevealSection>
+          <div className="mb-12 space-y-3">
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Dúvidas Frequentes</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Perguntas que todo mundo tem antes de investir</h2>
+          </div>
+        </RevealSection>
+
+        <RevealSection delay={100}>
+          <Accordion type="single" collapsible className="divide-y divide-border border-t border-b border-border">
+            {faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`item-${i}`} className="border-none">
+                <AccordionTrigger className="text-left font-semibold text-base py-6 hover:no-underline hover:text-primary transition-colors">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-foreground/65 leading-relaxed text-sm pb-6">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </RevealSection>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Formulário ─── */
 function FormularioPessoal() {
   const [submitted, setSubmitted] = useState(false);
@@ -501,7 +608,6 @@ function FormularioPessoal() {
       area: formData.get('area') as string,
       notes: formData.get('challenge') as string,
       digital_presence: formData.get('presence') as string,
-      budget: formData.get('budget') as string,
     });
 
     if (result.success) {
@@ -516,8 +622,8 @@ function FormularioPessoal() {
           <div className="w-16 h-16 bg-primary/10 flex items-center justify-center mx-auto">
             <Check className="h-8 w-8 text-primary" />
           </div>
-          <h2 className="text-3xl font-bold">Solicitação Enviada!</h2>
-          <p className="text-foreground/60">Entraremos em contato em até 48h úteis.</p>
+          <h2 className="text-3xl font-bold">Análise Solicitada!</h2>
+          <p className="text-foreground/60">Entraremos em contato em até 48h úteis para agendar sua conversa estratégica.</p>
         </div>
       </section>
     );
@@ -527,9 +633,12 @@ function FormularioPessoal() {
     <section id="formulario" className="section-spacing bg-secondary">
       <div className="container-sm max-w-2xl">
         <RevealSection>
-          <div className="mb-12 space-y-3">
-            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Orçamento</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Vamos Construir Sua Autoridade?</h2>
+          <div className="mb-8 space-y-3">
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Conversa Estratégica</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Vamos Analisar Seu Posicionamento Atual — Sem Compromisso</h2>
+            <p className="text-sm text-foreground/55 leading-relaxed">
+              Atendemos no máximo 3 novos projetos de Branding Pessoal por mês — para manter a qualidade de imersão que cada marca exige.
+            </p>
           </div>
         </RevealSection>
 
@@ -552,7 +661,7 @@ function FormularioPessoal() {
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="phone">Telefone/WhatsApp *</Label>
+                <Label htmlFor="phone">WhatsApp *</Label>
                 <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
               </div>
               <div className="space-y-2">
@@ -562,43 +671,27 @@ function FormularioPessoal() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="challenge">Seu maior desafio com marca pessoal *</Label>
-              <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente..." rows={3} className="rounded-none" />
+              <Label htmlFor="challenge">Qual seu maior desafio de autoridade hoje? *</Label>
+              <Textarea id="challenge" name="challenge" required placeholder="Ex: não consigo cobrar o que realmente valho, minha presença não reflete minha experiência..." rows={3} className="rounded-none" />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="presence">Presença digital atual</Label>
-                <select
-                  id="presence"
-                  name="presence"
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="Não tenho presença digital">Não tenho presença digital</option>
-                  <option value="Básica (perfis sem estratégia)">Básica (perfis sem estratégia)</option>
-                  <option value="Ativa mas inconsistente">Ativa mas inconsistente</option>
-                  <option value="Forte, quero profissionalizar">Forte, quero profissionalizar</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="budget">Faixa de investimento</Label>
-                <select
-                  id="budget"
-                  name="budget"
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="R$18.000 - R$25.000">R$18.000 - R$25.000</option>
-                  <option value="R$25.000 - R$35.000">R$25.000 - R$35.000</option>
-                  <option value="Acima de R$35.000">Acima de R$35.000</option>
-                  <option value="Flexível">Flexível</option>
-                </select>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="presence">Presença digital atual</Label>
+              <select
+                id="presence"
+                name="presence"
+                className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <option value="">Selecione</option>
+                <option value="Não tenho presença digital">Não tenho presença digital</option>
+                <option value="Básica (perfis sem estratégia)">Básica (perfis sem estratégia)</option>
+                <option value="Ativa mas inconsistente">Ativa mas inconsistente</option>
+                <option value="Forte, quero profissionalizar">Forte, quero profissionalizar</option>
+              </select>
             </div>
 
             <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Solicitar Proposta'}
+              {isLoading ? 'Enviando...' : 'Quero Iniciar Meu Processo'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">
@@ -641,6 +734,31 @@ export default function BrandingPessoal() {
       <ResultadosSimulados />
       {/* <InvestimentoPessoal /> — preço oculto, backup em src/_pricing-backup/investimento-branding-pessoal.tsx */}
       <Depoimento />
+      <section className="py-16 bg-primary text-primary-foreground">
+        <div className="container-sm max-w-4xl">
+          <RevealSection>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="space-y-2">
+                <p className="text-primary-foreground/60 text-sm font-mono uppercase tracking-widest">Próximo passo</p>
+                <p className="text-xl md:text-2xl font-bold leading-snug">
+                  Pronto para ser percebido pelo que realmente vale?
+                </p>
+              </div>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-none text-base px-8 h-12 flex-shrink-0 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors"
+                asChild
+              >
+                <a href="#formulario" className="flex items-center gap-2">
+                  Agendar Conversa <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+      <FAQ />
       <FormularioPessoal />
     </>
   );

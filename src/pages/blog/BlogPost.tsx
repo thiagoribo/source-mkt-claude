@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useBlogPost, useBlogPosts } from '@/hooks/queries/useBlogPosts';
 import Layout from '@/components/layout/Layout';
-import RevealSection from '@/components/shared/RevealSection';
 import { Calendar, User, ArrowLeft, Tag, Clock, Share2 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
@@ -111,61 +110,59 @@ export default function BlogPost() {
       {/* Hero */}
       <section className="bg-primary text-primary-foreground py-16 md:py-24">
         <div className="container-sm">
-          <RevealSection>
-            {/* Back Link */}
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors mb-8"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Voltar para o blog
-            </Link>
+          {/* Back Link */}
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors mb-8"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Voltar para o blog
+          </Link>
 
-            {/* Category */}
-            {post.category && (
-              <div className="flex items-center gap-2 mb-4">
-                <Tag className="w-4 h-4 opacity-60" />
-                <span className="text-sm font-mono uppercase tracking-wider opacity-70">
-                  {post.category.name}
-                </span>
+          {/* Category */}
+          {post.category && (
+            <div className="flex items-center gap-2 mb-4">
+              <Tag className="w-4 h-4 opacity-60" />
+              <span className="text-sm font-mono uppercase tracking-wider opacity-70">
+                {post.category.name}
+              </span>
+            </div>
+          )}
+
+          {/* Title */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif leading-[1.15] mb-6 max-w-4xl">
+            {post.title}
+          </h1>
+
+          {/* Meta */}
+          <div className="flex flex-wrap items-center gap-6 text-sm text-primary-foreground/60">
+            {post.author && (
+              <div className="flex items-center gap-2">
+                {post.author.image_url && (
+                  <img
+                    src={post.author.image_url}
+                    alt={post.author.name}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                )}
+                <span>{post.author.name}</span>
               </div>
             )}
-
-            {/* Title */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif leading-[1.15] mb-6 max-w-4xl">
-              {post.title}
-            </h1>
-
-            {/* Meta */}
-            <div className="flex flex-wrap items-center gap-6 text-sm text-primary-foreground/60">
-              {post.author && (
-                <div className="flex items-center gap-2">
-                  {post.author.image_url && (
-                    <img
-                      src={post.author.image_url}
-                      alt={post.author.name}
-                      className="w-8 h-8 rounded-full object-cover"
-                    />
-                  )}
-                  <span>{post.author.name}</span>
-                </div>
-              )}
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                <span>
-                  {new Date(post.published_at || post.created_at).toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>{readingTime} min de leitura</span>
-              </div>
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              <span>
+                {new Date(post.published_at || post.created_at).toLocaleDateString('pt-BR', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </span>
             </div>
-          </RevealSection>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span>{readingTime} min de leitura</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -173,15 +170,13 @@ export default function BlogPost() {
       {post.featured_image_url && (
         <section className="-mt-8 mb-12">
           <div className="container-sm">
-            <RevealSection>
-              <div className="aspect-[21/9] overflow-hidden border-2 border-border">
-                <img
-                  src={post.featured_image_url}
-                  alt={post.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </RevealSection>
+            <div className="aspect-[21/9] overflow-hidden border-2 border-border">
+              <img
+                src={post.featured_image_url}
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </section>
       )}
@@ -192,40 +187,36 @@ export default function BlogPost() {
           <div className="grid lg:grid-cols-4 gap-12">
             {/* Main Content */}
             <article className="lg:col-span-3">
-              <RevealSection>
-                <div
-                  className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-bold prose-a:text-primary prose-img:border-2 prose-img:border-border [&_p:empty]:min-h-[1.5em] [&_p:has(>br:only-child)]:min-h-[1.5em]"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                />
-              </RevealSection>
+              <div
+                className="prose prose-lg max-w-none text-foreground prose-headings:text-foreground prose-headings:font-serif prose-headings:font-bold prose-p:text-foreground/80 prose-li:text-foreground/80 prose-strong:text-foreground prose-a:text-primary prose-img:border-2 prose-img:border-border [&_p:empty]:min-h-[1.5em] [&_p:has(>br:only-child)]:min-h-[1.5em]"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
 
               {/* Share */}
-              <RevealSection delay={200}>
-                <div className="mt-12 pt-8 border-t border-border">
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm text-foreground/60 flex items-center gap-2">
-                      <Share2 className="w-4 h-4" />
-                      Compartilhar
-                    </span>
-                    <a
-                      href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-foreground/60 hover:text-primary transition-colors"
-                    >
-                      Twitter
-                    </a>
-                    <a
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-foreground/60 hover:text-primary transition-colors"
-                    >
-                      LinkedIn
-                    </a>
-                  </div>
+              <div className="mt-12 pt-8 border-t border-border">
+                <div className="flex items-center gap-4">
+                  <span className="text-sm text-foreground/60 flex items-center gap-2">
+                    <Share2 className="w-4 h-4" />
+                    Compartilhar
+                  </span>
+                  <a
+                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-foreground/60 hover:text-primary transition-colors"
+                  >
+                    Twitter
+                  </a>
+                  <a
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-foreground/60 hover:text-primary transition-colors"
+                  >
+                    LinkedIn
+                  </a>
                 </div>
-              </RevealSection>
+              </div>
             </article>
 
             {/* Sidebar */}
@@ -233,49 +224,45 @@ export default function BlogPost() {
               <div className="sticky top-8 space-y-8">
                 {/* Author */}
                 {post.author && (
-                  <RevealSection>
-                    <div className="bg-secondary p-6">
-                      <p className="text-xs font-mono uppercase tracking-wider text-foreground/50 mb-4">
-                        Escrito por
-                      </p>
-                      <div className="flex items-center gap-4">
-                        {post.author.image_url && (
-                          <img
-                            src={post.author.image_url}
-                            alt={post.author.name}
-                            className="w-12 h-12 object-cover"
-                          />
-                        )}
-                        <div>
-                          <p className="font-bold font-serif">{post.author.name}</p>
-                          <p className="text-xs text-foreground/60">{post.author.role}</p>
-                        </div>
+                  <div className="bg-secondary p-6">
+                    <p className="text-xs font-mono uppercase tracking-wider text-foreground/50 mb-4">
+                      Escrito por
+                    </p>
+                    <div className="flex items-center gap-4">
+                      {post.author.image_url && (
+                        <img
+                          src={post.author.image_url}
+                          alt={post.author.name}
+                          className="w-12 h-12 object-cover"
+                        />
+                      )}
+                      <div>
+                        <p className="font-bold font-serif">{post.author.name}</p>
+                        <p className="text-xs text-foreground/60">{post.author.role}</p>
                       </div>
                     </div>
-                  </RevealSection>
+                  </div>
                 )}
 
                 {/* Related */}
                 {relatedPosts.length > 0 && (
-                  <RevealSection delay={100}>
-                    <div>
-                      <p className="text-xs font-mono uppercase tracking-wider text-foreground/50 mb-4">
-                        Relacionados
-                      </p>
-                      <ul className="space-y-4">
-                        {relatedPosts.map((p) => (
-                          <li key={p.id}>
-                            <Link
-                              to={`/blog/${p.slug}`}
-                              className="text-sm font-medium hover:text-primary transition-colors line-clamp-2"
-                            >
-                              {p.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </RevealSection>
+                  <div>
+                    <p className="text-xs font-mono uppercase tracking-wider text-foreground/50 mb-4">
+                      Relacionados
+                    </p>
+                    <ul className="space-y-4">
+                      {relatedPosts.map((p) => (
+                        <li key={p.id}>
+                          <Link
+                            to={`/blog/${p.slug}`}
+                            className="text-sm font-medium hover:text-primary transition-colors line-clamp-2"
+                          >
+                            {p.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
             </aside>

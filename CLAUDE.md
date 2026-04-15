@@ -494,6 +494,34 @@ git push origin main      # Vercel faz deploy automático
 
 ---
 
+## OG Tags / Compartilhamento em Redes Sociais
+
+### Como funciona (duas camadas)
+
+**Camada 1 — Prerender no build** (`scripts/prerender.mjs`):
+- Gera `dist/blog/[slug]/index.html` para cada post publicado no Supabase no momento do deploy
+- Também gera HTML estático para todas as 7 rotas de serviço
+- O Vercel serve esses arquivos estáticos antes dos rewrites → bots recebem HTML correto instantaneamente
+
+**Camada 2 — Edge Middleware** (`middleware.ts`, raiz do projeto):
+- Intercepta requests de bots sociais (LinkedIn, WhatsApp, Facebook, etc.) para `/blog/*`
+- Busca dados do post em tempo real via Supabase REST API
+- Retorna HTML mínimo com OG tags corretas para posts que não têm arquivo estático (publicados após o último deploy)
+- Usuários normais não são afetados — passam direto para o SPA
+
+### O que isso significa na prática
+
+- **Posts existentes no deploy**: servidos pela Camada 1 (arquivo estático, máxima velocidade)
+- **Posts novos publicados após deploy**: cobertos pela Camada 2 automaticamente, sem precisar de novo deploy
+- **Resultado**: qualquer post compartilhado no LinkedIn/WhatsApp/etc. sempre mostra título, descrição e imagem do post
+
+### OG image dos posts de blog
+- Campo `featured_image_url` no Supabase: caminho relativo (ex: `/blog/hero-slug.svg`)
+- Ambas as camadas convertem para URL absoluta: `https://sourcemkt.com.br/blog/hero-slug.svg`
+- Fallback se não houver imagem: `https://sourcemkt.com.br/og-image.png`
+
+---
+
 ## Adicionando Imagens ao Projeto
 
 Imagens devem estar dentro de `src/assets/` para o Vite bundlar corretamente.
