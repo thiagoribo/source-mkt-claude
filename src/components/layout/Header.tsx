@@ -4,18 +4,13 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logoHeader from "@/assets/logo-header.svg";
 
 const navItems = [
-  { label: "Consultoria", href: "/consultoria-estrategica", bold: true },
-  {
-    label: "Branding",
-    children: [
-      { label: "Empresarial", href: "/branding-empresarial" },
-      { label: "Pessoal", href: "/branding-pessoal" },
-    ],
-  },
   { label: "Quem Somos", href: "/quem-somos" },
   {
     label: "Serviços",
     children: [
+      { label: "Consultoria Estratégica", href: "/consultoria-estrategica", premium: true },
+      { label: "Branding Empresarial", href: "/branding-empresarial", premium: true },
+      { label: "Branding Pessoal", href: "/branding-pessoal", premium: true },
       { label: "Identidade Visual", href: "/identidade-visual" },
       { label: "Gestão de Redes", href: "/gestao-redes-sociais" },
       { label: "Naming", href: "/naming" },
@@ -117,21 +112,35 @@ export default function Header() {
                       : "opacity-0 -translate-y-1 pointer-events-none"
                   }`}
                 >
-                  <div className="bg-brand-navy border border-brand-offwhite/10 py-2 min-w-[200px]">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        to={child.href}
-                        onClick={() => setOpenDropdown(null)}
-                        className={`block px-5 py-3 min-h-[44px] flex items-center text-xs font-medium tracking-wider uppercase hover:bg-brand-offwhite/5 transition-colors duration-150 ${
-                          isActive(child.href)
-                            ? "text-brand-offwhite border-l-2 border-brand-gold pl-[18px]"
-                            : "text-brand-offwhite/60 hover:text-brand-offwhite"
-                        }`}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
+                  <div className="bg-brand-navy border border-brand-offwhite/10 py-2 min-w-[220px]">
+                    {item.children.map((child, idx) => {
+                      const prev = item.children[idx - 1];
+                      const showDivider = prev?.premium && !child.premium;
+                      return (
+                        <div key={child.href}>
+                          {showDivider && (
+                            <div className="mx-4 my-1.5 border-t border-brand-offwhite/10" />
+                          )}
+                          <Link
+                            to={child.href}
+                            onClick={() => setOpenDropdown(null)}
+                            className={`block px-5 min-h-[44px] flex items-center tracking-wider uppercase hover:bg-brand-offwhite/5 transition-colors duration-150 ${
+                              child.premium
+                                ? "py-3 text-xs font-semibold"
+                                : "py-2.5 text-xs font-medium"
+                            } ${
+                              isActive(child.href)
+                                ? "text-brand-offwhite border-l-2 border-brand-gold pl-[18px]"
+                                : child.premium
+                                ? "text-brand-offwhite/85 hover:text-brand-offwhite"
+                                : "text-brand-offwhite/45 hover:text-brand-offwhite/75"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -186,20 +195,34 @@ export default function Header() {
                 <span className="text-xs font-semibold tracking-widest uppercase text-brand-offwhite/40 py-3">
                   {item.label}
                 </span>
-                {item.children.map((child) => (
-                  <Link
-                    key={child.href}
-                    to={child.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`text-sm font-medium py-2.5 pl-4 transition-all ${
-                      isActive(child.href)
-                        ? "text-brand-offwhite border-l-2 border-brand-gold pl-[14px]"
-                        : "text-brand-offwhite/70 hover:text-brand-offwhite border-l border-brand-offwhite/10 hover:border-brand-offwhite/40"
-                    }`}
-                  >
-                    {child.label}
-                  </Link>
-                ))}
+                {item.children.map((child, idx) => {
+                  const prev = item.children[idx - 1];
+                  const showDivider = prev?.premium && !child.premium;
+                  return (
+                    <div key={child.href}>
+                      {showDivider && (
+                        <div className="ml-4 my-1 border-t border-brand-offwhite/10" />
+                      )}
+                      <Link
+                        to={child.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={`pl-4 transition-all ${
+                          child.premium
+                            ? "text-sm font-semibold py-2.5"
+                            : "text-xs font-medium py-2"
+                        } ${
+                          isActive(child.href)
+                            ? "text-brand-offwhite border-l-2 border-brand-gold pl-[14px]"
+                            : child.premium
+                            ? "text-brand-offwhite/80 hover:text-brand-offwhite border-l border-brand-offwhite/20 hover:border-brand-offwhite/50"
+                            : "text-brand-offwhite/45 hover:text-brand-offwhite/70 border-l border-brand-offwhite/10 hover:border-brand-offwhite/30"
+                        }`}
+                      >
+                        {child.label}
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <Link
