@@ -105,6 +105,10 @@ export default {
           "0%": { width: "0%" },
           "100%": { width: "100%" },
         },
+        "marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -113,6 +117,7 @@ export default {
         "fade-in": "fade-in 0.6s ease-out forwards",
         "slide-in-right": "slide-in-right 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "line-grow": "line-grow 1.2s ease-out forwards",
+        "marquee": "marquee 22s linear infinite",
       },
     },
   },

@@ -324,6 +324,12 @@ function Formulario() {
     });
 
     if (result.success) {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "generate_lead",
+        form_source: "identidade-visual",
+        service: "Identidade Visual",
+      });
       setSubmitted(true);
     }
   };

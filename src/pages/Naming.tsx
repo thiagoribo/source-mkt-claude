@@ -401,6 +401,12 @@ function Formulario() {
     });
 
     if (result.success) {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "generate_lead",
+        form_source: "naming",
+        service: "Naming Estratégico",
+      });
       setSubmitted(true);
     }
   };

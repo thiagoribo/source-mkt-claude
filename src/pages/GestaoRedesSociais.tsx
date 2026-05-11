@@ -520,6 +520,12 @@ function Formulario() {
     });
 
     if (result.success) {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "generate_lead",
+        form_source: "gestao-redes-sociais",
+        service: "Gestão de Redes Sociais",
+      });
       setSubmitted(true);
     }
   };

@@ -421,6 +421,12 @@ function FormularioBranding() {
     });
 
     if (result.success) {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "generate_lead",
+        form_source: "branding-empresarial",
+        service: "Branding Empresarial",
+      });
       setSubmitted(true);
     }
   };

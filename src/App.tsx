@@ -21,6 +21,7 @@ const IdentidadeVisual = lazy(() => import("./pages/IdentidadeVisual"));
 const GestaoRedesSociais = lazy(() => import("./pages/GestaoRedesSociais"));
 const Naming = lazy(() => import("./pages/Naming"));
 const CaseDetail = lazy(() => import("./pages/CaseDetail"));
+const Consultoria360 = lazy(() => import("./pages/Consultoria360"));
 const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -108,6 +109,7 @@ const App = () => (
                       <Route path="/identidade-visual" element={<IdentidadeVisual />} />
                       <Route path="/gestao-redes-sociais" element={<GestaoRedesSociais />} />
                       <Route path="/naming" element={<Naming />} />
+                      <Route path="/consultoria-360" element={<Consultoria360 />} />
                       <Route path="/cases/:slug" element={<CaseDetail />} />
                       <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
                       <Route path="*" element={<NotFound />} />

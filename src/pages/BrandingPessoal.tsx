@@ -611,6 +611,12 @@ function FormularioPessoal() {
     });
 
     if (result.success) {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "generate_lead",
+        form_source: "branding-pessoal",
+        service: "Branding Pessoal",
+      });
       setSubmitted(true);
     }
   };
