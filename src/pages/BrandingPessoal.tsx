@@ -25,95 +25,6 @@ import {
 import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
 import { brandingPessoalResults } from "@/data/serviceMockups";
-import { TestimonialSlider } from "@/components/ui/testimonial-slider";
-import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
-
-// Fotos dos clientes - Branding Pessoal (fallback images)
-import sabrinaKeller from "@/assets/clientes/sabrina-keller.webp";
-import giuliaCloss from "@/assets/clientes/giulia-closs.webp";
-import andressaFraga from "@/assets/clientes/andressa-fraga.webp";
-import anaPriscia from "@/assets/clientes/ana-priscia.webp";
-import indyZimmer from "@/assets/clientes/indy-zimmer.webp";
-import thatianeOliveira from "@/assets/clientes/thatiane-oliveira.webp";
-import stephanytizziani from "@/assets/clientes/stephany-tizziani.webp";
-
-// Map client names to their local images
-const clientImageMap: Record<string, string> = {
-  "Sabrina Keller": sabrinaKeller,
-  "Giulia Closs": giuliaCloss,
-  "Andressa Fraga": andressaFraga,
-  "Dra. Ana Príscia": anaPriscia,
-  "Indy Zimmer": indyZimmer,
-  "Thatiane Nascimento": thatianeOliveira,
-  "Stephany Tizziani": stephanytizziani,
-};
-
-// Fallback testimonials for when Supabase is unavailable
-const fallbackTestimonials = [
-  {
-    id: 1,
-    name: "Sabrina Keller",
-    role: "Mentora de Mulheres e Palestrante",
-    quote: "Atribuo minha posição atual ao apoio na gestão de redes sociais e orientação de posicionamento. Recebo mensagens diárias de interessadas.",
-    result: "+150% faturamento",
-    imageSrc: sabrinaKeller,
-    thumbnailSrc: sabrinaKeller,
-  },
-  {
-    id: 2,
-    name: "Giulia Closs",
-    role: "Arquiteta",
-    quote: "O processo superou as expectativas. A equipe capturou a essência da minha marca desde o início.",
-    result: "R$ 20.000 no 1º mês",
-    imageSrc: giuliaCloss,
-    thumbnailSrc: giuliaCloss,
-  },
-  {
-    id: 3,
-    name: "Andressa Fraga",
-    role: "Advogada e Mestre em Neurociência",
-    quote: "Ana possui maestria em traduzir desejos que o cliente não consegue expressar com exatidão. O processo é uma escuta profunda que transforma histórias de vida em marcas estratégicas.",
-    result: "3 empresas + Podcast Neuro4you",
-    imageSrc: andressaFraga,
-    thumbnailSrc: andressaFraga,
-  },
-  {
-    id: 4,
-    name: "Dra. Ana Príscia",
-    role: "Médica Alergista e Imunologista",
-    quote: "Ana deu rumo ao meu navio. Antes eu tinha força mas remava em círculos. O processo trouxe equilíbrio e direcionamento através de questionamentos e estratégias sólidas.",
-    result: "Parcerias e projetos de destaque",
-    imageSrc: anaPriscia,
-    thumbnailSrc: anaPriscia,
-  },
-  {
-    id: 5,
-    name: "Indy Zimmer",
-    role: "Mentora de Mentalidade",
-    quote: "A equipe captou exatamente quem eu sou e superou as expectativas em 1 milhão de vezes. Descobri meu propósito e mudei completamente a visão do negócio.",
-    result: "Propósito descoberto",
-    imageSrc: indyZimmer,
-    thumbnailSrc: indyZimmer,
-  },
-  {
-    id: 6,
-    name: "Thatiane Nascimento",
-    role: "Assessora Administrativa & Financeira",
-    quote: "A mentoria trouxe confiança e a sensação de merecimento. Investir em imagem e comunicação foi uma das minhas melhores decisões.",
-    result: "Trabalha com grandes nomes do mercado digital",
-    imageSrc: thatianeOliveira,
-    thumbnailSrc: thatianeOliveira,
-  },
-  {
-    id: 7,
-    name: "Stephany Tizziani",
-    role: "Mentora de Nail Designers",
-    quote: "Melhor investimento da minha carreira. A agência me deu um norte e evitou muitos tropeços.",
-    result: "Aumento na procura pela mentoria",
-    imageSrc: stephanytizziani,
-    thumbnailSrc: stephanytizziani,
-  },
-];
 
 /* ─── CTA mid-page reutilizável ─── */
 function MidPageCta({ label, cta }: { label: string; cta: string }) {
@@ -509,32 +420,6 @@ function InvestimentoPessoal() {
   );
 }
 
-/* ─── Depoimento — editorial ─── */
-function Depoimento() {
-  const { data: supabaseTestimonials } = useTestimonialsByService('branding-pessoal');
-
-  // Transform Supabase data to match TestimonialSlider format, or use fallback
-  const testimonials = supabaseTestimonials && supabaseTestimonials.length > 0
-    ? supabaseTestimonials.map((t, i) => ({
-        id: i + 1,
-        name: t.name,
-        role: t.role || '',
-        quote: t.quote,
-        result: t.result || '',
-        imageSrc: t.image_url || clientImageMap[t.name] || sabrinaKeller,
-        thumbnailSrc: t.image_url || clientImageMap[t.name] || sabrinaKeller,
-      }))
-    : fallbackTestimonials;
-
-  return (
-    <TestimonialSlider
-      reviews={testimonials}
-      title="Clientes que Transformaram suas Carreiras"
-      subtitle="Profissionais que investiram em branding pessoal e colheram resultados extraordinários"
-    />
-  );
-}
-
 /* ─── FAQ ─── */
 function FAQ() {
   const faqs = [
@@ -739,7 +624,6 @@ export default function BrandingPessoal() {
       <ParaQuemE />
       <ResultadosSimulados />
       {/* <InvestimentoPessoal /> — preço oculto, backup em src/_pricing-backup/investimento-branding-pessoal.tsx */}
-      <Depoimento />
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container-sm max-w-4xl">
           <RevealSection>
