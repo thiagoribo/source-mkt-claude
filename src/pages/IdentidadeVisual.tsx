@@ -25,62 +25,6 @@ import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
 import CasesCarousel from "@/components/shared/CasesCarousel";
 import { identidadeVisualMockups } from "@/data/serviceMockups";
-import { TestimonialSlider } from "@/components/ui/testimonial-slider";
-import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
-
-// Fotos dos clientes - Identidade Visual (fallback images)
-import beatrizGarcia from "@/assets/clientes/beatriz-garcia.webp";
-import guilhermeMoeller from "@/assets/clientes/guilherme-moeller.webp";
-import jessicaFrasson from "@/assets/clientes/jessica-frasson.webp";
-import milenaPandolfi from "@/assets/clientes/milena-pandolfi.webp";
-
-// Map client names to their local images
-const clientImageMap: Record<string, string> = {
-  "Beatriz Garcia": beatrizGarcia,
-  "Guilherme Moeller": guilhermeMoeller,
-  "Jéssica Frasson": jessicaFrasson,
-  "Dra. Milena Pandolfi": milenaPandolfi,
-};
-
-// Fallback testimonials for when Supabase is unavailable
-const fallbackTestimonials = [
-  {
-    id: 1,
-    name: "Beatriz Garcia",
-    role: "Advogada",
-    quote: "O resultado superou todas as expectativas e combinou perfeitamente com minha identidade. Agora sinto que posso dominar o mundo!",
-    result: "Marca do escritório alavancada",
-    imageSrc: beatrizGarcia,
-    thumbnailSrc: beatrizGarcia,
-  },
-  {
-    id: 2,
-    name: "Guilherme Moeller",
-    role: "Treinador e Palestrante — Furu",
-    quote: "Atendimento com muita atenção e soluções que atenderam perfeitamente os sócios.",
-    result: "Soluções adequadas para todos",
-    imageSrc: guilhermeMoeller,
-    thumbnailSrc: guilhermeMoeller,
-  },
-  {
-    id: 3,
-    name: "Jéssica Frasson",
-    role: "Fisioterapeuta",
-    quote: "Agenda sempre lotada e aumento significativo no ticket dos meus serviços.",
-    result: "Espaço próprio inaugurado",
-    imageSrc: jessicaFrasson,
-    thumbnailSrc: jessicaFrasson,
-  },
-  {
-    id: 4,
-    name: "Dra. Milena Pandolfi",
-    role: "Médica Alergista e Imunologista",
-    quote: "Uma palavra resume o trabalho: clareza e direcionamento.",
-    result: "Agenda de pacientes preenchida",
-    imageSrc: milenaPandolfi,
-    thumbnailSrc: milenaPandolfi,
-  },
-];
 
 /* ─── Hero ─── */
 function Hero() {
@@ -426,33 +370,6 @@ function Formulario() {
   );
 }
 
-/* ─── Page ─── */
-/* ─── Depoimentos ─── */
-function Depoimentos() {
-  const { data: supabaseTestimonials } = useTestimonialsByService('identidade-visual');
-
-  // Transform Supabase data to match TestimonialSlider format, or use fallback
-  const testimonials = supabaseTestimonials && supabaseTestimonials.length > 0
-    ? supabaseTestimonials.map((t, i) => ({
-        id: i + 1,
-        name: t.name,
-        role: t.role || '',
-        quote: t.quote,
-        result: t.result || '',
-        imageSrc: t.image_url || clientImageMap[t.name] || beatrizGarcia,
-        thumbnailSrc: t.image_url || clientImageMap[t.name] || beatrizGarcia,
-      }))
-    : fallbackTestimonials;
-
-  return (
-    <TestimonialSlider
-      reviews={testimonials}
-      title="Identidades que Marcam"
-      subtitle="Clientes que transformaram a percepção de suas marcas com design estratégico"
-    />
-  );
-}
-
 export default function IdentidadeVisual() {
   return (
     <>
@@ -480,7 +397,6 @@ export default function IdentidadeVisual() {
       <Entregaveis />
       <GaleriaMockups />
       {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-identidade-visual.tsx */}
-      <Depoimentos />
       <Formulario />
     </>
   );

@@ -24,9 +24,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ComparisonTable from "@/components/shared/ComparisonTable";
 import { socialDashboardKpis, socialEditorialCycle } from "@/data/serviceMockups";
-import { TestimonialSlider } from "@/components/ui/testimonial-slider";
-import { useTestimonialsByService } from "@/hooks/queries/useTestimonials";
-
 // Imagens de depoimentos (o que falam de nós)
 import dep1 from "@/assets/cases/gestao-redes/depoimentos/dep-1.webp";
 import dep2 from "@/assets/cases/gestao-redes/depoimentos/dep-2.webp";
@@ -35,59 +32,6 @@ import dep5 from "@/assets/cases/gestao-redes/depoimentos/dep-5.webp";
 import dep8 from "@/assets/cases/gestao-redes/depoimentos/dep-8.webp";
 import dep9 from "@/assets/cases/gestao-redes/depoimentos/dep-9.webp";
 
-// Fotos dos clientes - Gestão de Redes Sociais (fallback images)
-import monalisaOliveira from "@/assets/clientes/monalisa-oliveira.webp";
-import rebeccaSantos from "@/assets/clientes/rebecca-santos.webp";
-import glayceKerolin from "@/assets/clientes/glayce-kerolin.webp";
-import sabrinaKeller from "@/assets/clientes/sabrina-keller.webp";
-
-// Map client names to their local images
-const clientImageMap: Record<string, string> = {
-  "Sabrina Keller": sabrinaKeller,
-  "Monalisa Oliveira": monalisaOliveira,
-  "Rebecca Santos": rebeccaSantos,
-  "Glayce Kerolin": glayceKerolin,
-};
-
-// Fallback testimonials for when Supabase is unavailable
-const fallbackTestimonials = [
-  {
-    id: 1,
-    name: "Sabrina Keller",
-    role: "Mentora de Mulheres e Palestrante",
-    quote: "Atribuo minha posição atual ao apoio na gestão de redes sociais e orientação de posicionamento. Recebo mensagens diárias de interessadas.",
-    result: "+150% faturamento, turmas sempre cheias",
-    imageSrc: sabrinaKeller,
-    thumbnailSrc: sabrinaKeller,
-  },
-  {
-    id: 2,
-    name: "Monalisa Oliveira",
-    role: "Advogada (Portugal)",
-    quote: "Trabalho incrível, personalizado e de altíssima qualidade.",
-    result: "Materiais de conteúdo de excelência",
-    imageSrc: monalisaOliveira,
-    thumbnailSrc: monalisaOliveira,
-  },
-  {
-    id: 3,
-    name: "Rebecca Santos",
-    role: "Advogada Tributária",
-    quote: "Um trabalho incrível, personalizado e de alta qualidade.",
-    result: "Conteúdo estratégico personalizado",
-    imageSrc: rebeccaSantos,
-    thumbnailSrc: rebeccaSantos,
-  },
-  {
-    id: 4,
-    name: "Glayce Kerolin",
-    role: "Mentora e Psicanalista",
-    quote: "Destaco o empenho da equipe em entregar soluções com profissionalismo.",
-    result: "Soluções entregues com excelência",
-    imageSrc: glayceKerolin,
-    thumbnailSrc: glayceKerolin,
-  },
-];
 
 /* ─── Hero ─── */
 function Hero() {
@@ -618,33 +562,6 @@ function Formulario() {
   );
 }
 
-/* ─── Page ─── */
-/* ─── Depoimentos ─── */
-function Depoimentos() {
-  const { data: supabaseTestimonials } = useTestimonialsByService('gestao-redes-sociais');
-
-  // Transform Supabase data to match TestimonialSlider format, or use fallback
-  const testimonials = supabaseTestimonials && supabaseTestimonials.length > 0
-    ? supabaseTestimonials.map((t, i) => ({
-        id: i + 1,
-        name: t.name,
-        role: t.role || '',
-        quote: t.quote,
-        result: t.result || '',
-        imageSrc: t.image_url || clientImageMap[t.name] || sabrinaKeller,
-        thumbnailSrc: t.image_url || clientImageMap[t.name] || sabrinaKeller,
-      }))
-    : fallbackTestimonials;
-
-  return (
-    <TestimonialSlider
-      reviews={testimonials}
-      title="Resultados nas Redes Sociais"
-      subtitle="Clientes que transformaram sua presença digital com gestão estratégica"
-    />
-  );
-}
-
 export default function GestaoRedesSociais() {
   return (
     <>
@@ -673,7 +590,6 @@ export default function GestaoRedesSociais() {
       <OQueFalamDeNos />
       <PreviewOperacao />
       {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-gestao-redes-sociais.tsx */}
-      <Depoimentos />
       <Formulario />
     </>
   );
