@@ -35,7 +35,6 @@ import {
 import RevealSection from "@/components/shared/RevealSection";
 import ana1 from "@/assets/ana-nova.webp";
 import thiago1 from "@/assets/thiago-1.webp";
-import stdiCase from "@/assets/cases/consultoria/stdi.webp";
 import startCase from "@/assets/cases/consultoria/start.webp";
 import likeBrandP20 from "@/assets/cases/branding/like-brand-p20.webp";
 
@@ -669,17 +668,6 @@ function Lideranca() {
 function CasesConsultoria() {
   const cases = [
     {
-      img: stdiCase,
-      name: "STDI",
-      challenge: "Empresa B2B investindo em marketing sem processo estruturado de geração e acompanhamento de leads — posicionamento genérico e pipeline sem previsibilidade",
-      actions: ["Diagnóstico estratégico completo", "Reposicionamento de marca B2B", "Arquitetura comercial e funil de vendas"],
-      result: "100% dos leads com acompanhamento estruturado e posicionamento consolidado",
-      links: {
-        linkedin: "https://www.linkedin.com/company/stdi-investiga%C3%A7%C3%A3o-intelig%C3%AAncia/posts/?feedView=all",
-        site: "https://www.stdiinteligencia.com.br/",
-      },
-    },
-    {
       img: startCase,
       name: "Start Imobiliário",
       challenge: "Investimento em mídia e captação sem funil estruturado — leads chegavam mas sem processo claro de qualificação para o segmento premium",
@@ -714,7 +702,7 @@ function CasesConsultoria() {
           <h2 className="text-3xl md:text-4xl font-bold mb-16">Empresas que Transformamos</h2>
         </RevealSection>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {cases.map((c, i) => (
             <RevealSection key={c.name} delay={i * 150}>
               <div className="group border border-border overflow-hidden h-full flex flex-col hover:border-primary/40 transition-colors">

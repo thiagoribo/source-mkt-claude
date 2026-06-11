@@ -36,7 +36,7 @@ src/
 │   ├── cases/
 │   │   ├── branding/          (2 imagens: LIKE.Brand)
 │   │   ├── branding-pessoal/  (4 cases)
-│   │   ├── consultoria/       (2 imagens: START, STDI)
+│   │   ├── consultoria/       (1 imagem: START)
 │   │   ├── identidade-visual/ (3 imagens)
 │   │   ├── gestao-redes/
 │   │   │   ├── like.png, jaqueline-vieira.png, lisia-heinen.png
@@ -329,7 +329,7 @@ export default function NomeServico() {
 5. Metodologia — Fase 01 inclui auditoria de Meta/Google Ads e fluxo de leads explicitamente
 6. Modalidades
 7. Liderança
-8. CasesConsultoria — challenges reescritos com contexto de performance/leads
+8. CasesConsultoria — **Start Imobiliário** e **LIKE. Brand** (STDI removido); grid `md:grid-cols-2`
 9. FAQ — inclui perguntas sobre análise de ads e alinhamento marketing+vendas
 10. FormularioQualificacao
 

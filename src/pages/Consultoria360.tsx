@@ -17,7 +17,6 @@ import thiago1 from "@/assets/thiago-1.webp";
 import logoCodigoVarejista from "@/assets/clientes/Logo/codigo-varejista.png";
 import logoCelsoMissias from "@/assets/clientes/Logo/celso-missias.png";
 import logoStartImobiliario from "@/assets/clientes/Logo/start-imobilirio.png";
-import logoStdi from "@/assets/clientes/Logo/stdi.png";
 import logoCelmi from "@/assets/clientes/Logo/celmi.png";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
@@ -306,7 +305,6 @@ const CLIENT_LOGOS = [
   { src: logoCodigoVarejista, alt: "Código Varejista" },
   { src: logoCelsoMissias,    alt: "Celso Missias" },
   { src: logoStartImobiliario, alt: "Start Imobiliário" },
-  { src: logoStdi,            alt: "STDI" },
   { src: logoCelmi,           alt: "Celmi" },
 ];
 

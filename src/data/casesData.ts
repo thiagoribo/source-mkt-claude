@@ -28,7 +28,6 @@ export interface CaseData {
   links: CaseLinks;
 }
 
-// Ordered: LIKE. → STDI → Clínica Petra → Start Imobiliário
 export const casesData: CaseData[] = [
   {
     id: "like-brand",
@@ -57,29 +56,6 @@ export const casesData: CaseData[] = [
     links: {
       instagram: "https://www.instagram.com/likebrand.oficial/",
       drive: "https://drive.google.com/drive/folders/1td6Z5UQf8y_jjKFRFt62RfTO6-H2LONj?usp=sharing",
-    },
-  },
-  {
-    id: "stdi-investigacao-inteligencia",
-    category: "Consultoria 360°",
-    client: "STDI Investigação e Inteligência",
-    tagline: "De investimento sem retorno a 30% de crescimento em 2 meses.",
-    headline: "Quando o problema não é o investimento — é a falta de estratégia.",
-    storytelling: [
-      "A STDI chegou até a Source com um incômodo real: investia em Google Ads, mas não via retorno. O dinheiro saía, os cliques vinham — e os clientes, não.",
-      "O problema não era o canal. Era tudo ao redor dele.",
-      "Faltava clareza no posicionamento: quem era a STDI para o mercado? Faltava processo comercial: o que acontecia com um lead depois que ele chegava? E faltava uma presença digital que transmitisse a seriedade que o serviço exigia.",
-      "A Source entrou com uma Consultoria 360°. Reconstruímos o site do zero, reformulando cada etapa da experiência do cliente — da primeira impressão ao primeiro contato. Redesenhamos o posicionamento de marca para que a STDI falasse diretamente com o perfil de cliente que queria atrair. Profissionalizamos a comunicação em todos os pontos de contato. E implantamos um novo modelo comercial, com processos claros para que nenhum lead fosse perdido no caminho.",
-      "O resultado: em 2 meses de implementação, a STDI cresceu 30% no faturamento. O Google Ads, que antes era um custo sem sentido, passou a ser um investimento com retorno mensurável. Hoje, cada lead tem acompanhamento, cada etapa tem dono — e a empresa está alinhada com o cliente que quer, pronta para crescer com consistência.",
-    ],
-    results: [
-      { metric: "30%", label: "de crescimento em faturamento" },
-      { metric: "2 meses", label: "de implementação para ver resultado" },
-      { metric: "100%", label: "dos leads com acompanhamento estruturado" },
-    ],
-    links: {
-      linkedin: "https://www.linkedin.com/company/stdi-investiga%C3%A7%C3%A3o-intelig%C3%AAncia/posts/?feedView=all",
-      site: "https://www.stdiinteligencia.com.br/",
     },
   },
   {
