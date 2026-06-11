@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useSubmitLead } from "@/hooks/useSubmitLead";
+import { trackLead, trackFormStart } from "@/lib/analytics";
 import {
   Check,
   X,
@@ -464,12 +465,7 @@ function Formulario() {
     });
 
     if (result.success) {
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        event: "generate_lead",
-        form_source: "gestao-redes-sociais",
-        service: "Gestão de Redes Sociais",
-      });
+      trackLead("gestao-redes-sociais");
       setSubmitted(true);
     }
   };
@@ -507,7 +503,7 @@ function Formulario() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome *</Label>
-                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" />
+                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" onFocus={() => trackFormStart("gestao-redes-sociais")} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email *</Label>

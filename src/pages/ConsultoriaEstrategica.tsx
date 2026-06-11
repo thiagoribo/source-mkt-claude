@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSubmitLead } from "@/hooks/useSubmitLead";
+import { trackLead, trackFormStart } from "@/lib/analytics";
 import {
   Accordion,
   AccordionContent,
@@ -804,21 +805,39 @@ function FAQ() {
 /* ─── Formulário ─── */
 function FormularioQualificacao() {
   const [submitted, setSubmitted] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1);
+  const [step1Data, setStep1Data] = useState({ name: '', email: '', phone: '', company: '' });
   const { submitLead, isLoading } = useSubmitLead('consultoria-estrategica');
-  const formRef = useRef<HTMLFormElement>(null);
+  const step1Ref = useRef<HTMLFormElement>(null);
+  const step2Ref = useRef<HTMLFormElement>(null);
   const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
+
+  const handleStep1 = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!step1Ref.current) return;
+    const fd = new FormData(step1Ref.current);
+    setStep1Data({
+      name: fd.get('name') as string,
+      email: fd.get('email') as string,
+      phone: fd.get('phone') as string,
+      company: fd.get('company') as string,
+    });
+    trackFormStart("consultoria-estrategica");
+    setStep(2);
+    setTimeout(() => window.scrollTo({ top: document.getElementById('formulario')?.offsetTop ?? 0, behavior: 'smooth' }), 50);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formRef.current) return;
+    if (!step2Ref.current) return;
 
-    const formData = new FormData(formRef.current);
+    const formData = new FormData(step2Ref.current);
 
     const result = await submitLead({
-      full_name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      whatsapp: formData.get('phone') as string,
-      company: formData.get('company') as string,
+      full_name: step1Data.name,
+      email: step1Data.email,
+      whatsapp: step1Data.phone,
+      company: step1Data.company,
       website: formData.get('website') as string,
       role: formData.get('role') as string,
       notes: formData.get('challenge') as string,
@@ -830,12 +849,7 @@ function FormularioQualificacao() {
     });
 
     if (result.success) {
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        event: "generate_lead",
-        form_source: "consultoria-estrategica",
-        service: "Consultoria Estratégica",
-      });
+      trackLead("consultoria-estrategica");
       setSubmitted(true);
     }
   };
@@ -858,6 +872,10 @@ function FormularioQualificacao() {
     <section id="formulario" className="section-spacing bg-background">
       <div className="container-sm max-w-2xl">
         <RevealSection>
+          <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-4 py-1.5 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
+            Apenas 3 vagas abertas em junho
+          </span>
           <div className="mb-12 space-y-3">
             <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Qualificação</p>
             <h2 className="text-3xl md:text-4xl font-bold">Pronto para Transformar sua Estratégia?</h2>
@@ -867,160 +885,157 @@ function FormularioQualificacao() {
           </div>
         </RevealSection>
 
+        {/* Progress indicator */}
+        <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center gap-2">
+            <span className="w-6 h-6 flex items-center justify-center text-xs font-mono bg-primary text-primary-foreground">1</span>
+            <span className="text-xs font-mono text-foreground/60">Contato</span>
+          </div>
+          <div className={`h-px flex-1 transition-colors duration-300 ${step === 2 ? 'bg-primary' : 'bg-border'}`} />
+          <div className="flex items-center gap-2">
+            <span className={`w-6 h-6 flex items-center justify-center text-xs font-mono transition-colors duration-300 ${step === 2 ? 'bg-primary text-primary-foreground' : 'bg-border text-foreground/40'}`}>2</span>
+            <span className="text-xs font-mono text-foreground/60">Qualificação</span>
+          </div>
+        </div>
+
         <RevealSection delay={100}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="space-y-6 border border-border p-8"
-          >
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome completo *</Label>
-                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" />
+          {step === 1 ? (
+            <form ref={step1Ref} onSubmit={handleStep1} className="space-y-6 border border-border p-8">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Nome completo *</Label>
+                  <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" defaultValue={step1Data.name} />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email corporativo *</Label>
+                  <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" defaultValue={step1Data.email} />
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email corporativo *</Label>
-                <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Telefone/WhatsApp *</Label>
+                  <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" defaultValue={step1Data.phone} />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="company">Nome da empresa *</Label>
+                  <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" defaultValue={step1Data.company} />
+                </div>
               </div>
-            </div>
+              <Button type="submit" size="lg" className="w-full rounded-none text-base h-12">
+                Continuar →
+              </Button>
+            </form>
+          ) : (
+            <form ref={step2Ref} onSubmit={handleSubmit} className="space-y-6 border border-border p-8">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="website">Site da empresa *</Label>
+                  <Input id="website" name="website" required placeholder="www.suaempresa.com" className="rounded-none" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="role">Seu cargo *</Label>
+                  <Input id="role" name="role" required placeholder="CEO, Diretor, etc." className="rounded-none" />
+                </div>
+              </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
+                <Label htmlFor="challenge">Qual o principal desafio estratégico? *</Label>
+                <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente o desafio que sua empresa enfrenta..." rows={3} className="rounded-none" />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="company">Nome da empresa *</Label>
-                <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" />
-              </div>
-            </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="website">Site da empresa *</Label>
-                <Input id="website" name="website" required placeholder="www.suaempresa.com" className="rounded-none" />
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="revenue">Faturamento anual aproximado *</Label>
+                  <select id="revenue" name="revenue" required className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                    <option value="">Selecione</option>
+                    <option value="Até R$500k/ano">Até R$500k/ano</option>
+                    <option value="R$500k – R$2M/ano">R$500k – R$2M/ano</option>
+                    <option value="R$2M – R$10M/ano">R$2M – R$10M/ano</option>
+                    <option value="R$10M+/ano">R$10M+/ano</option>
+                    <option value="Empresa com funding">Empresa com funding</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="budget">Faixa de investimento disponível *</Label>
+                  <select id="budget" name="budget" required className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                    <option value="">Selecione</option>
+                    <option value="Até R$35.000">Até R$35.000</option>
+                    <option value="R$35.000 – R$55.000">R$35.000 – R$55.000</option>
+                    <option value="R$55.000 – R$85.000">R$55.000 – R$85.000</option>
+                    <option value="R$85.000 – R$140.000">R$85.000 – R$140.000</option>
+                    <option value="Acima de R$140.000">Acima de R$140.000</option>
+                    <option value="Budget flexível">Budget flexível</option>
+                  </select>
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="role">Seu cargo *</Label>
-                <Input id="role" name="role" required placeholder="CEO, Diretor, etc." className="rounded-none" />
+
+              <div className="space-y-3">
+                <Label>Escopo do projeto (múltipla escolha)</Label>
+                <div className="space-y-2">
+                  {[
+                    "Diagnóstico e Reposicionamento Estratégico",
+                    "Estratégia de Performance e Conversão",
+                    "Arquitetura de Funil de Vendas",
+                    "Implementação Hands-on",
+                    "Ainda não sei, preciso de ajuda para mapear",
+                  ].map((scope) => (
+                    <div key={scope} className="flex items-center gap-2">
+                      <Checkbox
+                        id={`scope-${scope}`}
+                        checked={selectedScopes.includes(scope)}
+                        onCheckedChange={(checked) => {
+                          if (checked) setSelectedScopes([...selectedScopes, scope]);
+                          else setSelectedScopes(selectedScopes.filter((s) => s !== scope));
+                        }}
+                      />
+                      <Label htmlFor={`scope-${scope}`} className="text-sm font-normal text-foreground/75 cursor-pointer">
+                        {scope}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="challenge">Qual o principal desafio estratégico? *</Label>
-              <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente o desafio que sua empresa enfrenta..." rows={3} className="rounded-none" />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="revenue">Faturamento anual aproximado *</Label>
-                <select
-                  id="revenue"
-                  name="revenue"
-                  required
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="Até R$500k/ano">Até R$500k/ano</option>
-                  <option value="R$500k – R$2M/ano">R$500k – R$2M/ano</option>
-                  <option value="R$2M – R$10M/ano">R$2M – R$10M/ano</option>
-                  <option value="R$10M+/ano">R$10M+/ano</option>
-                  <option value="Empresa com funding">Empresa com funding</option>
-                </select>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="modality">Modalidade preferencial</Label>
+                  <select id="modality" name="modality" className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                    <option value="">Selecione</option>
+                    <option value="100% Remota">100% Remota</option>
+                    <option value="Híbrida">Híbrida</option>
+                    <option value="Imersão Presencial">Imersão Presencial</option>
+                    <option value="Flexível">Flexível</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="timeline">Timeline desejado</Label>
+                  <select id="timeline" name="timeline" className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                    <option value="">Selecione</option>
+                    <option value="Urgente (menos de 30 dias)">Urgente (menos de 30 dias)</option>
+                    <option value="30–90 dias">30–90 dias</option>
+                    <option value="90+ dias">90+ dias</option>
+                    <option value="Flexível">Flexível</option>
+                  </select>
+                </div>
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="budget">Faixa de investimento disponível *</Label>
-                <select
-                  id="budget"
-                  name="budget"
-                  required
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="Até R$35.000">Até R$35.000</option>
-                  <option value="R$35.000 – R$55.000">R$35.000 – R$55.000</option>
-                  <option value="R$55.000 – R$85.000">R$55.000 – R$85.000</option>
-                  <option value="R$85.000 – R$140.000">R$85.000 – R$140.000</option>
-                  <option value="Acima de R$140.000">Acima de R$140.000</option>
-                  <option value="Budget flexível">Budget flexível</option>
-                </select>
+                <Label htmlFor="source">Como conheceu a SM Agency?</Label>
+                <Input id="source" name="source" placeholder="Google, indicação, redes sociais..." className="rounded-none" />
               </div>
-            </div>
 
-            <div className="space-y-3">
-              <Label>Escopo do projeto (múltipla escolha)</Label>
-              <div className="space-y-2">
-                {[
-                  "Diagnóstico e Reposicionamento Estratégico",
-                  "Estratégia de Performance e Conversão",
-                  "Arquitetura de Funil de Vendas",
-                  "Implementação Hands-on",
-                  "Ainda não sei, preciso de ajuda para mapear",
-                ].map((scope) => (
-                  <div key={scope} className="flex items-center gap-2">
-                    <Checkbox
-                      id={`scope-${scope}`}
-                      checked={selectedScopes.includes(scope)}
-                      onCheckedChange={(checked) => {
-                        if (checked) {
-                          setSelectedScopes([...selectedScopes, scope]);
-                        } else {
-                          setSelectedScopes(selectedScopes.filter((s) => s !== scope));
-                        }
-                      }}
-                    />
-                    <Label htmlFor={`scope-${scope}`} className="text-sm font-normal text-foreground/75 cursor-pointer">
-                      {scope}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
+              <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
+                {isLoading ? 'Enviando...' : 'Quero uma Conversa Estratégica'}
+              </Button>
+              <button type="button" onClick={() => setStep(1)} className="w-full text-xs text-foreground/40 hover:text-foreground/70 transition-colors py-1">
+                ← Voltar ao passo anterior
+              </button>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="modality">Modalidade preferencial</Label>
-                <select
-                  id="modality"
-                  name="modality"
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="100% Remota">100% Remota</option>
-                  <option value="Híbrida">Híbrida</option>
-                  <option value="Imersão Presencial">Imersão Presencial</option>
-                  <option value="Flexível">Flexível</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="timeline">Timeline desejado</Label>
-                <select
-                  id="timeline"
-                  name="timeline"
-                  className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <option value="">Selecione</option>
-                  <option value="Urgente (menos de 30 dias)">Urgente (menos de 30 dias)</option>
-                  <option value="30–90 dias">30–90 dias</option>
-                  <option value="90+ dias">90+ dias</option>
-                  <option value="Flexível">Flexível</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="source">Como conheceu a SM Agency?</Label>
-              <Input id="source" name="source" placeholder="Google, indicação, redes sociais..." className="rounded-none" />
-            </div>
-
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Quero uma Conversa Estratégica'}
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Ao enviar, você concorda com nossa Política de Privacidade. Entraremos em contato em até 48h úteis.
-            </p>
-          </form>
+              <p className="text-xs text-muted-foreground text-center">
+                Ao enviar, você concorda com nossa Política de Privacidade. Entraremos em contato em até 48h úteis.
+              </p>
+            </form>
+          )}
         </RevealSection>
       </div>
     </section>

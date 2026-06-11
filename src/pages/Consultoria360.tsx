@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { trackLead, trackFormStart } from "@/lib/analytics";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -773,12 +774,7 @@ function CTAFinal() {
       source: "LP Consultoria 360°",
     });
     if (result.success) {
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        event: "generate_lead",
-        form_source: "consultoria-360",
-        service: "Consultoria Estratégica 360°",
-      });
+      trackLead("consultoria-360");
       setSubmitted(true);
     }
   };
@@ -840,6 +836,7 @@ function CTAFinal() {
                   name="name"
                   placeholder="Seu nome"
                   required
+                  onFocus={() => trackFormStart("consultoria-360")}
                   className="rounded-none h-12 text-sm bg-card border-border"
                 />
                 <Input

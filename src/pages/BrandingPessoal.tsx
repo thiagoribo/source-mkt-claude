@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useSubmitLead } from "@/hooks/useSubmitLead";
+import { trackLead, trackFormStart } from "@/lib/analytics";
 import {
   Check,
   User,
@@ -496,12 +497,7 @@ function FormularioPessoal() {
     });
 
     if (result.success) {
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        event: "generate_lead",
-        form_source: "branding-pessoal",
-        service: "Branding Pessoal",
-      });
+      trackLead("branding-pessoal");
       setSubmitted(true);
     }
   };
@@ -524,6 +520,10 @@ function FormularioPessoal() {
     <section id="formulario" className="section-spacing bg-secondary">
       <div className="container-sm max-w-2xl">
         <RevealSection>
+          <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-4 py-1.5 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
+            Apenas 3 vagas abertas em junho
+          </span>
           <div className="mb-8 space-y-3">
             <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Conversa Estratégica</p>
             <h2 className="text-3xl md:text-4xl font-bold">Vamos Analisar Seu Posicionamento Atual — Sem Compromisso</h2>
@@ -542,7 +542,7 @@ function FormularioPessoal() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome completo *</Label>
-                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" />
+                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" onFocus={() => trackFormStart("branding-pessoal")} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email *</Label>
