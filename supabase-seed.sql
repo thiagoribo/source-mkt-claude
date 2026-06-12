@@ -55,7 +55,7 @@ INSERT INTO team_members (name, role, bio, image_url, is_founder, display_order,
   true
 ),
 (
-  'Grazielli Santos',
+  'Aline Braga',
   'Adm & Financeiro',
   NULL,
   NULL,
