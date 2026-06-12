@@ -15,7 +15,7 @@ import anaCastro from "@/assets/equipe/ana-castro.webp";
 import caioCastro from "@/assets/equipe/caio-castro.webp";
 import gabrielaMontezi from "@/assets/equipe/gabriela-montezi.webp";
 import alineBraga from "@/assets/equipe/aline-braga.png";
-import lohanaVitoria from "@/assets/equipe/lohana-vitoria.webp";
+import lohanaVitoria from "@/assets/equipe/lohana-vitoria-2.png";
 
 // Team members (used when Supabase is unavailable)
 const fallbackTeamMembers = [
