@@ -23,6 +23,7 @@ const Naming = lazy(() => import("./pages/Naming"));
 const CaseDetail = lazy(() => import("./pages/CaseDetail"));
 const Consultoria360 = lazy(() => import("./pages/Consultoria360"));
 const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
+const Obrigado = lazy(() => import("./pages/Obrigado"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Blog Pages
@@ -94,6 +95,9 @@ const App = () => (
               {/* Blog Routes (use their own Layout) */}
               <Route path="/blog" element={<BlogIndex />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+
+              {/* Conversion Route (uses its own Layout) */}
+              <Route path="/obrigado" element={<Obrigado />} />
 
               {/* Public Routes */}
               <Route

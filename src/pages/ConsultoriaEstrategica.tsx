@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUtmParams } from "@/hooks/useUtmParams";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AnimatedNumber from "@/components/shared/AnimatedNumber";
@@ -804,13 +805,14 @@ function FAQ() {
 
 /* ─── Formulário ─── */
 function FormularioQualificacao() {
-  const [submitted, setSubmitted] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [step1Data, setStep1Data] = useState({ name: '', email: '', phone: '', company: '' });
   const { submitLead, isLoading } = useSubmitLead('consultoria-estrategica');
   const step1Ref = useRef<HTMLFormElement>(null);
   const step2Ref = useRef<HTMLFormElement>(null);
   const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
+  const navigate = useNavigate();
+  const utmParams = useUtmParams();
 
   const handleStep1 = (e: React.FormEvent) => {
     e.preventDefault();
@@ -846,27 +848,18 @@ function FormularioQualificacao() {
       scope: selectedScopes,
       modality: formData.get('modality') as string,
       timeline: formData.get('timeline') as string,
+      utm_source: utmParams.utm_source,
+      utm_medium: utmParams.utm_medium,
+      utm_campaign: utmParams.utm_campaign,
+      utm_content: utmParams.utm_content,
+      utm_term: utmParams.utm_term,
     });
 
     if (result.success) {
       trackLead("consultoria-estrategica");
-      setSubmitted(true);
+      navigate('/obrigado?service=consultoria-estrategica');
     }
   };
-
-  if (submitted) {
-    return (
-      <section id="formulario" className="section-spacing bg-background">
-        <div className="container-sm max-w-2xl text-center space-y-6">
-          <div className="w-16 h-16 bg-primary/10 flex items-center justify-center mx-auto">
-            <Check className="h-8 w-8 text-primary" />
-          </div>
-          <h2 className="text-3xl font-bold">Solicitação Enviada!</h2>
-          <p className="text-foreground/60">Entraremos em contato em até 48h úteis para agendar sua conversa de qualificação.</p>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="formulario" className="section-spacing bg-background">

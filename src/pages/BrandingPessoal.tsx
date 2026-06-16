@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { useState, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useUtmParams } from "@/hooks/useUtmParams";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -477,9 +479,10 @@ function FAQ() {
 
 /* ─── Formulário ─── */
 function FormularioPessoal() {
-  const [submitted, setSubmitted] = useState(false);
   const { submitLead, isLoading } = useSubmitLead('branding-pessoal');
   const formRef = useRef<HTMLFormElement>(null);
+  const navigate = useNavigate();
+  const utmParams = useUtmParams();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -494,27 +497,18 @@ function FormularioPessoal() {
       area: formData.get('area') as string,
       notes: formData.get('challenge') as string,
       digital_presence: formData.get('presence') as string,
+      utm_source: formData.get('utm_source') as string || undefined,
+      utm_medium: formData.get('utm_medium') as string || undefined,
+      utm_campaign: formData.get('utm_campaign') as string || undefined,
+      utm_content: formData.get('utm_content') as string || undefined,
+      utm_term: formData.get('utm_term') as string || undefined,
     });
 
     if (result.success) {
       trackLead("branding-pessoal");
-      setSubmitted(true);
+      navigate('/obrigado?service=branding-pessoal');
     }
   };
-
-  if (submitted) {
-    return (
-      <section id="formulario" className="section-spacing bg-secondary">
-        <div className="container-sm max-w-2xl text-center space-y-6">
-          <div className="w-16 h-16 bg-primary/10 flex items-center justify-center mx-auto">
-            <Check className="h-8 w-8 text-primary" />
-          </div>
-          <h2 className="text-3xl font-bold">Análise Solicitada!</h2>
-          <p className="text-foreground/60">Entraremos em contato em até 48h úteis para agendar sua conversa estratégica.</p>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="formulario" className="section-spacing bg-secondary">
@@ -539,6 +533,12 @@ function FormularioPessoal() {
             onSubmit={handleSubmit}
             className="space-y-6 bg-background border border-border p-8"
           >
+            <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
+            <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
+            <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
+            <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
+            <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
+
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nome completo *</Label>

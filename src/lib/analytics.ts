@@ -44,3 +44,8 @@ export function trackCtaClick(label: string, destination: string, page: string) 
 export function trackFormStart(source: FormSource) {
   push({ event: "form_start", form_source: source });
 }
+
+export function trackConversion(source?: FormSource) {
+  push({ event: "conversion", ...(source ? { form_source: source, service: serviceNames[source] } : {}) });
+  (window as any).fbq?.("track", "Lead", source ? { content_name: source } : {});
+}
