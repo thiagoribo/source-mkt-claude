@@ -40,28 +40,81 @@ import thiago1 from "@/assets/thiago-1.webp";
 import startCase from "@/assets/cases/consultoria/start.webp";
 import likeBrandP20 from "@/assets/cases/branding/like-brand-p20.webp";
 
-/* ─── Hero ─── */
-function Hero() {
-  return (
-    <section className="section-spacing bg-background overflow-hidden relative">
-      <div className="container-sm max-w-6xl">
-        <RevealSection>
-          <div className="relative">
-            <span
-              aria-hidden
-              className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden lg:block"
-              style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
-            >
-              SM
-            </span>
+/* ─── Hero + Formulário integrado ─── */
+function HeroWithForm() {
+  const [step, setStep] = useState<1 | 2>(1);
+  const [step1Data, setStep1Data] = useState({ name: '', email: '', phone: '', company: '' });
+  const { submitLead, isLoading } = useSubmitLead('consultoria-estrategica');
+  const step1Ref = useRef<HTMLFormElement>(null);
+  const step2Ref = useRef<HTMLFormElement>(null);
+  const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
+  const navigate = useNavigate();
+  const utmParams = useUtmParams();
 
-            <div className="relative max-w-3xl space-y-8">
+  const handleStep1 = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!step1Ref.current) return;
+    const fd = new FormData(step1Ref.current);
+    setStep1Data({
+      name: fd.get('name') as string,
+      email: fd.get('email') as string,
+      phone: fd.get('phone') as string,
+      company: fd.get('company') as string,
+    });
+    trackFormStart("consultoria-estrategica");
+    setStep(2);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!step2Ref.current) return;
+    const formData = new FormData(step2Ref.current);
+    const result = await submitLead({
+      full_name: step1Data.name,
+      email: step1Data.email,
+      whatsapp: step1Data.phone,
+      company: step1Data.company,
+      website: formData.get('website') as string,
+      role: formData.get('role') as string,
+      notes: formData.get('challenge') as string,
+      revenue: formData.get('revenue') as string,
+      budget: formData.get('budget') as string,
+      scope: selectedScopes,
+      modality: formData.get('modality') as string,
+      timeline: formData.get('timeline') as string,
+      utm_source: utmParams.utm_source,
+      utm_medium: utmParams.utm_medium,
+      utm_campaign: utmParams.utm_campaign,
+      utm_content: utmParams.utm_content,
+      utm_term: utmParams.utm_term,
+    });
+    if (result.success) {
+      trackLead("consultoria-estrategica");
+      navigate('/obrigado?service=consultoria-estrategica');
+    }
+  };
+
+  return (
+    <section id="formulario" className="section-spacing bg-background overflow-hidden relative">
+      <div className="container-sm max-w-6xl">
+        <div className="grid lg:grid-cols-[1fr_420px] gap-12 lg:gap-16 items-start">
+          {/* ── Left: Copy ── */}
+          <RevealSection>
+            <div className="relative space-y-8">
+              <span
+                aria-hidden
+                className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden xl:block"
+                style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
+              >
+                SM
+              </span>
+
               <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
                 Consultoria Estratégica
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.05] tracking-tight">
                 Você não tem{" "}
                 <em className="not-italic text-foreground/40 font-normal">
                   problema de produto.
@@ -70,20 +123,163 @@ function Hero() {
                 <span className="text-primary">Tem problema de máquina de crescimento.</span>
               </h1>
 
-              <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Diagnóstico 360° para empresas que investem em marketing mas não conseguem escalar: analisamos tráfego pago, funil de conversão, gestão de leads, posicionamento e alinhamento marketing+vendas — e entregamos o mapa do que está travando sua máquina de vendas.
+              <p className="text-base text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
+                Diagnóstico 360° para empresas que investem em marketing mas não conseguem escalar: analisamos tráfego pago, funil de conversão, gestão de leads, posicionamento e alinhamento marketing+vendas.
               </p>
 
-              <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Para empresas que já cresceram, mas chegaram em platô e precisam de clareza estratégica para disparar de vez.
-              </p>
-
-              <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
-                <a href="#formulario">Quero uma Conversa Estratégica</a>
-              </Button>
+              <ul className="space-y-2.5">
+                {[
+                  "Apenas 6 empresas atendidas por trimestre",
+                  "Diagnóstico completo: Meta Ads, Google Ads, funil e posicionamento",
+                  "Supervisão direta dos fundadores",
+                  "Resposta em até 48h úteis",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/65">
+                    <Check className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </RevealSection>
+          </RevealSection>
+
+          {/* ── Right: Form Card ── */}
+          <RevealSection delay={120}>
+            <div className="bg-secondary border border-border p-6 md:p-8">
+              <div className="mb-5">
+                <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-3 py-1 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
+                  Apenas 3 vagas em junho
+                </span>
+                <p className="font-bold text-lg">Quero uma Conversa Estratégica</p>
+                <p className="text-foreground/55 text-xs mt-1 leading-relaxed">30 minutos para entender seu contexto e ver se faz sentido trabalharmos juntos.</p>
+              </div>
+
+              {/* Progress */}
+              <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-5 h-5 flex items-center justify-center text-xs font-mono bg-primary text-primary-foreground">1</span>
+                  <span className="text-xs font-mono text-foreground/60">Contato</span>
+                </div>
+                <div className={`h-px flex-1 transition-colors duration-300 ${step === 2 ? 'bg-primary' : 'bg-border'}`} />
+                <div className="flex items-center gap-1.5">
+                  <span className={`w-5 h-5 flex items-center justify-center text-xs font-mono transition-colors duration-300 ${step === 2 ? 'bg-primary text-primary-foreground' : 'bg-border text-foreground/40'}`}>2</span>
+                  <span className="text-xs font-mono text-foreground/60">Qualificação</span>
+                </div>
+              </div>
+
+              {step === 1 ? (
+                <form ref={step1Ref} onSubmit={handleStep1} className="space-y-3.5">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-name" className="text-xs">Nome *</Label>
+                      <Input id="ce-name" name="name" required placeholder="Seu nome" className="rounded-none h-9 text-sm" defaultValue={step1Data.name} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-email" className="text-xs">Email *</Label>
+                      <Input id="ce-email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none h-9 text-sm" defaultValue={step1Data.email} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-phone" className="text-xs">WhatsApp *</Label>
+                      <Input id="ce-phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none h-9 text-sm" defaultValue={step1Data.phone} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-company" className="text-xs">Empresa *</Label>
+                      <Input id="ce-company" name="company" required placeholder="Sua empresa" className="rounded-none h-9 text-sm" defaultValue={step1Data.company} />
+                    </div>
+                  </div>
+                  <Button type="submit" size="lg" className="w-full rounded-none text-sm h-11">
+                    Continuar →
+                  </Button>
+                </form>
+              ) : (
+                <form ref={step2Ref} onSubmit={handleSubmit} className="space-y-3.5">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-website" className="text-xs">Site da empresa *</Label>
+                      <Input id="ce-website" name="website" required placeholder="www.suaempresa.com" className="rounded-none h-9 text-sm" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-role" className="text-xs">Cargo *</Label>
+                      <Input id="ce-role" name="role" required placeholder="CEO, Diretor..." className="rounded-none h-9 text-sm" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="ce-challenge" className="text-xs">Principal desafio estratégico *</Label>
+                    <Textarea id="ce-challenge" name="challenge" required placeholder="Descreva brevemente..." rows={2} className="rounded-none text-sm" />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-revenue" className="text-xs">Faturamento anual *</Label>
+                      <select id="ce-revenue" name="revenue" required className="flex h-9 w-full border border-input bg-background px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                        <option value="">Selecione</option>
+                        <option value="Até R$500k/ano">Até R$500k/ano</option>
+                        <option value="R$500k – R$2M/ano">R$500k – R$2M/ano</option>
+                        <option value="R$2M – R$10M/ano">R$2M – R$10M/ano</option>
+                        <option value="R$10M+/ano">R$10M+/ano</option>
+                        <option value="Empresa com funding">Com funding</option>
+                      </select>
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="ce-budget" className="text-xs">Budget disponível *</Label>
+                      <select id="ce-budget" name="budget" required className="flex h-9 w-full border border-input bg-background px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                        <option value="">Selecione</option>
+                        <option value="Até R$35.000">Até R$35k</option>
+                        <option value="R$35.000 – R$55.000">R$35k – R$55k</option>
+                        <option value="R$55.000 – R$85.000">R$55k – R$85k</option>
+                        <option value="R$85.000 – R$140.000">R$85k – R$140k</option>
+                        <option value="Acima de R$140.000">Acima de R$140k</option>
+                        <option value="Budget flexível">Flexível</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="text-xs">Escopo do projeto</Label>
+                    <div className="space-y-1.5">
+                      {[
+                        "Diagnóstico e Reposicionamento",
+                        "Estratégia de Performance",
+                        "Arquitetura de Funil",
+                        "Implementação Hands-on",
+                        "Não sei, preciso de ajuda para mapear",
+                      ].map((scope) => (
+                        <div key={scope} className="flex items-center gap-2">
+                          <Checkbox
+                            id={`scope-${scope}`}
+                            checked={selectedScopes.includes(scope)}
+                            onCheckedChange={(checked) => {
+                              if (checked) setSelectedScopes([...selectedScopes, scope]);
+                              else setSelectedScopes(selectedScopes.filter((s) => s !== scope));
+                            }}
+                          />
+                          <Label htmlFor={`scope-${scope}`} className="text-xs font-normal text-foreground/75 cursor-pointer">
+                            {scope}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button type="submit" size="lg" className="w-full rounded-none text-sm h-11" disabled={isLoading}>
+                    {isLoading ? 'Enviando...' : 'Quero uma Conversa Estratégica'}
+                  </Button>
+                  <button type="button" onClick={() => setStep(1)} className="w-full text-xs text-foreground/40 hover:text-foreground/70 transition-colors py-1">
+                    ← Voltar
+                  </button>
+                </form>
+              )}
+
+              <p className="text-xs text-muted-foreground text-center mt-3">
+                Sem compromisso · Resposta em até 48h úteis
+              </p>
+            </div>
+          </RevealSection>
+        </div>
       </div>
     </section>
   );
@@ -803,237 +999,6 @@ function FAQ() {
   );
 }
 
-/* ─── Formulário ─── */
-function FormularioQualificacao() {
-  const [step, setStep] = useState<1 | 2>(1);
-  const [step1Data, setStep1Data] = useState({ name: '', email: '', phone: '', company: '' });
-  const { submitLead, isLoading } = useSubmitLead('consultoria-estrategica');
-  const step1Ref = useRef<HTMLFormElement>(null);
-  const step2Ref = useRef<HTMLFormElement>(null);
-  const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
-  const navigate = useNavigate();
-  const utmParams = useUtmParams();
-
-  const handleStep1 = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!step1Ref.current) return;
-    const fd = new FormData(step1Ref.current);
-    setStep1Data({
-      name: fd.get('name') as string,
-      email: fd.get('email') as string,
-      phone: fd.get('phone') as string,
-      company: fd.get('company') as string,
-    });
-    trackFormStart("consultoria-estrategica");
-    setStep(2);
-    setTimeout(() => window.scrollTo({ top: document.getElementById('formulario')?.offsetTop ?? 0, behavior: 'smooth' }), 50);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!step2Ref.current) return;
-
-    const formData = new FormData(step2Ref.current);
-
-    const result = await submitLead({
-      full_name: step1Data.name,
-      email: step1Data.email,
-      whatsapp: step1Data.phone,
-      company: step1Data.company,
-      website: formData.get('website') as string,
-      role: formData.get('role') as string,
-      notes: formData.get('challenge') as string,
-      revenue: formData.get('revenue') as string,
-      budget: formData.get('budget') as string,
-      scope: selectedScopes,
-      modality: formData.get('modality') as string,
-      timeline: formData.get('timeline') as string,
-      utm_source: utmParams.utm_source,
-      utm_medium: utmParams.utm_medium,
-      utm_campaign: utmParams.utm_campaign,
-      utm_content: utmParams.utm_content,
-      utm_term: utmParams.utm_term,
-    });
-
-    if (result.success) {
-      trackLead("consultoria-estrategica");
-      navigate('/obrigado?service=consultoria-estrategica');
-    }
-  };
-
-  return (
-    <section id="formulario" className="section-spacing bg-background">
-      <div className="container-sm max-w-2xl">
-        <RevealSection>
-          <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-4 py-1.5 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
-            Apenas 3 vagas abertas em junho
-          </span>
-          <div className="mb-12 space-y-3">
-            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Qualificação</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Pronto para Transformar sua Estratégia?</h2>
-            <p className="text-foreground/60 text-sm leading-relaxed">
-              Agende uma conversa de qualificação de 30 minutos. Vamos entender seu contexto e validar se faz sentido trabalharmos juntos.
-            </p>
-          </div>
-        </RevealSection>
-
-        {/* Progress indicator */}
-        <div className="flex items-center gap-3 mb-8">
-          <div className="flex items-center gap-2">
-            <span className="w-6 h-6 flex items-center justify-center text-xs font-mono bg-primary text-primary-foreground">1</span>
-            <span className="text-xs font-mono text-foreground/60">Contato</span>
-          </div>
-          <div className={`h-px flex-1 transition-colors duration-300 ${step === 2 ? 'bg-primary' : 'bg-border'}`} />
-          <div className="flex items-center gap-2">
-            <span className={`w-6 h-6 flex items-center justify-center text-xs font-mono transition-colors duration-300 ${step === 2 ? 'bg-primary text-primary-foreground' : 'bg-border text-foreground/40'}`}>2</span>
-            <span className="text-xs font-mono text-foreground/60">Qualificação</span>
-          </div>
-        </div>
-
-        <RevealSection delay={100}>
-          {step === 1 ? (
-            <form ref={step1Ref} onSubmit={handleStep1} className="space-y-6 border border-border p-8">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nome completo *</Label>
-                  <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" defaultValue={step1Data.name} />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email corporativo *</Label>
-                  <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" defaultValue={step1Data.email} />
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                  <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" defaultValue={step1Data.phone} />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="company">Nome da empresa *</Label>
-                  <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" defaultValue={step1Data.company} />
-                </div>
-              </div>
-              <Button type="submit" size="lg" className="w-full rounded-none text-base h-12">
-                Continuar →
-              </Button>
-            </form>
-          ) : (
-            <form ref={step2Ref} onSubmit={handleSubmit} className="space-y-6 border border-border p-8">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="website">Site da empresa *</Label>
-                  <Input id="website" name="website" required placeholder="www.suaempresa.com" className="rounded-none" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="role">Seu cargo *</Label>
-                  <Input id="role" name="role" required placeholder="CEO, Diretor, etc." className="rounded-none" />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="challenge">Qual o principal desafio estratégico? *</Label>
-                <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente o desafio que sua empresa enfrenta..." rows={3} className="rounded-none" />
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="revenue">Faturamento anual aproximado *</Label>
-                  <select id="revenue" name="revenue" required className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                    <option value="">Selecione</option>
-                    <option value="Até R$500k/ano">Até R$500k/ano</option>
-                    <option value="R$500k – R$2M/ano">R$500k – R$2M/ano</option>
-                    <option value="R$2M – R$10M/ano">R$2M – R$10M/ano</option>
-                    <option value="R$10M+/ano">R$10M+/ano</option>
-                    <option value="Empresa com funding">Empresa com funding</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="budget">Faixa de investimento disponível *</Label>
-                  <select id="budget" name="budget" required className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                    <option value="">Selecione</option>
-                    <option value="Até R$35.000">Até R$35.000</option>
-                    <option value="R$35.000 – R$55.000">R$35.000 – R$55.000</option>
-                    <option value="R$55.000 – R$85.000">R$55.000 – R$85.000</option>
-                    <option value="R$85.000 – R$140.000">R$85.000 – R$140.000</option>
-                    <option value="Acima de R$140.000">Acima de R$140.000</option>
-                    <option value="Budget flexível">Budget flexível</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Label>Escopo do projeto (múltipla escolha)</Label>
-                <div className="space-y-2">
-                  {[
-                    "Diagnóstico e Reposicionamento Estratégico",
-                    "Estratégia de Performance e Conversão",
-                    "Arquitetura de Funil de Vendas",
-                    "Implementação Hands-on",
-                    "Ainda não sei, preciso de ajuda para mapear",
-                  ].map((scope) => (
-                    <div key={scope} className="flex items-center gap-2">
-                      <Checkbox
-                        id={`scope-${scope}`}
-                        checked={selectedScopes.includes(scope)}
-                        onCheckedChange={(checked) => {
-                          if (checked) setSelectedScopes([...selectedScopes, scope]);
-                          else setSelectedScopes(selectedScopes.filter((s) => s !== scope));
-                        }}
-                      />
-                      <Label htmlFor={`scope-${scope}`} className="text-sm font-normal text-foreground/75 cursor-pointer">
-                        {scope}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="modality">Modalidade preferencial</Label>
-                  <select id="modality" name="modality" className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                    <option value="">Selecione</option>
-                    <option value="100% Remota">100% Remota</option>
-                    <option value="Híbrida">Híbrida</option>
-                    <option value="Imersão Presencial">Imersão Presencial</option>
-                    <option value="Flexível">Flexível</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="timeline">Timeline desejado</Label>
-                  <select id="timeline" name="timeline" className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                    <option value="">Selecione</option>
-                    <option value="Urgente (menos de 30 dias)">Urgente (menos de 30 dias)</option>
-                    <option value="30–90 dias">30–90 dias</option>
-                    <option value="90+ dias">90+ dias</option>
-                    <option value="Flexível">Flexível</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="source">Como conheceu a SM Agency?</Label>
-                <Input id="source" name="source" placeholder="Google, indicação, redes sociais..." className="rounded-none" />
-              </div>
-
-              <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-                {isLoading ? 'Enviando...' : 'Quero uma Conversa Estratégica'}
-              </Button>
-              <button type="button" onClick={() => setStep(1)} className="w-full text-xs text-foreground/40 hover:text-foreground/70 transition-colors py-1">
-                ← Voltar ao passo anterior
-              </button>
-
-              <p className="text-xs text-muted-foreground text-center">
-                Ao enviar, você concorda com nossa Política de Privacidade. Entraremos em contato em até 48h úteis.
-              </p>
-            </form>
-          )}
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
 
 /* ─── Page ─── */
 export default function ConsultoriaEstrategica() {
@@ -1057,7 +1022,7 @@ export default function ConsultoriaEstrategica() {
           "serviceType": "Consultoria de Marketing"
         })}</script>
       </Helmet>
-      <Hero />
+      <HeroWithForm />
       <Sintomas />
       <OQueAnalisamos />
       <ParaQuemE />
@@ -1067,7 +1032,6 @@ export default function ConsultoriaEstrategica() {
       <Lideranca />
       <CasesConsultoria />
       <FAQ />
-      <FormularioQualificacao />
     </>
   );
 }

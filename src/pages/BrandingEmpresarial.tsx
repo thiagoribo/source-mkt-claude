@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { Button } from "@/components/ui/button";
@@ -30,28 +30,59 @@ import ComparisonTable from "@/components/shared/ComparisonTable";
 import likeBrandCase from "@/assets/cases/branding/like-brand-p18.webp";
 import petraCase from "@/assets/cases/naming/clinica-petra.webp";
 
-/* ─── Hero ─── */
-function Hero() {
-  return (
-    <section className="section-spacing bg-background overflow-hidden relative">
-      <div className="container-sm max-w-6xl">
-        <RevealSection>
-          <div className="relative">
-            <span
-              aria-hidden
-              className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden lg:block"
-              style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
-            >
-              SM
-            </span>
+/* ─── Hero + Formulário integrado ─── */
+function HeroWithForm() {
+  const { submitLead, isLoading } = useSubmitLead('branding-empresarial');
+  const formRef = useRef<HTMLFormElement>(null);
+  const navigate = useNavigate();
+  const utmParams = useUtmParams();
 
-            <div className="relative max-w-3xl space-y-8">
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+    const formData = new FormData(formRef.current);
+    const result = await submitLead({
+      full_name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      whatsapp: formData.get('phone') as string,
+      company: formData.get('company') as string,
+      website: formData.get('website') as string,
+      notes: formData.get('challenge') as string,
+      has_identity_visual: formData.get('has-vi') as string,
+      budget: '',
+      utm_source: formData.get('utm_source') as string || undefined,
+      utm_medium: formData.get('utm_medium') as string || undefined,
+      utm_campaign: formData.get('utm_campaign') as string || undefined,
+      utm_content: formData.get('utm_content') as string || undefined,
+      utm_term: formData.get('utm_term') as string || undefined,
+    });
+    if (result.success) {
+      trackLead("branding-empresarial");
+      navigate('/obrigado?service=branding-empresarial');
+    }
+  };
+
+  return (
+    <section id="formulario" className="section-spacing bg-background overflow-hidden relative">
+      <div className="container-sm max-w-6xl">
+        <div className="grid lg:grid-cols-[1fr_400px] gap-12 lg:gap-16 items-start">
+          {/* ── Left: Copy ── */}
+          <RevealSection>
+            <div className="relative space-y-8">
+              <span
+                aria-hidden
+                className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden xl:block"
+                style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
+              >
+                SM
+              </span>
+
               <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
                 Branding Empresarial
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.05] tracking-tight">
                 A marca que justifica{" "}
                 <em className="not-italic text-foreground/40 font-normal">
                   preços premium
@@ -60,20 +91,101 @@ function Hero() {
                 <span className="text-primary">começa aqui.</span>
               </h1>
 
-              <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
+              <p className="text-base text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
                 Construímos a base estratégica que transforma empresas em marcas com significado, diferenciação e valor percebido no mercado.
               </p>
 
-              <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Branding empresarial é o DNA da sua marca — propósito, posicionamento, valores e narrativa que guiam cada decisão de comunicação e negócio.
-              </p>
-
-              <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
-                <a href="#formulario">Conversar Sobre Minha Marca</a>
-              </Button>
+              <ul className="space-y-2.5">
+                {[
+                  "+100 marcas construídas",
+                  "Supervisão direta dos fundadores",
+                  "Apenas 2 vagas abertas em junho",
+                  "Resposta em até 48h úteis",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/65">
+                    <Check className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </RevealSection>
+          </RevealSection>
+
+          {/* ── Right: Form Card ── */}
+          <RevealSection delay={120}>
+            <div className="bg-secondary border border-border p-6 md:p-8">
+              <div className="mb-5">
+                <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-3 py-1 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
+                  Apenas 2 vagas em junho
+                </span>
+                <p className="font-bold text-lg">Vamos Construir sua Marca?</p>
+                <p className="text-foreground/55 text-xs mt-1 leading-relaxed">Preencha abaixo. Entraremos em contato em até 48h úteis.</p>
+              </div>
+
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-3.5">
+                <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
+                <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
+                <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
+                <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
+                <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="name" className="text-xs">Nome *</Label>
+                    <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none h-9 text-sm" onFocus={() => trackFormStart("branding-empresarial")} />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="email" className="text-xs">Email *</Label>
+                    <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none h-9 text-sm" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="phone" className="text-xs">WhatsApp *</Label>
+                    <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="company" className="text-xs">Empresa *</Label>
+                    <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none h-9 text-sm" />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="website" className="text-xs">Site da empresa</Label>
+                  <Input id="website" name="website" placeholder="www.suaempresa.com" className="rounded-none h-9 text-sm" />
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="challenge" className="text-xs">Seu maior desafio com a marca *</Label>
+                  <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente..." rows={2} className="rounded-none text-sm" />
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="has-vi" className="text-xs">Tem identidade visual?</Label>
+                  <select
+                    id="has-vi"
+                    name="has-vi"
+                    className="flex h-9 w-full border border-input bg-background px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <option value="">Selecione</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                  </select>
+                </div>
+
+                <Button type="submit" size="lg" className="w-full rounded-none text-sm h-11" disabled={isLoading}>
+                  {isLoading ? 'Enviando...' : 'Quero Construir Minha Marca'}
+                </Button>
+
+                <p className="text-xs text-muted-foreground text-center">
+                  Sem compromisso · Resposta em até 48h úteis
+                </p>
+              </form>
+            </div>
+          </RevealSection>
+        </div>
       </div>
     </section>
   );
@@ -399,125 +511,6 @@ function Comparacao() {
   );
 }
 
-/* ─── Formulário ─── */
-function FormularioBranding() {
-  const { submitLead, isLoading } = useSubmitLead('branding-empresarial');
-  const formRef = useRef<HTMLFormElement>(null);
-  const navigate = useNavigate();
-  const utmParams = useUtmParams();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formRef.current) return;
-
-    const formData = new FormData(formRef.current);
-
-    const result = await submitLead({
-      full_name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      whatsapp: formData.get('phone') as string,
-      company: formData.get('company') as string,
-      website: formData.get('website') as string,
-      notes: formData.get('challenge') as string,
-      has_identity_visual: formData.get('has-vi') as string,
-      budget: '',
-      utm_source: formData.get('utm_source') as string || undefined,
-      utm_medium: formData.get('utm_medium') as string || undefined,
-      utm_campaign: formData.get('utm_campaign') as string || undefined,
-      utm_content: formData.get('utm_content') as string || undefined,
-      utm_term: formData.get('utm_term') as string || undefined,
-    });
-
-    if (result.success) {
-      trackLead("branding-empresarial");
-      navigate('/obrigado?service=branding-empresarial');
-    }
-  };
-
-  return (
-    <section id="formulario" className="section-spacing bg-secondary">
-      <div className="container-sm max-w-2xl">
-        <RevealSection>
-          <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-4 py-1.5 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
-            Apenas 2 vagas abertas em junho
-          </span>
-          <div className="mb-12 space-y-3">
-            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Orçamento</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Vamos Construir uma Marca Inesquecível?</h2>
-          </div>
-        </RevealSection>
-
-        <RevealSection delay={100}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="space-y-6 bg-background border border-border p-8"
-          >
-            <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
-            <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
-            <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
-            <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
-            <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome *</Label>
-                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" onFocus={() => trackFormStart("branding-empresarial")} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
-                <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="company">Empresa *</Label>
-                <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="website">Site da empresa</Label>
-              <Input id="website" name="website" placeholder="www.suaempresa.com" className="rounded-none" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="challenge">Seu maior desafio com a marca atual *</Label>
-              <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente..." rows={3} className="rounded-none" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="has-vi">Você já tem identidade visual?</Label>
-              <select
-                id="has-vi"
-                name="has-vi"
-                className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <option value="">Selecione</option>
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-              </select>
-            </div>
-
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Quero Construir Minha Marca'}
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Ao enviar, você concorda com nossa Política de Privacidade.
-            </p>
-          </form>
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
 
 /* ─── Page ─── */
 export default function BrandingEmpresarial() {
@@ -541,7 +534,7 @@ export default function BrandingEmpresarial() {
           "serviceType": "Branding Empresarial"
         })}</script>
       </Helmet>
-      <Hero />
+      <HeroWithForm />
       <OQueE />
       <AntesDepois />
       <Processo />
@@ -549,7 +542,6 @@ export default function BrandingEmpresarial() {
       <CasesBranding />
       {/* <InvestimentoBranding /> — preço oculto, backup em src/_pricing-backup/investimento-branding-empresarial.tsx */}
       <Comparacao />
-      <FormularioBranding />
     </>
   );
 }

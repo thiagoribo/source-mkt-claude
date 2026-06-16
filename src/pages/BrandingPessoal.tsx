@@ -45,64 +45,164 @@ function MidPageCta({ label, cta }: { label: string; cta: string }) {
   );
 }
 
-/* ─── Hero ─── */
-function Hero() {
+/* ─── Hero + Formulário integrado ─── */
+function HeroWithForm() {
   const profiles = ["Empreendedores", "Executivos", "Consultores", "Especialistas"];
+  const { submitLead, isLoading } = useSubmitLead('branding-pessoal');
+  const formRef = useRef<HTMLFormElement>(null);
+  const navigate = useNavigate();
+  const utmParams = useUtmParams();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+    const formData = new FormData(formRef.current);
+    const result = await submitLead({
+      full_name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      whatsapp: formData.get('phone') as string,
+      area: formData.get('area') as string,
+      notes: formData.get('challenge') as string,
+      digital_presence: formData.get('presence') as string,
+      utm_source: formData.get('utm_source') as string || undefined,
+      utm_medium: formData.get('utm_medium') as string || undefined,
+      utm_campaign: formData.get('utm_campaign') as string || undefined,
+      utm_content: formData.get('utm_content') as string || undefined,
+      utm_term: formData.get('utm_term') as string || undefined,
+    });
+    if (result.success) {
+      trackLead("branding-pessoal");
+      navigate('/obrigado?service=branding-pessoal');
+    }
+  };
 
   return (
-    <section className="section-spacing bg-background overflow-hidden relative">
+    <section id="formulario" className="section-spacing bg-background overflow-hidden relative">
       <div className="container-sm max-w-6xl">
-        <RevealSection>
-          <div className="relative">
-            <span
-              aria-hidden
-              className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden lg:block"
-              style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
-            >
-              SM
-            </span>
+        <div className="grid lg:grid-cols-[1fr_400px] gap-12 lg:gap-16 items-start">
+          {/* ── Left: Copy ── */}
+          <RevealSection>
+            <div className="relative space-y-8">
+              <span
+                aria-hidden
+                className="absolute -top-8 right-0 text-[180px] leading-none font-bold font-serif select-none pointer-events-none hidden xl:block"
+                style={{ opacity: 0.035, letterSpacing: "-0.04em" }}
+              >
+                SM
+              </span>
 
-            <div className="relative max-w-3xl space-y-8">
               <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
                 Branding Pessoal
               </div>
 
-              {/* Target profiles */}
               <div className="flex flex-wrap gap-2">
                 {profiles.map((p) => (
-                  <span
-                    key={p}
-                    className="text-xs font-mono border border-border px-3 py-1.5 text-foreground/50"
-                  >
+                  <span key={p} className="text-xs font-mono border border-border px-3 py-1.5 text-foreground/50">
                     {p}
                   </span>
                 ))}
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.05] tracking-tight">
                 Especialistas cobram menos{" "}
-                <em className="not-italic text-foreground/40 font-normal">
-                  do que valem.
-                </em>
+                <em className="not-italic text-foreground/40 font-normal">do que valem.</em>
                 <br />
                 <span className="text-primary">O problema raramente é a competência.</span>
               </h1>
 
-              <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
+              <p className="text-base text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
                 Construímos o posicionamento estratégico e a identidade visual que fazem líderes, consultores e especialistas serem percebidos pelo que realmente valem.
               </p>
 
-              <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Não é presença digital. É autoridade de mercado construída com método — do posicionamento à identidade visual aplicada em todos os seus pontos de contato.
-              </p>
-
-              <Button size="lg" className="rounded-none text-base px-8 h-12" asChild>
-                <a href="#formulario">Quero Ser Percebido pelo Meu Valor</a>
-              </Button>
+              <ul className="space-y-2.5">
+                {[
+                  "+100 projetos de branding pessoal",
+                  "Posicionamento + identidade visual completa",
+                  "Apenas 3 vagas abertas em junho",
+                  "Resposta em até 48h úteis",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/65">
+                    <Check className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </RevealSection>
+          </RevealSection>
+
+          {/* ── Right: Form Card ── */}
+          <RevealSection delay={120}>
+            <div className="bg-secondary border border-border p-6 md:p-8">
+              <div className="mb-5">
+                <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-3 py-1 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
+                  Apenas 3 vagas em junho
+                </span>
+                <p className="font-bold text-lg">Vamos Analisar Seu Posicionamento?</p>
+                <p className="text-foreground/55 text-xs mt-1 leading-relaxed">Preencha abaixo. Entraremos em contato em até 48h úteis.</p>
+              </div>
+
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-3.5">
+                <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
+                <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
+                <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
+                <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
+                <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="bp-name" className="text-xs">Nome *</Label>
+                    <Input id="bp-name" name="name" required placeholder="Seu nome" className="rounded-none h-9 text-sm" onFocus={() => trackFormStart("branding-pessoal")} />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="bp-email" className="text-xs">Email *</Label>
+                    <Input id="bp-email" name="email" type="email" required placeholder="seu@email.com" className="rounded-none h-9 text-sm" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="bp-phone" className="text-xs">WhatsApp *</Label>
+                    <Input id="bp-phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="bp-area" className="text-xs">Área de atuação *</Label>
+                    <Input id="bp-area" name="area" required placeholder="Consultoria, Medicina..." className="rounded-none h-9 text-sm" />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="bp-challenge" className="text-xs">Seu maior desafio de autoridade hoje *</Label>
+                  <Textarea id="bp-challenge" name="challenge" required placeholder="Ex: não consigo cobrar o que realmente valho..." rows={2} className="rounded-none text-sm" />
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="bp-presence" className="text-xs">Presença digital atual</Label>
+                  <select
+                    id="bp-presence"
+                    name="presence"
+                    className="flex h-9 w-full border border-input bg-background px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <option value="">Selecione</option>
+                    <option value="Não tenho presença digital">Não tenho presença digital</option>
+                    <option value="Básica (perfis sem estratégia)">Básica (perfis sem estratégia)</option>
+                    <option value="Ativa mas inconsistente">Ativa mas inconsistente</option>
+                    <option value="Forte, quero profissionalizar">Forte, quero profissionalizar</option>
+                  </select>
+                </div>
+
+                <Button type="submit" size="lg" className="w-full rounded-none text-sm h-11" disabled={isLoading}>
+                  {isLoading ? 'Enviando...' : 'Quero Iniciar Meu Processo'}
+                </Button>
+
+                <p className="text-xs text-muted-foreground text-center">
+                  Sem compromisso · Resposta em até 48h úteis
+                </p>
+              </form>
+            </div>
+          </RevealSection>
+        </div>
       </div>
     </section>
   );
@@ -477,123 +577,6 @@ function FAQ() {
   );
 }
 
-/* ─── Formulário ─── */
-function FormularioPessoal() {
-  const { submitLead, isLoading } = useSubmitLead('branding-pessoal');
-  const formRef = useRef<HTMLFormElement>(null);
-  const navigate = useNavigate();
-  const utmParams = useUtmParams();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formRef.current) return;
-
-    const formData = new FormData(formRef.current);
-
-    const result = await submitLead({
-      full_name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      whatsapp: formData.get('phone') as string,
-      area: formData.get('area') as string,
-      notes: formData.get('challenge') as string,
-      digital_presence: formData.get('presence') as string,
-      utm_source: formData.get('utm_source') as string || undefined,
-      utm_medium: formData.get('utm_medium') as string || undefined,
-      utm_campaign: formData.get('utm_campaign') as string || undefined,
-      utm_content: formData.get('utm_content') as string || undefined,
-      utm_term: formData.get('utm_term') as string || undefined,
-    });
-
-    if (result.success) {
-      trackLead("branding-pessoal");
-      navigate('/obrigado?service=branding-pessoal');
-    }
-  };
-
-  return (
-    <section id="formulario" className="section-spacing bg-secondary">
-      <div className="container-sm max-w-2xl">
-        <RevealSection>
-          <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-4 py-1.5 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
-            Apenas 3 vagas abertas em junho
-          </span>
-          <div className="mb-8 space-y-3">
-            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Conversa Estratégica</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Vamos Analisar Seu Posicionamento Atual — Sem Compromisso</h2>
-            <p className="text-sm text-foreground/55 leading-relaxed">
-              Atendemos no máximo 3 novos projetos de Branding Pessoal por mês — para manter a qualidade de imersão que cada marca exige.
-            </p>
-          </div>
-        </RevealSection>
-
-        <RevealSection delay={100}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="space-y-6 bg-background border border-border p-8"
-          >
-            <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
-            <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
-            <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
-            <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
-            <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome completo *</Label>
-                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" onFocus={() => trackFormStart("branding-pessoal")} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
-                <Input id="email" name="email" type="email" required placeholder="seu@email.com" className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="phone">WhatsApp *</Label>
-                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="area">Área de atuação *</Label>
-                <Input id="area" name="area" required placeholder="Consultoria, Medicina, Tecnologia..." className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="challenge">Qual seu maior desafio de autoridade hoje? *</Label>
-              <Textarea id="challenge" name="challenge" required placeholder="Ex: não consigo cobrar o que realmente valho, minha presença não reflete minha experiência..." rows={3} className="rounded-none" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="presence">Presença digital atual</Label>
-              <select
-                id="presence"
-                name="presence"
-                className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <option value="">Selecione</option>
-                <option value="Não tenho presença digital">Não tenho presença digital</option>
-                <option value="Básica (perfis sem estratégia)">Básica (perfis sem estratégia)</option>
-                <option value="Ativa mas inconsistente">Ativa mas inconsistente</option>
-                <option value="Forte, quero profissionalizar">Forte, quero profissionalizar</option>
-              </select>
-            </div>
-
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Quero Iniciar Meu Processo'}
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Ao enviar, você concorda com nossa Política de Privacidade.
-            </p>
-          </form>
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
 
 /* ─── Page ─── */
 export default function BrandingPessoal() {
@@ -617,7 +600,7 @@ export default function BrandingPessoal() {
           "serviceType": "Branding Pessoal"
         })}</script>
       </Helmet>
-      <Hero />
+      <HeroWithForm />
       <OQueE />
       <AntesDepois />
       <Processo />
@@ -649,7 +632,6 @@ export default function BrandingPessoal() {
         </div>
       </section>
       <FAQ />
-      <FormularioPessoal />
     </>
   );
 }
