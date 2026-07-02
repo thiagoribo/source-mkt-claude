@@ -68,6 +68,9 @@ export default function Header() {
           <img
             src={logoHeader}
             alt="SM Agency"
+            width={150}
+            height={75}
+            decoding="async"
             className="h-9 md:h-11 w-auto transition-opacity duration-200 group-hover:opacity-80"
           />
         </Link>

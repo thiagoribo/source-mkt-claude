@@ -11,7 +11,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 pb-16 border-b border-brand-offwhite/10">
           {/* Brand col */}
           <div className="md:col-span-5 space-y-8">
-            <img src={logoFooter} alt="SM Agency" className="h-20 w-auto" />
+            <img
+              src={logoFooter}
+              alt="SM Agency"
+              width={150}
+              height={75}
+              loading="lazy"
+              decoding="async"
+              className="h-20 w-auto"
+            />
             <p className="text-sm text-brand-offwhite/50 leading-relaxed max-w-xs font-light">
               Consultoria estratégica e branding para empresas estabelecidas que querem crescer em categorias mais rentáveis.
             </p>

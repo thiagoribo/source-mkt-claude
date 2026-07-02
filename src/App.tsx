@@ -1,13 +1,9 @@
 import { lazy, Suspense } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { AuthProvider } from "@/contexts/AuthContext";
 import Layout from "@/components/layout/Layout";
 import ScrollToTop from "@/components/ScrollToTop";
 
@@ -25,109 +21,58 @@ const Consultoria360 = lazy(() => import("./pages/Consultoria360"));
 const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
 const Obrigado = lazy(() => import("./pages/Obrigado"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const AdminRoutes = lazy(() => import("./components/admin/AdminRoutes"));
 
 // Blog Pages
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 
-// Admin Pages
-const AdminLogin = lazy(() => import("./pages/admin/Login"));
-const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
-const AdminTeamMembers = lazy(() => import("./pages/admin/TeamMembers"));
-const AdminTestimonials = lazy(() => import("./pages/admin/Testimonials"));
-const AdminCases = lazy(() => import("./pages/admin/Cases"));
-const AdminMedia = lazy(() => import("./pages/admin/Media"));
-const AdminSettings = lazy(() => import("./pages/admin/Settings"));
-const AdminBlogPosts = lazy(() => import("./pages/admin/BlogPosts"));
-const AdminBlogPostEditor = lazy(() => import("./pages/admin/BlogPostEditor"));
-const AdminBlogCategories = lazy(() => import("./pages/admin/BlogCategories"));
-
-// Admin Components
-import AdminLayout from "./components/admin/AdminLayout";
-import ProtectedRoute from "./components/admin/ProtectedRoute";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      retry: 1,
-    },
-  },
-});
-
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <SpeedInsights />
-          <Analytics />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Suspense fallback={null}>
-            <Routes>
-              {/* Admin Routes */}
-              <Route path="/admin" element={<AdminLogin />} />
-              <Route
-                path="/admin/*"
-                element={
-                  <ProtectedRoute>
-                    <AdminLayout>
-                      <Routes>
-                        <Route path="dashboard" element={<AdminDashboard />} />
-                        <Route path="team" element={<AdminTeamMembers />} />
-                        <Route path="testimonials" element={<AdminTestimonials />} />
-                        <Route path="cases" element={<AdminCases />} />
-                        <Route path="media" element={<AdminMedia />} />
-                        <Route path="settings" element={<AdminSettings />} />
-                        <Route path="blog" element={<AdminBlogPosts />} />
-                        <Route path="blog/new" element={<AdminBlogPostEditor />} />
-                        <Route path="blog/:id" element={<AdminBlogPostEditor />} />
-                        <Route path="blog/categories" element={<AdminBlogCategories />} />
-                      </Routes>
-                    </AdminLayout>
-                  </ProtectedRoute>
-                }
-              />
+  <HelmetProvider>
+    <TooltipProvider>
+      <SpeedInsights />
+      <Analytics />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Suspense fallback={null}>
+          <Routes>
+            {/* Admin Routes */}
+            <Route path="/admin/*" element={<AdminRoutes />} />
 
-              {/* Blog Routes (use their own Layout) */}
-              <Route path="/blog" element={<BlogIndex />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
+            {/* Blog Routes (use their own Layout) */}
+            <Route path="/blog" element={<BlogIndex />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
 
-              {/* Conversion Route (uses its own Layout) */}
-              <Route path="/obrigado" element={<Obrigado />} />
+            {/* Conversion Route (uses its own Layout) */}
+            <Route path="/obrigado" element={<Obrigado />} />
 
-              {/* Public Routes */}
-              <Route
-                path="/*"
-                element={
-                  <Layout>
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/consultoria-estrategica" element={<ConsultoriaEstrategica />} />
-                      <Route path="/branding-empresarial" element={<BrandingEmpresarial />} />
-                      <Route path="/branding-pessoal" element={<BrandingPessoal />} />
-                      <Route path="/quem-somos" element={<QuemSomos />} />
-                      <Route path="/identidade-visual" element={<IdentidadeVisual />} />
-                      <Route path="/gestao-redes-sociais" element={<GestaoRedesSociais />} />
-                      <Route path="/naming" element={<Naming />} />
-                      <Route path="/consultoria-360" element={<Consultoria360 />} />
-                      <Route path="/cases/:slug" element={<CaseDetail />} />
-                      <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </Layout>
-                }
-              />
-            </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
-    </HelmetProvider>
-  </QueryClientProvider>
+            {/* Public Routes */}
+            <Route
+              path="/*"
+              element={
+                <Layout>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/consultoria-estrategica" element={<ConsultoriaEstrategica />} />
+                    <Route path="/branding-empresarial" element={<BrandingEmpresarial />} />
+                    <Route path="/branding-pessoal" element={<BrandingPessoal />} />
+                    <Route path="/quem-somos" element={<QuemSomos />} />
+                    <Route path="/identidade-visual" element={<IdentidadeVisual />} />
+                    <Route path="/gestao-redes-sociais" element={<GestaoRedesSociais />} />
+                    <Route path="/naming" element={<Naming />} />
+                    <Route path="/consultoria-360" element={<Consultoria360 />} />
+                    <Route path="/cases/:slug" element={<CaseDetail />} />
+                    <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Layout>
+              }
+            />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </TooltipProvider>
+  </HelmetProvider>
 );
 
 export default App;

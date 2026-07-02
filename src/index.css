@@ -1,4 +1,42 @@
-/* Google Fonts são carregadas via <link> no index.html para evitar render-blocking */
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/dm-sans-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: italic;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url("/fonts/dm-sans-italic-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/montserrat-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/montserrat-italic-700-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-mono-400-latin.woff2") format("woff2");
+}
 
 @tailwind base;
 @tailwind components;
@@ -251,6 +289,29 @@
     pointer-events: none;
     z-index: 2;
   }
+
+  .testimonial-marquee {
+    animation: testimonial-marquee var(--testimonial-duration, 16s) linear infinite;
+  }
+
+  .testimonial-card {
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .testimonial-card:hover,
+  .testimonial-card:focus {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 6px 6px 0 rgba(20, 30, 48, 0.09);
+  }
+}
+
+@keyframes testimonial-marquee {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
 }
 
 /* Custom scrollbar */
@@ -273,5 +334,8 @@
   }
   html {
     scroll-behavior: auto;
+  }
+  .testimonial-marquee {
+    animation: none;
   }
 }

@@ -1,15 +1,51 @@
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Layers, Zap, BarChart3, Map, Building2, Sparkles, Paintbrush2, Megaphone, Type } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
 import ResponsiveImage from "@/components/shared/ResponsiveImage";
-import TestimonialV2 from "@/components/ui/testimonial-v2";
 import { casesData } from "@/data/casesData";
-import anaHero from "@/assets/ana-header.svg";
-import ana1 from "@/assets/ana-nova.webp";
-import thiago1 from "@/assets/thiago-1.webp";
+import anaHero from "@/assets/optimized/ana-header-760.webp";
+import ana1 from "@/assets/optimized/ana-nova-430.webp";
+import ana1Large from "@/assets/optimized/ana-nova-700.webp";
+import thiago1 from "@/assets/optimized/thiago-1-520.webp";
+import thiago1Large from "@/assets/optimized/thiago-1-760.webp";
 
+const TestimonialV2 = lazy(() => import("@/components/ui/testimonial-v2"));
+
+function LazyTestimonials() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || shouldLoad) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "700px 0px", threshold: 0.01 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
+  return (
+    <div ref={ref} className={!shouldLoad ? "min-h-[520px] bg-secondary" : undefined}>
+      {shouldLoad ? (
+        <Suspense fallback={<div className="min-h-[520px] bg-secondary" />}>
+          <TestimonialV2 />
+        </Suspense>
+      ) : null}
+    </div>
+  );
+}
 
 /* ─── Hero ─── */
 function HeroSection() {
@@ -47,6 +83,8 @@ function HeroSection() {
                     alt="Ana Menegaz - Co-fundadora SM Agency"
                     className="w-full object-contain aspect-[662/697] drop-shadow-2xl"
                     sizes="(min-width: 1024px) 50vw, 0vw"
+                    width={760}
+                    height={801}
                     priority
                   />
                 </div>
@@ -127,7 +165,13 @@ function LeadershipSection() {
               <div className="aspect-[3/4] shadow-lg overflow-hidden">
                 <img
                   src={ana1}
+                  srcSet={`${ana1} 430w, ${ana1Large} 700w`}
+                  sizes="(max-width: 767px) 100vw, 50vw"
                   alt="Ana Santos"
+                  width={430}
+                  height={573}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-[50%_18%] scale-[1.12] origin-top"
                 />
               </div>
@@ -164,7 +208,13 @@ function LeadershipSection() {
             <div className="flex flex-col space-y-8">
               <img
                 src={thiago1}
+                srcSet={`${thiago1} 520w, ${thiago1Large} 760w`}
+                sizes="(max-width: 767px) 100vw, 50vw"
                 alt="Thiago Castro"
+                width={520}
+                height={694}
+                loading="lazy"
+                decoding="async"
                 className="w-full object-cover object-top aspect-[3/4] shadow-lg"
               />
               <div className="space-y-5">
@@ -561,7 +611,7 @@ export default function Index() {
       <LeadershipSection />
       <ServicesSection />
       <CasesSection />
-      <TestimonialV2 />
+      <LazyTestimonials />
       <CTASection />
     </>
   );

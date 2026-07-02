@@ -1,16 +1,15 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 // --- Imports de fotos de clientes ---
-import sabrinaKeller from "@/assets/clientes/sabrina-keller.webp";
-import giuliaCloss from "@/assets/clientes/giulia-closs.webp";
-import renataImaoka from "@/assets/clientes/renata-imaoka.webp";
-import andressaFraga from "@/assets/clientes/andressa-fraga.webp";
-import anaPriscia from "@/assets/clientes/ana-priscia.webp";
-import jaquelineVieira from "@/assets/clientes/jaqueline-vieira.webp";
-import indyZimmer from "@/assets/clientes/indy-zimmer.webp";
-import beatrizGarcia from "@/assets/clientes/beatriz-garcia.webp";
-import thatianeOliveira from "@/assets/clientes/thatiane-oliveira.webp";
+import sabrinaKeller from "@/assets/clientes/thumbs/sabrina-keller.webp";
+import giuliaCloss from "@/assets/clientes/thumbs/giulia-closs.webp";
+import renataImaoka from "@/assets/clientes/thumbs/renata-imaoka.webp";
+import andressaFraga from "@/assets/clientes/thumbs/andressa-fraga.webp";
+import anaPriscia from "@/assets/clientes/thumbs/ana-priscia.webp";
+import jaquelineVieira from "@/assets/clientes/thumbs/jaqueline-vieira.webp";
+import indyZimmer from "@/assets/clientes/thumbs/indy-zimmer.webp";
+import beatrizGarcia from "@/assets/clientes/thumbs/beatriz-garcia.webp";
+import thatianeOliveira from "@/assets/clientes/thumbs/thatiane-oliveira.webp";
 
 // --- Types ---
 interface Testimonial {
@@ -100,36 +99,18 @@ function TestimonialsColumn(props: {
 }) {
   return (
     <div className={props.className}>
-      <motion.ul
-        animate={{ translateY: "-50%" }}
-        transition={{
-          duration: props.duration || 10,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop",
-        }}
-        className="flex flex-col gap-5 pb-5 list-none m-0 p-0"
+      <ul
+        className="testimonial-marquee flex flex-col gap-5 pb-5 list-none m-0 p-0"
+        style={{ "--testimonial-duration": `${props.duration || 10}s` } as React.CSSProperties}
       >
         {[...new Array(2).fill(0).map((_, index) => (
           <React.Fragment key={index}>
             {props.testimonials.map(({ text, image, name, role, company }, i) => (
-              <motion.li
+              <li
                 key={`${index}-${i}`}
                 aria-hidden={index === 1 ? "true" : "false"}
                 tabIndex={index === 1 ? -1 : 0}
-                whileHover={{
-                  scale: 1.02,
-                  y: -5,
-                  boxShadow: "6px 6px 0 rgba(20, 30, 48, 0.09)",
-                  transition: { type: "spring", stiffness: 380, damping: 22 },
-                }}
-                whileFocus={{
-                  scale: 1.02,
-                  y: -5,
-                  boxShadow: "6px 6px 0 rgba(20, 30, 48, 0.09)",
-                  transition: { type: "spring", stiffness: 380, damping: 22 },
-                }}
-                className="p-7 border border-border max-w-xs w-full bg-background cursor-default select-none focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="testimonial-card p-7 border border-border max-w-xs w-full bg-background cursor-default select-none focus:outline-none focus:ring-2 focus:ring-primary/20"
               >
                 <blockquote className="m-0 p-0">
                   <p className="text-foreground/70 leading-relaxed text-sm m-0">
@@ -141,6 +122,8 @@ function TestimonialsColumn(props: {
                       height={40}
                       src={image}
                       alt={`Foto de ${name}`}
+                      loading="lazy"
+                      decoding="async"
                       className="h-10 w-10 rounded-full object-cover flex-shrink-0"
                     />
                     <div className="flex flex-col min-w-0">
@@ -153,11 +136,11 @@ function TestimonialsColumn(props: {
                     </div>
                   </footer>
                 </blockquote>
-              </motion.li>
+              </li>
             ))}
           </React.Fragment>
         ))]}
-      </motion.ul>
+      </ul>
     </div>
   );
 }
@@ -169,13 +152,7 @@ export default function TestimonialV2() {
       aria-labelledby="testimonials-heading"
       className="section-spacing bg-secondary relative overflow-hidden"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="container-sm"
-      >
+      <div className="container-sm">
         <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto mb-16 text-center space-y-5">
           <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
@@ -209,7 +186,7 @@ export default function TestimonialV2() {
             duration={17}
           />
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
