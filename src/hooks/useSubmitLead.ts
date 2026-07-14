@@ -20,6 +20,7 @@ const SERVICE_LABELS: Record<FormSource, ServiceInterest> = {
   'identidade-visual': 'Identidade Visual',
   'naming': 'Naming Estratégico',
   'gestao-redes-sociais': 'Gestão de Redes Sociais',
+  'posicionamento-de-marca': 'Posicionamento de Marca',
 };
 
 export function useSubmitLead(formSource: FormSource): UseSubmitLeadReturn {

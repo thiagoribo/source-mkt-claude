@@ -57,7 +57,15 @@ export type Lead =
   | LeadBrandingPessoal
   | LeadIdentidadeVisual
   | LeadNaming
-  | LeadGestaoRedes;
+  | LeadGestaoRedes
+  | LeadPosicionamento;
+
+export interface LeadPosicionamento extends LeadBase {
+  tipo_posicionamento?: string;
+  tempo_mercado?: string;
+  faturamento_range?: string;
+  principal_dor?: string;
+}
 
 // Formulários disponíveis
 export type FormSource =
@@ -66,7 +74,8 @@ export type FormSource =
   | 'branding-pessoal'
   | 'identidade-visual'
   | 'naming'
-  | 'gestao-redes-sociais';
+  | 'gestao-redes-sociais'
+  | 'posicionamento-de-marca';
 
 // Serviços disponíveis
 export type ServiceInterest =
@@ -75,4 +84,5 @@ export type ServiceInterest =
   | 'Branding Pessoal'
   | 'Identidade Visual'
   | 'Naming Estratégico'
-  | 'Gestão de Redes Sociais';
+  | 'Gestão de Redes Sociais'
+  | 'Posicionamento de Marca';

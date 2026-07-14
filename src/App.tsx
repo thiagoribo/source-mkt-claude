@@ -27,6 +27,9 @@ const AdminRoutes = lazy(() => import("./components/admin/AdminRoutes"));
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 
+// Landing Pages (sem Layout de navegação — tráfego pago)
+const PosicionamentoDeMarca = lazy(() => import("./pages/PosicionamentoDeMarca"));
+
 const App = () => (
   <HelmetProvider>
     <TooltipProvider>
@@ -45,6 +48,9 @@ const App = () => (
 
             {/* Conversion Route (uses its own Layout) */}
             <Route path="/obrigado" element={<Obrigado />} />
+
+            {/* Landing Pages — sem Header/Footer de navegação */}
+            <Route path="/posicionamento-de-marca" element={<PosicionamentoDeMarca />} />
 
             {/* Public Routes */}
             <Route
