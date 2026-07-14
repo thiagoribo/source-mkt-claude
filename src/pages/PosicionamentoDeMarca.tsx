@@ -250,55 +250,106 @@ function Reframe() {
 
         {/* Iceberg visual */}
         <RevealSection delay={160}>
-          <div className="mt-10 border border-border overflow-hidden" role="img" aria-label="Diagrama: identidade visual é a ponta visível; posicionamento, narrativa, cliente ideal e ponte comercial sustentam a marca.">
-            {/* ABOVE WATERLINE */}
-            <div className="bg-secondary/60 px-6 md:px-10 pt-8 pb-6">
-              <p className="text-xs font-mono tracking-widest uppercase text-foreground/35 mb-5">
-                O que o mercado vê
-              </p>
-              <div className="flex items-start gap-5">
-                {/* iceberg tip visual */}
-                <div className="hidden sm:flex flex-col items-center gap-1 flex-none">
-                  <div
-                    className="w-20 h-16 bg-background border border-border/60"
-                    style={{ clipPath: "polygon(40% 0, 70% 0, 90% 100%, 10% 100%)" }}
-                  />
+          <div
+            className="mt-10 border border-border overflow-hidden"
+            role="img"
+            aria-label="Diagrama do iceberg: identidade visual é a ponta visível (10% da marca); posicionamento, narrativa, cliente ideal e ponte comercial sustentam a venda abaixo da linha d'água (90% da marca)."
+          >
+            {/* ── ABOVE WATERLINE ── */}
+            <div className="bg-secondary/50 px-6 md:px-10 py-8">
+              <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-12">
+
+                {/* SVG iceberg illustration */}
+                <div className="flex-none mx-auto sm:mx-0" aria-hidden="true">
+                  <svg width="88" height="124" viewBox="0 0 88 124" fill="none">
+                    {/* above-water triangle — small, bright */}
+                    <polygon
+                      points="44,4 70,52 18,52"
+                      fill="white"
+                      stroke="#C8BEB0"
+                      strokeWidth="1.5"
+                    />
+                    {/* subtle crack lines on the tip */}
+                    <line x1="44" y1="12" x2="38" y2="34" stroke="#D8D0C8" strokeWidth="0.8" />
+                    <line x1="44" y1="12" x2="50" y2="30" stroke="#D8D0C8" strokeWidth="0.8" />
+                    {/* "10%" label above */}
+                    <text x="74" y="30" fontSize="8" fill="#B0A898" fontFamily="monospace">10%</text>
+
+                    {/* waterline */}
+                    <line x1="0" y1="52" x2="88" y2="52" stroke="#A8A098" strokeWidth="1" strokeDasharray="4 3" />
+
+                    {/* below-water mass — big, dark, irregular */}
+                    <path
+                      d="M18,52 Q0,64 2,88 Q6,116 44,122 Q82,116 86,88 Q88,64 70,52 Z"
+                      fill="#0B1B3E"
+                      fillOpacity="0.22"
+                      stroke="#0B1B3E"
+                      strokeWidth="1"
+                      strokeOpacity="0.3"
+                    />
+                    {/* "90%" label inside the submerged mass */}
+                    <text x="34" y="92" fontSize="8" fill="#0B1B3E" fillOpacity="0.4" fontFamily="monospace">90%</text>
+                  </svg>
                 </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-1">Identidade visual</h3>
-                  <p className="text-foreground/55 text-sm leading-relaxed">
+
+                {/* Above-water content */}
+                <div className="text-center sm:text-left">
+                  <span className="text-[10px] font-mono tracking-widest uppercase text-foreground/35 block mb-3">
+                    Acima da linha d'água · o que o mercado vê
+                  </span>
+                  <h3 className="font-bold text-xl mb-2">Identidade visual</h3>
+                  <p className="text-sm text-foreground/55 leading-relaxed max-w-[44ch]">
                     Logo, cores, tipografia, manual de marca. É onde a maioria dos projetos de "branding" começa — e termina.
                   </p>
-                  <span className="inline-block mt-3 text-xs font-mono text-foreground/40 bg-foreground/6 px-3 py-1">
+                  <span className="inline-block mt-4 px-3 py-1 text-xs font-mono text-foreground/40 border border-border/60 bg-background">
                     ≈ 10% da marca
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* waterline divider */}
-            <div className="relative border-t-2 border-dashed border-foreground/25 bg-background">
-              <span className="absolute right-4 -top-3.5 text-xs font-mono bg-background text-foreground/40 px-3 py-0.5 border border-border/40">
-                linha d'água
-              </span>
+            {/* ── WATERLINE — wave SVG ── */}
+            <div className="relative h-10 bg-secondary/50" aria-hidden="true">
+              <svg
+                viewBox="0 0 1000 40"
+                preserveAspectRatio="none"
+                className="absolute inset-0 w-full h-full"
+              >
+                <path
+                  d="M0,22 C120,8 240,36 360,22 C480,8 600,36 720,22 C840,8 920,32 1000,20 L1000,40 L0,40 Z"
+                  fill="#0B1B3E"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center z-10" style={{ paddingBottom: 10 }}>
+                <span className="text-[9px] font-mono tracking-widest uppercase text-foreground/40 bg-secondary/50 px-3 py-0.5">
+                  — linha d'água —
+                </span>
+              </div>
             </div>
 
-            {/* BELOW WATERLINE */}
-            <div className="bg-primary text-primary-foreground px-6 md:px-10 pt-6 pb-8">
-              <p className="text-xs font-mono tracking-widest uppercase text-accent mb-5">
-                O que sustenta a venda
-              </p>
+            {/* ── BELOW WATERLINE ── */}
+            <div className="bg-primary text-primary-foreground px-6 md:px-10 pt-8 pb-10">
+              <div className="mb-6">
+                <span className="text-[10px] font-mono tracking-widest uppercase text-accent block mb-1">
+                  Abaixo da linha d'água · o que sustenta a venda
+                </span>
+                <span className="text-[10px] font-mono text-primary-foreground/30">
+                  ≈ 90% da marca — invisível para o mercado, decisivo para o cliente
+                </span>
+              </div>
+
               <div className="grid sm:grid-cols-2 gap-4">
                 {belowItems.map((item) => (
-                  <div key={item.n} className="border border-white/10 p-4 bg-white/[0.04]">
+                  <div key={item.n} className="border border-white/10 p-5 bg-white/[0.04]">
                     <span className="text-xs font-mono text-accent mb-2 block">{item.n}</span>
-                    <h4 className="font-bold text-base mb-1">{item.title}</h4>
+                    <h4 className="font-bold text-base mb-1.5">{item.title}</h4>
                     <p className="text-primary-foreground/55 text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
-              <p className="text-primary-foreground/40 text-xs font-mono mt-5 text-center">
-                Um logo novo mexe na ponta. Posicionamento constrói o que está embaixo da água.
+
+              <p className="text-primary-foreground/30 text-xs font-mono mt-6 pt-5 border-t border-white/10 text-center">
+                Um logo mexe na ponta. Posicionamento constrói o que está abaixo da água.
               </p>
             </div>
           </div>
