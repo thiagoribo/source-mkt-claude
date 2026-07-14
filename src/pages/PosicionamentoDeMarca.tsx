@@ -198,7 +198,7 @@ function AuthorityBar() {
             </div>
           ))}
         </div>
-        <div className="border-t border-white/10 pt-5 flex flex-wrap items-center gap-4">
+        <div className="border-t border-white/10 pt-5 flex flex-wrap items-center gap-8">
           <span className="text-primary-foreground/35 text-xs font-mono tracking-widest uppercase w-full sm:w-auto">
             Marcas que confiaram na SM
           </span>
