@@ -11,7 +11,6 @@ import logoCelmi from "@/assets/clientes/Logo/celmi.png";
 import logoCelsoMissias from "@/assets/clientes/Logo/celso-missias.png";
 import logoCodigoVarejista from "@/assets/clientes/Logo/codigo-varejista.png";
 import logoStart from "@/assets/clientes/Logo/start-imobilirio.png";
-import logoStdi from "@/assets/clientes/Logo/stdi.png";
 import {
   ArrowRight, Phone, Check, X, ChevronDown,
   Building2, User, TrendingUp, Target, Layers,
@@ -186,7 +185,6 @@ function AuthorityBar() {
     { src: logoCelsoMissias, alt: "Celso Missias" },
     { src: logoCodigoVarejista, alt: "Código Varejista" },
     { src: logoStart, alt: "Start Imobiliário" },
-    { src: logoStdi, alt: "STDI" },
   ];
 
   return (
@@ -209,7 +207,7 @@ function AuthorityBar() {
               key={l.alt}
               src={l.src}
               alt={l.alt}
-              className="h-6 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity"
+              className="h-6 w-auto object-contain brightness-0 invert opacity-50 hover:opacity-80 transition-opacity"
             />
           ))}
         </div>
