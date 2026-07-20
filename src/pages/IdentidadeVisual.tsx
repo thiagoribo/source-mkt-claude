@@ -24,7 +24,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ComparisonTable from "@/components/shared/ComparisonTable";
+import QualificationForm from "@/components/shared/QualificationForm";
 import CasesCarousel from "@/components/shared/CasesCarousel";
 import { identidadeVisualMockups } from "@/data/serviceMockups";
 
@@ -51,21 +51,19 @@ function Hero() {
                 Identidade Visual
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
-                Sistemas visuais{" "}
-                <em className="not-italic text-foreground/40 font-normal">
-                  que comunicam
-                </em>
+              <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-bold leading-[1.05] tracking-tight">
+                Uma identidade visual que{" "}
+                <em className="not-italic text-foreground/40 font-normal">se aplica sozinha —</em>
                 <br />
-                <span className="text-primary">estratégia.</span>
+                <span className="text-primary">sem depender do gosto.</span>
               </h1>
 
               <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Transformamos plataformas de marca em identidades memoráveis, coerentes e aplicáveis em todos os pontos de contato.
+                Sistema visual completo com logotipo, paleta, tipografia e manual — traduzindo sua estratégia em uma linguagem gráfica coerente e aplicável em todos os pontos de contato.
               </p>
 
               <p className="text-sm text-foreground/50">
-                Serviço para empresas com estratégia de marca já definida.{" "}
+                Serviço para marcas com estratégia completa ou parcialmente definida. Avaliamos a base antes de iniciar a criação.{" "}
                 <Link
                   to="/branding-empresarial"
                   className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
@@ -85,25 +83,134 @@ function Hero() {
   );
 }
 
-/* ─── Antes e Depois — tabela comparativa ─── */
-const identidadeVisualRows = [
-  { sem: "Logo solto sem aplicação coerente", com: "Identidade consistente em todos os pontos de contato" },
-  { sem: "Marca visualmente genérica", com: "Visual marcante, diferenciado e memorável" },
-  { sem: "Comunicação desalinhada com a estratégia", com: "Expressão visual clara do posicionamento" },
-  { sem: "Dificuldade em se destacar da concorrência", com: "Reconhecimento e valorização da marca" },
-  { sem: "Sem manual de diretrizes de uso", com: "Manual completo e fácil de aplicar" },
-  { sem: "Dúvidas constantes na hora de aplicar", com: "Clareza, coesão e profissionalismo em tudo" },
-];
+/* ─── Logo ≠ Identidade — escala progressiva ─── */
+function LogoVsIdentidade() {
+  const columns = [
+    {
+      num: "01",
+      label: "Logo isolado",
+      subtitle: "Um símbolo sem sistema",
+      items: [
+        "Sem paleta definida",
+        "Sem tipografia de marca",
+        "Sem aplicações ou diretrizes",
+        "Depende da intuição em cada uso",
+      ],
+      tone: "faded",
+    },
+    {
+      num: "02",
+      label: "Identidade parcial",
+      subtitle: "Visual definido, estratégia vaga",
+      items: [
+        "Inconsistência entre canais",
+        "Aplicação depende de bom senso",
+        "Difícil de escalar ou delegar",
+        "Não sustenta preços premium",
+      ],
+      tone: "medium",
+    },
+    {
+      num: "03",
+      label: "Sistema Source",
+      subtitle: "Identidade completa e aplicável",
+      items: [
+        "Estratégia visual documentada",
+        "Aplicações em todos os pontos de contato",
+        "Manual de uso claro e prático",
+        "Consistência escalável",
+      ],
+      tone: "focus",
+    },
+  ];
 
-function AntesDepois() {
   return (
-    <ComparisonTable
-      title="Antes e Depois"
-      rows={identidadeVisualRows}
-      beforeLabel="Sem Sistema Profissional"
-      afterLabel="Com Sistema SM"
-      className="bg-secondary"
-    />
+    <section className="section-spacing bg-background">
+      <div className="container-sm max-w-6xl">
+        <RevealSection>
+          {/* Statement principal */}
+          <div className="mb-16 max-w-3xl">
+            <p className="text-xs font-mono uppercase tracking-widest text-foreground/35 mb-4">O equívoco mais comum</p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1]">
+              Um logo resolve visibilidade.<br />
+              <span className="text-primary italic font-serif">Uma identidade resolve posicionamento.</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 md:gap-5">
+            {columns.map((col) => {
+              const isFocus = col.tone === "focus";
+              const isMedium = col.tone === "medium";
+
+              return (
+                <div
+                  key={col.num}
+                  className={`
+                    relative p-7 md:p-8 flex flex-col
+                    ${isFocus
+                      ? "bg-primary text-primary-foreground md:-mt-4 md:pb-12 shadow-[8px_8px_0_0_rgba(220,180,100,0.15)]"
+                      : "bg-secondary/50 border border-border/30"}
+                  `}
+                >
+                  {/* Number */}
+                  <div className="flex items-baseline gap-3 mb-6">
+                    <span className={`font-mono font-bold text-2xl leading-none ${
+                      isFocus ? "text-accent" : isMedium ? "text-foreground/25" : "text-foreground/15"
+                    }`}>
+                      {col.num}
+                    </span>
+                    <div className={`h-px flex-1 ${
+                      isFocus ? "bg-accent/40" : "bg-border/50"
+                    }`} />
+                  </div>
+
+                  <p className={`text-[10px] font-mono uppercase tracking-widest mb-2 ${
+                    isFocus ? "text-primary-foreground/50" : "text-foreground/30"
+                  }`}>
+                    {col.label}
+                  </p>
+                  <h3 className={`text-lg md:text-xl font-bold mb-6 leading-snug ${
+                    isFocus ? "text-primary-foreground" : "text-foreground/70"
+                  }`}>
+                    {col.subtitle}
+                  </h3>
+
+                  <ul className="space-y-2.5 flex-1">
+                    {col.items.map((item, j) => (
+                      <li
+                        key={j}
+                        className={`text-sm leading-relaxed flex gap-2 items-start ${
+                          isFocus
+                            ? "text-primary-foreground/85"
+                            : isMedium
+                              ? "text-foreground/50"
+                              : "text-foreground/40"
+                        }`}
+                      >
+                        <span className={`select-none flex-shrink-0 ${
+                          isFocus ? "text-accent" : "text-foreground/25"
+                        }`}>
+                          —
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {isFocus && (
+                    <div className="mt-6 pt-5 border-t border-primary-foreground/10">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-accent">
+                        O que entregamos ↓
+                      </span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </RevealSection>
+      </div>
+    </section>
   );
 }
 
@@ -204,161 +311,21 @@ function GaleriaMockups() {
   );
 }
 
-/* ─── Investimento — secão escura de contraste ─── */
-function Investimento() {
-  return (
-    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-      {/* Decorative large text */}
-      <span
-        aria-hidden
-        className="absolute right-8 top-1/2 -translate-y-1/2 text-[160px] font-bold font-serif leading-none select-none pointer-events-none hidden lg:block"
-        style={{ opacity: 0.05 }}
-      >
-        R$
-      </span>
-
-      <div className="container-sm max-w-5xl relative">
-        <RevealSection>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
-            <div className="space-y-4">
-              <p className="text-xs font-mono tracking-widest uppercase opacity-50">Investimento</p>
-              <p className="text-6xl md:text-7xl font-bold font-serif leading-none">
-                R$8.000
-              </p>
-              <p className="text-primary-foreground/50 text-sm">
-                A partir de — Prazo: 4 a 6 semanas
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 md:items-end">
-              <Button
-                size="lg"
-                variant="outline"
-                className="rounded-none text-base px-8 h-12 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors"
-                asChild
-              >
-                <a href="#formulario" className="flex items-center gap-2">
-                  Quero Minha Identidade Visual <ArrowRight className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          </div>
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
-
 /* ─── Formulário ─── */
 function Formulario() {
-  const { submitLead, isLoading } = useSubmitLead('identidade-visual');
-  const formRef = useRef<HTMLFormElement>(null);
-  const navigate = useNavigate();
-  const utmParams = useUtmParams();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formRef.current) return;
-
-    const formData = new FormData(formRef.current);
-
-    const result = await submitLead({
-      full_name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      whatsapp: formData.get('phone') as string,
-      company: formData.get('company') as string,
-      has_strategy: formData.get('has-strategy') as string,
-      notes: formData.get('details') as string,
-      utm_source: formData.get('utm_source') as string || undefined,
-      utm_medium: formData.get('utm_medium') as string || undefined,
-      utm_campaign: formData.get('utm_campaign') as string || undefined,
-      utm_content: formData.get('utm_content') as string || undefined,
-      utm_term: formData.get('utm_term') as string || undefined,
-    });
-
-    if (result.success) {
-      trackLead("identidade-visual");
-      navigate('/obrigado?service=identidade-visual');
-    }
-  };
-
   return (
     <section id="formulario" className="section-spacing bg-background">
-      <div className="container-sm max-w-2xl">
+      <div className="container-sm max-w-3xl">
         <RevealSection>
           <div className="mb-12 space-y-3">
-            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Orçamento</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Quero Minha Identidade Visual</h2>
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Candidatura</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Sua marca já tem base para uma identidade?</h2>
+            <p className="text-foreground/60 max-w-2xl">Vamos avaliar a estratégia existente e as lacunas do projeto. Se a base ainda não for suficiente, indicaremos Branding como primeiro passo.</p>
           </div>
         </RevealSection>
 
         <RevealSection delay={100}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="space-y-6 border border-border p-8"
-          >
-            <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
-            <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
-            <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
-            <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
-            <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome *</Label>
-                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" onFocus={() => trackFormStart("identidade-visual")} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
-                <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="company">Empresa *</Label>
-                <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="has-strategy">Você já tem estratégia de marca definida? *</Label>
-              <select
-                id="has-strategy"
-                name="has-strategy"
-                required
-                className="flex h-10 w-full border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <option value="">Selecione</option>
-                <option value="Sim, já tenho">Sim, já tenho</option>
-                <option value="Parcialmente">Parcialmente</option>
-                <option value="Não, preciso construir">Não, preciso construir</option>
-              </select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="details">Detalhes do projeto</Label>
-              <Textarea
-                id="details"
-                name="details"
-                placeholder="Descreva brevemente o que precisa..."
-                rows={3}
-                className="rounded-none"
-              />
-            </div>
-
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Quero Minha Identidade Visual'}
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Ao enviar, você concorda com nossa Política de Privacidade.
-            </p>
-          </form>
+          <div className="border border-border p-6 md:p-8"><QualificationForm service="identidade-visual" /></div>
         </RevealSection>
       </div>
     </section>
@@ -369,10 +336,10 @@ export default function IdentidadeVisual() {
   return (
     <>
       <Helmet>
-        <title>Identidade Visual Profissional para Empresas | SM Agency</title>
+        <title>Identidade Visual Estratégica para Marcas | Source</title>
         <meta name="description" content="Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico alinhado ao posicionamento do seu negócio." />
         <link rel="canonical" href="https://sourcemkt.com.br/identidade-visual" />
-        <meta property="og:title" content="Identidade Visual Profissional para Empresas | SM Agency" />
+        <meta property="og:title" content="Identidade Visual Estratégica para Marcas | Source" />
         <meta property="og:description" content="Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico." />
         <meta property="og:url" content="https://sourcemkt.com.br/identidade-visual" />
         <script type="application/ld+json">{JSON.stringify({
@@ -381,17 +348,16 @@ export default function IdentidadeVisual() {
           "name": "Identidade Visual Profissional para Empresas",
           "description": "Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico alinhado ao posicionamento do seu negócio.",
           "url": "https://sourcemkt.com.br/identidade-visual",
-          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "provider": { "@type": "Organization", "name": "Source", "url": "https://sourcemkt.com.br" },
           "areaServed": { "@type": "Country", "name": "Brazil" },
           "serviceType": "Identidade Visual"
         })}</script>
       </Helmet>
       <Hero />
-      <AntesDepois />
+      <LogoVsIdentidade />
       <Processo />
       <Entregaveis />
       <GaleriaMockups />
-      {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-identidade-visual.tsx */}
       <Formulario />
     </>
   );

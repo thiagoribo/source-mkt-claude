@@ -21,7 +21,7 @@ export default function Footer() {
               className="h-20 w-auto"
             />
             <p className="text-sm text-brand-offwhite/50 leading-relaxed max-w-xs font-light">
-              Consultoria estratégica e branding para empresas estabelecidas que querem crescer em categorias mais rentáveis.
+              Estratégia, identidade e aplicação para especialistas e empresas preparados para construir uma marca consistente.
             </p>
             <div className="flex gap-5 items-center">
               <a
@@ -52,12 +52,10 @@ export default function Footer() {
             </h4>
             <nav className="flex flex-col gap-3">
               {[
-                { label: "Consultoria Estratégica", href: "/consultoria-estrategica" },
                 { label: "Branding Empresarial", href: "/branding-empresarial" },
                 { label: "Branding Pessoal", href: "/branding-pessoal" },
                 { label: "Identidade Visual", href: "/identidade-visual" },
                 { label: "Gestão de Redes Sociais", href: "/gestao-redes-sociais" },
-                { label: "Naming", href: "/naming" },
               ].map((link) => (
                 <Link
                   key={link.href}
@@ -81,25 +79,15 @@ export default function Footer() {
               >
                 contato@sourcemkt.com.br
               </a>
-              <a
-                href="https://wa.me/5511937292921"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-brand-offwhite transition-colors duration-200"
-              >
-                (11) 93729-2921
-              </a>
               <span className="text-brand-offwhite/30">Atendimento em todo Brasil</span>
             </div>
 
             <div className="pt-4">
               <a
-                href="https://wa.me/5511937292921"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/#candidatura"
                 className="inline-flex items-center h-10 px-6 text-xs font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-black hover:bg-white transition-colors duration-200"
               >
-                Agendar Conversa
+                Candidatar meu projeto
               </a>
             </div>
           </div>

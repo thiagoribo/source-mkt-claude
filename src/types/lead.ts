@@ -17,15 +17,8 @@ export interface LeadBase {
   utm_campaign?: string;
   utm_content?: string;
   utm_term?: string;
-}
-
-export interface LeadConsultoria extends LeadBase {
-  role?: string;
-  revenue?: string;
-  budget?: string;
-  scope?: string[];
-  modality?: string;
-  timeline?: string;
+  qualification_data?: Record<string, FormDataEntryValue>;
+  requested_service?: FormSource;
 }
 
 export interface LeadBrandingEmpresarial extends LeadBase {
@@ -43,22 +36,17 @@ export interface LeadIdentidadeVisual extends LeadBase {
   has_strategy?: string;
 }
 
-export interface LeadNaming extends LeadBase {
-  naming_type?: string;
-}
-
 export interface LeadGestaoRedes extends LeadBase {
   platforms?: string;
 }
 
 export type Lead =
-  | LeadConsultoria
   | LeadBrandingEmpresarial
   | LeadBrandingPessoal
   | LeadIdentidadeVisual
-  | LeadNaming
   | LeadGestaoRedes
-  | LeadPosicionamento;
+  | LeadPosicionamento
+  | LeadBase;
 
 export interface LeadPosicionamento extends LeadBase {
   tipo_posicionamento?: string;
@@ -69,20 +57,16 @@ export interface LeadPosicionamento extends LeadBase {
 
 // Formulários disponíveis
 export type FormSource =
-  | 'consultoria-estrategica'
+  | 'candidatura-geral'
   | 'branding-empresarial'
   | 'branding-pessoal'
   | 'identidade-visual'
-  | 'naming'
-  | 'gestao-redes-sociais'
-  | 'posicionamento-de-marca';
+  | 'gestao-redes-sociais';
 
 // Serviços disponíveis
 export type ServiceInterest =
-  | 'Consultoria Estratégica'
+  | 'Candidatura Geral'
   | 'Branding Empresarial'
   | 'Branding Pessoal'
   | 'Identidade Visual'
-  | 'Naming Estratégico'
-  | 'Gestão de Redes Sociais'
-  | 'Posicionamento de Marca';
+  | 'Gestão de Redes Sociais';

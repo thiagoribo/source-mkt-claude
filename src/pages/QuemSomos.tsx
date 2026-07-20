@@ -78,7 +78,7 @@ function Hero() {
               </p>
 
               <p className="text-sm text-foreground/50 max-w-lg leading-relaxed">
-                Fundada por Ana Santos e Thiago Castro, a SM Agency nasceu da convicção de que toda empresa estabelecida tem potencial para se tornar referência no seu mercado.
+                Fundada por Ana Santos e Thiago Castro, a Source existe para transformar estratégia e identidade em uma marca que orienta decisões reais.
               </p>
             </div>
           </div>
@@ -106,10 +106,10 @@ function Historia() {
                 Ana, com background profundo em branding e posicionamento de marca, via constantemente negócios sólidos com uma comunicação que não refletiam de fato a entrega e essência do negócio.
               </p>
               <p>
-                Thiago, vindo do mundo de performance e crescimento, frustrava-se ao ver empresas competindo por preço e travadas em faturamentos insustentáveis enquanto poderiam estruturar seu ecossistema, jornada e experiência do cliente para escalar de forma segura e lucrativa.
+                Thiago, vindo do mundo de performance e crescimento, via empresas investirem em comunicação antes de construir a base que deveria orientar cada canal e escolha.
               </p>
               <p className="pl-4 border-l-2 border-border text-foreground/50 text-sm">
-                Juntos, desenvolveram uma abordagem que integra o melhor de ambos: profundidade conceitual do branding estratégico com o rigor analítico de performance. Hoje, após mais de 100 empresas, nossa metodologia provou sua eficácia em diversos setores.
+                Juntos, desenvolveram uma abordagem que une profundidade estratégica e aplicação prática: primeiro a marca ganha direção; depois, identidade e comunicação passam a trabalhar com coerência.
               </p>
             </div>
           </div>
@@ -213,7 +213,7 @@ function Fundadores() {
 
                 <div className="text-foreground/65 text-sm leading-relaxed space-y-4">
                   <p>
-                    Ana Santos é co-fundadora da SM Agency, onde lidera todos os projetos de posicionamento estratégico e construção de marca.
+                    Ana Santos é co-fundadora da Source, onde lidera projetos de posicionamento estratégico e construção de marca.
                   </p>
                   <p>
                     Com mais de 10 anos de experiência em branding para empresas de diversos setores, desenvolveu uma abordagem única que combina rigor analítico com sensibilidade para traduzir a essência de um negócio em territórios de comunicação memoráveis.
@@ -266,19 +266,19 @@ function Fundadores() {
                 <div className="h-px w-10 bg-primary mb-5" />
                 <h3 className="text-3xl font-bold font-serif leading-tight">Thiago Castro</h3>
                 <p className="text-primary font-mono font-medium text-xs tracking-widest uppercase mt-2">
-                  Co-fundador · Performance e Crescimento
+                  Co-fundador · Estratégia e Aplicação
                 </p>
               </div>
 
               <div className="text-foreground/65 text-sm leading-relaxed space-y-4">
                 <p>
-                  Thiago Castro é co-fundador da SM Agency, onde lidera a dimensão de performance, estruturação comercial e crescimento de negócios.
+                  Thiago Castro é co-fundador da Source, onde conecta a estratégia da marca à sua aplicação nos pontos de contato.
                 </p>
                 <p>
                   Com mais de 15 anos de atuação em mercados nacionais e internacionais — incluindo EUA, China, Austrália, Portugal, Itália e Espanha — desenvolveu expertise em estruturar ecossistemas de negócios, jornadas do cliente e arquiteturas de funil que geram crescimento escalável e lucrativo.
                 </p>
                 <p>
-                  O que diferencia a abordagem de Thiago é a capacidade de enxergar o negócio de forma sistêmica: estruturando processos, canais e estratégias comerciais que transformam faturamento inconsistente em crescimento previsível.
+                  Sua abordagem sistêmica ajuda a transformar posicionamento em critérios claros para comunicação, conteúdo e consistência de marca.
                 </p>
               </div>
 
@@ -320,12 +320,12 @@ function Equipe() {
               Nossa Equipe
             </p>
             <h2 className="text-3xl md:text-4xl font-bold">
-              Equipe SM. Agency
+              Equipe Source
             </h2>
             <p className="text-foreground/60 text-sm leading-relaxed">
               Desenvolvemos um processo rigoroso de seleção e treinamento. Cada membro
-              é treinado diretamente por Ana e Thiago na metodologia SM, passando por
-              meses de imersão em projetos reais antes de liderar componentes de consultoria.
+              é treinado diretamente por Ana e Thiago na metodologia Source, passando por
+              imersão em projetos reais antes de assumir entregas estratégicas ou visuais.
             </p>
             <div className="h-px w-12 bg-accent mt-6" />
           </div>
@@ -403,7 +403,7 @@ function Numeros() {
 /* ─── Portfolio ─── */
 function Portfolio() {
   const [filter, setFilter] = useState("Todos");
-  const categories = ["Todos", "Consultoria 360°", "Branding Empresarial"];
+  const categories = ["Todos", "Branding Empresarial", "Projeto estratégico realizado"];
 
   const filtered =
     filter === "Todos"
@@ -508,8 +508,8 @@ function CTAFinal() {
               className="rounded-none text-base px-10 h-12 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors"
               asChild
             >
-              <a href="https://wa.me/5511937292921" target="_blank" rel="noopener noreferrer">
-                Agendar Conversa
+              <a href="/#candidatura">
+                Candidatar meu projeto
               </a>
             </Button>
           </div>
@@ -524,11 +524,11 @@ export default function QuemSomos() {
   return (
     <>
       <Helmet>
-        <title>Quem Somos | SM Agency — Agência de Branding e Marketing</title>
-        <meta name="description" content="Conheça a SM Agency: nossa história, valores e os profissionais por trás de marcas que se tornaram referência de mercado. Branding e consultoria estratégica." />
+        <title>Quem Somos | Source — Agência de Branding</title>
+        <meta name="description" content="Conheça a Source e as pessoas que constroem estratégia, identidade visual e aplicação para empresas e especialistas." />
         <link rel="canonical" href="https://sourcemkt.com.br/quem-somos" />
-        <meta property="og:title" content="Quem Somos | SM Agency — Agência de Branding e Marketing" />
-        <meta property="og:description" content="Conheça a SM Agency: nossa história, valores e os profissionais por trás de marcas que se tornaram referência de mercado." />
+        <meta property="og:title" content="Quem Somos | Source — Agência de Branding" />
+        <meta property="og:description" content="Conheça a Source e as pessoas que constroem estratégia, identidade e aplicação de marca." />
         <meta property="og:url" content="https://sourcemkt.com.br/quem-somos" />
       </Helmet>
       <Hero />

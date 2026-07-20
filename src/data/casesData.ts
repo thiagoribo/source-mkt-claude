@@ -88,7 +88,7 @@ export const casesData: CaseData[] = [
   },
   {
     id: "start-imobiliario",
-    category: "Consultoria 360°",
+    category: "Projeto estratégico realizado",
     client: "Start Imobiliário",
     tagline: "De operação desordenada a uma empresa com caminho claro para escalar.",
     headline: "Quando crescer sem estrutura é mais perigoso do que não crescer.",

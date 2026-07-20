@@ -7,12 +7,11 @@ import { trackConversion } from "@/lib/analytics";
 import type { FormSource } from "@/lib/analytics";
 
 const SERVICE_LABELS: Partial<Record<FormSource, string>> = {
-  "consultoria-estrategica": "Consultoria Estratégica",
+  "candidatura-geral": "Candidatura geral",
   "branding-empresarial": "Branding Empresarial",
   "branding-pessoal": "Branding Pessoal",
   "identidade-visual": "Identidade Visual",
   "gestao-redes-sociais": "Gestão de Redes Sociais",
-  "naming": "Naming Estratégico",
 };
 
 export default function Obrigado() {
@@ -22,7 +21,7 @@ export default function Obrigado() {
 
   useEffect(() => {
     trackConversion(service ?? undefined);
-  }, []);
+  }, [service]);
 
   return (
     <>
@@ -45,20 +44,11 @@ export default function Obrigado() {
                 Solicitação enviada.
               </h1>
               <p className="text-foreground/60 text-lg max-w-md mx-auto">
-                Nosso time entrará em contato em até <strong className="text-foreground">48h úteis</strong> para dar continuidade.
+                Vamos analisar o contexto e a aderência do projeto. Se houver encaixe, enviaremos um convite para uma conversa em até <strong className="text-foreground">48h úteis</strong>.
               </p>
             </div>
 
-            <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://wa.me/5511937292921?text=Ol%C3%A1%2C%20acabei%20de%20enviar%20uma%20solicita%C3%A7%C3%A3o%20pelo%20site."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-              >
-                Falar pelo WhatsApp
-                <ArrowRight className="h-4 w-4" />
-              </a>
+            <div className="pt-4 flex justify-center">
               <Link
                 to="/"
                 className="inline-flex items-center justify-center gap-2 h-12 px-8 border border-border text-sm font-medium hover:bg-secondary transition-colors"

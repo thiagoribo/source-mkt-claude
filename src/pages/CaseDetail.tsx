@@ -182,7 +182,7 @@ export default function CaseDetail() {
               className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 text-base px-10 h-13 font-semibold"
               asChild
             >
-              <a href="https://wa.me/5511937292921" target="_blank" rel="noopener noreferrer">
+              <a href="/#candidatura">
                 Quero uma transformação assim →
               </a>
             </Button>

@@ -60,16 +60,16 @@ async function fetchPublishedPosts(supabaseUrl, anonKey) {
 const routes = [
   {
     path: "branding-empresarial",
-    title: "Branding Empresarial Estratégico | SM Agency",
+    title: "Branding Empresarial Estratégico | Source",
     description:
-      "Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo para empresas que querem dominar seu mercado.",
+      "Estratégia, identidade visual e manual de marca em um projeto de branding empresarial de dois meses.",
     ogDescription:
       "Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo.",
     url: "https://sourcemkt.com.br/branding-empresarial",
   },
   {
     path: "branding-pessoal",
-    title: "Branding Pessoal para Líderes e Especialistas | SM Agency",
+    title: "Branding Pessoal para Líderes e Especialistas | Source",
     description:
       "Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes que querem ser reconhecidos pelo que representam.",
     ogDescription:
@@ -78,7 +78,7 @@ const routes = [
   },
   {
     path: "identidade-visual",
-    title: "Identidade Visual Profissional para Empresas | SM Agency",
+    title: "Identidade Visual Estratégica para Marcas | Source",
     description:
       "Sistema de identidade visual completo: logotipo, paleta de cores, tipografia e manual de marca. Design estratégico alinhado ao posicionamento do seu negócio.",
     ogDescription:
@@ -87,7 +87,7 @@ const routes = [
   },
   {
     path: "gestao-redes-sociais",
-    title: "Gestão de Redes Sociais Estratégica | SM Agency",
+    title: "Gestão de Redes Sociais para Marcas Estruturadas | Source",
     description:
       "Gestão profissional de redes sociais com calendário editorial, criação de conteúdo, gestão de comunidade e relatórios de performance mensais.",
     ogDescription:
@@ -95,30 +95,12 @@ const routes = [
     url: "https://sourcemkt.com.br/gestao-redes-sociais",
   },
   {
-    path: "naming",
-    title: "Naming Estratégico para Marcas e Produtos | SM Agency",
-    description:
-      "Criação de nomes estratégicos para marcas e produtos. Análise fonética, semântica, verificação de domínios disponíveis e pesquisa no INPI. Nomes construídos para durar.",
-    ogDescription:
-      "Criação de nomes estratégicos para marcas e produtos com verificação de domínios e pesquisa no INPI.",
-    url: "https://sourcemkt.com.br/naming",
-  },
-  {
-    path: "consultoria-estrategica",
-    title: "Consultoria de Marketing Estratégico | SM Agency",
-    description:
-      "Diagnóstico 360° de marketing: Meta Ads, Google Ads, funil de conversão, posicionamento de marca e alinhamento marketing+vendas. Identifique os gargalos que impedem seu crescimento.",
-    ogDescription:
-      "Diagnóstico 360° de marketing: Meta Ads, Google Ads, funil de conversão, posicionamento de marca e alinhamento marketing+vendas.",
-    url: "https://sourcemkt.com.br/consultoria-estrategica",
-  },
-  {
     path: "quem-somos",
-    title: "Quem Somos | SM Agency — Agência de Branding e Marketing",
+    title: "Quem Somos | Source — Agência de Branding",
     description:
-      "Conheça a SM Agency: nossa história, valores e os profissionais por trás de marcas que se tornaram referência de mercado. Branding e consultoria estratégica.",
+      "Conheça a Source e as pessoas que constroem estratégia, identidade visual e aplicação para empresas e especialistas.",
     ogDescription:
-      "Conheça a SM Agency: nossa história, valores e os profissionais por trás de marcas que se tornaram referência de mercado.",
+      "Conheça a Source e as pessoas por trás da nossa metodologia de branding.",
     url: "https://sourcemkt.com.br/quem-somos",
   },
 ];

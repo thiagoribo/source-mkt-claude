@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ComparisonTable from "@/components/shared/ComparisonTable";
+import QualificationForm from "@/components/shared/QualificationForm";
 import { socialDashboardKpis, socialEditorialCycle } from "@/data/serviceMockups";
 // Imagens de depoimentos (o que falam de nós)
 import dep1 from "@/assets/cases/gestao-redes/depoimentos/dep-1.webp";
@@ -59,21 +59,21 @@ function Hero() {
                 Gestão de Redes Sociais
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight">
-                Presença digital{" "}
+              <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-bold leading-[1.05] tracking-tight">
+                Sua marca reconhecida{" "}
                 <em className="not-italic text-foreground/40 font-normal">
-                  que gera
+                  em cada post,
                 </em>
                 <br />
-                <span className="text-primary">autoridade.</span>
+                <span className="text-primary">sem começar do zero toda semana.</span>
               </h1>
 
               <p className="text-lg text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Transformamos sua presença digital em canal de posicionamento, autoridade e conversão com conteúdo estratégico alinhado à marca.
+                Aplicamos a marca nos canais digitais com direção editorial, calendário estratégico e consistência visual — para que cada conteúdo reforce o mesmo posicionamento.
               </p>
 
               <p className="text-sm text-foreground/50">
-                Focado em marcas com posicionamento já definido.{" "}
+                Disponível para clientes de branding da Source ou marcas com estratégia, posicionamento e diretrizes utilizáveis.{" "}
                 <Link
                   to="/branding-empresarial"
                   className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
@@ -115,24 +115,48 @@ function Hero() {
   );
 }
 
-/* ─── Antes e Depois — tabela comparativa ─── */
-const gestaoSocialRows = [
-  { sem: "Posts sem estratégia ou calendário definido", com: "Calendário editorial estratégico e planejado" },
-  { sem: "Conteúdo genérico e sem personalidade de marca", com: "Conteúdo que reflete o posicionamento" },
-  { sem: "Baixo engajamento e alcance orgânico", com: "Crescimento orgânico consistente e mensurável" },
-  { sem: "Sem clareza de métricas ou retorno", com: "Relatórios com métricas e análises claras" },
-  { sem: "Comunicação desalinhada com a identidade", com: "Presença digital que gera autoridade e leads" },
-];
-
-function AntesDepois() {
+/* ─── Pré-requisito — callout impossível de ignorar ─── */
+function PreRequisito() {
   return (
-    <ComparisonTable
-      title="Antes e Depois"
-      rows={gestaoSocialRows}
-      beforeLabel="Sem Gestão Estratégica"
-      afterLabel="Com Gestão SM Agency"
-      className="bg-secondary"
-    />
+    <section className="bg-primary text-primary-foreground py-10 md:py-12">
+      <div className="container-sm max-w-5xl">
+        <RevealSection>
+          <div className="grid md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-start">
+            {/* Label */}
+            <div className="flex-shrink-0">
+              <div className="w-10 h-10 border border-accent/40 flex items-center justify-center">
+                <span className="text-accent font-mono font-bold text-sm">!</span>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div>
+              <h3 className="text-lg font-bold mb-2">
+                Este serviço exige uma base de marca documentada.
+              </h3>
+              <p className="text-primary-foreground/65 text-sm leading-relaxed max-w-2xl">
+                Gestão de redes não substitui branding. Aplicamos a marca nos canais digitais — não a criamos. Para marcas sem estratégia, posicionamento e identidade definidos, o primeiro passo obrigatório é o Branding.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 mt-5">
+                <Link
+                  to="/branding-empresarial"
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-accent hover:text-accent/80 transition-colors"
+                >
+                  Branding Empresarial <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <span className="text-primary-foreground/20 hidden sm:inline">·</span>
+                <Link
+                  to="/branding-pessoal"
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors"
+                >
+                  Branding Pessoal <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </RevealSection>
+      </div>
+    </section>
   );
 }
 
@@ -282,12 +306,15 @@ function OQueFalamDeNos() {
                   key={i}
                   className="pl-3 md:pl-5 min-w-0 shrink-0 grow-0 basis-4/5 sm:basis-1/2 lg:basis-1/3"
                 >
-                  <div className="border border-border bg-secondary/30 overflow-hidden">
+                  <div className="border border-border bg-secondary/30 overflow-hidden aspect-[4/5]">
                     <img
                       src={src}
                       alt={`Depoimento ${i + 1}`}
-                      className="w-full max-h-[520px] object-contain"
+                      width={400}
+                      height={500}
+                      className="w-full h-full object-contain"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>
@@ -402,155 +429,21 @@ function PreviewOperacao() {
   );
 }
 
-/* ─── Investimento — secão escura ─── */
-function Investimento() {
-  return (
-    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-      <span
-        aria-hidden
-        className="absolute right-8 top-1/2 -translate-y-1/2 font-bold font-serif leading-none select-none pointer-events-none hidden lg:block"
-        style={{ opacity: 0.05, fontSize: "160px" }}
-      >
-        SM
-      </span>
-
-      <div className="container-sm max-w-5xl relative">
-        <RevealSection>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
-            <div className="space-y-4">
-              <p className="text-xs font-mono tracking-widest uppercase opacity-50">Investimento</p>
-              <p className="text-6xl md:text-7xl font-bold font-serif leading-none">
-                R$1.597
-                <span className="text-3xl font-normal opacity-60">/mês</span>
-              </p>
-              <p className="text-primary-foreground/50 text-sm">
-                A partir de — Contrato mínimo: 6 meses
-              </p>
-            </div>
-            <Button
-              size="lg"
-              variant="outline"
-              className="rounded-none text-base px-8 h-12 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors"
-              asChild
-            >
-              <a href="#formulario" className="flex items-center gap-2">
-                Quero Gerenciar Minhas Redes <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
-
 /* ─── Formulário ─── */
 function Formulario() {
-  const { submitLead, isLoading } = useSubmitLead('gestao-redes-sociais');
-  const formRef = useRef<HTMLFormElement>(null);
-  const navigate = useNavigate();
-  const utmParams = useUtmParams();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formRef.current) return;
-
-    const formData = new FormData(formRef.current);
-
-    const result = await submitLead({
-      full_name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      whatsapp: formData.get('phone') as string,
-      company: formData.get('company') as string,
-      platforms: formData.get('platforms') as string,
-      notes: formData.get('details') as string,
-      utm_source: formData.get('utm_source') as string || undefined,
-      utm_medium: formData.get('utm_medium') as string || undefined,
-      utm_campaign: formData.get('utm_campaign') as string || undefined,
-      utm_content: formData.get('utm_content') as string || undefined,
-      utm_term: formData.get('utm_term') as string || undefined,
-    });
-
-    if (result.success) {
-      trackLead("gestao-redes-sociais");
-      navigate('/obrigado?service=gestao-redes-sociais');
-    }
-  };
-
   return (
     <section id="formulario" className="section-spacing bg-background">
-      <div className="container-sm max-w-2xl">
+      <div className="container-sm max-w-3xl">
         <RevealSection>
           <div className="mb-12 space-y-3">
-            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Orçamento</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Vamos Conversar Sobre Suas Redes?</h2>
+            <p className="text-xs font-mono tracking-widest uppercase text-foreground/40">Candidatura</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Sua marca está pronta para ser aplicada?</h2>
+            <p className="text-foreground/60 max-w-2xl">Gestão de redes não substitui branding. Se a marca ainda não possui estratégia e diretrizes utilizáveis, o primeiro passo será um projeto de Branding.</p>
           </div>
         </RevealSection>
 
         <RevealSection delay={100}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="space-y-6 border border-border p-8"
-          >
-            <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
-            <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
-            <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
-            <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
-            <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome *</Label>
-                <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none" onFocus={() => trackFormStart("gestao-redes-sociais")} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
-                <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="phone">Telefone/WhatsApp *</Label>
-                <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="company">Empresa *</Label>
-                <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none" />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="platforms">Quais plataformas utiliza? *</Label>
-              <Input
-                id="platforms"
-                name="platforms"
-                required
-                placeholder="Instagram, LinkedIn, Facebook..."
-                className="rounded-none"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="details">O que espera da gestão de redes?</Label>
-              <Textarea
-                id="details"
-                name="details"
-                placeholder="Descreva seus objetivos e o que está faltando hoje..."
-                rows={3}
-                className="rounded-none"
-              />
-            </div>
-
-            <Button type="submit" size="lg" className="w-full rounded-none text-base h-12" disabled={isLoading}>
-              {isLoading ? 'Enviando...' : 'Quero Gerenciar Minhas Redes'}
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Ao enviar, você concorda com nossa Política de Privacidade.
-            </p>
-          </form>
+          <div className="border border-border p-6 md:p-8"><QualificationForm service="gestao-redes-sociais" /></div>
         </RevealSection>
       </div>
     </section>
@@ -561,10 +454,10 @@ export default function GestaoRedesSociais() {
   return (
     <>
       <Helmet>
-        <title>Gestão de Redes Sociais Estratégica | SM Agency</title>
+        <title>Gestão de Redes Sociais para Marcas Estruturadas | Source</title>
         <meta name="description" content="Gestão profissional de redes sociais com calendário editorial, criação de conteúdo, gestão de comunidade e relatórios de performance mensais." />
         <link rel="canonical" href="https://sourcemkt.com.br/gestao-redes-sociais" />
-        <meta property="og:title" content="Gestão de Redes Sociais Estratégica | SM Agency" />
+        <meta property="og:title" content="Gestão de Redes Sociais para Marcas Estruturadas | Source" />
         <meta property="og:description" content="Gestão profissional de redes sociais com calendário editorial, criação de conteúdo e relatórios de performance mensais." />
         <meta property="og:url" content="https://sourcemkt.com.br/gestao-redes-sociais" />
         <script type="application/ld+json">{JSON.stringify({
@@ -573,18 +466,16 @@ export default function GestaoRedesSociais() {
           "name": "Gestão de Redes Sociais Estratégica",
           "description": "Gestão profissional de redes sociais com calendário editorial, criação de conteúdo, gestão de comunidade e relatórios de performance mensais.",
           "url": "https://sourcemkt.com.br/gestao-redes-sociais",
-          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "provider": { "@type": "Organization", "name": "Source", "url": "https://sourcemkt.com.br" },
           "areaServed": { "@type": "Country", "name": "Brazil" },
           "serviceType": "Gestão de Redes Sociais"
         })}</script>
       </Helmet>
       <Hero />
-      <AntesDepois />
+      <PreRequisito />
       <Processo />
-      <Entregaveis />
       <OQueFalamDeNos />
       <PreviewOperacao />
-      {/* <Investimento /> — preço oculto, backup em src/_pricing-backup/investimento-gestao-redes-sociais.tsx */}
       <Formulario />
     </>
   );

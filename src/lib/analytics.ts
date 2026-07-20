@@ -9,22 +9,18 @@ function push(payload: DataLayerEvent) {
 }
 
 export type FormSource =
-  | "consultoria-estrategica"
-  | "consultoria-360"
+  | "candidatura-geral"
   | "branding-empresarial"
   | "branding-pessoal"
   | "identidade-visual"
-  | "gestao-redes-sociais"
-  | "naming";
+  | "gestao-redes-sociais";
 
 const serviceNames: Record<FormSource, string> = {
-  "consultoria-estrategica": "Consultoria Estratégica",
-  "consultoria-360": "Consultoria Estratégica 360°",
+  "candidatura-geral": "Candidatura Geral",
   "branding-empresarial": "Branding Empresarial",
   "branding-pessoal": "Branding Pessoal",
   "identidade-visual": "Identidade Visual",
   "gestao-redes-sociais": "Gestão de Redes Sociais",
-  naming: "Naming Estratégico",
 };
 
 export function trackLead(source: FormSource) {

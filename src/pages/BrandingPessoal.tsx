@@ -26,7 +26,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import RevealSection from "@/components/shared/RevealSection";
-import ComparisonTable from "@/components/shared/ComparisonTable";
+import QualificationForm from "@/components/shared/QualificationForm";
 import { brandingPessoalResults } from "@/data/serviceMockups";
 
 /* ─── CTA mid-page reutilizável ─── */
@@ -93,7 +93,7 @@ function HeroWithForm() {
 
               <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
-                Branding Pessoal
+                Branding · Posicionamento Pessoal
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -105,22 +105,22 @@ function HeroWithForm() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.05] tracking-tight">
-                Especialistas cobram menos{" "}
-                <em className="not-italic text-foreground/40 font-normal">do que valem.</em>
+                Seja escolhido pela{" "}
+                <em className="not-italic text-foreground/40 font-normal">sua autoridade,</em>
                 <br />
-                <span className="text-primary">O problema raramente é a competência.</span>
+                <span className="text-primary">não pelo seu preço.</span>
               </h1>
 
               <p className="text-base text-foreground/65 leading-relaxed max-w-xl pl-5 border-l-2 border-accent">
-                Construímos o posicionamento estratégico e a identidade visual que fazem líderes, consultores e especialistas serem percebidos pelo que realmente valem.
+                Construímos o posicionamento estratégico e a identidade visual que fazem líderes, consultores e especialistas serem percebidos pelo valor real do que entregam — em dois meses.
               </p>
 
               <ul className="space-y-2.5">
                 {[
-                  "+100 projetos de branding pessoal",
-                  "Posicionamento + identidade visual completa",
-                  "Apenas 3 vagas abertas em junho",
-                  "Resposta em até 48h úteis",
+                  "Processo completo em dois meses",
+                  "Estratégia + identidade visual + manual de marca",
+                  "Participação direta em imersões e decisões",
+                  "Candidaturas analisadas em até 48h úteis",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/65">
                     <Check className="h-3.5 w-3.5 text-primary flex-shrink-0" />
@@ -135,71 +135,10 @@ function HeroWithForm() {
           <RevealSection delay={120}>
             <div className="bg-secondary border border-border p-6 md:p-8">
               <div className="mb-5">
-                <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-3 py-1 mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
-                  Apenas 3 vagas em junho
-                </span>
-                <p className="font-bold text-lg">Vamos Analisar Seu Posicionamento?</p>
-                <p className="text-foreground/55 text-xs mt-1 leading-relaxed">Preencha abaixo. Entraremos em contato em até 48h úteis.</p>
+                <p className="font-bold text-lg">Candidatura para Branding Pessoal</p>
+                <p className="text-foreground/55 text-xs mt-1 leading-relaxed">Queremos entender sua atuação, o momento do seu posicionamento e sua disponibilidade para o processo.</p>
               </div>
-
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-3.5">
-                <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
-                <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
-                <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
-                <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
-                <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="bp-name" className="text-xs">Nome *</Label>
-                    <Input id="bp-name" name="name" required placeholder="Seu nome" className="rounded-none h-9 text-sm" onFocus={() => trackFormStart("branding-pessoal")} />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="bp-email" className="text-xs">Email *</Label>
-                    <Input id="bp-email" name="email" type="email" required placeholder="seu@email.com" className="rounded-none h-9 text-sm" />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="bp-phone" className="text-xs">WhatsApp *</Label>
-                    <Input id="bp-phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none h-9 text-sm" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="bp-area" className="text-xs">Área de atuação *</Label>
-                    <Input id="bp-area" name="area" required placeholder="Consultoria, Medicina..." className="rounded-none h-9 text-sm" />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="bp-challenge" className="text-xs">Seu maior desafio de autoridade hoje *</Label>
-                  <Textarea id="bp-challenge" name="challenge" required placeholder="Ex: não consigo cobrar o que realmente valho..." rows={2} className="rounded-none text-sm" />
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="bp-presence" className="text-xs">Presença digital atual</Label>
-                  <select
-                    id="bp-presence"
-                    name="presence"
-                    className="flex h-9 w-full border border-input bg-background px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    <option value="">Selecione</option>
-                    <option value="Não tenho presença digital">Não tenho presença digital</option>
-                    <option value="Básica (perfis sem estratégia)">Básica (perfis sem estratégia)</option>
-                    <option value="Ativa mas inconsistente">Ativa mas inconsistente</option>
-                    <option value="Forte, quero profissionalizar">Forte, quero profissionalizar</option>
-                  </select>
-                </div>
-
-                <Button type="submit" size="lg" className="w-full rounded-none text-sm h-11" disabled={isLoading}>
-                  {isLoading ? 'Enviando...' : 'Quero Iniciar Meu Processo'}
-                </Button>
-
-                <p className="text-xs text-muted-foreground text-center">
-                  Sem compromisso · Resposta em até 48h úteis
-                </p>
-              </form>
+              <QualificationForm service="branding-pessoal" compact />
             </div>
           </RevealSection>
         </div>
@@ -208,29 +147,67 @@ function HeroWithForm() {
   );
 }
 
-/* ─── O Que É — layout editorial ─── */
+/* ─── O Que É Branding Pessoal — seção educacional ─── */
 function OQueE() {
+  const pilares = [
+    {
+      num: "01",
+      title: "Reputação",
+      text: "Sua trajetória, valores e diferenciais — o material bruto que já existe e precisa ser organizado com clareza.",
+    },
+    {
+      num: "02",
+      title: "Posicionamento",
+      text: "A escolha estratégica de como você quer ser percebido, para quem, e qual território ocupa no seu mercado.",
+    },
+    {
+      num: "03",
+      title: "Identidade",
+      text: "Sistema visual e narrativo que traduz o posicionamento em uma marca reconhecível, coerente e memorável.",
+    },
+  ];
+
   return (
     <section className="section-spacing bg-secondary">
       <div className="container-sm max-w-5xl">
         <RevealSection>
-          <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-16 items-start">
+          <div className="grid md:grid-cols-[1fr_1.6fr] gap-10 md:gap-16 items-start mb-14 md:mb-20">
             <div className="space-y-4">
-              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">O que é</p>
-              <blockquote className="text-2xl md:text-3xl font-bold font-serif leading-snug text-foreground/80">
-                "Não criamos personas. Amplificamos quem você já é."
+              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">O que é branding pessoal</p>
+              <blockquote className="text-2xl md:text-3xl font-bold font-serif leading-snug text-foreground/85">
+                "Branding pessoal é o<br /><span className="text-primary italic">posicionamento</span> de quem você já é —<br />organizado como marca."
               </blockquote>
               <div className="h-px w-12 bg-accent mt-6" />
             </div>
 
             <div className="space-y-5 text-foreground/70 leading-relaxed text-sm md:text-base">
               <p>
-                Branding pessoal é sobre comunicar quem você é de forma intencional, estratégica e memorável — traduzindo sua essência, valores e diferenciais em uma marca forte e reconhecida.
+                <strong className="text-foreground font-semibold">Branding pessoal</strong> é o processo de posicionar profissionais consolidados como marcas — traduzindo reputação, expertise e valores em uma identidade estratégica reconhecível pelo público certo.
               </p>
               <p>
-                Na SM Agency, ajudamos líderes e especialistas a construírem autoridade com autenticidade, conectando propósito, imagem e posicionamento para que você seja lembrado não apenas pelo que faz, mas por quem você é.
+                Diferente de "gestão de audiência" ou produção de conteúdo, o branding pessoal define <em>o que você representa antes de decidir o que postar</em>. Sem esse posicionamento, cada peça de comunicação puxa a marca para uma direção diferente e a autoridade fica diluída.
+              </p>
+              <p className="text-foreground/55 text-sm border-l-2 border-accent pl-4 italic">
+                Não criamos personas. Não vendemos crescimento de seguidores. Organizamos quem você já é para que o mercado perceba o valor real do que você entrega.
               </p>
             </div>
+          </div>
+        </RevealSection>
+
+        <RevealSection delay={100}>
+          <div className="grid md:grid-cols-3 gap-0 border-t border-border/40 pt-10">
+            {pilares.map((p, i) => (
+              <div
+                key={p.num}
+                className={`p-2 md:px-6 lg:px-8 ${
+                  i > 0 ? "border-t md:border-t-0 md:border-l border-border/30 pt-8 md:pt-2" : ""
+                }`}
+              >
+                <p className="font-mono text-xs text-accent mb-3">{p.num}</p>
+                <h3 className="font-bold text-base mb-2 leading-snug">{p.title}</h3>
+                <p className="text-foreground/55 text-sm leading-relaxed">{p.text}</p>
+              </div>
+            ))}
           </div>
         </RevealSection>
       </div>
@@ -238,23 +215,90 @@ function OQueE() {
   );
 }
 
-/* ─── Antes e Depois — tabela comparativa ─── */
-const brandingPessoalRows = [
-  { sem: "Comunicação genérica e inconsistente", com: "Posicionamento claro e autêntico" },
-  { sem: "Baixa percepção de autoridade e expertise", com: "Imagem que transmite confiança e credibilidade" },
-  { sem: "Falta de clareza sobre o que comunicar", com: "Mensagem direcionada ao público certo" },
-  { sem: "Identidade visual desconectada da proposta", com: "Visual coerente com estilo e propósito" },
-  { sem: '"Mais um" no mercado, sem diferenciação real', com: "Marca pessoal memorável e diferenciada" },
-];
-
-function AntesDepois() {
+/* ─── Percepção × Competência — fundo navy para quebrar ritmo ─── */
+function PercepcaoVsCompetencia() {
   return (
-    <ComparisonTable
-      title="Antes e Depois do Branding Pessoal"
-      rows={brandingPessoalRows}
-      beforeLabel="Sem Branding Pessoal"
-      afterLabel="Com Branding Pessoal"
-    />
+    <section className="section-spacing bg-primary text-primary-foreground relative overflow-hidden">
+      {/* Ghost typographic element */}
+      <span
+        aria-hidden
+        className="absolute -top-6 -right-4 md:top-8 md:right-16 font-bold font-serif leading-none select-none pointer-events-none text-primary-foreground/[0.04]"
+        style={{ fontSize: "clamp(8rem, 22vw, 20rem)", letterSpacing: "-0.05em" }}
+      >
+        ≠
+      </span>
+
+      <div className="container-sm max-w-5xl relative">
+        <RevealSection>
+          {/* Pull quote */}
+          <div className="mb-14 max-w-2xl">
+            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-primary-foreground/40 mb-5">
+              O paradoxo
+            </p>
+            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-bold font-serif leading-snug text-primary-foreground">
+              O mercado não compra competência.<br />
+              <span className="text-accent italic">Compra a percepção de competência.</span>
+            </blockquote>
+            <div className="h-[2px] w-16 bg-accent mt-8" />
+          </div>
+
+          {/* Dois estados */}
+          <div className="grid md:grid-cols-2 gap-10 md:gap-0">
+            {/* Sem branding pessoal */}
+            <div className="md:pr-10 lg:pr-16">
+              <div className="flex items-center gap-3 mb-8 pb-4 border-b border-primary-foreground/10">
+                <span className="w-2 h-2 border border-primary-foreground/30 rotate-45 inline-block flex-shrink-0" />
+                <p className="text-[10px] font-mono uppercase tracking-widest text-primary-foreground/35">
+                  Sem posicionamento
+                </p>
+              </div>
+              <div className="space-y-5">
+                {[
+                  "Clientes que subestimam o valor cobrado",
+                  "Indicações inconsistentes — sem narrativa clara",
+                  "Visual desconectado do nível da entrega",
+                  "Comunicação que não diferencia do concorrente",
+                  "Autoridade percebida menor que a real",
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 items-baseline">
+                    <span className="text-[10px] font-mono text-primary-foreground/20 flex-shrink-0 pt-px">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-sm text-primary-foreground/40 leading-relaxed">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Com branding pessoal Source */}
+            <div className="md:pl-10 lg:pl-16 md:border-l md:border-primary-foreground/10">
+              <div className="flex items-center gap-3 mb-8 pb-4 border-b border-accent/30">
+                <span className="w-2 h-2 bg-accent inline-block flex-shrink-0" />
+                <p className="text-[10px] font-mono uppercase tracking-widest text-accent">
+                  Com branding pessoal Source
+                </p>
+              </div>
+              <div className="space-y-5">
+                {[
+                  "Posicionamento que sustenta preços coerentes com a entrega",
+                  "Narrativa de autoridade clara, consistente e memorável",
+                  "Identidade visual alinhada com o estilo e a proposta",
+                  "Diferenciação real — percebida pelo público certo",
+                  "Reputação organizada como ativo estratégico da carreira",
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 items-baseline">
+                    <span className="text-[10px] font-mono text-accent/60 flex-shrink-0 pt-px">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-sm text-primary-foreground/90 leading-relaxed font-medium">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </RevealSection>
+      </div>
+    </section>
   );
 }
 
@@ -285,9 +329,9 @@ function Processo() {
     {
       num: "04",
       icon: Compass,
-      title: "Ativação e Direcionamento",
-      text: "Entregamos manual completo, jornada do cliente estruturada, ecossistema de serviços organizado e direcionamento estratégico para os seus canais digitais.",
-      duration: "Entrega final",
+      title: "Manual e Diretrizes de Aplicação",
+      text: "Organizamos a estratégia e a identidade em um manual claro para orientar sua comunicação e os próximos pontos de contato.",
+      duration: "Semana 8",
     },
   ];
 
@@ -324,8 +368,8 @@ function Processo() {
         </div>
 
         <MidPageCta
-          label="Todo o processo leva menos de 2 meses. Pronto para começar?"
-          cta="Quero Iniciar Meu Processo"
+          label="O processo acontece em dois meses e exige participação ativa em cada decisão."
+          cta="Candidatar meu projeto"
         />
       </div>
     </section>
@@ -335,19 +379,19 @@ function Processo() {
 /* ─── Para Quem É — lista editorial ─── */
 function ParaQuemE() {
   const criteria = [
-    "Você é empreendedor, executivo, consultor ou especialista de mercado",
-    "Quer ser reconhecido como autoridade no seu segmento",
-    "Precisa atrair clientes, oportunidades ou parceiros certos",
-    "Sua presença digital não reflete seu nível real de expertise",
-    "Você tem conteúdo para compartilhar mas falta clareza na comunicação",
-    "Quer se diferenciar em mercados competitivos",
+    "Você é fundador, executivo, consultor ou especialista com atuação comprovada",
+    "Já possui uma oferta clara e sabe qual público deseja atender",
+    "Sua reputação profissional ainda não está organizada como marca",
+    "Pode participar das imersões, validar caminhos e tomar decisões",
+    "Está preparado para aplicar a nova marca depois da entrega",
+    "Busca autoridade baseada em posicionamento, não apenas crescimento de audiência",
   ];
 
   return (
     <section className="section-spacing bg-background">
       <div className="container-sm max-w-4xl">
         <RevealSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Este Serviço É Para Você Se:</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Este projeto exige de você</h2>
         </RevealSection>
 
         <RevealSection delay={100}>
@@ -368,8 +412,8 @@ function ParaQuemE() {
         </RevealSection>
 
         <MidPageCta
-          label="Se você se identificou com 3 ou mais pontos acima, esse serviço é para você."
-          cta="Agendar Conversa"
+          label="Este não é um serviço de assessoria para influenciadores nem de crescimento de audiência."
+          cta="Enviar candidatura"
         />
       </div>
     </section>
@@ -411,7 +455,7 @@ function ResultadosSimulados() {
           <div className="mb-12 space-y-3">
             <h2 className="text-3xl md:text-4xl font-bold">Cases Reais</h2>
             <p className="text-foreground/55 text-sm max-w-xl">
-              Resultados reais de clientes que investiram em branding pessoal com a SM Agency.
+              Projetos de clientes que construíram seu branding pessoal com a Source.
             </p>
           </div>
         </RevealSection>
@@ -484,45 +528,6 @@ function ResultadosSimulados() {
   );
 }
 
-/* ─── Investimento — seção escura ─── */
-function InvestimentoPessoal() {
-  return (
-    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-      <span
-        aria-hidden
-        className="absolute right-8 top-1/2 -translate-y-1/2 font-bold font-serif leading-none select-none pointer-events-none hidden lg:block"
-        style={{ opacity: 0.05, fontSize: "160px" }}
-      >
-        18k
-      </span>
-
-      <div className="container-sm max-w-5xl relative">
-        <RevealSection>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
-            <div className="space-y-4">
-              <p className="text-xs font-mono tracking-widest uppercase opacity-50">Investimento</p>
-              <p className="text-6xl md:text-7xl font-bold font-serif leading-none">R$18.000</p>
-              <p className="text-primary-foreground/50 text-sm">
-                A partir de — Duração: 5–7 semanas
-              </p>
-            </div>
-            <Button
-              size="lg"
-              variant="outline"
-              className="rounded-none text-base px-8 h-12 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors"
-              asChild
-            >
-              <a href="#formulario" className="flex items-center gap-2">
-                Solicitar Proposta <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
-
 /* ─── FAQ ─── */
 function FAQ() {
   const faqs = [
@@ -532,19 +537,19 @@ function FAQ() {
     },
     {
       q: "Preciso ter muitos seguidores para esse serviço fazer sentido?",
-      a: "Não. Branding pessoal não é sobre quantidade de seguidores — é sobre qualidade de percepção. Clientes com 2.000 seguidores fecham contratos maiores do que perfis com 50.000 quando têm posicionamento claro. O objetivo é atrair as pessoas certas, não qualquer pessoa.",
+      a: "Não. Branding pessoal não é sobre quantidade de seguidores, mas sobre clareza de posicionamento e coerência de percepção. O objetivo é ser compreendido pelas pessoas certas.",
     },
     {
       q: "Em quanto tempo começo a perceber resultados?",
-      a: "Os primeiros resultados aparecem já durante o processo — clareza, segurança na comunicação, identidade visual consistente. Contratos e oportunidades concretas geralmente surgem nos primeiros 60 a 90 dias após a implementação.",
+      a: "Durante o processo, você já ganha clareza de posicionamento, narrativa e critérios de comunicação. Resultados comerciais dependem da aplicação da marca, do mercado e da operação de cada profissional.",
     },
     {
-      q: "Por que R$18.000? O que justifica esse investimento?",
-      a: "Você recebe: posicionamento estratégico completo, identidade visual profissional (que sozinha custa de R$6.000 a R$15.000 no mercado), narrativa de marca, jornada do cliente estruturada e manual completo. Mas mais do que o entregável, o retorno sobre a percepção de valor — que permite cobrar mais pelos mesmos serviços — costuma pagar o investimento no primeiro ou segundo contrato fechado.",
+      q: "Quanto tempo dura e o que preciso disponibilizar?",
+      a: "O processo dura dois meses. Você participa das imersões, compartilha contexto, avalia os caminhos apresentados e aprova as entregas dentro dos prazos combinados.",
     },
     {
       q: "E se eu não gostar do resultado?",
-      a: "Trabalhamos com imersão profunda e co-criação em cada etapa — você aprova antes de avançarmos. Revisões fazem parte do processo. Nosso histórico com mais de 100 projetos mostra que quando o processo é seguido corretamente, o resultado supera as expectativas do cliente.",
+      a: "O projeto é construído por etapas, com apresentações, validações e revisões previstas. Sua participação reduz desalinhamentos e garante que as decisões façam sentido para a realidade da marca.",
     },
   ];
 
@@ -583,11 +588,11 @@ export default function BrandingPessoal() {
   return (
     <>
       <Helmet>
-        <title>Branding Pessoal para Líderes e Especialistas | SM Agency</title>
-        <meta name="description" content="Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes que querem ser reconhecidos pelo que representam." />
+        <title>Branding Pessoal e Posicionamento de Autoridade | Source</title>
+        <meta name="description" content="Branding pessoal e posicionamento estratégico para líderes, consultores e especialistas: reputação, identidade visual e narrativa organizadas como marca em dois meses." />
         <link rel="canonical" href="https://sourcemkt.com.br/branding-pessoal" />
-        <meta property="og:title" content="Branding Pessoal para Líderes e Especialistas | SM Agency" />
-        <meta property="og:description" content="Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes." />
+        <meta property="og:title" content="Branding Pessoal e Posicionamento de Autoridade | Source" />
+        <meta property="og:description" content="Branding pessoal e posicionamento de autoridade — identidade visual, narrativa e reputação organizadas como marca." />
         <meta property="og:url" content="https://sourcemkt.com.br/branding-pessoal" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -595,18 +600,17 @@ export default function BrandingPessoal() {
           "name": "Branding Pessoal para Líderes e Especialistas",
           "description": "Construa autoridade e influência com branding pessoal estratégico. Posicionamento, identidade visual e narrativa para líderes que querem ser reconhecidos pelo que representam.",
           "url": "https://sourcemkt.com.br/branding-pessoal",
-          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "provider": { "@type": "Organization", "name": "Source", "url": "https://sourcemkt.com.br" },
           "areaServed": { "@type": "Country", "name": "Brazil" },
           "serviceType": "Branding Pessoal"
         })}</script>
       </Helmet>
       <HeroWithForm />
       <OQueE />
-      <AntesDepois />
+      <PercepcaoVsCompetencia />
       <Processo />
       <ParaQuemE />
       <ResultadosSimulados />
-      {/* <InvestimentoPessoal /> — preço oculto, backup em src/_pricing-backup/investimento-branding-pessoal.tsx */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container-sm max-w-4xl">
           <RevealSection>
@@ -624,7 +628,7 @@ export default function BrandingPessoal() {
                 asChild
               >
                 <a href="#formulario" className="flex items-center gap-2">
-                  Agendar Conversa <ArrowRight className="h-4 w-4" />
+                  Candidatar meu projeto <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>
             </div>

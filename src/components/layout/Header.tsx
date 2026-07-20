@@ -8,12 +8,10 @@ const navItems = [
   {
     label: "Serviços",
     children: [
-      { label: "Consultoria Estratégica", href: "/consultoria-estrategica", premium: true },
       { label: "Branding Empresarial", href: "/branding-empresarial", premium: true },
       { label: "Branding Pessoal", href: "/branding-pessoal", premium: true },
       { label: "Identidade Visual", href: "/identidade-visual" },
       { label: "Gestão de Redes", href: "/gestao-redes-sociais" },
-      { label: "Naming", href: "/naming" },
     ],
   },
   { label: "Blog", href: "/blog" },
@@ -154,8 +152,6 @@ export default function Header() {
                 className={`text-xs font-semibold tracking-widest uppercase transition-colors duration-200 relative ${
                   isActive(item.href!)
                     ? "text-brand-offwhite after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-brand-gold"
-                    : item.bold
-                    ? "text-brand-offwhite hover:text-brand-offwhite/80"
                     : "text-brand-offwhite/60 hover:text-brand-offwhite"
                 }`}
               >
@@ -168,12 +164,10 @@ export default function Header() {
         {/* CTA + Mobile Toggle */}
         <div className="flex items-center gap-4">
           <a
-            href="https://wa.me/5511937292921"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/#candidatura"
             className="hidden lg:inline-flex items-center h-9 px-6 text-xs font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-navy transition-all duration-300 hover:bg-white"
           >
-            Agendar Conversa
+            Candidatar meu projeto
           </a>
           <button
             className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-brand-offwhite/80 hover:text-brand-offwhite transition-colors"
@@ -243,13 +237,11 @@ export default function Header() {
             )
           )}
           <a
-            href="https://wa.me/5511937292921"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/#candidatura"
             onClick={() => setMobileOpen(false)}
             className="mt-6 flex items-center justify-center h-11 text-xs font-semibold tracking-widest uppercase bg-brand-offwhite text-brand-navy"
           >
-            Agendar Conversa
+            Candidatar meu projeto
           </a>
         </nav>
       </div>

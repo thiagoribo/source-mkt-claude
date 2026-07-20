@@ -26,7 +26,7 @@ import {
   Globe,
 } from "lucide-react";
 import RevealSection from "@/components/shared/RevealSection";
-import ComparisonTable from "@/components/shared/ComparisonTable";
+import QualificationForm from "@/components/shared/QualificationForm";
 import likeBrandCase from "@/assets/cases/branding/like-brand-p18.webp";
 import petraCase from "@/assets/cases/naming/clinica-petra.webp";
 
@@ -79,7 +79,7 @@ function HeroWithForm() {
 
               <div className="inline-flex items-center gap-2 border border-border px-3 py-1.5 text-xs font-mono tracking-widest uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
-                Branding Empresarial
+                Branding · Posicionamento Empresarial
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.05] tracking-tight">
@@ -97,10 +97,10 @@ function HeroWithForm() {
 
               <ul className="space-y-2.5">
                 {[
-                  "+100 marcas construídas",
-                  "Supervisão direta dos fundadores",
-                  "Apenas 2 vagas abertas em junho",
-                  "Resposta em até 48h úteis",
+                  "Processo completo em dois meses",
+                  "Estratégia + identidade visual + manual de marca",
+                  "Participação dos decisores da empresa",
+                  "Candidaturas analisadas em até 48h úteis",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/65">
                     <Check className="h-3.5 w-3.5 text-primary flex-shrink-0" />
@@ -115,74 +115,10 @@ function HeroWithForm() {
           <RevealSection delay={120}>
             <div className="bg-secondary border border-border p-6 md:p-8">
               <div className="mb-5">
-                <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 text-xs font-medium px-3 py-1 mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
-                  Apenas 2 vagas em junho
-                </span>
-                <p className="font-bold text-lg">Vamos Construir sua Marca?</p>
-                <p className="text-foreground/55 text-xs mt-1 leading-relaxed">Preencha abaixo. Entraremos em contato em até 48h úteis.</p>
+                <p className="font-bold text-lg">Candidatura para Branding Empresarial</p>
+                <p className="text-foreground/55 text-xs mt-1 leading-relaxed">Conte sobre o negócio, o estágio do posicionamento e quem participará das decisões.</p>
               </div>
-
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-3.5">
-                <input type="hidden" name="utm_source" value={utmParams.utm_source ?? ''} />
-                <input type="hidden" name="utm_medium" value={utmParams.utm_medium ?? ''} />
-                <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign ?? ''} />
-                <input type="hidden" name="utm_content" value={utmParams.utm_content ?? ''} />
-                <input type="hidden" name="utm_term" value={utmParams.utm_term ?? ''} />
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="name" className="text-xs">Nome *</Label>
-                    <Input id="name" name="name" required placeholder="Seu nome" className="rounded-none h-9 text-sm" onFocus={() => trackFormStart("branding-empresarial")} />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="email" className="text-xs">Email *</Label>
-                    <Input id="email" name="email" type="email" required placeholder="seu@empresa.com" className="rounded-none h-9 text-sm" />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="phone" className="text-xs">WhatsApp *</Label>
-                    <Input id="phone" name="phone" required placeholder="(11) 99999-9999" className="rounded-none h-9 text-sm" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="company" className="text-xs">Empresa *</Label>
-                    <Input id="company" name="company" required placeholder="Sua empresa" className="rounded-none h-9 text-sm" />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="website" className="text-xs">Site da empresa</Label>
-                  <Input id="website" name="website" placeholder="www.suaempresa.com" className="rounded-none h-9 text-sm" />
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="challenge" className="text-xs">Seu maior desafio com a marca *</Label>
-                  <Textarea id="challenge" name="challenge" required placeholder="Descreva brevemente..." rows={2} className="rounded-none text-sm" />
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="has-vi" className="text-xs">Tem identidade visual?</Label>
-                  <select
-                    id="has-vi"
-                    name="has-vi"
-                    className="flex h-9 w-full border border-input bg-background px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    <option value="">Selecione</option>
-                    <option value="Sim">Sim</option>
-                    <option value="Não">Não</option>
-                  </select>
-                </div>
-
-                <Button type="submit" size="lg" className="w-full rounded-none text-sm h-11" disabled={isLoading}>
-                  {isLoading ? 'Enviando...' : 'Quero Construir Minha Marca'}
-                </Button>
-
-                <p className="text-xs text-muted-foreground text-center">
-                  Sem compromisso · Resposta em até 48h úteis
-                </p>
-              </form>
+              <QualificationForm service="branding-empresarial" compact />
             </div>
           </RevealSection>
         </div>
@@ -191,33 +127,155 @@ function HeroWithForm() {
   );
 }
 
-/* ─── O Que É — layout editorial em duas colunas ─── */
+/* ─── O Que É Branding — seção educacional ─── */
 function OQueE() {
+  const pilares = [
+    {
+      num: "01",
+      title: "Estratégia e posicionamento",
+      text: "O que sua marca representa, para quem existe e por que importa. Define território, promessa e diferenciais defensáveis.",
+    },
+    {
+      num: "02",
+      title: "Identidade e expressão",
+      text: "Como a marca se apresenta ao mundo — logotipo, paleta, tipografia, tom de voz e territórios visuais coerentes.",
+    },
+    {
+      num: "03",
+      title: "Direção e aplicação",
+      text: "O manual que orienta cada decisão de comunicação para manter a marca reconhecível em todos os pontos de contato.",
+    },
+  ];
+
   return (
     <section className="section-spacing bg-secondary">
       <div className="container-sm max-w-5xl">
+        {/* Definição em destaque */}
         <RevealSection>
-          <div className="grid md:grid-cols-[1fr_1.6fr] gap-12 md:gap-16 items-start">
-            {/* Pull quote */}
+          <div className="grid md:grid-cols-[1fr_1.6fr] gap-10 md:gap-16 items-start mb-14 md:mb-20">
             <div className="space-y-4">
-              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">O que é</p>
-              <blockquote className="text-2xl md:text-3xl font-bold font-serif leading-snug text-foreground/80">
-                "Não fazemos marca bonita. Fazemos marcas com alma e estratégia."
+              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">
+                O que é branding
+              </p>
+              <blockquote className="text-2xl md:text-3xl font-bold font-serif leading-snug text-foreground/85">
+                "Branding é o<br /><span className="text-primary italic">posicionamento</span> de uma marca<br />posto em prática."
               </blockquote>
               <div className="h-px w-12 bg-accent mt-6" />
             </div>
 
-            {/* Body text */}
             <div className="space-y-5 text-foreground/70 leading-relaxed text-sm md:text-base">
               <p>
-                Branding empresarial é o processo de construir o DNA estratégico da sua marca — não apenas o que você vende, mas o que você representa no mercado. É aqui que nascem o propósito, a visão e a narrativa que sustentam sua presença.
+                <strong className="text-foreground font-semibold">Branding empresarial</strong> é o processo de construir o posicionamento estratégico da sua marca — não apenas o que você vende, mas o que você representa no mercado, para quem, e por quê.
               </p>
               <p>
-                Na SM Agency, definimos os pilares que atraem o público certo, criam diferenciação real e transformam negócios em marcas com significado, autoridade e valor percebido.
+                É onde nascem propósito, visão, narrativa e sistema visual — os pilares que sustentam cada decisão de comunicação da empresa. Sem esse posicionamento, cada peça, campanha e canal comunica algo diferente e a marca perde valor percebido.
               </p>
-              <p className="text-foreground/50 text-sm border-l-2 border-border pl-4">
-                Este não é um projeto cosmético de redesign. É trabalho estratégico profundo que redefine como sua empresa se posiciona, comunica e compete.
+              <p className="text-foreground/55 text-sm border-l-2 border-accent pl-4 italic">
+                Branding não é redesign de logo. É o trabalho estratégico que define como sua empresa se posiciona, comunica e compete no mercado.
               </p>
+            </div>
+          </div>
+        </RevealSection>
+
+        {/* Três pilares */}
+        <RevealSection delay={100}>
+          <div className="grid md:grid-cols-3 gap-0 border-t border-border/40 pt-10">
+            {pilares.map((p, i) => (
+              <div
+                key={p.num}
+                className={`p-2 md:px-6 lg:px-8 ${
+                  i > 0 ? "border-t md:border-t-0 md:border-l border-border/30 pt-8 md:pt-2" : ""
+                }`}
+              >
+                <p className="font-mono text-xs text-accent mb-3">{p.num}</p>
+                <h3 className="font-bold text-base mb-2 leading-snug">{p.title}</h3>
+                <p className="text-foreground/55 text-sm leading-relaxed">{p.text}</p>
+              </div>
+            ))}
+          </div>
+        </RevealSection>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Contraste editorial — fundo navy para quebrar ritmo ─── */
+function Contraste() {
+  const antes = [
+    "Comunicação desconectada — cada peça parece vir de uma empresa diferente",
+    "Posicionamento indefinido: o mercado não sabe o que diferencia a marca",
+    "Competição por preço porque o valor percebido não sustenta margens",
+    "Decisões de comunicação tomadas caso a caso, sem critério de marca",
+  ];
+  const depois = [
+    "Tom de voz consistente e alinhado com os valores da empresa",
+    "Posicionamento claro que destaca o negócio no mercado certo",
+    "Justificativa sólida para preços premium, com valor percebido real",
+    "Diretrizes que orientam cada decisão de comunicação com clareza",
+  ];
+
+  return (
+    <section className="section-spacing bg-primary text-primary-foreground relative overflow-hidden">
+      {/* Ghost typographic element */}
+      <span
+        aria-hidden
+        className="absolute -top-6 -right-4 md:top-8 md:right-16 font-bold font-serif leading-none select-none pointer-events-none text-primary-foreground/[0.04]"
+        style={{ fontSize: "clamp(8rem, 22vw, 20rem)", letterSpacing: "-0.05em" }}
+      >
+        ↔
+      </span>
+
+      <div className="container-sm max-w-5xl relative">
+        <RevealSection>
+          <div className="mb-14 max-w-2xl">
+            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-primary-foreground/40 mb-4">
+              O antes e o depois
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+              O que muda quando uma marca<br />
+              <span className="text-accent italic font-serif">tem estratégia</span> por trás.
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-10 md:gap-0">
+            {/* Antes */}
+            <div className="md:pr-10 lg:pr-16">
+              <div className="flex items-center gap-3 mb-8 pb-4 border-b border-primary-foreground/10">
+                <span className="w-2 h-2 border border-primary-foreground/30 rotate-45 inline-block flex-shrink-0" />
+                <p className="text-[10px] font-mono uppercase tracking-widest text-primary-foreground/35">
+                  Sem estratégia de marca
+                </p>
+              </div>
+              <div className="space-y-5">
+                {antes.map((item, i) => (
+                  <div key={i} className="flex gap-4 items-baseline">
+                    <span className="text-[10px] font-mono text-primary-foreground/20 flex-shrink-0 pt-px">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-sm text-primary-foreground/40 leading-relaxed">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Depois — coluna com border-l accent */}
+            <div className="md:pl-10 lg:pl-16 md:border-l md:border-primary-foreground/10">
+              <div className="flex items-center gap-3 mb-8 pb-4 border-b border-accent/30">
+                <span className="w-2 h-2 bg-accent inline-block flex-shrink-0" />
+                <p className="text-[10px] font-mono uppercase tracking-widest text-accent">
+                  Com branding Source
+                </p>
+              </div>
+              <div className="space-y-5">
+                {depois.map((item, i) => (
+                  <div key={i} className="flex gap-4 items-baseline">
+                    <span className="text-[10px] font-mono text-accent/60 flex-shrink-0 pt-px">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-sm text-primary-foreground/90 leading-relaxed font-medium">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </RevealSection>
@@ -226,33 +284,15 @@ function OQueE() {
   );
 }
 
-/* ─── Antes e Depois — tabela comparativa ─── */
-const brandingRows = [
-  { sem: "Comunicação desconectada e sem personalidade", com: "Tom de voz único e alinhado com valores" },
-  { sem: "Marca sem diferenciação clara no mercado", com: "Posicionamento claro que destaca seu negócio" },
-  { sem: "Dificuldade de conectar com o público certo", com: "Narrativa que inspira, conecta e engaja" },
-  { sem: "Ausência de clareza sobre missão, visão e valores", com: "Pilares estratégicos bem definidos e aplicáveis" },
-  { sem: "Marca que vende, mas não se posiciona", com: "Marca com propósito, cultura e conexão verdadeira" },
-  { sem: "Competição apenas por preço ou conveniência", com: "Justificativa sólida para preços premium" },
-];
-
-function AntesDepois() {
-  return (
-    <ComparisonTable
-      title="Antes e Depois do Branding Estratégico"
-      rows={brandingRows}
-    />
-  );
-}
-
 /* ─── Processo — numerado com duração ─── */
 function Processo() {
   const steps = [
-    { num: "01", icon: Search, title: "Diagnóstico e Imersão", text: "Entendemos o mercado, o negócio e oportunidades de posicionamento", duration: "2 semanas" },
-    { num: "02", icon: Layers, title: "Estruturação Estratégica", text: "Propósito, missão, visão, valores, arquétipo e atributos de marca", duration: "3 semanas" },
-    { num: "03", icon: Target, title: "Posicionamento e Diferenciação", text: "Proposta de valor, narrativa e promessa da marca no mercado", duration: "2 semanas" },
-    { num: "04", icon: MessageSquare, title: "Tom de Voz e Personalidade", text: "Como a marca fala, se expressa e se relaciona com o público", duration: "1 semana" },
-    { num: "05", icon: BookOpen, title: "Manual de Marca", text: "Documento completo e aplicável com toda a base estratégica", duration: "Entrega final" },
+    { num: "01", icon: Search, title: "Diagnóstico e Imersão", text: "Entendemos o mercado, o negócio e oportunidades de posicionamento", duration: "Semana 1" },
+    { num: "02", icon: Layers, title: "Estruturação Estratégica", text: "Propósito, missão, visão, valores, arquétipo e atributos de marca", duration: "Semanas 2–3" },
+    { num: "03", icon: Target, title: "Posicionamento e Diferenciação", text: "Proposta de valor, narrativa e promessa da marca no mercado", duration: "Semana 4" },
+    { num: "04", icon: MessageSquare, title: "Tom de Voz e Personalidade", text: "Como a marca fala, se expressa e se relaciona com o público", duration: "Semana 5" },
+    { num: "05", icon: Palette, title: "Identidade Visual", text: "Sistema visual que traduz o posicionamento em logotipo, cores, tipografia e elementos de marca", duration: "Semanas 6–7" },
+    { num: "06", icon: BookOpen, title: "Manual de Marca", text: "Documento final com a estratégia, a identidade e as diretrizes de aplicação", duration: "Semana 8" },
   ];
 
   return (
@@ -299,11 +339,8 @@ function Entregaveis() {
     { icon: Target, title: "Arquétipo e Personalidade de Marca" },
     { icon: Layers, title: "Posicionamento e Proposta de Valor" },
     { icon: Volume2, title: "Tom de Voz e Territórios de Comunicação" },
-    { icon: FileText, title: "Manual de Marca (60-80 páginas)" },
-    { icon: Search, title: "Auditoria Completa de Gestão, Marketing, Posicionamento & Performance" },
-    { icon: ArrowRight, title: "Estratégias Comerciais e de Performance" },
-    { icon: MessageSquare, title: "Estruturação de Funil de Vendas e Jornada do Cliente" },
-    { icon: BookOpen, title: "Arquitetura de Site (página de vendas) & UX Experience" },
+    { icon: Palette, title: "Sistema de Identidade Visual Completo" },
+    { icon: FileText, title: "Manual de Marca Estratégico e Visual" },
   ];
 
   return (
@@ -379,8 +416,11 @@ function CasesBranding() {
                   <img
                     src={c.img}
                     alt={c.name}
+                    width={800}
+                    height={450}
                     className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="p-6 md:p-8 flex flex-col flex-1">
@@ -424,63 +464,6 @@ function CasesBranding() {
   );
 }
 
-/* ─── Investimento — seção escura ─── */
-function InvestimentoBranding() {
-  const factors = [
-    "Complexidade do mercado e da competição",
-    "Necessidade de pesquisa primária com stakeholders",
-    "Arquitetura de marca (única vs. portfólio)",
-    "Inclusão de identidade visual integrada",
-  ];
-
-  return (
-    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-      <span
-        aria-hidden
-        className="absolute right-8 top-1/2 -translate-y-1/2 font-bold font-serif leading-none select-none pointer-events-none hidden lg:block"
-        style={{ opacity: 0.05, fontSize: "160px" }}
-      >
-        25k
-      </span>
-
-      <div className="container-sm max-w-5xl relative">
-        <RevealSection>
-          <div className="grid md:grid-cols-[1fr_auto] gap-12 md:gap-16 items-end">
-            <div className="space-y-6">
-              <p className="text-xs font-mono tracking-widest uppercase opacity-50">Investimento</p>
-              <p className="text-6xl md:text-7xl font-bold font-serif leading-none">R$25.000</p>
-              <p className="text-primary-foreground/50 text-sm">A partir de — Duração: 6–8 semanas</p>
-
-              <div className="space-y-3 pt-2">
-                <p className="text-xs font-mono uppercase tracking-widest opacity-50">O que influencia o valor</p>
-                <div className="divide-y divide-primary-foreground/10">
-                  {factors.map((f) => (
-                    <div key={f} className="flex items-start gap-3 py-3">
-                      <span className="text-accent mt-0.5 flex-shrink-0">→</span>
-                      <span className="text-sm text-primary-foreground/70">{f}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <Button
-              size="lg"
-              variant="outline"
-              className="rounded-none text-base px-8 h-12 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-colors self-end"
-              asChild
-            >
-              <a href="#formulario" className="flex items-center gap-2">
-                Agendar Conversa <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        </RevealSection>
-      </div>
-    </section>
-  );
-}
-
 /* ─── Comparação — callout editorial ─── */
 function Comparacao() {
   return (
@@ -488,22 +471,17 @@ function Comparacao() {
       <div className="container-sm max-w-3xl">
         <RevealSection>
           <div className="pl-6 border-l-2 border-accent space-y-4">
-            <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">Qual serviço escolher?</p>
-            <h3 className="text-xl font-bold">Branding Empresarial ou Consultoria Estratégica?</h3>
+            <p className="text-xs font-mono uppercase tracking-widest text-foreground/40">Compromisso compartilhado</p>
+            <h3 className="text-xl font-bold">O projeto exige a presença de quem decide.</h3>
             <div className="space-y-3 text-sm text-foreground/65 leading-relaxed">
               <p>
-                <strong className="text-foreground">Branding Empresarial</strong> foca na construção da plataforma de marca e posicionamento estratégico — ideal para definir ou redefinir sua identidade.
+                Ao longo de dois meses, a Source conduz imersões, apresenta caminhos e estrutura a marca. A liderança traz contexto, participa das decisões e valida as entregas dentro dos prazos.
               </p>
               <p>
-                <strong className="text-foreground">Consultoria Estratégica</strong> é mais abrangente: inclui branding, mas adiciona performance, arquitetura de funil e acompanhamento de implementação — para quem precisa de um roadmap completo de crescimento.
+                Para negócios em desenvolvimento, é necessário já ter oferta, público, modelo de negócio e decisão real de lançamento definidos.
               </p>
             </div>
-            <Link
-              to="/consultoria-estrategica"
-              className="text-primary text-sm font-medium hover:underline inline-block"
-            >
-              Comparar os serviços →
-            </Link>
+            <a href="#formulario" className="text-primary text-sm font-medium hover:underline inline-block">Candidatar o projeto →</a>
           </div>
         </RevealSection>
       </div>
@@ -517,11 +495,11 @@ export default function BrandingEmpresarial() {
   return (
     <>
       <Helmet>
-        <title>Branding Empresarial Estratégico | SM Agency</title>
-        <meta name="description" content="Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo para negócios que querem vender pelo valor que entregam." />
+        <title>Branding e Posicionamento Empresarial | Source</title>
+        <meta name="description" content="Branding empresarial e posicionamento estratégico de marca em dois meses: identidade visual, tom de voz e manual completo para empresas que querem vender pelo valor que entregam." />
         <link rel="canonical" href="https://sourcemkt.com.br/branding-empresarial" />
-        <meta property="og:title" content="Branding Empresarial Estratégico | SM Agency" />
-        <meta property="og:description" content="Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo." />
+        <meta property="og:title" content="Branding e Posicionamento Empresarial | Source" />
+        <meta property="og:description" content="Branding empresarial e posicionamento estratégico de marca — identidade visual, tom de voz e manual completo em dois meses." />
         <meta property="og:url" content="https://sourcemkt.com.br/branding-empresarial" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -529,18 +507,17 @@ export default function BrandingEmpresarial() {
           "name": "Branding Empresarial Estratégico",
           "description": "Transforme sua empresa em uma marca reconhecida. Posicionamento, proposta de valor, tom de voz e manual de marca completo para negócios que querem vender pelo valor que entregam.",
           "url": "https://sourcemkt.com.br/branding-empresarial",
-          "provider": { "@type": "Organization", "name": "SM Agency", "url": "https://sourcemkt.com.br" },
+          "provider": { "@type": "Organization", "name": "Source", "url": "https://sourcemkt.com.br" },
           "areaServed": { "@type": "Country", "name": "Brazil" },
           "serviceType": "Branding Empresarial"
         })}</script>
       </Helmet>
       <HeroWithForm />
       <OQueE />
-      <AntesDepois />
+      <Contraste />
       <Processo />
       <Entregaveis />
       <CasesBranding />
-      {/* <InvestimentoBranding /> — preço oculto, backup em src/_pricing-backup/investimento-branding-empresarial.tsx */}
       <Comparacao />
     </>
   );

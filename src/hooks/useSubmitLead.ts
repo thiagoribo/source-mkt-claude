@@ -14,13 +14,11 @@ interface UseSubmitLeadReturn {
 }
 
 const SERVICE_LABELS: Record<FormSource, ServiceInterest> = {
-  'consultoria-estrategica': 'Consultoria Estratégica',
+  'candidatura-geral': 'Candidatura Geral',
   'branding-empresarial': 'Branding Empresarial',
   'branding-pessoal': 'Branding Pessoal',
   'identidade-visual': 'Identidade Visual',
-  'naming': 'Naming Estratégico',
   'gestao-redes-sociais': 'Gestão de Redes Sociais',
-  'posicionamento-de-marca': 'Posicionamento de Marca',
 };
 
 export function useSubmitLead(formSource: FormSource): UseSubmitLeadReturn {
@@ -38,19 +36,37 @@ export function useSubmitLead(formSource: FormSource): UseSubmitLeadReturn {
     }
 
     try {
+      const resolvedService = formData.requested_service ?? formSource;
       const leadData: Partial<Lead> & { workspace_id: string } = {
         ...formData,
         workspace_id: 'f1d7cfc8-88a0-4b8a-8812-381f42b1e3aa',
         source: 'Site SM Agency',
-        service_interest: SERVICE_LABELS[formSource],
+        service_interest: SERVICE_LABELS[resolvedService],
         form_source: formSource,
         pipeline: 'new_lead',
         stage: 'New Lead',
       };
 
-      const { error: insertError } = await supabaseCRM
+      let { error: insertError } = await supabaseCRM
         .from('leads')
         .insert(leadData);
+
+      // Compatibilidade durante a implantação da migration do CRM: preserva
+      // todas as respostas no campo notes até as colunas estruturadas existirem.
+      if (insertError && /qualification_data|requested_service/i.test(insertError.message)) {
+        const { qualification_data, requested_service, ...legacyLeadData } = leadData;
+        const qualificationNotes = qualification_data
+          ? `\n\n[Candidatura]\n${Object.entries(qualification_data)
+              .map(([key, value]) => `${key}: ${String(value)}`)
+              .join('\n')}`
+          : '';
+
+        const fallback = await supabaseCRM.from('leads').insert({
+          ...legacyLeadData,
+          notes: `${legacyLeadData.notes ?? ''}${qualificationNotes}`.trim(),
+        });
+        insertError = fallback.error;
+      }
 
       if (insertError) {
         console.error('Erro ao enviar lead:', insertError);
