@@ -13,7 +13,7 @@ import thiago1 from "@/assets/thiago-1.webp";
 // Equipe (fallback images)
 import anaCastro from "@/assets/equipe/ana-castro.webp";
 import caioCastro from "@/assets/equipe/caio-castro.webp";
-import gabrielaMontezi from "@/assets/equipe/gabriela-montezi.webp";
+import juliaRibeiro from "@/assets/equipe/julia-ribeiro.png";
 import alineBraga from "@/assets/equipe/aline-braga.png";
 import lohanaVitoria from "@/assets/equipe/lohana-vitoria-2.png";
 
@@ -21,7 +21,7 @@ import lohanaVitoria from "@/assets/equipe/lohana-vitoria-2.png";
 const fallbackTeamMembers = [
   { name: "Caio Castro", role: "Designer Sênior", image: caioCastro },
   { name: "Ana Castro", role: "Designer Sênior", image: anaCastro },
-  { name: "Gabriela Montezi", role: "Estrategista de Redes Sociais", image: gabrielaMontezi },
+  { name: "Júlia Ribeiro", role: "Estrategista de Redes Sociais", image: juliaRibeiro },
   { name: "Aline Braga", role: "Adm & Financeiro", image: alineBraga },
   { name: "Lohana Vitória", role: "Designer Sênior", image: lohanaVitoria },
 ];
@@ -30,7 +30,8 @@ const fallbackTeamMembers = [
 const teamImageMap: Record<string, string> = {
   "Ana Castro": anaCastro,
   "Caio Castro": caioCastro,
-  "Gabriela Montezi": gabrielaMontezi,
+  "Júlia Ribeiro": juliaRibeiro,
+  "Julia Ribeiro": juliaRibeiro,
   "Aline Braga": alineBraga,
   "Lohana Vitória": lohanaVitoria,
   "Lohana Vitoria": lohanaVitoria,
