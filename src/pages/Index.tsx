@@ -6,7 +6,7 @@ import { Building2, Sparkles, Paintbrush2, Megaphone, Check, ArrowRight } from "
 import RevealSection from "@/components/shared/RevealSection";
 import QualificationForm from "@/components/shared/QualificationForm";
 import ResponsiveImage from "@/components/shared/ResponsiveImage";
-import { casesData } from "@/data/casesData";
+import ResultadosCarousel from "@/components/shared/ResultadosCarousel";
 import anaHero from "@/assets/optimized/ana-header-760.webp";
 import ana1 from "@/assets/optimized/ana-nova-430.webp";
 import ana1Large from "@/assets/optimized/ana-nova-700.webp";
@@ -565,94 +565,48 @@ function ServicesSection() {
   );
 }
 
-/* ─── Cases — com destaque editorial ─── */
+/* ─── Cases — carrossel visual de resultados ─── */
 function CasesSection() {
-  const featured = casesData[0];
-  const others = casesData.slice(1);
-
   return (
     <section id="cases" className="section-spacing bg-background">
-      <div className="container-sm">
+      <div className="container-sm max-w-5xl">
         <RevealSection>
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14">
+          <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 md:gap-14 items-end mb-10 md:mb-14">
             <div>
-              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40 mb-3">Cases</p>
-              <h2 className="text-3xl md:text-4xl font-bold">Transformações Reais</h2>
+              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40 mb-3">
+                Cases · Resultados
+              </p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05] tracking-tight">
+                Transformações<br />
+                <span className="text-primary italic font-serif">reais em imagens.</span>
+              </h2>
             </div>
+            <p className="text-foreground/60 text-sm md:text-base leading-relaxed md:pb-2">
+              Cada slide é um recorte de projeto entregue — do posicionamento à execução visual. A prova concreta do que muda quando marca e estratégia caminham juntas.
+            </p>
           </div>
         </RevealSection>
 
-        {/* Case destaque */}
-        {featured && (
-          <RevealSection>
-            <Link
-              to={`/cases/${featured.id}`}
-              className="group block bg-primary text-primary-foreground mb-4 md:mb-6 relative overflow-hidden hover:shadow-[8px_8px_0_0_rgba(220,180,100,0.2)] transition-shadow duration-500"
+        <RevealSection>
+          <ResultadosCarousel />
+        </RevealSection>
+
+        <RevealSection>
+          <div className="mt-12 pt-8 border-t border-border/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p className="text-sm text-foreground/50 max-w-md leading-relaxed">
+              Sua marca pode ser o próximo case. Candidaturas analisadas em 48h úteis.
+            </p>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-none border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground flex-shrink-0 min-h-[44px]"
             >
-              {/* Ghost metric */}
-              <span
-                aria-hidden
-                className="absolute top-4 right-4 md:top-8 md:right-10 font-bold font-serif leading-none text-primary-foreground/[0.06] select-none pointer-events-none"
-                style={{ fontSize: "clamp(4rem, 12vw, 9rem)" }}
-              >
-                420%
-              </span>
-
-              <div className="relative p-8 md:p-12 lg:p-14">
-                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-primary-foreground/35 mb-5 block">
-                  {featured.category}
-                </span>
-
-                <p className="text-xl md:text-2xl lg:text-3xl font-bold font-serif max-w-xl mb-10 leading-snug">
-                  {featured.tagline}
-                </p>
-
-                {/* Metrics row */}
-                <div className="flex flex-wrap items-end gap-8 md:gap-12 pt-8 border-t border-primary-foreground/10">
-                  {featured.results.map((r) => (
-                    <div key={r.label}>
-                      <p className="text-2xl md:text-3xl font-bold font-serif text-accent">{r.metric}</p>
-                      <p className="text-[11px] text-primary-foreground/35 mt-0.5 font-mono uppercase tracking-wide">{r.label}</p>
-                    </div>
-                  ))}
-                  <div className="ml-auto flex items-center gap-2 text-sm font-medium group-hover:gap-4 transition-all duration-300">
-                    <span className="hidden sm:inline">{featured.client}</span>
-                    <span className="w-6 h-px bg-current group-hover:w-10 transition-all duration-300" />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </RevealSection>
-        )}
-
-        {/* Others */}
-        {others.length > 0 && (
-          <div className="grid md:grid-cols-2 gap-4">
-            {others.map((c, i) => (
-              <RevealSection key={c.id} delay={i * 100}>
-                <Link
-                  to={`/cases/${c.id}`}
-                  className="group block border border-border/50 hover:border-primary/40 transition-colors duration-300"
-                >
-                  <div className="h-44 bg-secondary/50 flex flex-col justify-between p-7">
-                    <span className="text-primary text-[10px] font-mono font-semibold tracking-widest uppercase">
-                      {c.category}
-                    </span>
-                    <p className="text-base font-semibold text-foreground leading-snug">
-                      {c.tagline}
-                    </p>
-                  </div>
-                  <div className="px-7 py-4 flex items-center justify-between border-t border-border/30">
-                    <h3 className="font-medium text-sm text-foreground/60">{c.client}</h3>
-                    <span className="text-primary text-xs font-medium group-hover:underline">
-                      Ver case →
-                    </span>
-                  </div>
-                </Link>
-              </RevealSection>
-            ))}
+              <a href="#candidatura" className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase">
+                Candidatar meu projeto <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </Button>
           </div>
-        )}
+        </RevealSection>
       </div>
     </section>
   );
