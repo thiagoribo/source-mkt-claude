@@ -1,11 +1,22 @@
 import { lazy, Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import ScrollToTop from "@/components/ScrollToTop";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 // Public Pages — lazy loaded (chunk separado por rota)
 const Index = lazy(() => import("./pages/Index"));
@@ -29,10 +40,11 @@ const PosicionamentoDeMarca = lazy(() => import("./pages/PosicionamentoDeMarca")
 
 const App = () => (
   <HelmetProvider>
-    <TooltipProvider>
-      <SpeedInsights />
-      <Analytics />
-      <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <SpeedInsights />
+        <Analytics />
+        <BrowserRouter>
         <ScrollToTop />
         <Suspense fallback={null}>
           <Routes>
@@ -68,10 +80,11 @@ const App = () => (
                 </Layout>
               }
             />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   </HelmetProvider>
 );
 
