@@ -14,7 +14,7 @@ export default function CaseDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold font-serif mb-4">Case não encontrado</h1>
-          <Link to="/quem-somos#portfolio" className="text-primary hover:underline">
+          <Link to="/cases" className="text-primary hover:underline">
             Ver todos os cases
           </Link>
         </div>
@@ -34,7 +34,7 @@ export default function CaseDetail() {
         <div className="container-sm max-w-4xl">
           <RevealSection>
             <Link
-              to="/quem-somos#portfolio"
+              to="/cases"
               className="inline-flex items-center gap-2 text-primary-foreground/60 hover:text-primary-foreground text-sm font-mono uppercase tracking-widest mb-10 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />

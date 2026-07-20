@@ -5,6 +5,7 @@ import logoHeader from "@/assets/logo-header.svg";
 
 const navItems = [
   { label: "Quem Somos", href: "/quem-somos" },
+  { label: "Cases", href: "/cases" },
   {
     label: "Serviços",
     children: [

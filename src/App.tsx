@@ -25,6 +25,7 @@ const BrandingPessoal = lazy(() => import("./pages/BrandingPessoal"));
 const QuemSomos = lazy(() => import("./pages/QuemSomos"));
 const IdentidadeVisual = lazy(() => import("./pages/IdentidadeVisual"));
 const GestaoRedesSociais = lazy(() => import("./pages/GestaoRedesSociais"));
+const Cases = lazy(() => import("./pages/Cases"));
 const CaseDetail = lazy(() => import("./pages/CaseDetail"));
 const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
 const Obrigado = lazy(() => import("./pages/Obrigado"));
@@ -73,6 +74,7 @@ const App = () => (
                     <Route path="/quem-somos" element={<QuemSomos />} />
                     <Route path="/identidade-visual" element={<IdentidadeVisual />} />
                     <Route path="/gestao-redes-sociais" element={<GestaoRedesSociais />} />
+                    <Route path="/cases" element={<Cases />} />
                     <Route path="/cases/:slug" element={<CaseDetail />} />
                     <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
                     <Route path="*" element={<NotFound />} />

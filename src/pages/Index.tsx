@@ -594,17 +594,27 @@ function CasesSection() {
         <RevealSection>
           <div className="mt-12 pt-8 border-t border-border/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <p className="text-sm text-foreground/50 max-w-md leading-relaxed">
-              Sua marca pode ser o próximo case. Candidaturas analisadas em 48h úteis.
+              Sua marca pode ser o próximo case. Leia as histórias completas ou envie sua candidatura.
             </p>
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-none border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground flex-shrink-0 min-h-[44px]"
-            >
-              <a href="#candidatura" className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase">
-                Candidatar meu projeto <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-none border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground min-h-[44px]"
+              >
+                <Link to="/cases" className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase">
+                  Ver cases completos <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className="rounded-none bg-primary text-primary-foreground hover:shadow-lg min-h-[44px]"
+              >
+                <a href="#candidatura" className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase">
+                  Candidatar meu projeto <ArrowRight className="h-3.5 w-3.5" />
+                </a>
+              </Button>
+            </div>
           </div>
         </RevealSection>
       </div>

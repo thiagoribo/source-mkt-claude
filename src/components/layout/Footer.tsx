@@ -102,6 +102,9 @@ export default function Footer() {
             <Link to="/quem-somos" className="text-xs text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
               Quem Somos
             </Link>
+            <Link to="/cases" className="text-xs text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
+              Cases
+            </Link>
             <Link to="/politica-de-privacidade" className="text-xs text-brand-offwhite/25 hover:text-brand-offwhite/60 transition-colors tracking-wide">
               Política de Privacidade
             </Link>

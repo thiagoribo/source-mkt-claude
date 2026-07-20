@@ -103,6 +103,15 @@ const routes = [
       "Conheça a Source e as pessoas por trás da nossa metodologia de branding.",
     url: "https://sourcemkt.com.br/quem-somos",
   },
+  {
+    path: "cases",
+    title: "Cases | Source — Transformações reais de branding e posicionamento",
+    description:
+      "Cases da Source: LIKE. Brand, Clínica Petra e Start Imobiliário. Como estratégia, identidade e aplicação transformaram cada negócio.",
+    ogDescription:
+      "Transformações reais em branding, posicionamento e aplicação de marca.",
+    url: "https://sourcemkt.com.br/cases",
+  },
 ];
 
 function escapeHtmlAttr(str) {
